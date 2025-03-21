@@ -4,18 +4,34 @@
 #include <stdio.h>
 /* END Includes --------------------------------------------------------------*/
 
+/* typedef -------------------------------------------------------------------*/
+typedef struct{
+	union{
+		uint8_t bit0: 1;
+		uint8_t bit1: 1;
+		uint8_t bit2: 1;
+		uint8_t bit3: 1;
+		uint8_t bit4: 1;
+		uint8_t bit5: 1;
+		uint8_t bit6: 1;
+		uint8_t bit7: 1;
+	}bitmap;
+	uint8_t byte;
+}Byte_Flag_Struct;
+
+/* END typedef ---------------------------------------------------------------*/
 
 /* define --------------------------------------------------------------------*/
 #define F_CPU 16000000UL  // Definir la frecuencia del reloj en 16 MHz
 #define TRIGGER_PIN  PD2 // Pin de Trigger PIN Numero 2
 #define ECHO_PIN     PD3 // Pin de Echo PIN Numero 3
 
-#define DO_TRIGGER bandera.Bit_Map.bit0
-#define TRIGGER_FINISH bandera.Bit_Map.bit1
-#define ECHO_RISING bandera.Bit_Map.bit2
-#define ECHO_STATE bandera.Bit_Map.bit3  // Usamos el bit 3 para el estado de ECHO
-#define TRIGGER_STATE bandera.Bit_Map.bit4 // Usamos el bit 4 para el estado de TRIGGER
-#define TRIGGER_ALLOWED bandera.Bit_Map.bit5 // Usamos el bit 5 para el allow del TRIGGER
+#define DO_TRIGGER bandera.bitmap.bit0
+#define TRIGGER_FINISH bandera.bitmap.bit1
+#define ECHO_RISING bandera.bitmap.bit2
+#define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
+#define TRIGGER_STATE bandera.bitmap.bit4 // Usamos el bit 4 para el estado de TRIGGER
+#define TRIGGER_ALLOWED bandera.bitmap.bit5 // Usamos el bit 5 para el allow del TRIGGER
 
 /* END define ----------------------------------------------------------------*/
 
@@ -80,10 +96,11 @@ ISR(TIMER2_COMPA_vect)
 	}else if(!TRIGGER_STATE){ //TRIGGER en alto y finalizo
 		//nada
 	}else if(!TRIGGER_STATE){ //TRIGGER en bajo
-		if(wait_time < 10){
+		if(!TRIGGER_ALLOWED && wait_time < 10){
 			wait_time++;
 		}else{
 			TRIGGER_ALLOWED = 1;
+			wait_time = 0;
 		}
 	}
 }
