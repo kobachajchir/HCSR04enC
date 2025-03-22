@@ -25,6 +25,8 @@ typedef struct{
 #define F_CPU 16000000UL  // Definir la frecuencia del reloj en 16 MHz
 #define TRIGGER_PIN  PD2 // Pin de Trigger PIN Numero 2
 #define ECHO_PIN     PD3 // Pin de Echo PIN Numero 3
+#define LED_BUILTIN_PIN     PB5 // Pin de Echo PIN Numero 3
+
 
 #define DO_TRIGGER bandera.bitmap.bit0
 #define TRIGGER_FINISH bandera.bitmap.bit1
@@ -51,6 +53,7 @@ volatile uint8_t echo_state = 0; // Estado de la señal de eco (0: esperando flan
 void timer1_init();
 void timer2_init();
 void external_interrupt_init();
+void gpio_pins_init();
 void USART_Init(uint16_t ubrr);
 void USART_Transmit(unsigned char data);
 int USART_putchar(char c, FILE *stream);
@@ -96,11 +99,12 @@ ISR(TIMER2_COMPA_vect)
 	}else if(!TRIGGER_STATE){ //TRIGGER en alto y finalizo
 		//nada
 	}else if(!TRIGGER_STATE){ //TRIGGER en bajo
-		if(!TRIGGER_ALLOWED && wait_time < 10){
+		if(!TRIGGER_ALLOWED && wait_time < 7){ //No esta habilitado el trigger de nuevo, esperar 60ms
 			wait_time++;
 		}else{
 			TRIGGER_ALLOWED = 1;
 			wait_time = 0;
+			PORTB &= ~(1 << LED_BUILTIN_PIN); // Pin LED a LOW
 		}
 	}
 }
@@ -162,11 +166,17 @@ void timer2_init()
 	TCNT2 = 0;  // Inicializa el contador de Timer 2 en 0
 }
 
+void gpio_pins_init(){
+	DDRB |= (1 << LED_BUILTIN_PIN);   // Configura el pin LED (PORTB5) como salida
+	PORTB |= (1 << LED_BUILTIN_PIN);  // Pin LED a HIGH
+}
+
+
 // Configuración de interrupción externa (INT0) para el pin ECHO (flancos ascendentes y descendentes)
 void external_interrupt_init()
 {
-	DDRD &= ~(1 << PD3);  // Configura el pin ECHO (PORTD3) como entrada
-	DDRD |= (1 << PD2);   // Configura el pin TRIGGER (PORTD2) como salida
+	DDRD &= ~(1 << ECHO_PIN);  // Configura el pin ECHO (PORTD3) como entrada
+	DDRD |= (1 << TRIGGER_PIN);   // Configura el pin TRIGGER (PORTD2) como salida
 
 	// Configuración de interrupción externa
 	EIMSK |= (1 << INT0);   // Habilita la interrupción externa INT0 (pin 2)
@@ -199,6 +209,7 @@ int main()
 	// Inicializa los temporizadores y las interrupciones
 	timer1_init();  // Inicializa el Timer 1
 	timer2_init();  // Inicializa el Timer 2
+	gpio_pins_init();
 	external_interrupt_init();  // Inicializa la interrupción externa INT0 (flancos)
 	if(TRIGGER_ALLOWED){
 		DO_TRIGGER = 1;
@@ -207,20 +218,21 @@ int main()
 	while (1)
 	{
 		// Emitir el TRIGGER
-		if (DO_TRIGGER && !TRIGGER_STATE)
+		if (DO_TRIGGER && !TRIGGER_STATE) //Hacer Trigger y no se hizo trigger aun
 		{
 			DO_TRIGGER = 0;  // Resetea la bandera
-			TRIGGER_STATE = 1;
-			TRIGGER_FINISH = 0;
+			TRIGGER_ALLOWED = 0;
+			TRIGGER_STATE = 1; //Trigger activo
+			TRIGGER_FINISH = 0; //No finalizo
 			// Configuramos Timer 1 para capturar el flanco ascendente después de emitir el trigger
 			TCCR1B |= (1 << ICES1);  // Capturar en el flanco ascendente (ECHO_RISING)
 			ECHO_RISING = 1;  // Indicamos que estamos esperando el flanco ascendente
 			// Emitir el pulso TRIGGER (10 microsegundos)
-			PORTD |= (1 << PD2);  // Pin TRIGGER a HIGH
-		}else if(TRIGGER_STATE && TRIGGER_FINISH){
-			TRIGGER_STATE = 0;
-			PORTD &= ~(1 << PD2); // Pin TRIGGER a LOW
-			TRIGGER_ALLOWED = 0;
+			PORTD |= (1 << TRIGGER_PIN);  // Pin TRIGGER a HIGH
+		}else if(TRIGGER_STATE && TRIGGER_FINISH){ //Termino el trigger
+			TRIGGER_STATE = 0; //Marcar como que termino
+			PORTD &= ~(1 << TRIGGER_PIN); // Pin TRIGGER a LOW
+			PORTB |= (1 << LED_BUILTIN_PIN);  // Pin LED a HIGH
 		}
 
 		// Aquí el código principal puede hacer otras tareas
