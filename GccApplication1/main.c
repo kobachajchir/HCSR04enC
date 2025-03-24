@@ -63,7 +63,7 @@ ISR(TIMER1_CAPT_vect)
 		// Change to capture falling edge
 		TCCR1B &= ~(1 << ICES1);
 		ECHO_RISING = 0;
-		} else {  // Falling edge detection
+	} else {  // Falling edge detection
 		// Falling edge detected
 		echo_finish_time = ICR1 + (ovf_count * 65536);
 		ECHO_STATE = 0;
