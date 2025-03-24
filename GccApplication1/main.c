@@ -7,6 +7,7 @@
 #include "types/cintaType.h"
 #include "utils/usart/usart_utils.h"
 #include "utils/hcsr04/hcsr04_utils.h"
+#include "utils/servo/servo_utils.h"
 
 /* END Includes --------------------------------------------------------------*/
 
@@ -27,11 +28,15 @@ Byte_Flag_Struct bandera;  // Definido para manejar flags
 volatile uint16_t echo_init_time = 0;  // Tiempo de inicio (flanco ascendente)
 volatile uint16_t echo_finish_time = 0;    // Tiempo final (flanco descendente)
 volatile uint16_t distance_mm = 0;      // Distancia en milímetros
+volatile uint8_t servo_counter = 0;      // servo tick counter
+volatile uint32_t pulse_width_A = SERVO_START_PULSE; // Starting position
+volatile uint16_t target_tick_A = 0; //Target de ticks para modificar estado softPWM ServoA
 volatile uint8_t ovf_count = 0; // Contador de desbordamientos del Timer 1
 volatile uint8_t wait_time = 0; // Contador de desbordamientos del Timer 1
 volatile uint8_t btn_pressed_time = 0; // Contador de btn presionado en multiplos de 10ms
 volatile uint8_t echo_state = 0; // Estado de la señal de eco
 volatile uint8_t cienMsCounter = 0; //Counter de 100ms
+uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
 cinta_out outA;
 cinta_out outB;
 cinta_out outC;
@@ -75,6 +80,22 @@ ISR(TIMER1_OVF_vect)
 	ovf_count++;  // Incrementa el contador de desbordamientos del Timer 1
 }
 
+// ISR para Compare A - inicia el pulso
+ISR(TIMER1_COMPA_vect) {
+	// Programar siguiente interrupción a 50Hz
+	OCR1A += SERVO_FRAME_PERIOD;
+	
+	// Iniciar pulso
+	PORTB |= (1 << SERVOA_PIN);
+	// Programar Compare B para finalizar el pulso
+	OCR1B = TCNT1 + pulse_width_A;
+}
+
+// ISR para Compare B - finaliza el pulso
+ISR(TIMER1_COMPB_vect) {
+	// Finalizar pulso
+	PORTB &= ~(1 << SERVOA_PIN);
+}
 
 // ISR para Timer 2 (se ejecuta cada 10 ms)
 ISR(TIMER2_COMPA_vect)
@@ -103,6 +124,15 @@ ISR(TIMER2_COMPA_vect)
 		}else{
 			SECPASSED = 1;
 		}
+		if(SERVOA_RESET){
+			if(servo_counter < SERVO_RESET_TIME){
+				servo_counter++;
+			}else{
+				servo_counter = 0;
+				SERVOA_RESET = 0;
+				servoA_set_angle(90);
+			}
+		}
 	}
 }
 /* END Function ISR ----------------------------------------------------------*/
@@ -118,6 +148,7 @@ FILE mystdin = FDEV_SETUP_STREAM(NULL, USART_getchar, _FDEV_SETUP_READ);
 
 
 /* Timer1 and External Interrupt Functions ---------------------------------*/
+
 void timer1_init()
 {
 	// Reset the timer counter
@@ -125,11 +156,12 @@ void timer1_init()
 	// Clear input capture flag
 	TIFR1 |= (1 << ICF1);
 	// Enable input capture interrupt and overflow interrupt
-	TIMSK1 |= (1 << ICIE1) | (1 << TOIE1);
+	TIMSK1 |= (1 << ICIE1) | (1 << TOIE1) | (1 << OCIE1A) | (1 << OCIE1B);
 	// Set to capture rising edge initially
 	TCCR1B |= (1 << ICES1);
 	// Set prescaler to 8 for adequate timing resolution
 	TCCR1B |= (1 << CS11);  // Prescaler = 8
+	OCR1A = TCNT1 + SERVO_FRAME_PERIOD; // Primera interrupción en 20ms desde ya
 }
 
 void timer2_init()
@@ -150,6 +182,7 @@ void gpio_pins_init() {
 	DDRB &= ~(1 << ECHO_PIN);         // ECHO pin as input (now on PORTB)
 	DDRD &= ~(1 << BUTTON_PIN);       // BUTTON pin as input
 	PORTD &= ~(1 << BUTTON_PIN);
+	DDRB |= (1 << SERVOA_PIN);
 	
 	// Make sure TRIGGER starts LOW
 	PORTD &= ~(1 << TRIGGER_PIN);
@@ -243,19 +276,23 @@ int main()
 			}
 		}
 		if(SECPASSED){
-			DO_TRIGGER = 1;
+			//DO_TRIGGER = 1;
 			SECPASSED = 0;
 			cienMsCounter = 0;
 		}
 		if(BTN_RELEASED){
-			BTN_RELEASED = 0;
-			DO_TRIGGER = 1; //!TEST
+			BTN_RELEASED = 0; //TEST SERVO A
+			SERVOA_MOVE = 1;
+		}
+		if(SERVOA_MOVE){
+			SERVOA_MOVE = 0;
+			servoA_set_angle(0);
+			SERVOA_RESET = 1;
 		}
 		if(CALCULATE){
 			CALCULATE = 0;
 			calculate_distance();  // Calculamos y mostramos la distancia
 		}
-
 		// Aquí el código principal puede hacer otras tareas
 		// La medición de distancia y las interrupciones se manejan en segundo plano
 	}

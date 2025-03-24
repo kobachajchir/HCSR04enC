@@ -138,6 +138,12 @@
     <Compile Include="utils\hcsr04\hcsr04_utils.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="utils\servo\servo_utils.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utils\servo\servo_utils.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="utils\usart\usart_utils.c">
       <SubType>compile</SubType>
     </Compile>
@@ -149,6 +155,7 @@
     <Folder Include="utils" />
     <Folder Include="types" />
     <Folder Include="utils\hcsr04" />
+    <Folder Include="utils\servo" />
     <Folder Include="utils\usart" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

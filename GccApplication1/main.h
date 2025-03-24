@@ -22,10 +22,17 @@
 #define ECHO_PIN     PB0  // Pin de Echo PIN Numero 8
 #define BUTTON_PIN     PD4  // Pin de Button PIN Numero 4
 #define LED_BUILTIN_PIN PB5  // Pin LED incorporado (Arduino pin 13)
+#define SERVOA_PIN PB1  // Pin Servo A PIN 6
 
 #define DISTANCE_MIN_MM 30 //3cm min
 #define DISTANCE_MAX_MM 2000 //2m max
 #define ECHO_INTERVAL_TENMS 20 //100 es 1seg
+
+#define SERVO_MIN_PULSE 2000UL // 1ms (2000 * 0.5us)
+#define SERVO_START_PULSE 3000UL // 1ms (2000 * 0.5us)
+#define SERVO_MAX_PULSE 4000UL // 2ms (4000 * 0.5us)
+#define SERVO_FRAME_PERIOD 40000 // 20ms (40000 * 0.5us) o 50hz
+#define SERVO_RESET_TIME 30 //Multiplos de 10ms
 
 #define CAJA_GRANDE 3  // Define de caja grande
 #define CAJA_MEDIA 2  // Define de caja media
@@ -47,6 +54,8 @@
 #define TIMER2_ACTIVE bandera2.bitmap.bit1
 #define BTN_OVF bandera2.bitmap.bit2
 #define SECPASSED bandera2.bitmap.bit3
+#define SERVOA_MOVE bandera2.bitmap.bit4
+#define SERVOA_RESET bandera2.bitmap.bit5
 
 /*
 #define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
@@ -61,10 +70,12 @@ Byte_Flag_Struct bandera2;  // Definido para manejar flags
 extern volatile uint16_t echo_init_time;  // Tiempo de inicio (flanco ascendente)
 extern volatile uint16_t echo_finish_time;    // Tiempo final (flanco descendente)
 extern volatile uint16_t distance_mm;      // Distancia en milímetros
+extern volatile uint32_t pulse_width_A; // Starting position
 extern volatile uint8_t ovf_count; // Contador de desbordamientos del Timer 1
 extern volatile uint8_t wait_time; // Contador de desbordamientos del Timer 1
 extern volatile uint8_t btn_pressed_time; // Contador de btn presionado en multiplos de 10ms
 extern volatile uint8_t echo_state; // Estado de la señal de eco
+extern volatile uint8_t servo_counter;
 extern cinta_out outA;
 extern cinta_out outB;
 extern cinta_out outC;
