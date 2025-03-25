@@ -30,7 +30,7 @@
 
 #define DISTANCE_MIN_MM 30 //3cm min
 #define DISTANCE_MAX_MM 2000 //2m max
-#define ECHO_INTERVAL_TENMS 20 //100 es 1seg
+#define ECHO_INTERVAL_TENMS 20 //Max 2.5s que es 255, porque el contador es uint8
 
 #define SERVO_MIN_PULSE 2000UL // 1ms (2000 * 0.5us)
 #define SERVO_START_PULSE 3000UL // 1ms (2000 * 0.5us)
@@ -63,6 +63,8 @@
 #define ULTRASONIC_ENABLE bandera.bitmap.bit7 //
 
 #define VEINTEMS_PASSED bandera2.bitmap.bit0
+#define EMIT_TRIGGER bandera2.bitmap.bit1
+#define EMIT_FAILED bandera2.bitmap.bit2
 
 /*
 #define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
