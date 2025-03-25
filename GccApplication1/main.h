@@ -11,6 +11,8 @@
 
 #include "types/bitmapType.h"
 #include "types/cintaType.h"
+#include "ultrasonic.h"
+#include "ultrasonic_hal.h"
 
 #define CAJA_GRANDE 3  // Define de caja grande
 #define CAJA_MEDIA 2  // Define de caja media
@@ -19,6 +21,8 @@
 
 #define F_CPU 16000000UL  // Definir la frecuencia del reloj en 16 MHz
 #define TRIGGER_PIN  PD3  // Pin de Trigger PIN Numero 3
+#define TRIGGER_DDR    DDRD
+#define TRIGGER_PORT   PORTD
 #define ECHO_PIN     PB0  // Pin de Echo PIN Numero 8
 #define BUTTON_PIN     PD4  // Pin de Button PIN Numero 4
 #define LED_BUILTIN_PIN PB5  // Pin LED incorporado (Arduino pin 13)
@@ -41,21 +45,24 @@
 
 #define BTN_PRESS_TIME 10  // Define de descarte
 
-#define DO_TRIGGER bandera.bitmap.bit0
-#define TRIGGER_FINISH bandera.bitmap.bit1
-#define ECHO_RISING bandera.bitmap.bit2
-#define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
-#define TRIGGER_STATE bandera.bitmap.bit4 // Usamos el bit 4 para el estado de TRIGGER
-#define TRIGGER_ALLOWED bandera.bitmap.bit5 // Usamos el bit 5 para el allow del TRIGGER
-#define CALCULATE bandera.bitmap.bit6 // Usamos el bit 6 para el allow del TRIGGER
-#define BTN_PRESSED bandera.bitmap.bit7 // Usamos el bit 7 para detectar el button press
+//#define DO_TRIGGER bandera.bitmap.bit0
+//#define TRIGGER_FINISH bandera.bitmap.bit1
+//#define ECHO_RISING bandera.bitmap.bit2
+//#define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
+// #define TRIGGER_STATE bandera.bitmap.bit4 // Usamos el bit 4 para el estado de TRIGGER
+// #define TRIGGER_ALLOWED bandera.bitmap.bit5 // Usamos el bit 5 para el allow del TRIGGER
+// #define CALCULATE bandera.bitmap.bit6 // Usamos el bit 6 para el allow del TRIGGER
 
-#define BTN_RELEASED bandera2.bitmap.bit0
-#define TIMER2_ACTIVE bandera2.bitmap.bit1
-#define BTN_OVF bandera2.bitmap.bit2
-#define SECPASSED bandera2.bitmap.bit3
-#define SERVOA_MOVE bandera2.bitmap.bit4
-#define SERVOA_RESET bandera2.bitmap.bit5
+#define BTN_RELEASED bandera.bitmap.bit0
+#define TIMER2_ACTIVE bandera.bitmap.bit1
+#define BTN_OVF bandera.bitmap.bit2
+#define SECPASSED bandera.bitmap.bit3
+#define SERVOA_MOVE bandera.bitmap.bit4
+#define SERVOA_RESET bandera.bitmap.bit5
+#define BTN_PRESSED bandera.bitmap.bit6 // Usamos el bit 6 para detectar el button press
+#define ULTRASONIC_ENABLE bandera.bitmap.bit7 //
+
+#define VEINTEMS_PASSED bandera2.bitmap.bit0
 
 /*
 #define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
@@ -65,8 +72,8 @@
 #define BTN_PRESS bandera.bitmap.bit7 // Usamos el bit 7 para detectar el button press
 */
 
-Byte_Flag_Struct bandera;  // Definido para manejar flags
-Byte_Flag_Struct bandera2;  // Definido para manejar flags
+extern Byte_Flag_Struct bandera;  // Definido para manejar flags
+extern Byte_Flag_Struct bandera2;  // Definido para manejar flags
 extern volatile uint16_t echo_init_time;  // Tiempo de inicio (flanco ascendente)
 extern volatile uint16_t echo_finish_time;    // Tiempo final (flanco descendente)
 extern volatile uint16_t distance_mm;      // Distancia en milímetros
@@ -80,6 +87,5 @@ extern cinta_out outA;
 extern cinta_out outB;
 extern cinta_out outC;
 extern cinta_out outD;
-
-
+extern ultrasonic_t ultraSensor;
 #endif /* MAIN_H_ */
