@@ -40,7 +40,7 @@ volatile uint8_t btn_pressed_time = 0; // Contador de btn presionado en multiplo
 volatile uint8_t echo_state = 0; // Estado de la señal de eco
 volatile uint8_t diezMsCounter = 0; //Counter de 10ms, max 255 ovf cada 2.55 segundos
 volatile uint8_t veintems_counter = 0;
-uint8_t trigger_timeout_counter = 0;
+volatile uint8_t trigger_timeout_counter = 0;
 uint32_t now = 0;
 uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
 cinta_out outA;
@@ -112,11 +112,12 @@ ISR(TIMER2_COMPA_vect)
 {
 	if(TIMER2_ACTIVE){
 		// Lógica para manejar el estado del TRIGGER
-		if (ultraSensor.state == ULTRA_TRIGGERING) {
+		if (ultraSensor.state == ULTRA_TRIGGERING && !ultraSensor.TRIGGER_ALLOWED) {
+			printf("Aqui\n");
 			//Cada interrupción es de 10ms, y queremos un pulso de 20ms
 			if (trigger_timeout_counter < 2) {
 				trigger_timeout_counter++;
-				} else {
+			} else {
 				ultraSensor.TRIGGER_FINISH = 1;
 				printf("TRIGGER FINISH alto\n");
 				trigger_timeout_counter = 0;
@@ -143,7 +144,7 @@ ISR(TIMER2_COMPA_vect)
 			diezMsCounter++;
 			}else{
 			diezMsCounter = 0;
-			EMIT_TRIGGER = 1; //Emitir trigger
+			//EMIT_TRIGGER = 1; //Emitir trigger
 		}
 		if(BTN_PRESSED){
 			if(btn_pressed_time == 255){
@@ -262,6 +263,7 @@ int main()
 	EMIT_TRIGGER = 1; //Solo si quiero emitir al iniciar, sino sacar
 	//Imprime iniciado
 	printf("Iniciado\n");
+	sei();
 	while (1)
 	{ 
 		if(ULTRASONIC_ENABLE && ultraSensor.TRIGGER_ALLOWED && EMIT_TRIGGER){ //Sensor habilitado, listo para emitir y señal de emitir en alto
@@ -310,6 +312,9 @@ int main()
 		/*if(SECPASSED){ Aun no implementado
 			SECPASSED = 0;
 		}*/ 
+		if(DEBUG_FLAG){
+			printf("Aqui");
+		}
 		if(BTN_RELEASED){
 			BTN_RELEASED = 0; //TEST SERVO A
 			SERVOA_MOVE = 1;

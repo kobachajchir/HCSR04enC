@@ -65,6 +65,7 @@
 #define VEINTEMS_PASSED bandera2.bitmap.bit0
 #define EMIT_TRIGGER bandera2.bitmap.bit1
 #define EMIT_FAILED bandera2.bitmap.bit2
+#define DEBUG_FLAG bandera2.bitmap.bit3
 
 /*
 #define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
