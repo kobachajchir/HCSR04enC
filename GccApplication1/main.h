@@ -56,7 +56,7 @@
 #define BTN_RELEASED bandera.bitmap.bit0
 #define TIMER2_ACTIVE bandera.bitmap.bit1
 #define BTN_OVF bandera.bitmap.bit2
-#define SECPASSED bandera.bitmap.bit3
+#define ECHO_INTERVAL_FLAG bandera.bitmap.bit3
 #define SERVOA_MOVE bandera.bitmap.bit4
 #define SERVOA_RESET bandera.bitmap.bit5
 #define BTN_PRESSED bandera.bitmap.bit6 // Usamos el bit 6 para detectar el button press

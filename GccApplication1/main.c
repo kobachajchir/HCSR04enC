@@ -222,9 +222,10 @@ ISR(TIMER2_COMPA_vect)
 			}
 		}
 		// --- Contador general (no modificado) ---
-		if(diezMsCounter < ECHO_INTERVAL_TENMS){
+		if(diezMsCounter < ECHO_INTERVAL_TENMS && !ECHO_INTERVAL_FLAG){
 			diezMsCounter++;
 			} else {
+			ECHO_INTERVAL_FLAG = 1;
 			diezMsCounter = 0;
 		}
 		
@@ -295,6 +296,8 @@ int main()
 		if(ultraSensor.state == ULTRA_DONE && ultraSensor.NEW_RESULT){
 			printf("HCSR04 Dist[mm] %ul\n", ultrasonic_get_distance(&ultraSensor));
 			ultraSensor.NEW_RESULT = 0;
+			ultrasonic_init_flags(&ultraSensor);
+			ultraSensor.state = ULTRA_IDLE;
 		}
 		if(VEINTEMS_PASSED){
 			//ultrasonic_hal_echo_timeout(&ultraSensor); //Wrapper fn para setear TIMEDOUT = 1 en la libreria
@@ -324,17 +327,18 @@ int main()
 				}
 			}
 		}
-		/*if(SECPASSED){ Aun no implementado
-			SECPASSED = 0;
-		}*/ 
+		if(ECHO_INTERVAL_FLAG){ 
+			ECHO_INTERVAL_FLAG = 0;
+			EMIT_TRIGGER = 1;
+		}
 		if(DEBUG_FLAG){
 			printf("Aqui");
 			DEBUG_FLAG = 0;
 		}
 		if(BTN_RELEASED){
 			BTN_RELEASED = 0; //TEST SERVO A
-			EMIT_TRIGGER = 1;
-			//SERVOA_MOVE = 1;
+			//EMIT_TRIGGER = 1;
+			SERVOA_MOVE = 1;
 		}
 		if(SERVOA_MOVE){
 			SERVOA_MOVE = 0;
