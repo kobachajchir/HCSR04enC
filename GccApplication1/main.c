@@ -276,7 +276,7 @@ int main()
 			}
 		}
 		if(SECPASSED){
-			//DO_TRIGGER = 1;
+			DO_TRIGGER = 1;
 			SECPASSED = 0;
 			cienMsCounter = 0;
 		}
