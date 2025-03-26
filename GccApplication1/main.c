@@ -2,6 +2,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include "main.h"
 #include "types/bitmapType.h"
@@ -41,6 +42,7 @@ volatile uint8_t echo_state = 0; // Estado de la señal de eco
 volatile uint8_t diezMsCounter = 0; //Counter de 10ms, max 255 ovf cada 2.55 segundos
 volatile uint8_t veintems_counter = 0;
 volatile uint8_t trigger_timeout_counter = 0;
+static volatile bool trigger_active = false;
 uint32_t now = 0;
 uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
 cinta_out outA;
@@ -108,61 +110,7 @@ ISR(TIMER1_COMPB_vect) {
 }
 
 // ISR para Timer 2 (se ejecuta cada 10 ms)
-ISR(TIMER2_COMPA_vect)
-{
-	if(TIMER2_ACTIVE){
-		// Lógica para manejar el estado del TRIGGER
-		if (ultraSensor.state == ULTRA_TRIGGERING && !ultraSensor.TRIGGER_ALLOWED) {
-			printf("Aqui\n");
-			//Cada interrupción es de 10ms, y queremos un pulso de 20ms
-			if (trigger_timeout_counter < 2) {
-				trigger_timeout_counter++;
-			} else {
-				ultraSensor.TRIGGER_FINISH = 1;
-				printf("TRIGGER FINISH alto\n");
-				trigger_timeout_counter = 0;
-			}
-		}
-		//Logica para manejar el timeout de 20ms
-		if(ultraSensor.state == ULTRA_WAIT_RISING && ultraSensor.ECHO_RISING && !VEINTEMS_PASSED){ //Esta esperando el echo y no paso por aca
-			if(veintems_counter < 2){ //Si aun no llego a 20ms que son 2 veintems_counter
-				veintems_counter++;	//Sumar 1 = 10ms
-			}else{ //Llego a 2, 
-				VEINTEMS_PASSED = 1; //Pasaron 20ms, setear para poner en timeout
-				veintems_counter = 0; //Poner en 0 de nuevo
-			}
-		//Logica para manejar el timeout de 70ms del trigger
-		} else if(ultraSensor.state == ULTRA_IDLE || ultraSensor.state == ULTRA_DONE) { // Si esta en espera o en listo
-			if(!ultraSensor.TRIGGER_ALLOWED && wait_time < 7) { // No esta habilitado el trigger de nuevo, esperar 70ms
-				wait_time++;
-			} else {
-				ultraSensor.TRIGGER_ALLOWED = 1;
-				wait_time = 0;
-			}
-		}
-		if(diezMsCounter < ECHO_INTERVAL_TENMS){ //ECHO_INTERVAL_TENMS indica cada cuanto hacer trigger en multiplos de 10ms
-			diezMsCounter++;
-			}else{
-			diezMsCounter = 0;
-			//EMIT_TRIGGER = 1; //Emitir trigger
-		}
-		if(BTN_PRESSED){
-			if(btn_pressed_time == 255){
-				BTN_OVF = 1;
-			}
-			btn_pressed_time++;
-		}
-		if(SERVOA_RESET){
-			if(servo_counter < SERVO_RESET_TIME){
-				servo_counter++;
-			}else{
-				servo_counter = 0;
-				SERVOA_RESET = 0;
-				servoA_set_angle(90);
-			}
-		}
-	}
-}
+
 /* END Function ISR ----------------------------------------------------------*/
 
 // Inicializa la redirección de la salida estándar (stdout)
@@ -230,6 +178,74 @@ void printfWrapper(const char* message) {
 
 /* END Timer1 and External Interrupt Functions ------------------------------*/
 
+ISR(TIMER2_COMPA_vect)
+{
+	if(TIMER2_ACTIVE) {
+		// --- Gestión del pulso de TRIGGER en ULTRA_TRIGGERING ---
+		if(ultraSensor.state == ULTRA_TRIGGERING) {
+			if(!trigger_active) {
+				// Primera interrupción: activa el trigger y marca la bandera
+				ultrasonic_hal_trigger_setHigh();
+				ultraSensor.DO_TRIGGER = 1;
+				trigger_active = true;
+				} else {
+				// Segunda interrupción: desactiva el trigger y señala que terminó el pulso
+				ultrasonic_hal_trigger_setLow();
+				ultraSensor.TRIGGER_FINISH = 1;
+				trigger_active = false;
+				EMIT_TRIGGER = 0;
+				WAITING_ECHO = 1;
+				ultraSensor.state = ULTRA_WAIT_RISING;
+				ultraSensor.ECHO_RISING = 1; // Indica que se ha enviado el trigger y se espera ECHO
+				ultraSensor.TRIGGER_FINISH = 0; // Limpiamos la bandera para evitar transiciones repetidas
+			}
+		}
+		
+		// --- Timeout de 20ms para el ECHO ---
+		if(ultraSensor.state == ULTRA_WAIT_RISING && ultraSensor.ECHO_RISING && !VEINTEMS_PASSED && WAITING_ECHO) {
+			static volatile uint8_t wait_echo_counter = 0;
+			if(wait_echo_counter < 1) { // 1 * 10ms = 10ms (ajusta si lo deseas a 2 para 20ms)
+				wait_echo_counter++;
+				} else {
+				VEINTEMS_PASSED = 1;
+				wait_echo_counter = 0;
+			}
+		}
+		// --- Habilitar el trigger nuevamente en estados IDLE o DONE (70ms) ---
+		else if(ultraSensor.state == ULTRA_IDLE || ultraSensor.state == ULTRA_DONE) {
+			static volatile uint8_t wait_trigger_allowed_counter = 0;
+			if(!ultraSensor.TRIGGER_ALLOWED && wait_trigger_allowed_counter < 7){ // 7 * 10ms = 70ms
+				wait_trigger_allowed_counter++;
+				} else {
+				ultraSensor.TRIGGER_ALLOWED = 1;
+				wait_trigger_allowed_counter = 0;
+			}
+		}
+		// --- Contador general (no modificado) ---
+		if(diezMsCounter < ECHO_INTERVAL_TENMS){
+			diezMsCounter++;
+			} else {
+			diezMsCounter = 0;
+		}
+		
+		// --- Código adicional (botón, servo, etc.) ---
+		if(BTN_PRESSED){
+			if(btn_pressed_time == 255){
+				BTN_OVF = 1;
+			}
+			btn_pressed_time++;
+		}
+		if(SERVOA_RESET){
+			if(servo_counter < SERVO_RESET_TIME){
+				servo_counter++;
+				} else {
+				servo_counter = 0;
+				SERVOA_RESET = 0;
+				servoA_set_angle(90);
+			}
+		}
+	}
+}
 
 int main()
 {
@@ -256,8 +272,7 @@ int main()
 	timer1_init();
 	timer2_init();
 	//Inicia HCSR04
-	ultrasonic_init(&ultraSensor);
-	ultrasonic_set_print_method(&ultraSensor, printfWrapper); //Iniciar el metodo de impresion printf del ultrasonido
+	ultrasonic_init(&ultraSensor, printfWrapper);
 	// Inicializa la interrupción externa
 	//external_interrupt_init();
 	EMIT_TRIGGER = 1; //Solo si quiero emitir al iniciar, sino sacar
@@ -266,31 +281,31 @@ int main()
 	sei();
 	while (1)
 	{ 
-		if(ULTRASONIC_ENABLE && ultraSensor.TRIGGER_ALLOWED && EMIT_TRIGGER){ //Sensor habilitado, listo para emitir y señal de emitir en alto
-			if(ultrasonic_start(&ultraSensor)){ //Trata de iniciar, veremos el resultado
-				printf("InitHCSR04\n"); //Emitio
-			}else{
-				printf("ErrorInitHCSR04\n"); //No puedo iniciar, no emitio, no bajo la bandera de emision
-				EMIT_FAILED = 1; //Fallo emision
+		if(ULTRASONIC_ENABLE && ultraSensor.TRIGGER_ALLOWED && EMIT_TRIGGER){
+			if(ultrasonic_start(&ultraSensor)){
+				printf("InitHCSR04\n");
+				ULTRASONIC_ENABLE = 0; // Se desactiva para no reiniciar la medición hasta que termine
+				EMIT_TRIGGER = 0;
+				} else {
+				printf("ErrorInitHCSR04\n");
+				EMIT_FAILED = 1;
 			}
 		}
-		ultrasonic_update(&ultraSensor);
-		if(ultraSensor.state == ULTRA_TRIGGERING){ //Imprime 
-			if(!ultraSensor.DO_TRIGGER && !ultraSensor.TRIGGER_ALLOWED && EMIT_TRIGGER){ //Ya lanzo trigger y quedo en tiempo de espera
-				printf("Trigger lanzado \n"); //Imprime hasta que cambia de estado la libreria
-				EMIT_TRIGGER = 0; //Logro emitir poniendo pin en alto
-			}
-		}
-		if(ultraSensor.TRIGGER_FINISH && ultraSensor.ECHO_RISING){ //Termino trigger y el echo aun no volvio
-			printf("Esperando ECHO \n");
-		}
-		if(ultraSensor.state == ULTRA_DONE){
+		ultrasonic_update(&ultraSensor);	
+		if(ultraSensor.state == ULTRA_DONE && ultraSensor.NEW_RESULT){
 			printf("HCSR04 Dist[mm] %ul\n", ultrasonic_get_distance(&ultraSensor));
+			ultraSensor.NEW_RESULT = 0;
 		}
 		if(VEINTEMS_PASSED){
-			ultrasonic_hal_echo_timeout(&ultraSensor); //Wrapper fn para setear TIMEDOUT = 1 en la libreria
+			//ultrasonic_hal_echo_timeout(&ultraSensor); //Wrapper fn para setear TIMEDOUT = 1 en la libreria
 			printf("HCSR04 perdio ECHO\n");
 			VEINTEMS_PASSED = 0; //Reiniciar bandera de timeout
+			WAITING_ECHO = 0;
+			ULTRASONIC_ENABLE = 1;
+			ultraSensor.TIMEDOUT = 1;
+			if(ultrasonic_timeout_clear(&ultraSensor)){
+				printf("Timeout clear");
+			}
 		}
 		if((PIND & (1 << BUTTON_PIN)) && !BTN_PRESSED){ //Presionado y no salto la flag aun
 			btn_pressed_time = 0;
@@ -314,10 +329,12 @@ int main()
 		}*/ 
 		if(DEBUG_FLAG){
 			printf("Aqui");
+			DEBUG_FLAG = 0;
 		}
 		if(BTN_RELEASED){
 			BTN_RELEASED = 0; //TEST SERVO A
-			SERVOA_MOVE = 1;
+			EMIT_TRIGGER = 1;
+			//SERVOA_MOVE = 1;
 		}
 		if(SERVOA_MOVE){
 			SERVOA_MOVE = 0;
