@@ -21,6 +21,9 @@ utils/legacy_hcsr04/hcsr04_utils.d utils/legacy_hcsr04/hcsr04_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
  ../utils/legacy_hcsr04/./../../types/bitmapType.h \
+ ../utils/legacy_hcsr04/./../../types/sorterSystemTypes.h \
+ ../utils/legacy_hcsr04/./../../types/boxTypes.h \
+ ../utils/legacy_hcsr04/./../../types/outputType.h \
  ../utils/legacy_hcsr04/hcsr04_utils.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -64,5 +67,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 
 ../utils/legacy_hcsr04/./../../types/bitmapType.h:
+
+../utils/legacy_hcsr04/./../../types/sorterSystemTypes.h:
+
+../utils/legacy_hcsr04/./../../types/boxTypes.h:
+
+../utils/legacy_hcsr04/./../../types/outputType.h:
 
 ../utils/legacy_hcsr04/hcsr04_utils.h:

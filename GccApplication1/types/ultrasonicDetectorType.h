@@ -13,8 +13,8 @@
 #include "ultrasonic_hal.h"
 #include "bitmapType.h"
 
-/*#define ZONE_ULTRA_CLEAR flags.bitmap.bit0;
-#define SELECTED flags.bitmap.bit1;
+#define ZONE_ULTRA_CLEAR flags.bitmap.bit0;
+/*#define SELECTED flags.bitmap.bit1;
 #define DISCARDED flags.bitmap.bit2;
 #define DISCARDED flags.bitmap.bit3;*/
 // NO AGREGAR MAS -> Nibble H lo usamos para el tipo

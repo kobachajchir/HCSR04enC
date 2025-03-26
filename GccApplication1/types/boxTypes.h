@@ -26,11 +26,11 @@
 #define BOX_LENGTH_MM 80
 
 //Definiciones de los tipos de cajas -> Nibble H de las flags
-#define BOX_SIZE_A 3  // Define de caja grande
-#define BOX_SIZE_B 2  // Define de caja media
-#define BOX_SIZE_C 1  // Define de caja chica
 #define BOX_DISCARDED 0  // Define de descarte
-#define BOX_UNKNOWN 4 //No definida
+#define BOX_SIZE_A 1  // Define de caja grande
+#define BOX_SIZE_B 2  // Define de caja media
+#define BOX_SIZE_C 3  // Define de caja chica
+#define NO_BOX 4 //No definida
 typedef uint8_t box_type_t; //Tipo de caja
 
 #define BOX_WAITING_MEASURE 0   // Esperando en zona de medición
@@ -45,6 +45,12 @@ typedef struct {
 	uint8_t min_height_mm;  // Minimum height in millimeters
 	uint8_t max_height_mm;  // Maximum height in millimeters
 } box_height_range_t;
+
+typedef struct {
+	box_height_range_t box_size_a;  // Large box range
+	box_height_range_t box_size_b;  // Medium box range
+	box_height_range_t box_size_c;  // Small box range
+} box_height_range_matrix_t;
 
 typedef struct {
 	uint8_t height_mm;     // Altura medida

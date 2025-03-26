@@ -11,6 +11,7 @@
 
 #include "types/bitmapType.h"
 #include "types/ultrasonicDetectorType.h"
+#include "types/sorterSystemTypes.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
 
@@ -69,15 +70,9 @@
 #define EMIT_FAILED bandera2.bitmap.bit2
 #define WAITING_ECHO bandera2.bitmap.bit3
 #define WAIT_TIME_TRIGGER_PASSED bandera2.bitmap.bit4
-#define DEBUG_FLAGS bandera2.bitmap.bit5
-
-/*
-#define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
-#define TRIGGER_STATE bandera.bitmap.bit4 // Usamos el bit 4 para el estado de TRIGGER
-#define TRIGGER_ALLOWED bandera.bitmap.bit5 // Usamos el bit 5 para el allow del TRIGGER
-#define CALCULATE bandera.bitmap.bit6 // Usamos el bit 6 para el allow del TRIGGER
-#define BTN_PRESS bandera.bitmap.bit7 // Usamos el bit 7 para detectar el button press
-*/
+#define TRIGGER_ACTIVE bandera2.bitmap.bit5
+#define DEBUG_FLAGS bandera2.bitmap.bit6 //DebugFlags de la libreria del HCSR04
+#define DEBUG_FLAGS_SORTER bandera2.bitmap.bit7 //DebugFlags del Sorter
 
 extern Byte_Flag_Struct bandera;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
 extern Byte_Flag_Struct bandera2;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
@@ -92,4 +87,6 @@ extern volatile uint8_t echo_state; // Estado de la señal de eco
 extern volatile uint8_t servo_counter;
 extern ultrasonic_t ultraSensor;
 extern Ultrasonic_Detector_t hcsr04Detector;
+extern sorter_system_t SorterSystem;
+
 #endif /* MAIN_H_ */

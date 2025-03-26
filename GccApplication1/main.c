@@ -44,10 +44,10 @@ volatile uint8_t echo_state = 0; // Estado de la señal de eco
 volatile uint8_t diezMsCounter = 0; //Counter de 10ms, max 255 ovf cada 2.55 segundos
 volatile uint8_t veintems_counter = 0;
 volatile uint8_t trigger_timeout_counter = 0;
-static volatile bool trigger_active = false;
 uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
 ultrasonic_t ultraSensor;
 Ultrasonic_Detector_t hcsr04Detector;
+sorter_system_t SorterSystem;
 
 /* END Global variables ------------------------------------------------------*/
 
@@ -181,16 +181,16 @@ ISR(TIMER2_COMPA_vect)
 	if(TIMER2_ACTIVE) {
 		// --- Gestión del pulso de TRIGGER en ULTRA_TRIGGERING ---
 		if(ultraSensor.state == ULTRA_TRIGGERING) {
-			if(!trigger_active) {
+			if(!TRIGGER_ACTIVE) {
 				// Primera interrupción: activa el trigger y marca la bandera
 				ultrasonic_hal_trigger_setHigh();
 				ultraSensor.DO_TRIGGER = 1;
-				trigger_active = true;
+				TRIGGER_ACTIVE = 1;
 			} else {
 				// Segunda interrupción: desactiva el trigger y señala que terminó el pulso
 				ultrasonic_hal_trigger_setLow();
 				ultraSensor.TRIGGER_FINISH = 1;
-				trigger_active = false;
+				TRIGGER_ACTIVE = 0;
 				EMIT_TRIGGER = 0;
 				WAITING_ECHO = 1;
 				ultraSensor.TRIGGER_ALLOWED = 0;
@@ -202,12 +202,11 @@ ISR(TIMER2_COMPA_vect)
 		
 		// --- Timeout de 20ms para el ECHO ---
 		if(ultraSensor.state == ULTRA_WAIT_RISING && ultraSensor.ECHO_RISING && !VEINTEMS_PASSED && WAITING_ECHO) {
-			static volatile uint8_t wait_echo_counter = 0;
-			if(wait_echo_counter < 1) { // 1 * 10ms = 10ms (ajusta si lo deseas a 2 para 20ms)
-				wait_echo_counter++;
+			if(veintems_counter < 1) { // 1 * 10ms = 10ms (ajusta si lo deseas a 2 para 20ms)
+				veintems_counter++;
 				} else {
 				VEINTEMS_PASSED = 1;
-				wait_echo_counter = 0;
+				veintems_counter = 0;
 			}
 		}
 		// --- Habilitar el trigger nuevamente en estados IDLE o DONE (70ms) ---
@@ -258,6 +257,7 @@ int main()
 	TIMER2_ACTIVE = 1;
 	ULTRASONIC_ENABLE = 1;
 	DEBUG_FLAGS = 0;
+	DEBUG_FLAGS_SORTER = 1;
 	// Inicializa la comunicación serial primero
 	USART_Init(8);  // 115200 baudios para un reloj de 16 MHz
 	// Redirigir la salida estándar a USART
@@ -275,6 +275,7 @@ int main()
 	ultrasonic_set_debug_mode(&ultraSensor, DEBUG_FLAGS ? true : false);
 	hcsr04Detector.sensor = &ultraSensor;
 	NIBBLEH_SET_STATE(hcsr04Detector, SENSOR_IDLE);
+	initSorter(&SorterSystem);
 	// Inicializa la interrupción externa
 	//external_interrupt_init();
 	EMIT_TRIGGER = 1; //Solo si quiero emitir al iniciar, sino sacar
@@ -283,7 +284,7 @@ int main()
 	sei();
 	while (1)
 	{ 
-		ultraSensorTask(hcsr04Detector.sensor); //Recordar que la funcion pide un puntero y esto ya es un puntero, por lo que no lo apunto con &
+		ultraSensorTask(&hcsr04Detector, &SorterSystem); //Recordar que la funcion pide un puntero y esto ya es un puntero, por lo que no lo apunto con &
 		if((PIND & (1 << BUTTON_PIN)) && !BTN_PRESSED){ //Presionado y no salto la flag aun
 			btn_pressed_time = 0;
 			BTN_PRESSED = 1;
@@ -301,20 +302,20 @@ int main()
 				}
 			}
 		}
-		if(WAIT_TIME_TRIGGER_PASSED){
+		if(WAIT_TIME_TRIGGER_PASSED){ //Esta bandera salta cuando se cunplio el tiempo de espera entre triggers
 			WAIT_TIME_TRIGGER_PASSED = 0;
 			ultraSensor.TRIGGER_ALLOWED = 1;
 		}
-		if(ECHO_INTERVAL_FLAG){ 
+		if(ECHO_INTERVAL_FLAG){ //Esto controla cuando entra a emitir otro trigger
 			ECHO_INTERVAL_FLAG = 0;
 			EMIT_TRIGGER = 1;
 		}
-		if(BTN_RELEASED){
+		if(BTN_RELEASED){ //Bandera que controla accion del press del boton
 			BTN_RELEASED = 0; //TEST SERVO A
 			//EMIT_TRIGGER = 1;
 			SERVOA_MOVE = 1;
 		}
-		if(SERVOA_MOVE){
+		if(SERVOA_MOVE){ //Accionamiento del SERVO A
 			SERVOA_MOVE = 0;
 			servoA_set_angle(0);
 			SERVOA_RESET = 1;

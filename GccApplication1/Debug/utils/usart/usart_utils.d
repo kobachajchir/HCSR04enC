@@ -19,7 +19,10 @@ utils/usart/usart_utils.d utils/usart/usart_utils.o: \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
- ../utils/usart/./../../types/bitmapType.h
+ ../utils/usart/./../../types/bitmapType.h \
+ ../utils/usart/./../../types/sorterSystemTypes.h \
+ ../utils/usart/./../../types/boxTypes.h \
+ ../utils/usart/./../../types/outputType.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -62,3 +65,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 
 ../utils/usart/./../../types/bitmapType.h:
+
+../utils/usart/./../../types/sorterSystemTypes.h:
+
+../utils/usart/./../../types/boxTypes.h:
+
+../utils/usart/./../../types/outputType.h:

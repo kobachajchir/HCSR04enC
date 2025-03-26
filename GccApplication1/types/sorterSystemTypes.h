@@ -25,7 +25,7 @@ typedef struct {
 } production_stats_t;
 
 typedef struct {
-	box_height_range_t *box_ranges;
+	box_height_range_matrix_t *box_ranges;
 	output_t outputs[NUM_OUTPUTS];
 	production_stats_t stats;
 } sorter_system_t;
