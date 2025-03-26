@@ -10,14 +10,16 @@
 #define MAIN_H_
 
 #include "types/bitmapType.h"
-#include "types/cintaType.h"
+#include "types/ultrasonicDetectorType.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
 
-#define CAJA_GRANDE 3  // Define de caja grande
-#define CAJA_MEDIA 2  // Define de caja media
-#define CAJA_CHICA 1  // Define de caja chica
-#define DESCARTE 0  // Define de descarte
+#define NIBBLEH_SET_STATE(object, state) \
+((object).flags.byte = ((object).flags.byte & 0x0F) | (((state) & 0x0F) << 4))
+
+#define NIBBLEH_GET_STATE(object) (((object).flags.byte >> 4) & 0x0F)
+
+#define ALL_FLAGS flags.byte
 
 #define F_CPU 16000000UL  // Definir la frecuencia del reloj en 16 MHz
 #define TRIGGER_PIN  PD3  // Pin de Trigger PIN Numero 3
@@ -30,7 +32,7 @@
 
 #define DISTANCE_MIN_MM 30 //3cm min
 #define DISTANCE_MAX_MM 2000 //2m max
-#define ECHO_INTERVAL_TENMS 20 //Max 2.5s que es 255, porque el contador es uint8
+#define ECHO_INTERVAL_TENMS 10 //Max 2.5s que es 255, porque el contador es uint8
 
 #define SERVO_MIN_PULSE 2000UL // 1ms (2000 * 0.5us)
 #define SERVO_START_PULSE 3000UL // 1ms (2000 * 0.5us)
@@ -77,8 +79,8 @@
 #define BTN_PRESS bandera.bitmap.bit7 // Usamos el bit 7 para detectar el button press
 */
 
-extern Byte_Flag_Struct bandera;  // Definido para manejar flags
-extern Byte_Flag_Struct bandera2;  // Definido para manejar flags
+extern Byte_Flag_Struct bandera;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
+extern Byte_Flag_Struct bandera2;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
 extern volatile uint16_t echo_init_time;  // Tiempo de inicio (flanco ascendente)
 extern volatile uint16_t echo_finish_time;    // Tiempo final (flanco descendente)
 extern volatile uint16_t distance_mm;      // Distancia en milímetros
@@ -88,9 +90,6 @@ extern volatile uint8_t wait_time; // Contador de desbordamientos del Timer 1
 extern volatile uint8_t btn_pressed_time; // Contador de btn presionado en multiplos de 10ms
 extern volatile uint8_t echo_state; // Estado de la señal de eco
 extern volatile uint8_t servo_counter;
-extern cinta_out outA;
-extern cinta_out outB;
-extern cinta_out outC;
-extern cinta_out outD;
 extern ultrasonic_t ultraSensor;
+extern Ultrasonic_Detector_t hcsr04Detector;
 #endif /* MAIN_H_ */

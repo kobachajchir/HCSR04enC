@@ -7,6 +7,7 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include "./../../main.h"
+#include "servo_utils.h"
 
 void servoA_set_angle(uint8_t angle)
 {

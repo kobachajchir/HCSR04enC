@@ -4,7 +4,9 @@
 
 main.c
 
-utils\hcsr04\hcsr04_utils.c
+utils\legacy_hcsr04\hcsr04_utils.c
+
+utils\programPath\boxsorter_utils.c
 
 utils\servo\servo_utils.c
 

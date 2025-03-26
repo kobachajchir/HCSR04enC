@@ -35,7 +35,8 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../utils \
 ../types \
-../utils/hcsr04 \
+../utils/legacy_hcsr04 \
+../utils/programPath \
 ../utils/servo \
 ../utils/usart
 
@@ -43,7 +44,8 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../main.c \
-../utils/hcsr04/hcsr04_utils.c \
+../utils/legacy_hcsr04/hcsr04_utils.c \
+../utils/programPath/boxsorter_utils.c \
 ../utils/servo/servo_utils.c \
 ../utils/ultrasonic_hal.c \
 ../utils/usart/usart_utils.c
@@ -57,28 +59,32 @@ ASM_SRCS +=
 
 OBJS +=  \
 main.o \
-utils/hcsr04/hcsr04_utils.o \
+utils/legacy_hcsr04/hcsr04_utils.o \
+utils/programPath/boxsorter_utils.o \
 utils/servo/servo_utils.o \
 utils/ultrasonic_hal.o \
 utils/usart/usart_utils.o
 
 OBJS_AS_ARGS +=  \
 main.o \
-utils/hcsr04/hcsr04_utils.o \
+utils/legacy_hcsr04/hcsr04_utils.o \
+utils/programPath/boxsorter_utils.o \
 utils/servo/servo_utils.o \
 utils/ultrasonic_hal.o \
 utils/usart/usart_utils.o
 
 C_DEPS +=  \
 main.d \
-utils/hcsr04/hcsr04_utils.d \
+utils/legacy_hcsr04/hcsr04_utils.d \
+utils/programPath/boxsorter_utils.d \
 utils/servo/servo_utils.d \
 utils/ultrasonic_hal.d \
 utils/usart/usart_utils.d
 
 C_DEPS_AS_ARGS +=  \
 main.d \
-utils/hcsr04/hcsr04_utils.d \
+utils/legacy_hcsr04/hcsr04_utils.d \
+utils/programPath/boxsorter_utils.d \
 utils/servo/servo_utils.d \
 utils/ultrasonic_hal.d \
 utils/usart/usart_utils.d
@@ -105,7 +111,14 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
-utils/hcsr04/hcsr04_utils.o: ../utils/hcsr04/hcsr04_utils.c
+utils/legacy_hcsr04/hcsr04_utils.o: ../utils/legacy_hcsr04/hcsr04_utils.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+utils/programPath/boxsorter_utils.o: ../utils/programPath/boxsorter_utils.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

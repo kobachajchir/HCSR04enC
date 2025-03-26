@@ -6,9 +6,11 @@
 #include <stddef.h>
 #include "main.h"
 #include "types/bitmapType.h"
-#include "types/cintaType.h"
+#include "types/sorterSystemTypes.h"
 #include "utils/usart/usart_utils.h"
 #include "utils/servo/servo_utils.h"
+#include "types/ultrasonicDetectorType.h"
+#include "utils/programPath/boxsorter_utils.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
 
@@ -43,13 +45,9 @@ volatile uint8_t diezMsCounter = 0; //Counter de 10ms, max 255 ovf cada 2.55 seg
 volatile uint8_t veintems_counter = 0;
 volatile uint8_t trigger_timeout_counter = 0;
 static volatile bool trigger_active = false;
-uint32_t now = 0;
 uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
-cinta_out outA;
-cinta_out outB;
-cinta_out outC;
-cinta_out outD;
 ultrasonic_t ultraSensor;
+Ultrasonic_Detector_t hcsr04Detector;
 
 /* END Global variables ------------------------------------------------------*/
 
@@ -267,10 +265,6 @@ int main()
 	// Redirigir la entrada estándar a USART
 	stdin = &mystdin;
 	diezMsCounter = 0;
-	outA.cinta_struct_full_mem = 0;
-	outB.cinta_struct_full_mem = 0;
-	outC.cinta_struct_full_mem = 0;
-	outD.cinta_struct_full_mem = 0;
 	// Inicializa los pines GPIO
 	gpio_pins_init();
 	// Inicializa los temporizadores
@@ -278,7 +272,9 @@ int main()
 	timer2_init();
 	//Inicia HCSR04
 	ultrasonic_init(&ultraSensor, printfWrapper);
-	ultrasonic_set_debug_mode(&ultraSensor, false);
+	ultrasonic_set_debug_mode(&ultraSensor, DEBUG_FLAGS ? true : false);
+	hcsr04Detector.sensor = &ultraSensor;
+	NIBBLEH_SET_STATE(hcsr04Detector, SENSOR_IDLE);
 	// Inicializa la interrupción externa
 	//external_interrupt_init();
 	EMIT_TRIGGER = 1; //Solo si quiero emitir al iniciar, sino sacar
@@ -287,44 +283,7 @@ int main()
 	sei();
 	while (1)
 	{ 
-		if(ULTRASONIC_ENABLE && ultraSensor.TRIGGER_ALLOWED && EMIT_TRIGGER){
-			if(ultrasonic_start(&ultraSensor)){
-				if(DEBUG_FLAGS){
-					printf("InitHCSR04\n");
-				}
-				ULTRASONIC_ENABLE = 0; // Se desactiva para no reiniciar la medición hasta que termine
-				EMIT_TRIGGER = 0;
-				ultraSensor.TRIGGER_ALLOWED = 0;
-				} else {
-				if(DEBUG_FLAGS){
-					printf("ErrorInitHCSR04\n");
-				}	
-				EMIT_FAILED = 1;
-				EMIT_TRIGGER = 0;
-			}
-		}
-		ultrasonic_update(&ultraSensor);	
-		if(ultraSensor.state == ULTRA_DONE && ultraSensor.NEW_RESULT){
-			printf("HCSR04 Dist[mm] %ul\n", ultrasonic_get_distance(&ultraSensor));
-			ultraSensor.NEW_RESULT = 0;
-			ultrasonic_init_flags(&ultraSensor);
-			ultraSensor.state = ULTRA_IDLE;
-			ULTRASONIC_ENABLE = 1; 
-		}
-		if(VEINTEMS_PASSED){
-			if(DEBUG_FLAGS){
-				printf("HCSR04 perdio ECHO\n");	
-			}
-			VEINTEMS_PASSED = 0; // Reiniciar bandera de timeout
-			WAITING_ECHO = 0;
-			ultraSensor.TIMEDOUT = 1;
-			// Cambia el estado a timeout para que se pueda limpiar
-			ultraSensor.state = ULTRA_TIMEOUT;
-			if(ultrasonic_timeout_clear(&ultraSensor, DEBUG_FLAGS ? true : false) && DEBUG_FLAGS){
-				printf("LIB DEBUG - HCSR04 TMDOUT Cleared\n");
-			}
-			ULTRASONIC_ENABLE = 1;
-		}
+		ultraSensorTask(hcsr04Detector.sensor); //Recordar que la funcion pide un puntero y esto ya es un puntero, por lo que no lo apunto con &
 		if((PIND & (1 << BUTTON_PIN)) && !BTN_PRESSED){ //Presionado y no salto la flag aun
 			btn_pressed_time = 0;
 			BTN_PRESSED = 1;

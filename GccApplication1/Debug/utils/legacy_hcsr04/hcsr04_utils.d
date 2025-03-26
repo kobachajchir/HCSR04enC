@@ -1,4 +1,5 @@
-main.d main.o: .././main.c \
+utils/legacy_hcsr04/hcsr04_utils.d utils/legacy_hcsr04/hcsr04_utils.o: \
+ ../utils/legacy_hcsr04/hcsr04_utils.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -10,19 +11,17 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- .././main.h .././types/bitmapType.h .././types/ultrasonicDetectorType.h \
+ ../utils/legacy_hcsr04/./../../main.h \
+ ../utils/legacy_hcsr04/./../../types/bitmapType.h \
+ ../utils/legacy_hcsr04/./../../types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
- .././types/bitmapType.h .././types/sorterSystemTypes.h \
- .././types/boxTypes.h .././types/outputType.h \
- .././utils/usart/usart_utils.h .././utils/servo/servo_utils.h \
- .././utils/programPath/boxsorter_utils.h \
- .././utils/programPath/../../types/boxTypes.h
+ ../utils/legacy_hcsr04/./../../types/bitmapType.h \
+ ../utils/legacy_hcsr04/hcsr04_utils.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -46,38 +45,24 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
-
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
+../utils/legacy_hcsr04/./../../main.h:
 
-.././main.h:
+../utils/legacy_hcsr04/./../../types/bitmapType.h:
 
-.././types/bitmapType.h:
-
-.././types/ultrasonicDetectorType.h:
+../utils/legacy_hcsr04/./../../types/ultrasonicDetectorType.h:
 
 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
+
 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 
-.././types/bitmapType.h:
+../utils/legacy_hcsr04/./../../types/bitmapType.h:
 
-.././types/sorterSystemTypes.h:
-
-.././types/boxTypes.h:
-
-.././types/outputType.h:
-
-.././utils/usart/usart_utils.h:
-
-.././utils/servo/servo_utils.h:
-
-.././utils/programPath/boxsorter_utils.h:
-
-.././utils/programPath/../../types/boxTypes.h:
+../utils/legacy_hcsr04/hcsr04_utils.h:
