@@ -188,13 +188,14 @@ ISR(TIMER2_COMPA_vect)
 				ultrasonic_hal_trigger_setHigh();
 				ultraSensor.DO_TRIGGER = 1;
 				trigger_active = true;
-				} else {
+			} else {
 				// Segunda interrupción: desactiva el trigger y señala que terminó el pulso
 				ultrasonic_hal_trigger_setLow();
 				ultraSensor.TRIGGER_FINISH = 1;
 				trigger_active = false;
 				EMIT_TRIGGER = 0;
 				WAITING_ECHO = 1;
+				ultraSensor.TRIGGER_ALLOWED = 0;
 				ultraSensor.state = ULTRA_WAIT_RISING;
 				ultraSensor.ECHO_RISING = 1; // Indica que se ha enviado el trigger y se espera ECHO
 				ultraSensor.TRIGGER_FINISH = 0; // Limpiamos la bandera para evitar transiciones repetidas
@@ -212,17 +213,19 @@ ISR(TIMER2_COMPA_vect)
 			}
 		}
 		// --- Habilitar el trigger nuevamente en estados IDLE o DONE (70ms) ---
-		else if(ultraSensor.state == ULTRA_IDLE || ultraSensor.state == ULTRA_DONE) {
-			static volatile uint8_t wait_trigger_allowed_counter = 0;
-			if(!ultraSensor.TRIGGER_ALLOWED && wait_trigger_allowed_counter < 7){ // 7 * 10ms = 70ms
-				wait_trigger_allowed_counter++;
+		if(!ultraSensor.TRIGGER_ALLOWED && !WAIT_TIME_TRIGGER_PASSED) {
+			if(wait_time < 7){ // 7 * 10ms = 70ms
+				wait_time++;
 				} else {
-				ultraSensor.TRIGGER_ALLOWED = 1;
-				wait_trigger_allowed_counter = 0;
+				WAIT_TIME_TRIGGER_PASSED = 1;
+				wait_time = 0;
+			}
+			if(ultraSensor.TIMEDOUT){
+				ultrasonic_timeout_clear(&ultraSensor, DEBUG_FLAGS ? true : false);
 			}
 		}
 		// --- Contador general (no modificado) ---
-		if(diezMsCounter < ECHO_INTERVAL_TENMS && !ECHO_INTERVAL_FLAG){
+		if(diezMsCounter < ECHO_INTERVAL_TENMS){
 			diezMsCounter++;
 			} else {
 			ECHO_INTERVAL_FLAG = 1;
@@ -256,6 +259,7 @@ int main()
 	// Habilita el trigger y verifica explícitamente que otras banderas estén en 0
 	TIMER2_ACTIVE = 1;
 	ULTRASONIC_ENABLE = 1;
+	DEBUG_FLAGS = 0;
 	// Inicializa la comunicación serial primero
 	USART_Init(8);  // 115200 baudios para un reloj de 16 MHz
 	// Redirigir la salida estándar a USART
@@ -274,6 +278,7 @@ int main()
 	timer2_init();
 	//Inicia HCSR04
 	ultrasonic_init(&ultraSensor, printfWrapper);
+	ultrasonic_set_debug_mode(&ultraSensor, false);
 	// Inicializa la interrupción externa
 	//external_interrupt_init();
 	EMIT_TRIGGER = 1; //Solo si quiero emitir al iniciar, sino sacar
@@ -284,12 +289,18 @@ int main()
 	{ 
 		if(ULTRASONIC_ENABLE && ultraSensor.TRIGGER_ALLOWED && EMIT_TRIGGER){
 			if(ultrasonic_start(&ultraSensor)){
-				printf("InitHCSR04\n");
+				if(DEBUG_FLAGS){
+					printf("InitHCSR04\n");
+				}
 				ULTRASONIC_ENABLE = 0; // Se desactiva para no reiniciar la medición hasta que termine
 				EMIT_TRIGGER = 0;
+				ultraSensor.TRIGGER_ALLOWED = 0;
 				} else {
-				printf("ErrorInitHCSR04\n");
+				if(DEBUG_FLAGS){
+					printf("ErrorInitHCSR04\n");
+				}	
 				EMIT_FAILED = 1;
+				EMIT_TRIGGER = 0;
 			}
 		}
 		ultrasonic_update(&ultraSensor);	
@@ -298,17 +309,21 @@ int main()
 			ultraSensor.NEW_RESULT = 0;
 			ultrasonic_init_flags(&ultraSensor);
 			ultraSensor.state = ULTRA_IDLE;
+			ULTRASONIC_ENABLE = 1; 
 		}
 		if(VEINTEMS_PASSED){
-			//ultrasonic_hal_echo_timeout(&ultraSensor); //Wrapper fn para setear TIMEDOUT = 1 en la libreria
-			printf("HCSR04 perdio ECHO\n");
-			VEINTEMS_PASSED = 0; //Reiniciar bandera de timeout
-			WAITING_ECHO = 0;
-			ULTRASONIC_ENABLE = 1;
-			ultraSensor.TIMEDOUT = 1;
-			if(ultrasonic_timeout_clear(&ultraSensor)){
-				printf("Timeout clear");
+			if(DEBUG_FLAGS){
+				printf("HCSR04 perdio ECHO\n");	
 			}
+			VEINTEMS_PASSED = 0; // Reiniciar bandera de timeout
+			WAITING_ECHO = 0;
+			ultraSensor.TIMEDOUT = 1;
+			// Cambia el estado a timeout para que se pueda limpiar
+			ultraSensor.state = ULTRA_TIMEOUT;
+			if(ultrasonic_timeout_clear(&ultraSensor, DEBUG_FLAGS ? true : false) && DEBUG_FLAGS){
+				printf("LIB DEBUG - HCSR04 TMDOUT Cleared\n");
+			}
+			ULTRASONIC_ENABLE = 1;
 		}
 		if((PIND & (1 << BUTTON_PIN)) && !BTN_PRESSED){ //Presionado y no salto la flag aun
 			btn_pressed_time = 0;
@@ -327,13 +342,13 @@ int main()
 				}
 			}
 		}
+		if(WAIT_TIME_TRIGGER_PASSED){
+			WAIT_TIME_TRIGGER_PASSED = 0;
+			ultraSensor.TRIGGER_ALLOWED = 1;
+		}
 		if(ECHO_INTERVAL_FLAG){ 
 			ECHO_INTERVAL_FLAG = 0;
 			EMIT_TRIGGER = 1;
-		}
-		if(DEBUG_FLAG){
-			printf("Aqui");
-			DEBUG_FLAG = 0;
 		}
 		if(BTN_RELEASED){
 			BTN_RELEASED = 0; //TEST SERVO A

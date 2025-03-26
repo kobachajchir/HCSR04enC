@@ -66,7 +66,8 @@
 #define EMIT_TRIGGER bandera2.bitmap.bit1
 #define EMIT_FAILED bandera2.bitmap.bit2
 #define WAITING_ECHO bandera2.bitmap.bit3
-#define DEBUG_FLAG bandera2.bitmap.bit4
+#define WAIT_TIME_TRIGGER_PASSED bandera2.bitmap.bit4
+#define DEBUG_FLAGS bandera2.bitmap.bit5
 
 /*
 #define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
