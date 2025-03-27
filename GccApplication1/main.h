@@ -9,16 +9,15 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
+#include "utils/macros_utils.h"
 #include "types/bitmapType.h"
 #include "types/ultrasonicDetectorType.h"
 #include "types/sorterSystemTypes.h"
+#include "types/TCRTType.h"
+#include "types/outputType.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
-
-#define NIBBLEH_SET_STATE(object, state) \
-((object).flags.byte = ((object).flags.byte & 0x0F) | (((state) & 0x0F) << 4))
-
-#define NIBBLEH_GET_STATE(object) (((object).flags.byte >> 4) & 0x0F)
+#include <avr/io.h>
 
 #define ALL_FLAGS flags.byte
 
@@ -29,7 +28,19 @@
 #define ECHO_PIN     PB0  // Pin de Echo PIN Numero 8
 #define BUTTON_PIN     PD4  // Pin de Button PIN Numero 4
 #define LED_BUILTIN_PIN PB5  // Pin LED incorporado (Arduino pin 13)
-#define SERVOA_PIN PB1  // Pin Servo A PIN 6
+#define SERVOA_PIN PB1  // Pin Servo A PIN 9
+#define SERVOB_PIN PB2  // Pin Servo B PIN 10
+#define SERVOC_PIN PB3  // Pin Servo C PIN 11
+
+#define TCRT_A PC0
+#define TCRT_B PC1
+#define TCRT_C PC2
+#define TCRT_U PC3
+
+#define TCRT_A_CHANNEL 0
+#define TCRT_B_CHANNEL 1
+#define TCRT_C_CHANNEL 2
+#define TCRT_U_CHANNEL 3
 
 #define DISTANCE_MIN_MM 30 //3cm min
 #define DISTANCE_MAX_MM 2000 //2m max
@@ -74,6 +85,26 @@
 #define DEBUG_FLAGS bandera2.bitmap.bit6 //DebugFlags de la libreria del HCSR04
 #define DEBUG_FLAGS_SORTER bandera2.bitmap.bit7 //DebugFlags del Sorter
 
+//Defines para bits individuales
+#define BIT0_MASK   0x01  // 0000 0001
+#define BIT1_MASK   0x02  // 0000 0010
+#define BIT2_MASK   0x04  // 0000 0100
+#define BIT3_MASK   0x08  // 0000 1000
+#define BIT4_MASK   0x10  // 0001 0000
+#define BIT5_MASK   0x20  // 0010 0000
+#define BIT6_MASK   0x40  // 0100 0000
+#define BIT7_MASK   0x80  // 1000 0000
+
+//Defines para combinaciones de 2 bit
+#define BITS01_MASK 0x03  // 0000 0011
+#define BITS23_MASK 0x0C  // 0000 1100
+#define BITS45_MASK 0x30  // 0011 0000
+#define BITS67_MASK 0xC0  // 1100 0000
+
+//Defines para nibbles
+#define NIBBLE_L_MASK 0x0F  // 0000 1111 ? bits 0-3
+#define NIBBLE_H_MASK 0xF0  // 1111 0000 ? bits 4-7
+
 extern Byte_Flag_Struct bandera;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
 extern Byte_Flag_Struct bandera2;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
 extern volatile uint16_t echo_init_time;  // Tiempo de inicio (flanco ascendente)
@@ -88,5 +119,12 @@ extern volatile uint8_t servo_counter;
 extern ultrasonic_t ultraSensor;
 extern Ultrasonic_Detector_t hcsr04Detector;
 extern sorter_system_t SorterSystem;
+extern TCRT_t IR_A;
+extern TCRT_t IR_B;
+extern TCRT_t IR_C;
+extern TCRT_t IR_U;
+extern output_t salidaA;
+extern output_t salidaB;
+extern output_t salidaC;
 
 #endif /* MAIN_H_ */

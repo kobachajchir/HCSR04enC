@@ -149,6 +149,9 @@
     <Compile Include="types\sorterSystemTypes.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="types\TCRTType.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="types\ultrasonicDetectorType.h">
       <SubType>compile</SubType>
     </Compile>
@@ -156,6 +159,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="utils\legacy_hcsr04\hcsr04_utils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utils\macros_utils.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="utils\programPath\boxsorter_utils.c">
@@ -168,6 +174,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="utils\servo\servo_utils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utils\tcrt\tcrt_utils.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utils\tcrt\tcrt_utils.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="utils\ultrasonic_hal.c">
@@ -184,6 +196,7 @@
     <Folder Include="utils" />
     <Folder Include="types" />
     <Folder Include="utils\legacy_hcsr04" />
+    <Folder Include="utils\tcrt" />
     <Folder Include="utils\programPath" />
     <Folder Include="utils\servo" />
     <Folder Include="utils\usart" />

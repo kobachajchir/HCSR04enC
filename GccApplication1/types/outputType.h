@@ -13,6 +13,10 @@
 #include "bitmapType.h"
 
 #define OUTPUT_BUSY flags.bitmap.bit0;
+#define OUTPUT_PUSH flags.bitmap.bit1;
+// #define OUTPUT_BUSY flags.bitmap.bit2;
+// #define OUTPUT_BUSY flags.bitmap.bit3;
+//Solo NIBBLE L para flags
 
 typedef struct {
 	uint8_t sensor_pin;         // Pin digital del sensor de paso

@@ -15,7 +15,7 @@
 #define NUM_OUTPUTS 3
 #define DETECTION_THRESHOLD_MAX_MM 105
 #define DETECTION_THRESHOLD_MIN_MM 55
-#define DETECTION_IDLE_DISTANCE_MM 150
+#define DETECTION_IDLE_DISTANCE_MM 190
 
 typedef struct {
 	uint32_t total_measured;
@@ -25,8 +25,8 @@ typedef struct {
 } production_stats_t;
 
 typedef struct {
-	box_height_range_matrix_t *box_ranges;
-	output_t outputs[NUM_OUTPUTS];
+	box_height_range_matrix_t* box_ranges;
+	output_t* outputs[NUM_OUTPUTS];
 	production_stats_t stats;
 } sorter_system_t;
 

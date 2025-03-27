@@ -10,6 +10,7 @@
 #include "utils/usart/usart_utils.h"
 #include "utils/servo/servo_utils.h"
 #include "types/ultrasonicDetectorType.h"
+#include "types/TCRTType.h"
 #include "utils/programPath/boxsorter_utils.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
@@ -47,7 +48,15 @@ volatile uint8_t trigger_timeout_counter = 0;
 uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
 ultrasonic_t ultraSensor;
 Ultrasonic_Detector_t hcsr04Detector;
+TCRT_t IR_A;
+TCRT_t IR_B;
+TCRT_t IR_C;
+TCRT_t IR_U;
+output_t salidaA;
+output_t salidaB;
+output_t salidaC;
 sorter_system_t SorterSystem;
+
 
 /* END Global variables ------------------------------------------------------*/
 
@@ -149,17 +158,23 @@ void timer2_init()
 }
 
 void gpio_pins_init() {
-	DDRB |= (1 << LED_BUILTIN_PIN);   // LED pin as output
+	DDRB |= (1 << LED_BUILTIN_PIN);   // LED pin salida
 	PORTB |= (1 << LED_BUILTIN_PIN);  // LED HIGH
 	
-	DDRD |= (1 << TRIGGER_PIN);       // TRIGGER pin as output
-	DDRB &= ~(1 << ECHO_PIN);         // ECHO pin as input (now on PORTB)
-	DDRD &= ~(1 << BUTTON_PIN);       // BUTTON pin as input
-	PORTD &= ~(1 << BUTTON_PIN);
-	DDRB |= (1 << SERVOA_PIN);
+	DDRD |= (1 << TRIGGER_PIN);       // TRIGGER pin salida
+	DDRB &= ~(1 << ECHO_PIN);         // ECHO pin como entrada
+	DDRD &= ~(1 << BUTTON_PIN);       // BUTTON pin como entrada
 	
-	// Make sure TRIGGER starts LOW
+	//Inicializar las salidas de servos
+	DDRB |= (1 << SERVOA_PIN); // SERVOA_PIN como entrada
+	DDRB |= (1 << SERVOB_PIN); // SERVOB_PIN como entrada
+	DDRB |= (1 << SERVOC_PIN); // SERVOC_PIN como entrada
+	
+	tcrt_init(); //Despues haremos esto para todos los sensores, modularizando
+	
+	// Poner en bajo estos pines para asegurarnos
 	PORTD &= ~(1 << TRIGGER_PIN);
+	PORTD &= ~(1 << BUTTON_PIN);
 }
 
 // Configuración de interrupción externa (INT0) para el pin ECHO
@@ -271,10 +286,11 @@ int main()
 	timer1_init();
 	timer2_init();
 	//Inicia HCSR04
+	TCRT_init_Handlers(); //Inicializa las estructuras TCRT_X
 	ultrasonic_init(&ultraSensor, printfWrapper);
 	ultrasonic_set_debug_mode(&ultraSensor, DEBUG_FLAGS ? true : false);
-	hcsr04Detector.sensor = &ultraSensor;
-	NIBBLEH_SET_STATE(hcsr04Detector, SENSOR_IDLE);
+	initDetector(&hcsr04Detector, &ultraSensor, &IR_U);
+	initOutputs();
 	initSorter(&SorterSystem);
 	// Inicializa la interrupción externa
 	//external_interrupt_init();

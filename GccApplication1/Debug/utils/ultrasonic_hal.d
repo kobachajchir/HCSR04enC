@@ -5,10 +5,13 @@ utils/ultrasonic_hal.d utils/ultrasonic_hal.o: ../utils/ultrasonic_hal.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
- ../utils/../main.h ../utils/../types/bitmapType.h \
+ ../utils/../main.h ../utils/../utils/macros_utils.h \
+ ../utils/../utils/../main.h ../utils/../types/bitmapType.h \
  ../utils/../types/ultrasonicDetectorType.h \
- ../utils/../types/bitmapType.h ../utils/../types/sorterSystemTypes.h \
- ../utils/../types/boxTypes.h ../utils/../types/outputType.h \
+ ../utils/../types/bitmapType.h ../utils/../types/TCRTType.h \
+ ../utils/../types/sorterSystemTypes.h ../utils/../types/boxTypes.h \
+ ../utils/../types/outputType.h ../utils/../types/TCRTType.h \
+ ../utils/../types/outputType.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -33,15 +36,25 @@ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 
 ../utils/../main.h:
 
+../utils/../utils/macros_utils.h:
+
+../utils/../utils/../main.h:
+
 ../utils/../types/bitmapType.h:
 
 ../utils/../types/ultrasonicDetectorType.h:
 
 ../utils/../types/bitmapType.h:
 
+../utils/../types/TCRTType.h:
+
 ../utils/../types/sorterSystemTypes.h:
 
 ../utils/../types/boxTypes.h:
+
+../utils/../types/outputType.h:
+
+../utils/../types/TCRTType.h:
 
 ../utils/../types/outputType.h:
 

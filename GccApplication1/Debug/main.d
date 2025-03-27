@@ -15,11 +15,13 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- .././main.h .././types/bitmapType.h .././types/ultrasonicDetectorType.h \
+ .././main.h .././utils/macros_utils.h .././utils/../main.h \
+ .././types/bitmapType.h .././types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
- .././types/bitmapType.h .././types/sorterSystemTypes.h \
- .././types/boxTypes.h .././types/outputType.h \
+ .././types/bitmapType.h .././types/TCRTType.h \
+ .././types/sorterSystemTypes.h .././types/boxTypes.h \
+ .././types/outputType.h .././types/TCRTType.h .././types/outputType.h \
  .././utils/usart/usart_utils.h .././utils/servo/servo_utils.h \
  .././utils/programPath/boxsorter_utils.h \
  .././utils/programPath/../../types/boxTypes.h
@@ -58,6 +60,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 .././main.h:
 
+.././utils/macros_utils.h:
+
+.././utils/../main.h:
+
 .././types/bitmapType.h:
 
 .././types/ultrasonicDetectorType.h:
@@ -68,9 +74,15 @@ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 
 .././types/bitmapType.h:
 
+.././types/TCRTType.h:
+
 .././types/sorterSystemTypes.h:
 
 .././types/boxTypes.h:
+
+.././types/outputType.h:
+
+.././types/TCRTType.h:
 
 .././types/outputType.h:
 
