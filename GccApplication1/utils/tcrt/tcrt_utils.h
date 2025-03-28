@@ -18,5 +18,6 @@ bool detect_rising_edge(TCRT_t* sensor, uint8_t current_state)
 void TCRT_init_Handlers();
 void calibrateIRSensor(TCRT_t* sensor);
 void tcrt_read(TCRT_t* sensor);
+bool tcrt_is_box_detected(TCRT_t* sensor);
 
 #endif /* TCRT_UTILS_H_ */

@@ -241,11 +241,30 @@ void irSensorsTask(sorter_system_t * sorter){
 	if(IR_READ){
 		printf("IR A: %u\n", IR_A.ADCConvertedValue);
 		printf("IR B: %u\n", IR_B.ADCConvertedValue);
+		printf("IR C: %u\n", IR_B.ADCConvertedValue);
 		IR_READ = 0;
 	}
 	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
 		CLEAR_FLAG(IR_A.flags, TCRT_NEW_VALUE);
-		tcrt_read();
+		tcrt_read(&IR_A);
+	}
+	if(tcrt_is_box_detected(&IR_A)){
+		if(NIBBLEH_GET_STATE(IR_A.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
+			SET_FLAG(salidaA.flags, OUTPUT_PUSH);
+			NIBBLEH_SET_STATE(IR_A.flags, TCRT_STATUS_IDLE);
+			printf("Detecto en IR A");
+		}
+	}
+	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
+		CLEAR_FLAG(IR_A.flags, TCRT_NEW_VALUE);
+		tcrt_read(&IR_B);
+	}
+	if(tcrt_is_box_detected(&IR_B)){
+		if(NIBBLEH_GET_STATE(IR_B.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
+			SET_FLAG(salidaB.flags, OUTPUT_PUSH);
+			NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
+			printf("Detecto en IR B");
+		}
 	}
 }
 
@@ -254,25 +273,31 @@ void servosTask(){
 	if (!IS_FLAG_SET(servoA.flags, SERVO_PUSH) && !IS_FLAG_SET(servoA.flags, SERVO_RESET)) {
 		// Ya terminó su ciclo de activación ? limpiar orden externa
 		CLEAR_FLAG(salidaA.flags, OUTPUT_PUSH);
-		} else if (IS_FLAG_SET(salidaA.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoA.flags, SERVO_PUSH)) {
+		printf("Desactiva Servo A");
+	} else if (IS_FLAG_SET(salidaA.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoA.flags, SERVO_PUSH)) {
 		// Solo setea si no se activó aún el pulso
 		SET_FLAG(servoA.flags, SERVO_PUSH);
 		SET_FLAG(servoA.flags, SERVO_RESET);
+		printf("Activa Servo A");
 	}
 
 	// SERVO B
 	if (!IS_FLAG_SET(servoB.flags, SERVO_PUSH) && !IS_FLAG_SET(servoB.flags, SERVO_RESET)) {
 		CLEAR_FLAG(salidaB.flags, OUTPUT_PUSH);
-		} else if (IS_FLAG_SET(salidaB.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoB.flags, SERVO_PUSH)) {
+		printf("Desactiva Servo B");
+	} else if (IS_FLAG_SET(salidaB.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoB.flags, SERVO_PUSH)) {
 		SET_FLAG(servoB.flags, SERVO_PUSH);
 		SET_FLAG(servoB.flags, SERVO_RESET);
+		printf("Activa Servo B");
 	}
 
 	// SERVO C
 	if (!IS_FLAG_SET(servoC.flags, SERVO_PUSH) && !IS_FLAG_SET(servoC.flags, SERVO_RESET)) {
 		CLEAR_FLAG(salidaC.flags, OUTPUT_PUSH);
+		printf("Desactiva Servo C");
 		} else if (IS_FLAG_SET(salidaC.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoC.flags, SERVO_PUSH)) {
 		SET_FLAG(servoC.flags, SERVO_PUSH);
 		SET_FLAG(servoC.flags, SERVO_RESET);
+		printf("Activa Servo C");
 	}
 }

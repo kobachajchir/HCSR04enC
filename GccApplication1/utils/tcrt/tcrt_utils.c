@@ -48,6 +48,7 @@ void TCRT_init_Handlers(){
 	IR_A.pin = TCRT_A;
 	IR_A.ADCConvertedValue = 0;
 	IR_A.lastReading = 0;
+	IR_A.hysteresis_percent = 20;
 	NIBBLEH_SET_STATE(IR_A.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_A.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED)){
@@ -58,6 +59,8 @@ void TCRT_init_Handlers(){
 	IR_B.pin = TCRT_B;
 	IR_B.ADCConvertedValue = 0;
 	IR_B.lastReading = 0;
+	IR_B.hysteresis_percent = 20;
+	
 	NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_B.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED)){
@@ -68,6 +71,7 @@ void TCRT_init_Handlers(){
 	IR_C.pin = TCRT_C;
 	IR_C.ADCConvertedValue = 0;
 	IR_C.lastReading = 0;
+	IR_C.hysteresis_percent = 20;
 	NIBBLEH_SET_STATE(IR_C.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_C.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED)){
@@ -78,6 +82,7 @@ void TCRT_init_Handlers(){
 	IR_U.pin = TCRT_U;
 	IR_U.ADCConvertedValue = 0;
 	IR_U.lastReading = 0;
+	IR_U.hysteresis_percent = 20;
 	NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_U.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED)){
@@ -119,13 +124,46 @@ void calibrateIRSensor(TCRT_t* sensor)
 
 void tcrt_read(TCRT_t* sensor)
 {
-	uint32_t acumulador = 0;
-	uint16_t valor = 0;
-	for (uint8_t i = 0; i < TCRT_FILTER_SAMPLES; i++) {
-		valor = tcrt_read_channel(sensor->channel);  // Lectura cruda del ADC
-		acumulador += valor;
+	if (IS_FLAG_SET(sensor->flags, TCRT_NEW_VALUE)) {
+		CLEAR_FLAG(sensor->flags, TCRT_NEW_VALUE);  // Consumimos el pulso de 10ms
+
+		uint16_t lectura = tcrt_read_channel(sensor->channel);
+		sensor->lastReading = lectura;
+
+		// Acumula
+		sensor->filterAccumulator += lectura;
+		sensor->calibrationCounter++;
+
+		// Si alcanzó el número de muestras requerido
+		if (sensor->calibrationCounter >= TCRT_FILTER_SAMPLES) {
+			sensor->ADCConvertedValue = sensor->filterAccumulator / TCRT_FILTER_SAMPLES;
+			sensor->filterAccumulator = 0;
+			sensor->calibrationCounter = 0;
+		}
 	}
-	uint16_t promedio = acumulador / TCRT_FILTER_SAMPLES;
-	sensor->ADCConvertedValue = promedio;
-	sensor->lastReading = valor;
 }
+
+bool tcrt_is_box_detected(TCRT_t* sensor)
+{
+	// Calcular el umbral ajustado con margen de histéresis
+	uint32_t threshold_with_margin = (sensor->threshold * (100UL - sensor->hysteresis_percent)) / 100UL;
+
+	// Ver si hay objeto ahora
+	bool box_now = (sensor->ADCConvertedValue < threshold_with_margin);
+
+	if (box_now && NIBBLEH_GET_STATE(sensor->flags) == TCRT_STATUS_IDLE) {
+		// Caja recién detectada ? flanco de subida
+		SET_FLAG(sensor->flags, TCRT_NEW_VALUE);
+		SET_FLAG(sensor->flags, TCRT_EDGE_RISING);
+		NIBBLEH_SET_STATE(sensor->flags, TCRT_READ);
+	}
+	else if (!box_now && NIBBLEH_GET_STATE(sensor->flags) == TCRT_READ) {
+		// Caja recién salió del sensor ? flanco de bajada
+		SET_FLAG(sensor->flags, TCRT_NEW_VALUE);
+		CLEAR_FLAG(sensor->flags, TCRT_EDGE_RISING);
+		NIBBLEH_SET_STATE(sensor->flags, TCRT_COUNTED);
+	}
+
+	return box_now;
+}
+

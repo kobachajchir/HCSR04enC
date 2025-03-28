@@ -18,6 +18,8 @@ typedef struct {
 	uint8_t channel; //Canal TCRT_X_CHANNEL
 	uint8_t pin;
 	uint8_t calibrationCounter;
+	uint32_t filterAccumulator;
+	uint8_t hysteresis_percent;  // Campo porcentual del threshold para tomar como valido
 }TCRT_t;
 
 #define TCRT_ENABLED BIT0_MASK

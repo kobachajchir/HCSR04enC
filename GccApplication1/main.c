@@ -291,7 +291,7 @@ ISR(TIMER2_COMPA_vect)
 			}
 			btn_pressed_time++;
 		}
-		// Codigo lectura TCRT
+		// Codigo lectura TCRT cada 10ms
 		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 10ms
 			SET_FLAG(IR_A.flags, TCRT_NEW_VALUE);
 		}
@@ -385,6 +385,10 @@ int main()
 	{ 
 		if(!IR_CALIBRATED){
 			calibrateAllIRSensors();
+			IR_A.calibrationCounter = 0;
+			IR_B.calibrationCounter = 0;
+			IR_C.calibrationCounter = 0;
+			IR_U.calibrationCounter = 0;
 		}else{
 			irSensorsTask(&SorterSystem);
 		}
