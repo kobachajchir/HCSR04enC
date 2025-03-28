@@ -15,6 +15,7 @@
 #include "types/sorterSystemTypes.h"
 #include "types/TCRTType.h"
 #include "types/outputType.h"
+#include "types/servoType.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
 #include <avr/io.h>
@@ -42,6 +43,9 @@
 #define TCRT_C_CHANNEL 2
 #define TCRT_U_CHANNEL 3
 
+#define TCRT_CALIBRATION_SAMPLES 10
+#define TCRT_FILTER_SAMPLES 10
+
 #define DISTANCE_MIN_MM 30 //3cm min
 #define DISTANCE_MAX_MM 2000 //2m max
 #define ECHO_INTERVAL_TENMS 10 //Max 2.5s que es 255, porque el contador es uint8
@@ -56,6 +60,9 @@
 #define CAJA_MEDIA 2  // Define de caja media
 #define CAJA_CHICA 1  // Define de caja chica
 #define DESCARTE 0  // Define de descarte
+
+#define SERVO_PUSH_ANGLE 90
+#define SERVO_IDLE_ANGLE 0
 
 #define BTN_PRESS_TIME 10  // Define de descarte
 
@@ -85,6 +92,9 @@
 #define DEBUG_FLAGS bandera2.bitmap.bit6 //DebugFlags de la libreria del HCSR04
 #define DEBUG_FLAGS_SORTER bandera2.bitmap.bit7 //DebugFlags del Sorter
 
+#define IR_CALIBRATED bandera3.bitmap.bit0
+#define IR_READ bandera3.bitmap.bit1
+
 //Defines para bits individuales
 #define BIT0_MASK   0x01  // 0000 0001
 #define BIT1_MASK   0x02  // 0000 0010
@@ -107,6 +117,7 @@
 
 extern Byte_Flag_Struct bandera;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
 extern Byte_Flag_Struct bandera2;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
+extern Byte_Flag_Struct bandera3;  // Definido para manejar flags //Se manejan dentro de las interrupciones, por eso son volatile estas
 extern volatile uint16_t echo_init_time;  // Tiempo de inicio (flanco ascendente)
 extern volatile uint16_t echo_finish_time;    // Tiempo final (flanco descendente)
 extern volatile uint16_t distance_mm;      // Distancia en milímetros
@@ -123,6 +134,11 @@ extern TCRT_t IR_A;
 extern TCRT_t IR_B;
 extern TCRT_t IR_C;
 extern TCRT_t IR_U;
+extern servo_t servoA;
+extern servo_t servoB;
+extern servo_t servoC;
+extern volatile servo_t* servosArray[NUM_OUTPUTS];
+extern volatile uint8_t current_servo;
 extern output_t salidaA;
 extern output_t salidaB;
 extern output_t salidaC;

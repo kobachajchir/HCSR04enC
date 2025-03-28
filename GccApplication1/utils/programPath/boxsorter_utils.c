@@ -22,6 +22,9 @@ void initDetector(Ultrasonic_Detector_t* hcsr04Detector, ultrasonic_t* sensor_ul
 }
 
 void initOutputs(){
+	initServo(&servoA, 0, SERVOA_PIN);
+	initServo(&servoB, 1, SERVOB_PIN);
+	initServo(&servoC, 2, SERVOC_PIN);
 	salidaA.actuator_pin = SERVOA_PIN;
 	salidaA.sensor_pin = IR_A.pin;
 	salidaA.flags.byte = 0;
@@ -136,7 +139,7 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 	// 3. Si la medición finalizó exitosamente
 	if (ultraDetector->sensor->state == ULTRA_DONE && ultraDetector->sensor->NEW_RESULT)
 	{
-		printf("HCSR04 Dist[mm] %lu\n", (uint32_t)ultrasonic_get_distance(ultraDetector->sensor));
+		//printf("HCSR04 Dist[mm] %lu\n", (uint32_t)ultrasonic_get_distance(ultraDetector->sensor));
 		ultraDetector->sensor->NEW_RESULT = 0;
 
 		box_type_t tipo;
@@ -231,5 +234,45 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 		}
 
 		ULTRASONIC_ENABLE = 1;
+	}
+}
+
+void irSensorsTask(sorter_system_t * sorter){
+	if(IR_READ){
+		printf("IR A: %u\n", IR_A.ADCConvertedValue);
+		printf("IR B: %u\n", IR_B.ADCConvertedValue);
+		IR_READ = 0;
+	}
+	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
+		CLEAR_FLAG(IR_A.flags, TCRT_NEW_VALUE);
+		tcrt_read();
+	}
+}
+
+void servosTask(){
+	// SERVO A
+	if (!IS_FLAG_SET(servoA.flags, SERVO_PUSH) && !IS_FLAG_SET(servoA.flags, SERVO_RESET)) {
+		// Ya terminó su ciclo de activación ? limpiar orden externa
+		CLEAR_FLAG(salidaA.flags, OUTPUT_PUSH);
+		} else if (IS_FLAG_SET(salidaA.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoA.flags, SERVO_PUSH)) {
+		// Solo setea si no se activó aún el pulso
+		SET_FLAG(servoA.flags, SERVO_PUSH);
+		SET_FLAG(servoA.flags, SERVO_RESET);
+	}
+
+	// SERVO B
+	if (!IS_FLAG_SET(servoB.flags, SERVO_PUSH) && !IS_FLAG_SET(servoB.flags, SERVO_RESET)) {
+		CLEAR_FLAG(salidaB.flags, OUTPUT_PUSH);
+		} else if (IS_FLAG_SET(salidaB.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoB.flags, SERVO_PUSH)) {
+		SET_FLAG(servoB.flags, SERVO_PUSH);
+		SET_FLAG(servoB.flags, SERVO_RESET);
+	}
+
+	// SERVO C
+	if (!IS_FLAG_SET(servoC.flags, SERVO_PUSH) && !IS_FLAG_SET(servoC.flags, SERVO_RESET)) {
+		CLEAR_FLAG(salidaC.flags, OUTPUT_PUSH);
+		} else if (IS_FLAG_SET(salidaC.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoC.flags, SERVO_PUSH)) {
+		SET_FLAG(servoC.flags, SERVO_PUSH);
+		SET_FLAG(servoC.flags, SERVO_RESET);
 	}
 }

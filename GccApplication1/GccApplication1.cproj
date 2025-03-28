@@ -146,6 +146,9 @@
     <Compile Include="types\outputType.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="types\servoType.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="types\sorterSystemTypes.h">
       <SubType>compile</SubType>
     </Compile>

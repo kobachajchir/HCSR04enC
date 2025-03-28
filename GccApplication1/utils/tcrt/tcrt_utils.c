@@ -47,6 +47,7 @@ void TCRT_init_Handlers(){
 	IR_A.channel = TCRT_A_CHANNEL;
 	IR_A.pin = TCRT_A;
 	IR_A.ADCConvertedValue = 0;
+	IR_A.lastReading = 0;
 	NIBBLEH_SET_STATE(IR_A.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_A.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED)){
@@ -56,6 +57,7 @@ void TCRT_init_Handlers(){
 	IR_B.channel = TCRT_B_CHANNEL;
 	IR_B.pin = TCRT_B;
 	IR_B.ADCConvertedValue = 0;
+	IR_B.lastReading = 0;
 	NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_B.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED)){
@@ -65,6 +67,7 @@ void TCRT_init_Handlers(){
 	IR_C.channel = TCRT_C_CHANNEL;
 	IR_C.pin = TCRT_C;
 	IR_C.ADCConvertedValue = 0;
+	IR_C.lastReading = 0;
 	NIBBLEH_SET_STATE(IR_C.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_C.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED)){
@@ -74,10 +77,55 @@ void TCRT_init_Handlers(){
 	IR_U.channel = TCRT_U_CHANNEL;
 	IR_U.pin = TCRT_U;
 	IR_U.ADCConvertedValue = 0;
+	IR_U.lastReading = 0;
 	NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_U.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED)){
 		printf("TCRT U ENABLED");
 	}
 	printf("Init TCRT Handlers");
+}
+
+bool detect_rising_edge(TCRT_t* sensor, uint8_t current_state)
+{
+	bool rising = (sensor->lastReading == 0 && current_state == 1);
+	sensor->lastReading = current_state;
+	return rising;
+}
+
+void calibrateIRSensor(TCRT_t* sensor)
+{
+	if (IS_FLAG_SET(sensor->flags, TCRT_NEW_VALUE)) {
+		CLEAR_FLAG(sensor->flags, TCRT_NEW_VALUE); // Se leyó, limpiar flag
+
+		// Inicialización automática en primer ciclo
+		if (sensor->calibrationCounter == 0) {
+			sensor->lastReading = 0;
+		}
+
+		// Acumula valores
+		sensor->lastReading += tcrt_read_channel(sensor->channel);
+		sensor->calibrationCounter++;
+
+		// Si terminó de tomar las muestras necesarias
+		if (sensor->calibrationCounter >= TCRT_CALIBRATION_SAMPLES) {
+			sensor->threshold = sensor->lastReading / TCRT_CALIBRATION_SAMPLES;
+			sensor->calibrationCounter = 0;
+			CLEAR_FLAG(sensor->flags, TCRT_CALIBRATING); // IMPORTANTE
+			printf("Sensor canal %u calibrado con threshold %u\n", sensor->channel, sensor->threshold);
+		}
+	}
+}
+
+void tcrt_read(TCRT_t* sensor)
+{
+	uint32_t acumulador = 0;
+	uint16_t valor = 0;
+	for (uint8_t i = 0; i < TCRT_FILTER_SAMPLES; i++) {
+		valor = tcrt_read_channel(sensor->channel);  // Lectura cruda del ADC
+		acumulador += valor;
+	}
+	uint16_t promedio = acumulador / TCRT_FILTER_SAMPLES;
+	sensor->ADCConvertedValue = promedio;
+	sensor->lastReading = valor;
 }

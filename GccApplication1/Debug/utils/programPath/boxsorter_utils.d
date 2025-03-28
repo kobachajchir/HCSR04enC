@@ -17,6 +17,7 @@ utils/programPath/boxsorter_utils.d utils/programPath/boxsorter_utils.o: \
  ../utils/programPath/../../types/outputType.h \
  ../utils/programPath/../../types/TCRTType.h \
  ../utils/programPath/../../types/outputType.h \
+ ../utils/programPath/../../types/servoType.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -68,6 +69,8 @@ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 ../utils/programPath/../../types/TCRTType.h:
 
 ../utils/programPath/../../types/outputType.h:
+
+../utils/programPath/../../types/servoType.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 

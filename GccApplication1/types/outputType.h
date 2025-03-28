@@ -12,10 +12,10 @@
 #include "boxTypes.h"
 #include "bitmapType.h"
 
-#define OUTPUT_BUSY flags.bitmap.bit0;
-#define OUTPUT_PUSH flags.bitmap.bit1;
-// #define OUTPUT_BUSY flags.bitmap.bit2;
-// #define OUTPUT_BUSY flags.bitmap.bit3;
+#define OUTPUT_BUSY BIT0_MASK
+#define OUTPUT_PUSH BIT1_MASK
+#define OUTPUT_RESET BIT2_MASK
+// #define OUTPUT_BUSY BIT3_MASK;
 //Solo NIBBLE L para flags
 
 typedef struct {
