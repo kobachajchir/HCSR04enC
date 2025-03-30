@@ -64,6 +64,7 @@ output_t salidaA;
 output_t salidaB;
 output_t salidaC;
 sorter_system_t SorterSystem;
+ProtocolService protocolService;
 
 
 /* END Global variables ------------------------------------------------------*/
@@ -463,6 +464,7 @@ int main()
 	stdout = &mystdout;
 	// Redirigir la entrada estándar a USART
 	stdin = &mystdin;
+	initProtocolService(&protocolService);
 	diezMsCounter = 0;
 	// Inicializa los pines GPIO
 	gpio_pins_init();

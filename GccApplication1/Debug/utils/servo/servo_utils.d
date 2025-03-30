@@ -30,6 +30,7 @@ utils/servo/servo_utils.d utils/servo/servo_utils.o: \
  ../utils/servo/./../../types/TCRTType.h \
  ../utils/servo/./../../types/outputType.h \
  ../utils/servo/./../../types/servoType.h \
+ ../utils/servo/./../../types/protocolTypes.h \
  ../utils/servo/../../types/servoType.h ../utils/servo/servo_utils.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -91,6 +92,8 @@ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 ../utils/servo/./../../types/outputType.h:
 
 ../utils/servo/./../../types/servoType.h:
+
+../utils/servo/./../../types/protocolTypes.h:
 
 ../utils/servo/../../types/servoType.h:
 

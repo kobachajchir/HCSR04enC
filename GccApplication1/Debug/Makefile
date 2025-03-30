@@ -36,6 +36,7 @@ SUBDIRS :=  \
 ../utils \
 ../types \
 ../utils/legacy_hcsr04 \
+../utils/protocol \
 ../utils/tcrt \
 ../utils/programPath \
 ../utils/servo \
@@ -47,6 +48,7 @@ C_SRCS +=  \
 ../main.c \
 ../utils/legacy_hcsr04/hcsr04_utils.c \
 ../utils/programPath/boxsorter_utils.c \
+../utils/protocol/protocol_utils.c \
 ../utils/servo/servo_utils.c \
 ../utils/tcrt/tcrt_utils.c \
 ../utils/ultrasonic_hal.c \
@@ -63,6 +65,7 @@ OBJS +=  \
 main.o \
 utils/legacy_hcsr04/hcsr04_utils.o \
 utils/programPath/boxsorter_utils.o \
+utils/protocol/protocol_utils.o \
 utils/servo/servo_utils.o \
 utils/tcrt/tcrt_utils.o \
 utils/ultrasonic_hal.o \
@@ -72,6 +75,7 @@ OBJS_AS_ARGS +=  \
 main.o \
 utils/legacy_hcsr04/hcsr04_utils.o \
 utils/programPath/boxsorter_utils.o \
+utils/protocol/protocol_utils.o \
 utils/servo/servo_utils.o \
 utils/tcrt/tcrt_utils.o \
 utils/ultrasonic_hal.o \
@@ -81,6 +85,7 @@ C_DEPS +=  \
 main.d \
 utils/legacy_hcsr04/hcsr04_utils.d \
 utils/programPath/boxsorter_utils.d \
+utils/protocol/protocol_utils.d \
 utils/servo/servo_utils.d \
 utils/tcrt/tcrt_utils.d \
 utils/ultrasonic_hal.d \
@@ -90,6 +95,7 @@ C_DEPS_AS_ARGS +=  \
 main.d \
 utils/legacy_hcsr04/hcsr04_utils.d \
 utils/programPath/boxsorter_utils.d \
+utils/protocol/protocol_utils.d \
 utils/servo/servo_utils.d \
 utils/tcrt/tcrt_utils.d \
 utils/ultrasonic_hal.d \
@@ -125,6 +131,13 @@ utils/legacy_hcsr04/hcsr04_utils.o: ../utils/legacy_hcsr04/hcsr04_utils.c
 	
 
 utils/programPath/boxsorter_utils.o: ../utils/programPath/boxsorter_utils.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib" -I"../../../koba_ultrasonic_lib/koba_ultrasonic_lib"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+utils/protocol/protocol_utils.o: ../utils/protocol/protocol_utils.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib" -I"../../../koba_ultrasonic_lib/koba_ultrasonic_lib"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -9,6 +9,10 @@
 #ifndef USART_UTILS_H_
 #define USART_UTILS_H_
 
+#include <stdio.h>
+#include <avr/io.h>
+
+
 void USART_Init(uint16_t ubrr);
 void USART_Transmit(unsigned char data);
 int USART_putchar(char c, FILE *stream);

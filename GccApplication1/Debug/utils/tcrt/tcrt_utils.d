@@ -28,7 +28,8 @@ utils/tcrt/tcrt_utils.d utils/tcrt/tcrt_utils.o: \
  ../utils/tcrt/../../types/outputType.h \
  ../utils/tcrt/../../types/TCRTType.h \
  ../utils/tcrt/../../types/outputType.h \
- ../utils/tcrt/../../types/servoType.h
+ ../utils/tcrt/../../types/servoType.h \
+ ../utils/tcrt/../../types/protocolTypes.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -89,3 +90,5 @@ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 ../utils/tcrt/../../types/outputType.h:
 
 ../utils/tcrt/../../types/servoType.h:
+
+../utils/tcrt/../../types/protocolTypes.h:

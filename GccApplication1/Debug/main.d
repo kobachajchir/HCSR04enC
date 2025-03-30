@@ -22,8 +22,9 @@ main.d main.o: .././main.c \
  .././types/bitmapType.h .././types/TCRTType.h \
  .././types/sorterSystemTypes.h .././types/boxTypes.h \
  .././types/outputType.h .././types/TCRTType.h .././types/outputType.h \
- .././types/servoType.h .././utils/usart/usart_utils.h \
- .././utils/servo/servo_utils.h .././utils/programPath/boxsorter_utils.h \
+ .././types/servoType.h .././types/protocolTypes.h \
+ .././utils/usart/usart_utils.h .././utils/servo/servo_utils.h \
+ .././utils/programPath/boxsorter_utils.h \
  .././utils/programPath/../../types/boxTypes.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -87,6 +88,8 @@ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 .././types/outputType.h:
 
 .././types/servoType.h:
+
+.././types/protocolTypes.h:
 
 .././utils/usart/usart_utils.h:
 

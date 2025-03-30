@@ -16,6 +16,7 @@
 #include "types/TCRTType.h"
 #include "types/outputType.h"
 #include "types/servoType.h"
+#include "types/protocolTypes.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
 #include <avr/io.h>
@@ -141,5 +142,7 @@ extern volatile uint8_t current_servo;
 extern output_t salidaA;
 extern output_t salidaB;
 extern output_t salidaC;
+extern ProtocolService protocolService;
+
 
 #endif /* MAIN_H_ */

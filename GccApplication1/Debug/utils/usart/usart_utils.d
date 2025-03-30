@@ -29,7 +29,8 @@ utils/usart/usart_utils.d utils/usart/usart_utils.o: \
  ../utils/usart/./../../types/outputType.h \
  ../utils/usart/./../../types/TCRTType.h \
  ../utils/usart/./../../types/outputType.h \
- ../utils/usart/./../../types/servoType.h
+ ../utils/usart/./../../types/servoType.h \
+ ../utils/usart/./../../types/protocolTypes.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -90,3 +91,5 @@ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 ../utils/usart/./../../types/outputType.h:
 
 ../utils/usart/./../../types/servoType.h:
+
+../utils/usart/./../../types/protocolTypes.h:
