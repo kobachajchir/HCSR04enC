@@ -277,7 +277,12 @@ void irSensorsTask(sorter_system_t * sorter){
 	}
 	if(tcrt_is_box_detected(&IR_B)){
 		if(NIBBLEH_GET_STATE(IR_B.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
-			//SET_FLAG(salidaB.flags, OUTPUT_PUSH);
+			if(IS_FLAG_SET(salidaB.flags, OUTPUT_READY)){
+				CLEAR_FLAG(salidaB.flags, OUTPUT_READY);
+				SET_FLAG(servoB.flags, SERVO_PUSH);
+				servoB.state_time = 0;
+				printf("Pushed servo B and zeroed state time\n");
+			}
 			NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
 			printf("Detecto en IR B\n");
 		}

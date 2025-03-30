@@ -150,11 +150,19 @@ ISR(TIMER1_COMPB_vect) {
 		// Clear the push and reset flags
 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_RESET);
 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_PUSH);
-		printf("ISR COMPB RESET %d...\n", servosArray[current_servo]->pin);
 		// Return to idle angle
 		servosArray[current_servo]->angle = SERVO_IDLE_ANGLE;
 		servosArray[current_servo]->pulse_us = calculate_angle_pulseUs(servosArray[current_servo]);
-		printf("Volvio a posicion IDLE\n");
+		if(current_servo == 0){
+			SET_FLAG(salidaA.flags, OUTPUT_READY);
+			printf("Volvio a posicion IDLE A\n");
+		}else if(current_servo == 1){
+			SET_FLAG(salidaB.flags, OUTPUT_READY);
+			printf("Volvio a posicion IDLE B\n");
+		}else if(current_servo == 2){
+			SET_FLAG(salidaC.flags, OUTPUT_READY);
+			printf("Volvio a posicion IDLE C\n");
+		}
 	}
 	
 	// Move to next servo, but only if there are more servos to process in this frame
@@ -180,56 +188,6 @@ ISR(TIMER1_COMPB_vect) {
 	}
 	// If current_servo >= NUM_OUTPUTS, we've processed all servos for this frame
 }
-
-// ISR(TIMER1_COMPA_vect) {
-// 	// Update pulse duration based on current angle or push state
-// 	    // Debug - print current flags
-// 	OCR1B = TCNT1 + SERVO_START_PULSE; //Setearlo por si no entramos abajo, si entramos se sobrescribe
-// 	if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_ENABLE)) {
-// 		// If servo is enabled, process it
-// 		if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_PUSH) &&
-// 		!IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_RESET)) {
-// 			// If in push mode, use maximum pulse (assuming push is at 180 degrees)
-// 			servosArray[current_servo]->pulse_us = SERVO_MAX_PULSE;
-// 			printf("ISR COMPA PUSH %d...\n", servosArray[current_servo]->pin);
-// 			SET_FLAG(servosArray[current_servo]->flags, SERVO_RESET);
-// 			printf("COMPA: Setting RESET flag for servo %d\n", servosArray[current_servo]->pin);
-// 		} else {
-// 			// Otherwise use the angle setting
-// 			servosArray[current_servo]->pulse_us = calculate_angle_pulseUs(servosArray[current_servo]->angle);
-// 		}
-// 		
-// 		// Activate the current servo pin
-// 		PORTB |= (1 << servosArray[current_servo]->pin);
-// 		
-// 		// Schedule pulse end with Compare B
-// 		OCR1B = TCNT1 + servosArray[current_servo]->pulse_us;
-// 	} 
-// 	// Schedule next Compare A interrupt in 20ms
-// 	OCR1A += SERVO_FRAME_PERIOD;
-// 	IR_READ_INTERRUPT = 1;
-// }
-// 
-// // ISR Compare B
-// ISR(TIMER1_COMPB_vect) {
-// 	// Turn off the current servo pin
-// 	PORTB &= ~(1 << servosArray[current_servo]->pin);
-// 	
-// 	// Check if we need to reset after push
-// 	if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_PUSH) &&
-// 	IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_RESET)) {
-// 		
-// 		// Clear the push and reset flags
-// 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_RESET);
-// 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_PUSH);
-// 		printf("ISR COMPB RESET %d...\n", servosArray[current_servo]->pin);
-// 		// Return to idle angle
-// 		//servosArray[current_servo]->angle = SERVO_IDLE_ANGLE;
-// 	}
-// 	
-// 	// Move to next servo (cycles through all servos)
-// 	current_servo = (current_servo + 1) % NUM_OUTPUTS;
-// }
 
 // ISR para Timer 2 (se ejecuta cada 10 ms)
 
@@ -366,18 +324,30 @@ ISR(TIMER2_COMPA_vect)
 			}
 			btn_pressed_time++;
 		}
-		/*if(IS_FLAG_SET(servoA.flags, SERVO_PUSH)){
-			printf("Servo in PUSH mode: state_time = %d\n", servoA.state_time);
+		if(IS_FLAG_SET(servoA.flags, SERVO_PUSH)){
+			//printf("Servo in PUSH mode: state_time = %d\n", servoA.state_time);
 			if(servoA.state_time < SERVO_ACTIVE_TIME){
 				servoA.state_time++;  // Increment time spent in PUSH mode
-				printf("Servo in PUSH mode: state_time = %d\n", servoA.state_time);
+				//printf("Servo in PUSH mode: state_time = %d\n", servoA.state_time);
 			} else {
 				// If we have reached the active time, reset state_time and set RESET flag
 				servoA.state_time = 0;
 				SET_FLAG(servoA.flags, SERVO_RESET);  // Set reset flag
-				printf("Servo RESET triggered: state_time = %d\n", servoA.state_time);
+				//printf("Servo RESET triggered: state_time = %d\n", servoA.state_time);
 			}
-		}*/
+		}
+		if(IS_FLAG_SET(servoB.flags, SERVO_PUSH)){
+			//printf("Servo in PUSH mode: state_time = %d\n", servoB.state_time);
+			if(servoB.state_time < SERVO_ACTIVE_TIME){
+				servoB.state_time++;  // Increment time spent in PUSH mode
+				//printf("Servo in PUSH mode: state_time = %d\n", servoB.state_time);
+				} else {
+				// If we have reached the active time, reset state_time and set RESET flag
+				servoB.state_time = 0;
+				SET_FLAG(servoB.flags, SERVO_RESET);  // Set reset flag
+				//printf("Servo RESET triggered: state_time = %d\n", servoB.state_time);
+			}
+		}
 		// Codigo lectura TCRT cada 10ms
 		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 10ms
 			SET_FLAG(IR_A.flags, TCRT_NEW_VALUE);
