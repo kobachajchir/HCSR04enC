@@ -122,7 +122,7 @@ ISR(TIMER1_COMPA_vect) {
 			!IS_FLAG_SET(servosArray[i]->flags, SERVO_RESET)) {
 				// If in push mode, use maximum pulse
 				servosArray[i]->pulse_us = SERVO_MAX_PULSE;
-				printf("ISR COMPA PUSH %d...\n", servosArray[i]->pin);
+				//printf("ISR COMPA PUSH %d...\n", servosArray[i]->pin);
 				} else {
 				// Otherwise use the angle setting
 				servosArray[i]->pulse_us = calculate_angle_pulseUs(servosArray[i]->angle);
