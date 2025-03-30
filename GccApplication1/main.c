@@ -155,13 +155,16 @@ ISR(TIMER1_COMPB_vect) {
 		servosArray[current_servo]->pulse_us = calculate_angle_pulseUs(servosArray[current_servo]);
 		if(current_servo == 0){
 			SET_FLAG(salidaA.flags, OUTPUT_READY);
-			printf("Volvio a posicion IDLE A\n");
+			CLEAR_FLAG(salidaA.flags, OUTPUT_BUSY);
+			//printf("Volvio a posicion IDLE A\n");
 		}else if(current_servo == 1){
 			SET_FLAG(salidaB.flags, OUTPUT_READY);
-			printf("Volvio a posicion IDLE B\n");
+			CLEAR_FLAG(salidaB.flags, OUTPUT_BUSY);
+			//printf("Volvio a posicion IDLE B\n");
 		}else if(current_servo == 2){
 			SET_FLAG(salidaC.flags, OUTPUT_READY);
-			printf("Volvio a posicion IDLE C\n");
+			CLEAR_FLAG(salidaC.flags, OUTPUT_BUSY);
+			//printf("Volvio a posicion IDLE C\n");
 		}
 	}
 	
@@ -348,6 +351,18 @@ ISR(TIMER2_COMPA_vect)
 				//printf("Servo RESET triggered: state_time = %d\n", servoB.state_time);
 			}
 		}
+		if(IS_FLAG_SET(servoC.flags, SERVO_PUSH)){
+			//printf("Servo in PUSH mode: state_time = %d\n", servoB.state_time);
+			if(servoC.state_time < SERVO_ACTIVE_TIME){
+				servoC.state_time++;  // Increment time spent in PUSH mode
+				//printf("Servo in PUSH mode: state_time = %d\n", servoB.state_time);
+				} else {
+				// If we have reached the active time, reset state_time and set RESET flag
+				servoC.state_time = 0;
+				SET_FLAG(servoC.flags, SERVO_RESET);  // Set reset flag
+				//printf("Servo RESET triggered: state_time = %d\n", servoB.state_time);
+			}
+		}
 		// Codigo lectura TCRT cada 10ms
 		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 10ms
 			SET_FLAG(IR_A.flags, TCRT_NEW_VALUE);
@@ -355,12 +370,12 @@ ISR(TIMER2_COMPA_vect)
 		if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){ //Cada 10ms
 			SET_FLAG(IR_B.flags, TCRT_NEW_VALUE);
 		}
-// 		if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){ //Cada 10ms
-// 			SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
-// 		}
-// 		if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){ //Cada 10ms
-// 			SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
-// 		}
+		if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){ //Cada 10ms
+			SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
+		}
+		if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){ //Cada 10ms
+			SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
+		}
 	}
 }
 
@@ -391,17 +406,19 @@ static inline bool calibrateAllIRSensors()
 	if (IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) {
 		calibrateIRSensor(&IR_B);
 	}
-	if (IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) {
-		calibrateIRSensor(&IR_B);
+	if (IS_FLAG_SET(IR_C.flags, TCRT_CALIBRATING)) {
+		calibrateIRSensor(&IR_C);
 	}
-	if (IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) {
-		calibrateIRSensor(&IR_B);
+	if (IS_FLAG_SET(IR_U.flags, TCRT_CALIBRATING)) {
+		calibrateIRSensor(&IR_U);
 	}
 	// Lo mismo con los demás si están habilitados...
 
 	// Condición de salida
 	if (!IS_FLAG_SET(IR_A.flags, TCRT_CALIBRATING) &&
-	!IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) { //Agregar los otros despues
+		!IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING) &&
+		!IS_FLAG_SET(IR_C.flags, TCRT_CALIBRATING) &&
+		!IS_FLAG_SET(IR_U.flags, TCRT_CALIBRATING)) { //Si hay alguno no ENABLED, entonces no entra en CALIBRATING mode y aca puede salir tranquilo, no bloquea el funcionamiento no tener un sensor
 		return true; // Listo
 	}
 	return false; // Sigue calibrando

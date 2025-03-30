@@ -56,7 +56,7 @@ void TCRT_init_Handlers(){
 	IR_B.hysteresis_percent = 20;
 	
 	NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
-	SET_FLAG(IR_B.flags, TCRT_ENABLED);
+	//SET_FLAG(IR_B.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED)){
 		printf("TCRT B ENABLED\n");
 	}
@@ -78,7 +78,7 @@ void TCRT_init_Handlers(){
 	IR_U.lastReading = 0;
 	IR_U.hysteresis_percent = 20;
 	NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);
-	//SET_FLAG(IR_U.flags, TCRT_ENABLED);
+	SET_FLAG(IR_U.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED)){
 		printf("TCRT U ENABLED\n");
 	}
@@ -145,8 +145,7 @@ bool tcrt_is_box_detected(TCRT_t* sensor)
 		SET_FLAG(sensor->flags, TCRT_NEW_VALUE);
 		SET_FLAG(sensor->flags, TCRT_EDGE_RISING);
 		NIBBLEH_SET_STATE(sensor->flags, TCRT_READ);
-	}
-	else if (!box_now && NIBBLEH_GET_STATE(sensor->flags) == TCRT_READ) {
+	}else if (!box_now && NIBBLEH_GET_STATE(sensor->flags) == TCRT_READ) {
 		// Caja recién salió del sensor ? flanco de bajada
 		SET_FLAG(sensor->flags, TCRT_NEW_VALUE);
 		CLEAR_FLAG(sensor->flags, TCRT_EDGE_RISING);

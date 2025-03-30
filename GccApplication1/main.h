@@ -78,8 +78,8 @@
 #define TIMER2_ACTIVE bandera.bitmap.bit1
 #define BTN_OVF bandera.bitmap.bit2
 #define ECHO_INTERVAL_FLAG bandera.bitmap.bit3
-#define SERVOA_MOVE bandera.bitmap.bit4
-#define SERVOA_RESET bandera.bitmap.bit5
+#define IR_READ_INTERRUPT bandera.bitmap.bit4
+#define IR_CALIBRATED bandera.bitmap.bit5
 #define BTN_PRESSED bandera.bitmap.bit6 // Usamos el bit 6 para detectar el button press
 #define ULTRASONIC_ENABLE bandera.bitmap.bit7 //
 
@@ -91,9 +91,6 @@
 #define TRIGGER_ACTIVE bandera2.bitmap.bit5
 #define DEBUG_FLAGS bandera2.bitmap.bit6 //DebugFlags de la libreria del HCSR04
 #define DEBUG_FLAGS_SORTER bandera2.bitmap.bit7 //DebugFlags del Sorter
-
-#define IR_CALIBRATED bandera3.bitmap.bit0
-#define IR_READ_INTERRUPT bandera3.bitmap.bit1 //
 
 #define SERVO_ACTIVE_TIME 10
 
