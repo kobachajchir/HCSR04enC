@@ -61,8 +61,8 @@
 #define CAJA_CHICA 1  // Define de caja chica
 #define DESCARTE 0  // Define de descarte
 
-#define SERVO_PUSH_ANGLE 90
-#define SERVO_IDLE_ANGLE 0
+#define SERVO_PUSH_ANGLE 0
+#define SERVO_IDLE_ANGLE 90
 
 #define BTN_PRESS_TIME 10  // Define de descarte
 
@@ -93,7 +93,9 @@
 #define DEBUG_FLAGS_SORTER bandera2.bitmap.bit7 //DebugFlags del Sorter
 
 #define IR_CALIBRATED bandera3.bitmap.bit0
-#define IR_READ bandera3.bitmap.bit1
+#define IR_READ_INTERRUPT bandera3.bitmap.bit1 //
+
+#define SERVO_ACTIVE_TIME 10
 
 //Defines para bits individuales
 #define BIT0_MASK   0x01  // 0000 0001

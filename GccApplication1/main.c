@@ -47,6 +47,7 @@ volatile uint8_t echo_state = 0; // Estado de la señal de eco
 volatile uint8_t diezMsCounter = 0; //Counter de 10ms, max 255 ovf cada 2.55 segundos
 volatile uint8_t veintems_counter = 0;
 volatile uint8_t trigger_timeout_counter = 0;
+volatile uint8_t servo_active_counter = 0;
 uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
 ultrasonic_t ultraSensor;
 Ultrasonic_Detector_t hcsr04Detector;
@@ -107,55 +108,129 @@ ISR(TIMER1_OVF_vect)
 	ovf_count++;  // Incrementa el contador de desbordamientos del Timer 1
 }
 
-// ISR Compare A
-ISR(TIMER1_COMPA_vect) { //Interrupcion cada 20ms
-	//IMPORTANTE, voy a atender de manera circular a los servos, por lo que no va a estar a 20ms sino a 60ms la llamada a cada servo
-	 // Determinar ancho de pulso según flag
-    // Verificar si el servo actual debe empujar (por su salida correspondiente)
-    if (IS_FLAG_SET(servosArray[current_servo]->flags, OUTPUT_PUSH)) {
-	    servo_set_angle(current_servo, SERVO_PUSH_ANGLE); // Aplica ángulo de empuje
-	    SET_FLAG(servosArray[current_servo]->flags, SERVO_PUSH);  // Marca que está empujando
-	    SET_FLAG(servosArray[current_servo]->flags, SERVO_RESET); // Necesita reset
-	    } else {
-	    servo_set_angle(current_servo, SERVO_PUSH_ANGLE); // Si no está activo, retraído
-    }
-    // Activar el pin del servo actual
-    PORTB |= (1 << servosArray[current_servo]->pin);
-    // Programar apagado del pulso con OCR1B
-    OCR1B = TCNT1 + servosArray[current_servo]->pulse_us;
-    // Programar próxima interrupción de COMPA en 20 ms (frecuencia fija)
-    OCR1A += SERVO_FRAME_PERIOD;
-	if(IS_FLAG_SET(IR_A.flags, TCRT_CALIBRATING) && !IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Esta calibrando sensor IR A
-		SET_FLAG(IR_A.flags, TCRT_NEW_VALUE); //Setear la toma de nuevo valor
-	}
-	if(IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING) && !IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){ //Esta calibrando sensor IR B
-		SET_FLAG(IR_B.flags, TCRT_NEW_VALUE); //Setear la toma de nuevo valor
-	}
-	if(IS_FLAG_SET(IR_C.flags, TCRT_CALIBRATING) && !IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){ //Esta calibrando sensor IR C
-		SET_FLAG(IR_C.flags, TCRT_NEW_VALUE); //Setear la toma de nuevo valor
-	}
-	if(IS_FLAG_SET(IR_U.flags, TCRT_CALIBRATING) && !IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){ //Esta calibrando sensor IR U
-		SET_FLAG(IR_U.flags, TCRT_NEW_VALUE); //Setear la toma de nuevo valor
+ISR(TIMER1_COMPA_vect) {
+	// Schedule next Compare A interrupt in 20ms
+	OCR1A += SERVO_FRAME_PERIOD;
+	IR_READ_INTERRUPT = 1;
+	
+	// Process all servos in one 20ms frame
+	for (uint8_t i = 0; i < NUM_OUTPUTS; i++) {
+		// Update pulse duration for this servo
+		if (IS_FLAG_SET(servosArray[i]->flags, SERVO_ENABLE)) {
+			// Calculate pulse width based on state
+			if (IS_FLAG_SET(servosArray[i]->flags, SERVO_PUSH) &&
+			!IS_FLAG_SET(servosArray[i]->flags, SERVO_RESET)) {
+				// If in push mode, use maximum pulse
+				servosArray[i]->pulse_us = SERVO_MAX_PULSE;
+				printf("ISR COMPA PUSH %d...\n", servosArray[i]->pin);
+				} else {
+				// Otherwise use the angle setting
+				servosArray[i]->pulse_us = calculate_angle_pulseUs(servosArray[i]->angle);
+			}
+
+			// Set the pin high immediately if it's the first servo
+			if (i == 0) {
+				PORTB |= (1 << servosArray[i]->pin);
+				// Schedule turn-off with Compare B
+				OCR1B = TCNT1 + servosArray[i]->pulse_us;
+				current_servo = 0; // Mark this as the active servo
+			}
+		}
 	}
 }
 
-// ISR Compare B
-ISR(TIMER1_COMPB_vect)
-{
-	// Apaga el pin del servo actual
+ISR(TIMER1_COMPB_vect) {
+	// Turn off the current servo pin
 	PORTB &= ~(1 << servosArray[current_servo]->pin);
-
-	// Si estaba marcado para resetear (fin de pulso de empuje)
+	
+	// Check if we need to reset after push
 	if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_PUSH) &&
 	IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_RESET)) {
-		// Limpia flags internos del servo
-		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_PUSH);
+		
+		// Clear the push and reset flags
 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_RESET);
-		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_PUSH); // Muy importante: limpiar la orden externa
+		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_PUSH);
+		printf("ISR COMPB RESET %d...\n", servosArray[current_servo]->pin);
+		// Return to idle angle
+		servosArray[current_servo]->angle = SERVO_IDLE_ANGLE;
+		servosArray[current_servo]->pulse_us = calculate_angle_pulseUs(servosArray[current_servo]);
+		printf("Volvio a posicion IDLE\n");
 	}
-	// Avanzar al siguiente servo
-	current_servo = (current_servo + 1) % NUM_OUTPUTS;
+	
+	// Move to next servo, but only if there are more servos to process in this frame
+	current_servo++;
+	if (current_servo < NUM_OUTPUTS) {
+		// If there are more servos to process, activate the next one
+		if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_ENABLE)) {
+			// Turn on the pin for the next servo
+			PORTB |= (1 << servosArray[current_servo]->pin);
+			// Schedule turn-off
+			OCR1B = TCNT1 + servosArray[current_servo]->pulse_us;
+			} else {
+			// If the next servo isn't enabled, skip to the one after
+			// This is a recursive call to COMPB logic without the actual interrupt
+			PORTB &= ~(1 << servosArray[current_servo]->pin); // Make sure the pin is low
+			current_servo++;
+			// Continue checking for the next enabled servo
+			if (current_servo < NUM_OUTPUTS && IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_ENABLE)) {
+				PORTB |= (1 << servosArray[current_servo]->pin);
+				OCR1B = TCNT1 + servosArray[current_servo]->pulse_us;
+			}
+		}
+	}
+	// If current_servo >= NUM_OUTPUTS, we've processed all servos for this frame
 }
+
+// ISR(TIMER1_COMPA_vect) {
+// 	// Update pulse duration based on current angle or push state
+// 	    // Debug - print current flags
+// 	OCR1B = TCNT1 + SERVO_START_PULSE; //Setearlo por si no entramos abajo, si entramos se sobrescribe
+// 	if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_ENABLE)) {
+// 		// If servo is enabled, process it
+// 		if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_PUSH) &&
+// 		!IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_RESET)) {
+// 			// If in push mode, use maximum pulse (assuming push is at 180 degrees)
+// 			servosArray[current_servo]->pulse_us = SERVO_MAX_PULSE;
+// 			printf("ISR COMPA PUSH %d...\n", servosArray[current_servo]->pin);
+// 			SET_FLAG(servosArray[current_servo]->flags, SERVO_RESET);
+// 			printf("COMPA: Setting RESET flag for servo %d\n", servosArray[current_servo]->pin);
+// 		} else {
+// 			// Otherwise use the angle setting
+// 			servosArray[current_servo]->pulse_us = calculate_angle_pulseUs(servosArray[current_servo]->angle);
+// 		}
+// 		
+// 		// Activate the current servo pin
+// 		PORTB |= (1 << servosArray[current_servo]->pin);
+// 		
+// 		// Schedule pulse end with Compare B
+// 		OCR1B = TCNT1 + servosArray[current_servo]->pulse_us;
+// 	} 
+// 	// Schedule next Compare A interrupt in 20ms
+// 	OCR1A += SERVO_FRAME_PERIOD;
+// 	IR_READ_INTERRUPT = 1;
+// }
+// 
+// // ISR Compare B
+// ISR(TIMER1_COMPB_vect) {
+// 	// Turn off the current servo pin
+// 	PORTB &= ~(1 << servosArray[current_servo]->pin);
+// 	
+// 	// Check if we need to reset after push
+// 	if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_PUSH) &&
+// 	IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_RESET)) {
+// 		
+// 		// Clear the push and reset flags
+// 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_RESET);
+// 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_PUSH);
+// 		printf("ISR COMPB RESET %d...\n", servosArray[current_servo]->pin);
+// 		// Return to idle angle
+// 		//servosArray[current_servo]->angle = SERVO_IDLE_ANGLE;
+// 	}
+// 	
+// 	// Move to next servo (cycles through all servos)
+// 	current_servo = (current_servo + 1) % NUM_OUTPUTS;
+// }
+
 // ISR para Timer 2 (se ejecuta cada 10 ms)
 
 /* END Function ISR ----------------------------------------------------------*/
@@ -206,9 +281,9 @@ void gpio_pins_init() {
 	DDRD &= ~(1 << BUTTON_PIN);       // BUTTON pin como entrada
 	
 	//Inicializar las salidas de servos
-	DDRB |= (1 << SERVOA_PIN); // SERVOA_PIN como entrada
-	DDRB |= (1 << SERVOB_PIN); // SERVOB_PIN como entrada
-	DDRB |= (1 << SERVOC_PIN); // SERVOC_PIN como entrada
+	DDRB |= (1 << SERVOA_PIN); // SERVOA_PIN como salida
+	DDRB |= (1 << SERVOB_PIN); // SERVOB_PIN como salida
+	DDRB |= (1 << SERVOC_PIN); // SERVOC_PIN como salida
 	
 	tcrt_init(); //Despues haremos esto para todos los sensores, modularizando
 	
@@ -291,6 +366,18 @@ ISR(TIMER2_COMPA_vect)
 			}
 			btn_pressed_time++;
 		}
+		/*if(IS_FLAG_SET(servoA.flags, SERVO_PUSH)){
+			printf("Servo in PUSH mode: state_time = %d\n", servoA.state_time);
+			if(servoA.state_time < SERVO_ACTIVE_TIME){
+				servoA.state_time++;  // Increment time spent in PUSH mode
+				printf("Servo in PUSH mode: state_time = %d\n", servoA.state_time);
+			} else {
+				// If we have reached the active time, reset state_time and set RESET flag
+				servoA.state_time = 0;
+				SET_FLAG(servoA.flags, SERVO_RESET);  // Set reset flag
+				printf("Servo RESET triggered: state_time = %d\n", servoA.state_time);
+			}
+		}*/
 		// Codigo lectura TCRT cada 10ms
 		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 10ms
 			SET_FLAG(IR_A.flags, TCRT_NEW_VALUE);
@@ -298,15 +385,12 @@ ISR(TIMER2_COMPA_vect)
 		if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){ //Cada 10ms
 			SET_FLAG(IR_B.flags, TCRT_NEW_VALUE);
 		}
-		if(SERVOA_RESET){
-			if(servo_counter < SERVO_RESET_TIME){
-				servo_counter++;
-				} else {
-				servo_counter = 0;
-				SERVOA_RESET = 0;
-				servo_set_angle(0, SERVO_IDLE_ANGLE);
-			}
-		}
+// 		if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){ //Cada 10ms
+// 			SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
+// 		}
+// 		if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){ //Cada 10ms
+// 			SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
+// 		}
 	}
 }
 
@@ -316,10 +400,18 @@ static inline bool calibrateAllIRSensors()
 
 	if (!init_done) {
 		printf("Calibrando sensores IR...\n");
-		SET_FLAG(IR_A.flags, TCRT_CALIBRATING);
-		SET_FLAG(IR_B.flags, TCRT_CALIBRATING);
-		// SET_FLAG(IR_C.flags, TCRT_CALIBRATING);
-		// SET_FLAG(IR_U.flags, TCRT_CALIBRATING);
+		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED)){
+			SET_FLAG(IR_A.flags, TCRT_CALIBRATING);	
+		}
+		if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED)){
+			SET_FLAG(IR_B.flags, TCRT_CALIBRATING);
+		}
+		if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED)){
+			SET_FLAG(IR_C.flags, TCRT_CALIBRATING);
+		}
+		if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED)){
+			SET_FLAG(IR_U.flags, TCRT_CALIBRATING);
+		}
 		init_done = true;
 	}
 
@@ -329,18 +421,40 @@ static inline bool calibrateAllIRSensors()
 	if (IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) {
 		calibrateIRSensor(&IR_B);
 	}
+	if (IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) {
+		calibrateIRSensor(&IR_B);
+	}
+	if (IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) {
+		calibrateIRSensor(&IR_B);
+	}
 	// Lo mismo con los demás si están habilitados...
 
 	// Condición de salida
 	if (!IS_FLAG_SET(IR_A.flags, TCRT_CALIBRATING) &&
 	!IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) { //Agregar los otros despues
-		if(!IR_CALIBRATED){
-			printf("Todos los sensores IR calibrados.\n");	
-			IR_CALIBRATED = 1;
-		}
 		return true; // Listo
 	}
 	return false; // Sigue calibrando
+}
+
+static inline void buttonTask(void){
+	if((PIND & (1 << BUTTON_PIN)) && !BTN_PRESSED){ //Presionado y no salto la flag aun
+		btn_pressed_time = 0;
+		BTN_PRESSED = 1;
+		}else if(BTN_PRESSED && !(PIND & (1 << BUTTON_PIN))){ //Flag activa y no presionado, estuvo presionado y se solto
+		BTN_PRESSED = 0;
+		if(BTN_OVF){ //Se sostuvo demasiado y hubo un overflow en el contador
+			printf("Btn overflowed\n");
+		}
+		if(btn_pressed_time >= BTN_PRESS_TIME || BTN_OVF){ //Overflow marcado como un tiempo valido
+			BTN_RELEASED = 1;
+			}else{ //Reiniciar
+			btn_pressed_time = 0;
+			if(BTN_OVF){
+				BTN_OVF = 0;
+			}
+		}
+	}
 }
 
 
@@ -373,7 +487,6 @@ int main()
 	ultrasonic_init(&ultraSensor, printfWrapper);
 	ultrasonic_set_debug_mode(&ultraSensor, DEBUG_FLAGS ? true : false);
 	initDetector(&hcsr04Detector, &ultraSensor, &IR_U);
-	initOutputs();
 	initSorter(&SorterSystem);
 	// Inicializa la interrupción externa
 	//external_interrupt_init();
@@ -383,34 +496,22 @@ int main()
 	sei();
 	while (1)
 	{ 
-		if(!IR_CALIBRATED){
-			calibrateAllIRSensors();
-			IR_A.calibrationCounter = 0;
-			IR_B.calibrationCounter = 0;
-			IR_C.calibrationCounter = 0;
-			IR_U.calibrationCounter = 0;
-		}else{
+		if(IR_CALIBRATED){
 			irSensorsTask(&SorterSystem);
+		}else{
+			if(calibrateAllIRSensors()){
+				printf("Todos los sensores IR calibrados.\n");
+				IR_CALIBRATED = 1;
+				IR_A.calibrationCounter = 0;
+				IR_B.calibrationCounter = 0;
+				IR_C.calibrationCounter = 0;
+				IR_U.calibrationCounter = 0;
+				initOutputs();
+			}
 		}
 		ultraSensorTask(&hcsr04Detector, &SorterSystem); //Recordar que la funcion pide un puntero y esto ya es un puntero, por lo que no lo apunto con &
 		servosTask();
-		if((PIND & (1 << BUTTON_PIN)) && !BTN_PRESSED){ //Presionado y no salto la flag aun
-			btn_pressed_time = 0;
-			BTN_PRESSED = 1;
-		}else if(BTN_PRESSED && !(PIND & (1 << BUTTON_PIN))){ //Flag activa y no presionado, estuvo presionado y se solto
-			BTN_PRESSED = 0;
-			if(BTN_OVF){ //Se sostuvo demasiado y hubo un overflow en el contador
-				printf("Btn overflowed\n");
-			}
-			if(btn_pressed_time >= BTN_PRESS_TIME || BTN_OVF){ //Overflow marcado como un tiempo valido 
-				BTN_RELEASED = 1;
-			}else{ //Reiniciar
-				btn_pressed_time = 0;
-				if(BTN_OVF){
-					BTN_OVF = 0;
-				}
-			}
-		}
+		buttonTask();
 		if(WAIT_TIME_TRIGGER_PASSED){ //Esta bandera salta cuando se cunplio el tiempo de espera entre triggers
 			WAIT_TIME_TRIGGER_PASSED = 0;
 			ultraSensor.TRIGGER_ALLOWED = 1;
@@ -418,12 +519,27 @@ int main()
 		if(ECHO_INTERVAL_FLAG){ //Esto controla cuando entra a emitir otro trigger
 			ECHO_INTERVAL_FLAG = 0;
 			EMIT_TRIGGER = 1;
-			IR_READ = 1;
+			//IR_READ = 1; //DEBUG
 		}
+		
 		if(BTN_RELEASED){ //Bandera que controla accion del press del boton
 			BTN_RELEASED = 0; //TEST SERVO A
 			//EMIT_TRIGGER = 1;
-			SERVOA_MOVE = 1;
+		}
+		if(IR_READ_INTERRUPT){
+			IR_READ_INTERRUPT = 0;
+			if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_CALIBRATING) && !IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Esta calibrando sensor IR A
+				SET_FLAG(IR_A.flags, TCRT_NEW_VALUE); //Setear la toma de nuevo valor
+			}
+			if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING) && !IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){ //Esta calibrando sensor IR B
+				SET_FLAG(IR_B.flags, TCRT_NEW_VALUE); //Setear la toma de nuevo valor
+			}
+			if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_C.flags, TCRT_CALIBRATING) && !IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){ //Esta calibrando sensor IR C
+				SET_FLAG(IR_C.flags, TCRT_NEW_VALUE); //Setear la toma de nuevo valor
+			}
+			if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_U.flags, TCRT_CALIBRATING) && !IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){ //Esta calibrando sensor IR U
+				SET_FLAG(IR_U.flags, TCRT_NEW_VALUE); //Setear la toma de nuevo valor
+			}
 		}
 		// Aquí el código principal puede hacer otras tareas
 		// La medición de distancia y las interrupciones se manejan en segundo plano

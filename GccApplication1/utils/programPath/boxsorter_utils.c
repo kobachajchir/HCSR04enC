@@ -21,10 +21,19 @@ void initDetector(Ultrasonic_Detector_t* hcsr04Detector, ultrasonic_t* sensor_ul
 	printf("Init hcsr04Detector, sensor idle\n");
 }
 
+inline void initServos(void){
+	initServo(&servoA, 0, SERVOA_PIN, SERVO_IDLE_ANGLE);
+	initServo(&servoB, 1, SERVOB_PIN, SERVO_IDLE_ANGLE);
+	//initServo(&servoC, 2, SERVOC_PIN);
+	servosArray[0] = &servoA;
+	servosArray[1] = &servoB;
+	servosArray[2] = &servoC;
+	current_servo = 0;
+	printf("Init servos\n");
+}
+
 void initOutputs(){
-	initServo(&servoA, 0, SERVOA_PIN);
-	initServo(&servoB, 1, SERVOB_PIN);
-	initServo(&servoC, 2, SERVOC_PIN);
+	initServos();
 	salidaA.actuator_pin = SERVOA_PIN;
 	salidaA.sensor_pin = IR_A.pin;
 	salidaA.flags.byte = 0;
@@ -34,6 +43,9 @@ void initOutputs(){
 	salidaC.actuator_pin = SERVOC_PIN;
 	salidaC.sensor_pin = IR_C.pin;
 	salidaC.flags.byte = 0;
+	SET_FLAG(salidaA.flags, OUTPUT_READY);
+	SET_FLAG(salidaB.flags, OUTPUT_READY);
+	SET_FLAG(salidaC.flags, OUTPUT_READY);
 	printf("Init outputs\n");
 }
 
@@ -238,66 +250,62 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 }
 
 void irSensorsTask(sorter_system_t * sorter){
-	if(IR_READ){
-		printf("IR A: %u\n", IR_A.ADCConvertedValue);
-		printf("IR B: %u\n", IR_B.ADCConvertedValue);
-		printf("IR C: %u\n", IR_B.ADCConvertedValue);
-		IR_READ = 0;
-	}
-	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
+	
+	//printf("IR A: %u\n", IR_A.ADCConvertedValue);	
+	//printf("IR B: %u\n", IR_A.ADCConvertedValue);	
+	//printf("IR C: %u\n", IR_C.ADCConvertedValue);
+	//Para ir_U, hay que hacer otro debug, no tiene una salida asignada
+	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 10 ms se activa
 		CLEAR_FLAG(IR_A.flags, TCRT_NEW_VALUE);
 		tcrt_read(&IR_A);
 	}
 	if(tcrt_is_box_detected(&IR_A)){
 		if(NIBBLEH_GET_STATE(IR_A.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
-			SET_FLAG(salidaA.flags, OUTPUT_PUSH);
+			if(IS_FLAG_SET(salidaA.flags, OUTPUT_READY)){
+				CLEAR_FLAG(salidaA.flags, OUTPUT_READY);
+				SET_FLAG(servoA.flags, SERVO_PUSH);
+				servoA.state_time = 0;
+				printf("Pushed servo A and zeroed state time\n");
+			}
 			NIBBLEH_SET_STATE(IR_A.flags, TCRT_STATUS_IDLE);
-			printf("Detecto en IR A");
+			printf("Detecto en IR A\n");
 		}
 	}
-	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
-		CLEAR_FLAG(IR_A.flags, TCRT_NEW_VALUE);
+	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
+		CLEAR_FLAG(IR_B.flags, TCRT_NEW_VALUE);
 		tcrt_read(&IR_B);
 	}
 	if(tcrt_is_box_detected(&IR_B)){
 		if(NIBBLEH_GET_STATE(IR_B.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
-			SET_FLAG(salidaB.flags, OUTPUT_PUSH);
+			//SET_FLAG(salidaB.flags, OUTPUT_PUSH);
 			NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
-			printf("Detecto en IR B");
+			printf("Detecto en IR B\n");
+		}
+	}
+	if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
+		CLEAR_FLAG(IR_C.flags, TCRT_NEW_VALUE);
+		tcrt_read(&IR_C);
+	}
+	if(tcrt_is_box_detected(&IR_C)){
+		if(NIBBLEH_GET_STATE(IR_C.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
+			SET_FLAG(salidaB.flags, OUTPUT_PUSH);
+			NIBBLEH_SET_STATE(IR_C.flags, TCRT_STATUS_IDLE);
+			printf("Detecto en IR C\n");
+		}
+	}
+	if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
+		CLEAR_FLAG(IR_U.flags, TCRT_NEW_VALUE);
+		tcrt_read(&IR_U);
+	}
+	if(tcrt_is_box_detected(&IR_U)){
+		if(NIBBLEH_GET_STATE(IR_U.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
+			SET_FLAG(salidaB.flags, OUTPUT_PUSH);
+			NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);
+			printf("Detecto en IR U\n");
 		}
 	}
 }
 
-void servosTask(){
-	// SERVO A
-	if (!IS_FLAG_SET(servoA.flags, SERVO_PUSH) && !IS_FLAG_SET(servoA.flags, SERVO_RESET)) {
-		// Ya terminó su ciclo de activación ? limpiar orden externa
-		CLEAR_FLAG(salidaA.flags, OUTPUT_PUSH);
-		printf("Desactiva Servo A");
-	} else if (IS_FLAG_SET(salidaA.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoA.flags, SERVO_PUSH)) {
-		// Solo setea si no se activó aún el pulso
-		SET_FLAG(servoA.flags, SERVO_PUSH);
-		SET_FLAG(servoA.flags, SERVO_RESET);
-		printf("Activa Servo A");
-	}
+void servosTask() {
 
-	// SERVO B
-	if (!IS_FLAG_SET(servoB.flags, SERVO_PUSH) && !IS_FLAG_SET(servoB.flags, SERVO_RESET)) {
-		CLEAR_FLAG(salidaB.flags, OUTPUT_PUSH);
-		printf("Desactiva Servo B");
-	} else if (IS_FLAG_SET(salidaB.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoB.flags, SERVO_PUSH)) {
-		SET_FLAG(servoB.flags, SERVO_PUSH);
-		SET_FLAG(servoB.flags, SERVO_RESET);
-		printf("Activa Servo B");
-	}
-
-	// SERVO C
-	if (!IS_FLAG_SET(servoC.flags, SERVO_PUSH) && !IS_FLAG_SET(servoC.flags, SERVO_RESET)) {
-		CLEAR_FLAG(salidaC.flags, OUTPUT_PUSH);
-		printf("Desactiva Servo C");
-		} else if (IS_FLAG_SET(salidaC.flags, OUTPUT_PUSH) && !IS_FLAG_SET(servoC.flags, SERVO_PUSH)) {
-		SET_FLAG(servoC.flags, SERVO_PUSH);
-		SET_FLAG(servoC.flags, SERVO_RESET);
-		printf("Activa Servo C");
-	}
 }

@@ -15,7 +15,7 @@
 #define OUTPUT_BUSY BIT0_MASK
 #define OUTPUT_PUSH BIT1_MASK
 #define OUTPUT_RESET BIT2_MASK
-// #define OUTPUT_BUSY BIT3_MASK;
+#define OUTPUT_READY BIT3_MASK
 //Solo NIBBLE L para flags
 
 typedef struct {

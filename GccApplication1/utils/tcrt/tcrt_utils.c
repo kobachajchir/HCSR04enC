@@ -36,12 +36,6 @@ uint16_t tcrt_read_channel(uint8_t channel)
 	return ADC;                         // Retorna valor de 10 bits (0–1023)
 }
 
-// 	Byte_Flag_Struct statusFlags; //Aca tenemos el estado en el nibble H, y las banderas en el nibble L
-// 	uint16_t ADCConvertedValue; //Resolucion 10 bits 0 - 1023
-// 	uint8_t channel; //Canal TCRT_X_CHANNEL
-// 	uint8_t pin;
-// }TCRT_t;
-
 void TCRT_init_Handlers(){
 	IR_A.flags.byte = 0;
 	IR_A.channel = TCRT_A_CHANNEL;
@@ -52,7 +46,7 @@ void TCRT_init_Handlers(){
 	NIBBLEH_SET_STATE(IR_A.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_A.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED)){
-		printf("TCRT A ENABLED");
+		printf("TCRT A ENABLED\n");
 	}
 	IR_B.flags.byte = 0;
 	IR_B.channel = TCRT_B_CHANNEL;
@@ -64,7 +58,7 @@ void TCRT_init_Handlers(){
 	NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
 	SET_FLAG(IR_B.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED)){
-		printf("TCRT B ENABLED");
+		printf("TCRT B ENABLED\n");
 	}
 	IR_C.flags.byte = 0;
 	IR_C.channel = TCRT_C_CHANNEL;
@@ -73,9 +67,9 @@ void TCRT_init_Handlers(){
 	IR_C.lastReading = 0;
 	IR_C.hysteresis_percent = 20;
 	NIBBLEH_SET_STATE(IR_C.flags, TCRT_STATUS_IDLE);
-	SET_FLAG(IR_C.flags, TCRT_ENABLED);
+	//SET_FLAG(IR_C.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED)){
-		printf("TCRT C ENABLED");
+		printf("TCRT C ENABLED\n");
 	}
 	IR_U.flags.byte = 0;
 	IR_U.channel = TCRT_U_CHANNEL;
@@ -84,11 +78,10 @@ void TCRT_init_Handlers(){
 	IR_U.lastReading = 0;
 	IR_U.hysteresis_percent = 20;
 	NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);
-	SET_FLAG(IR_U.flags, TCRT_ENABLED);
+	//SET_FLAG(IR_U.flags, TCRT_ENABLED);
 	if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED)){
-		printf("TCRT U ENABLED");
+		printf("TCRT U ENABLED\n");
 	}
-	printf("Init TCRT Handlers");
 }
 
 bool detect_rising_edge(TCRT_t* sensor, uint8_t current_state)
@@ -124,22 +117,18 @@ void calibrateIRSensor(TCRT_t* sensor)
 
 void tcrt_read(TCRT_t* sensor)
 {
-	if (IS_FLAG_SET(sensor->flags, TCRT_NEW_VALUE)) {
-		CLEAR_FLAG(sensor->flags, TCRT_NEW_VALUE);  // Consumimos el pulso de 10ms
+	uint16_t lectura = tcrt_read_channel(sensor->channel);
+	sensor->lastReading = lectura;
 
-		uint16_t lectura = tcrt_read_channel(sensor->channel);
-		sensor->lastReading = lectura;
-
-		// Acumula
-		sensor->filterAccumulator += lectura;
-		sensor->calibrationCounter++;
-
-		// Si alcanzó el número de muestras requerido
-		if (sensor->calibrationCounter >= TCRT_FILTER_SAMPLES) {
-			sensor->ADCConvertedValue = sensor->filterAccumulator / TCRT_FILTER_SAMPLES;
-			sensor->filterAccumulator = 0;
-			sensor->calibrationCounter = 0;
-		}
+	// Acumula
+	sensor->filterAccumulator += lectura;
+	sensor->calibrationCounter++;
+		
+	// Si alcanzó el número de muestras requerido
+	if (sensor->calibrationCounter >= TCRT_FILTER_SAMPLES) {
+		sensor->ADCConvertedValue = sensor->filterAccumulator / TCRT_FILTER_SAMPLES;
+		sensor->filterAccumulator = 0;
+		sensor->calibrationCounter = 0;
 	}
 }
 
