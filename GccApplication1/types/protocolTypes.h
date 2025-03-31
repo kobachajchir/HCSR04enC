@@ -10,8 +10,10 @@
 #define PROTOCOLTYPE_H_
 
 #include "bitmapType.h"
+#include <stdbool.h>
 
 #define PROTOCOL_BUFFER_SIZE 32
+#define EXPECTED_HEADER_SUM 0x1A
 
 #define PROTOSERV_ BIT0_MASK;
 
@@ -47,6 +49,7 @@ typedef struct {
 	uint8_t indexR;
 	uint8_t buffer[PROTOCOL_BUFFER_SIZE];
 	Byte_Flag_Struct flags;
+	bool processData;
 } ProtocolService;
 
 #endif /* PROTOCOLTYPE_H_ */

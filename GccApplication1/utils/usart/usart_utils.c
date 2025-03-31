@@ -8,19 +8,20 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include "./../../main.h"
+#include "./../../types/protocolTypes.h"
 
 /* USART Functions -----------------------------------------------------------*/
 // Función para inicializar el puerto serial (USART)
 void USART_Init(uint16_t ubrr)
 {
-	// Configura el baud rate para 115200 baudios
-	UBRR0H = (unsigned char)(ubrr >> 8);  // Parte alta del baud rate
-	UBRR0L = (unsigned char)ubrr;         // Parte baja del baud rate
+	// Configurar el baud rate
+	UBRR0H = (unsigned char)(ubrr >> 8);
+	UBRR0L = (unsigned char)ubrr;
 
-	// Habilita el receptor y transmisor
-	UCSR0B = (1 << RXEN0) | (1 << TXEN0);  // Habilitar RX y TX
-
-	// Configura el formato de los datos: 8 bits de datos, sin paridad, 1 bit de stop
+	// Habilitar receptor, transmisor y la interrupción de recepción
+	UCSR0B = (1 << RXEN0) | (1 << TXEN0) | (1 << RXCIE0);
+	
+	// Configurar el formato: 8 bits de datos, sin paridad, 1 bit de stop
 	UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
 }
 
@@ -45,14 +46,27 @@ unsigned char USART_Receive(void)
 // Redirige printf para usar USART
 int USART_putchar(char c, FILE *stream)
 {
+	// Si se desea manejar la nueva línea con retorno de carro:
 	if (c == '\n')
-	USART_Transmit('\r'); // Enviar un retorno de carro para manejar las nuevas líneas
-	USART_Transmit(c);
+	USART_putchar('\r', stream);
+	
+	// Esperar a que el buffer de transmisión (hardware) esté vacío
+	while (!(UCSR0A & (1 << UDRE0)))
+	;  // Espera activa
+	
+	// Enviar el carácter
+	UDR0 = c;
 	return 0;
 }
 
-// Redirige la entrada estándar (stdin) para recibir datos desde USART
+
 int USART_getchar(FILE *stream)
 {
-	return USART_Receive();  // Recibir un carácter desde USART
+	// Si no hay datos disponibles, se retorna -1 (puedes interpretar esto como EOF)
+	if (protocolService.indexR == protocolService.indexW)
+	return -1;
+	
+	uint8_t data = protocolService.buffer[protocolService.indexR];
+	protocolService.indexR = (protocolService.indexR + 1) % PROTOCOL_BUFFER_SIZE;
+	return data;
 }

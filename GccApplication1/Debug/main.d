@@ -25,7 +25,9 @@ main.d main.o: .././main.c \
  .././types/servoType.h .././types/protocolTypes.h \
  .././utils/usart/usart_utils.h .././utils/servo/servo_utils.h \
  .././utils/programPath/boxsorter_utils.h \
- .././utils/programPath/../../types/boxTypes.h
+ .././utils/programPath/../../types/boxTypes.h \
+ .././utils/protocol/protocol_utils.h .././utils/protocol/../../main.h \
+ .././utils/protocol/../../types/protocolTypes.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -98,3 +100,9 @@ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 .././utils/programPath/boxsorter_utils.h:
 
 .././utils/programPath/../../types/boxTypes.h:
+
+.././utils/protocol/protocol_utils.h:
+
+.././utils/protocol/../../main.h:
+
+.././utils/protocol/../../types/protocolTypes.h:

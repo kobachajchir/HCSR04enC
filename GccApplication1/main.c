@@ -13,6 +13,7 @@
 #include "types/ultrasonicDetectorType.h"
 #include "types/TCRTType.h"
 #include "utils/programPath/boxsorter_utils.h"
+#include "utils/protocol/protocol_utils.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
 
@@ -153,7 +154,7 @@ ISR(TIMER1_COMPB_vect) {
 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_PUSH);
 		// Return to idle angle
 		servosArray[current_servo]->angle = SERVO_IDLE_ANGLE;
-		servosArray[current_servo]->pulse_us = calculate_angle_pulseUs(servosArray[current_servo]);
+		servosArray[current_servo]->pulse_us = calculate_angle_pulseUs(servosArray[current_servo]->angle);
 		if(current_servo == 0){
 			SET_FLAG(salidaA.flags, OUTPUT_READY);
 			CLEAR_FLAG(salidaA.flags, OUTPUT_BUSY);
@@ -193,14 +194,45 @@ ISR(TIMER1_COMPB_vect) {
 	// If current_servo >= NUM_OUTPUTS, we've processed all servos for this frame
 }
 
-// ISR para Timer 2 (se ejecuta cada 10 ms)
+ISR(USART_RX_vect)
+{
+	uint8_t received_byte = UDR0;  // Lee el byte recibido
+	// Calcular el próximo índice de escritura en el buffer circular
+	uint8_t next_indexW = (protocolService.indexW + 1) % PROTOCOL_BUFFER_SIZE;
+
+	// Verifica si el buffer está lleno (es decir, si next_indexW alcanzaría indexR)
+	if (next_indexW == protocolService.indexR) { //Que el proximo sean iguales y no este procesando nada
+		// El buffer está lleno; activar la bandera para procesar datos antes de sobrescribir
+		protocolService.processData = true;
+		// Opcional: puedes descartar el byte recibido o almacenarlo en un buffer temporal
+		} else {
+		// Hay espacio, copia el byte en el buffer
+		protocolService.buffer[protocolService.indexW] = received_byte;
+		// Actualiza el índice de escritura
+		protocolService.indexW = next_indexW;
+	}
+}
+
+ISR(USART_UDRE_vect)
+{
+	// Si aún hay datos en el buffer...
+	if (protocolService.indexR != protocolService.indexW) {
+		// Enviar el siguiente byte
+		UDR0 = protocolService.buffer[protocolService.indexR];
+		protocolService.indexR = (protocolService.indexR + 1) % PROTOCOL_BUFFER_SIZE;
+		} else {
+		// Si el buffer está vacío, deshabilitar la interrupción para no seguir disparando
+		UCSR0B &= ~(1 << UDRIE0);
+	}
+}
+
 
 /* END Function ISR ----------------------------------------------------------*/
 
-// Inicializa la redirección de la salida estándar (stdout)
+// Redirige printf (stdout) usando la función nativa de transmisión bloqueante.
 FILE mystdout = FDEV_SETUP_STREAM(USART_putchar, NULL, _FDEV_SETUP_WRITE);
 
-// Inicializa la redirección de la entrada estándar (stdin)
+// Redirige la entrada (stdin) usando una función personalizada que lea de tu buffer RX.
 FILE mystdin = FDEV_SETUP_STREAM(NULL, USART_getchar, _FDEV_SETUP_READ);
 
 
@@ -255,12 +287,12 @@ void gpio_pins_init() {
 }
 
 // Configuración de interrupción externa (INT0) para el pin ECHO
-void external_interrupt_init()
-{
-	// Configuración de interrupción externa
-	EICRA |= (1 << ISC01) | (1 << ISC00);  // Configura INT0 para detectar flanco ascendente
-	EIMSK |= (1 << INT0);                   // Habilita la interrupción externa INT0 (pin 2)
-}
+// void external_interrupt_init()
+// {
+// 	// Configuración de interrupción externa
+// 	EICRA |= (1 << ISC01) | (1 << ISC00);  // Configura INT0 para detectar flanco ascendente
+// 	EIMSK |= (1 << INT0);                   // Habilita la interrupción externa INT0 (pin 2)
+// }
 
 void printfWrapper(const char* message) {
 	printf("%s\n", message);
@@ -501,6 +533,15 @@ int main()
 		ultraSensorTask(&hcsr04Detector, &SorterSystem); //Recordar que la funcion pide un puntero y esto ya es un puntero, por lo que no lo apunto con &
 		servosTask();
 		buttonTask();
+		if(protocolService.processData){
+			printf("Procesar info\n");
+			if(process_protocol_buffer()){
+				
+			}else{
+				
+			}
+			protocolService.processData = false;
+		}
 		if(WAIT_TIME_TRIGGER_PASSED){ //Esta bandera salta cuando se cunplio el tiempo de espera entre triggers
 			WAIT_TIME_TRIGGER_PASSED = 0;
 			ultraSensor.TRIGGER_ALLOWED = 1;

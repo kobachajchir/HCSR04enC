@@ -1,6 +1,5 @@
 utils/protocol/protocol_utils.d utils/protocol/protocol_utils.o: \
- ../utils/protocol/protocol_utils.c ../utils/protocol/protocol_utils.h \
- ../utils/protocol/../../main.h \
+ ../utils/protocol/protocol_utils.c ../utils/protocol/../../main.h \
  ../utils/protocol/../../utils/macros_utils.h \
  ../utils/protocol/../../utils/../main.h \
  ../utils/protocol/../../types/bitmapType.h \
@@ -29,12 +28,11 @@ utils/protocol/protocol_utils.d utils/protocol/protocol_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
+ ../utils/protocol/protocol_utils.h \
  ../utils/protocol/../../types/protocolTypes.h \
  ../utils/protocol/../usart/usart_utils.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h
-
-../utils/protocol/protocol_utils.h:
 
 ../utils/protocol/../../main.h:
 
@@ -93,6 +91,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
+
+../utils/protocol/protocol_utils.h:
 
 ../utils/protocol/../../types/protocolTypes.h:
 
