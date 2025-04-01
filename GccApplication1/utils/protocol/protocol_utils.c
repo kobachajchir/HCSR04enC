@@ -13,6 +13,7 @@ void initProtocolService(ProtocolService* service){
 	service->indexR = 0;
 	service->indexW = 0;
 	service->flags.byte = 0;
+	clear_receive_pck();
 	printf("Init protocol service\n");
 }
 
@@ -76,51 +77,93 @@ ProtocolFrame receive_protocol_frame() {
 }
 
 bool verify_header() {
-	// Asegurarse de que hay al menos 4 bytes disponibles (esto depende de la implementación del buffer)
-	// Primero, comprobamos que el primer byte es 'U'
+	// Verificar si hay al menos 4 bytes disponibles
+	uint8_t available;
+	if (protocolService.indexW >= protocolService.indexR) {
+		available = protocolService.indexW - protocolService.indexR;
+		} else {
+		available = PROTOCOL_BUFFER_SIZE - protocolService.indexR + protocolService.indexW;
+	}
+	if (available < 4) {
+		return false; // No hay suficientes bytes para el header
+	}
+
+	// Comprobar que el primer byte es 'U'
 	if (protocolService.buffer[protocolService.indexR] != 'U') {
 		return false; // No es un header candidato.
 	}
-	
-	uint8_t idx0 = protocolService.indexR; //254
+
+	// Calcular los índices para los 4 bytes del header, considerando el buffer circular.
+	uint8_t idx0 = protocolService.indexR;
 	uint8_t idx1 = (protocolService.indexR + 1) % PROTOCOL_BUFFER_SIZE;
 	uint8_t idx2 = (protocolService.indexR + 2) % PROTOCOL_BUFFER_SIZE;
 	uint8_t idx3 = (protocolService.indexR + 3) % PROTOCOL_BUFFER_SIZE;
 
-	// Calcular la suma ponderada de los 4 bytes usando pesos: 4,3,2,1
+	// Calcular la suma ponderada de los 4 bytes usando pesos: 4, 3, 2, 1
 	uint16_t sum = 0;
 	sum += (uint16_t)protocolService.buffer[idx0] * 4;  // 'U'
 	sum += (uint16_t)protocolService.buffer[idx1] * 3;  // 'N'
 	sum += (uint16_t)protocolService.buffer[idx2] * 2;  // 'E'
 	sum += (uint16_t)protocolService.buffer[idx3] * 1;  // 'R'
 	
-	// Reducir a 8 bits (por ejemplo, tomando el valor menor significativo)
-	uint8_t computed = (uint8_t)(sum & NIBBLE_L_MASK);
+	printf("Recibió %c\n", protocolService.buffer[idx0]);
+	printf("Recibió %c\n", protocolService.buffer[idx1]);
+	printf("Recibió %c\n", protocolService.buffer[idx2]);
+	printf("Recibió %c\n", protocolService.buffer[idx3]);
 	
+	// Reducir a 8 bits: tomar los 8 bits menos significativos
+	uint8_t computed = (uint8_t)(sum & 0xFF);
+
 	// Comparar con el valor esperado
 	if (computed == EXPECTED_HEADER_SUM) {
-		printf("Computado %u, Esperaba %u", computed, EXPECTED_HEADER_SUM);
+		printf("Computado %u, Esperaba %u\n", computed, EXPECTED_HEADER_SUM);
+		protocolService.indexR = idx3; // Avanzar indexR hasta la posición del cuarto byte (donde debería estar 'R')
 		return true;  // La cabecera es válida.
-		} else {
-		// No coincide; ajustar indexR para descartar este candidato.
-		// Se posiciona en la ubicación del cuarto byte (U + 3), donde debería estar 'R'.
-		protocolService.indexR = idx3;  // O, si es un buffer circular, aplicar módulo.
+	} else {
+		// No coincide; descartar este header.
 		return false;
 	}
 }
 
 bool process_protocol_buffer() {
-	// Verificar si hay al menos 4 bytes para el header
-	// (la verificación de tamaño depende de tu implementación del buffer)
-	if((protocolService.indexW - protocolService.indexR)<4){
-		printf("Menos de 4 bytes en buffer\n");
+	uint8_t available;
+	if (protocolService.indexW >= protocolService.indexR) {
+		available = protocolService.indexW - protocolService.indexR;
+		} else {
+		available = PROTOCOL_BUFFER_SIZE - protocolService.indexR + protocolService.indexW;
+	}
+
+	if (available < PROTOCOL_MIN_BYTE_COUNT) {
+		printf("Menos de %u bytes en buffer\n", PROTOCOL_MIN_BYTE_COUNT);
 		return false;
 	}
+	
 	if (verify_header()) {
 		printf("Header UNER válido\n");
 		// Se continúa procesando el paquete...
+		return true;
 		} else {
 		printf("Header inválido, descartado\n");
-		// Se puede reintentar leer otro candidato
+		return false;
 	}
+}
+
+Command getResponseCommand(Command req) {
+	for (size_t i = 0; i < NUM_COMMANDS; i++) {
+		if (commandMap[i].request == req) {
+			return commandMap[i].response;
+		}
+	}
+	// En caso de no encontrar coincidencia, se retorna CMD_ALIVE como valor por defecto
+	return CMD_ALIVE;
+}
+
+void clear_receive_pck(){
+	protocolService.receivePck.checksum = 0;
+	protocolService.receivePck.cmd = 0;
+	protocolService.receivePck.length = 0;
+	protocolService.receivePck.token = 0;
+	protocolService.receivePck.payload[0] = NULL;
+	protocolService.receivePck.header[0] = NULL;
+	printf("Paquete RCV cleared \n");
 }

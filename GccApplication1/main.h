@@ -67,6 +67,8 @@
 
 #define BTN_PRESS_TIME 10  // Define de descarte
 
+#define PROTOCOL_MIN_BYTE_COUNT 6
+
 //#define DO_TRIGGER bandera.bitmap.bit0
 //#define TRIGGER_FINISH bandera.bitmap.bit1
 //#define ECHO_RISING bandera.bitmap.bit2
