@@ -31,7 +31,7 @@
 #define PROTOSERV_PROCESSING BIT0_MASK
 #define PROTOSERV_CHECKDATA BIT1_MASK
 #define PROTOSERV_RESET BIT2_MASK
-// #define PROTOSERV_CHECKDATA BIT3_MASK
+#define PROTOSERV_CREATE_PCK BIT3_MASK
 
 typedef struct {
 	uint8_t header[4];           // HEADER (4 bytes)

@@ -84,9 +84,6 @@ bool verify_header() {
 		} else {
 		available = PROTOCOL_BUFFER_SIZE - protocolService.indexR + protocolService.indexW;
 	}
-	if (available < 4) {
-		return false; // No hay suficientes bytes para el header
-	}
 
 	// Comprobar que el primer byte es 'U'
 	if (protocolService.buffer[protocolService.indexR] != 'U') {
@@ -106,17 +103,11 @@ bool verify_header() {
 	sum += (uint16_t)protocolService.buffer[idx2] * 2;  // 'E'
 	sum += (uint16_t)protocolService.buffer[idx3] * 1;  // 'R'
 	
-	printf("Recibió %c\n", protocolService.buffer[idx0]);
-	printf("Recibió %c\n", protocolService.buffer[idx1]);
-	printf("Recibió %c\n", protocolService.buffer[idx2]);
-	printf("Recibió %c\n", protocolService.buffer[idx3]);
-	
 	// Reducir a 8 bits: tomar los 8 bits menos significativos
 	uint8_t computed = (uint8_t)(sum & 0xFF);
 
 	// Comparar con el valor esperado
 	if (computed == EXPECTED_HEADER_SUM) {
-		printf("Computado %u, Esperaba %u\n", computed, EXPECTED_HEADER_SUM);
 		protocolService.indexR = idx3; // Avanzar indexR hasta la posición del cuarto byte (donde debería estar 'R')
 		return true;  // La cabecera es válida.
 	} else {
@@ -139,11 +130,9 @@ bool process_protocol_buffer() {
 	}
 	
 	if (verify_header()) {
-		printf("Header UNER válido\n");
 		// Se continúa procesando el paquete...
 		return true;
 		} else {
-		printf("Header inválido, descartado\n");
 		return false;
 	}
 }
@@ -166,4 +155,96 @@ void clear_receive_pck(){
 	protocolService.receivePck.payload[0] = NULL;
 	protocolService.receivePck.header[0] = NULL;
 	printf("Paquete RCV cleared \n");
+}
+
+uint8_t calculatePayload() {
+	uint8_t checksum = 0;  // Inicializa el checksum en 0
+	
+	// Sumar los bytes de 'UNER'
+	checksum ^= 'U';  // XOR de 'U'
+	checksum ^= 'N';  // XOR de 'N'
+	checksum ^= 'E';  // XOR de 'E'
+	checksum ^= 'R';  // XOR de 'R'
+	
+	// Sumar el byte de LENGTH
+	checksum ^= protocolService.receivePck.length;
+	
+	// Sumar el byte de TOKEN (usamos el valor de PROTOCOL_TOKEN)
+	checksum ^= PROTOCOL_TOKEN;
+	
+	// Sumar el byte de CMD
+	checksum ^= protocolService.receivePck.cmd;
+	
+	// Imprimir los valores del payload
+	printf("Payload en Hex:\n");
+	// CHANGED: Removed the -1 to process all bytes
+	for (int i = 0; i < protocolService.receivePck.length; i++) {
+		uint8_t payload_byte = *(protocolService.receivePck.payload + i);
+		printf("Byte %d: 0x%02X (Decimal: %d)\n", i, payload_byte, payload_byte);
+		checksum ^= payload_byte;  // XOR de cada byte del payload
+	}
+	
+	// Imprimir el checksum calculado en hexadecimal
+	printf("CHECKSUM CALC %02X\n", checksum);
+	
+	// Imprimir el checksum esperado
+	printf("CHECKSUM ESPERADO: %02X\n", protocolService.receivePck.checksum);
+	
+	// Comparar el checksum calculado con el esperado
+	if (checksum == protocolService.receivePck.checksum) {
+		printf("Cks valido\n");
+		} else {
+		printf("Cks invalido\n");
+	}
+	
+	// Devuelve el checksum calculado
+	return checksum;
+}
+
+void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength) {
+	// Fill the header with 'UNER'
+	protocolService.receivePck.header[0] = 'U';
+	protocolService.receivePck.header[1] = 'N';
+	protocolService.receivePck.header[2] = 'E';
+	protocolService.receivePck.header[3] = 'R';
+	
+	// Set the length field to the payload length
+	protocolService.receivePck.length = payloadLength;
+	
+	// Set the token
+	protocolService.receivePck.token = PROTOCOL_TOKEN; // Assuming PROTOCOL_TOKEN is defined as 0x3A
+	
+	// Set the command
+	protocolService.receivePck.cmd = cmd;
+	
+	// Point the payload to the correct position in the buffer
+	// protocolService.receivePck.payload is already pointing to the right memory location
+	// as mentioned in the description
+	
+	// Calculate the checksum
+	uint8_t checksum = 0;
+	
+	// XOR with header bytes
+	checksum ^= protocolService.receivePck.header[0]; // 'U'
+	checksum ^= protocolService.receivePck.header[1]; // 'N'
+	checksum ^= protocolService.receivePck.header[2]; // 'E'
+	checksum ^= protocolService.receivePck.header[3]; // 'R'
+	
+	// XOR with length
+	checksum ^= protocolService.receivePck.length;
+	
+	// XOR with token
+	checksum ^= protocolService.receivePck.token;
+	
+	// XOR with command
+	checksum ^= protocolService.receivePck.cmd;
+	
+	// XOR with each byte of the payload
+	for (int i = 0; i < protocolService.receivePck.length; i++) {
+		checksum ^= *(protocolService.receivePck.payload + i);
+	}
+	
+	// Set the checksum field
+	protocolService.receivePck.checksum = checksum;
+	printf("Paquete creado \n");
 }

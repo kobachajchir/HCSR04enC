@@ -17,8 +17,8 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  .././main.h .././utils/macros_utils.h .././utils/../main.h \
  .././types/bitmapType.h .././types/ultrasonicDetectorType.h \
- D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
- D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
+ ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h \
+ ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h \
  .././types/bitmapType.h .././types/TCRTType.h \
  .././types/sorterSystemTypes.h .././types/boxTypes.h \
  .././types/outputType.h .././types/TCRTType.h .././types/outputType.h \
@@ -71,9 +71,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 .././types/ultrasonicDetectorType.h:
 
-D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h:
+../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h:
 
-D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
+../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h:
 
 .././types/bitmapType.h:
 

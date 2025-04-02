@@ -203,7 +203,10 @@ ISR(USART_RX_vect)
 	// Verifica si el buffer está lleno: si el próximo índice de escritura es igual al índice de lectura
 	if (next_indexW == protocolService.indexR) {
 		// El buffer está lleno; activa la bandera para procesar datos antes de sobrescribir
-		SET_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
+			if (!(IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA))) {
+				// Si la bandera de procesamiento no está activa, no se debe sobreescribir
+				SET_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
+			}
 		// Opcional: podrías descartar el byte recibido
 		} else {
 		// Hay espacio: copia el byte en el buffer
@@ -219,9 +222,9 @@ ISR(USART_RX_vect)
 		}
 
 		// Si hay al menos 6 bytes (mínimo para un paquete) disponibles, activa processData
-		if (available >= 6) {
-			SET_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
-		}
+        if (available >= PROTOCOL_MIN_BYTE_COUNT && !IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA)) {
+	        SET_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
+        }
 	}
 }
 
@@ -552,18 +555,15 @@ int main()
 				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_HEADER);
 				SET_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 			} else {
-				protocolService.indexR = protocolService.indexW;
-				printf("Index R = indexW = %u", protocolService.indexR);
-				CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
-				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
+				SET_FLAG(protocolService.flags, PROTOSERV_RESET);
 			}
-			CLEAR_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
 		}
 		if(IS_FLAG_SET(protocolService.flags, PROTOSERV_RESET)){
 			protocolService.indexR = protocolService.indexW;
 			printf("Index R = indexW = %u", protocolService.indexR);
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_RESET);
+			CLEAR_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
 			clear_receive_pck();
 		}
@@ -577,29 +577,56 @@ int main()
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_TOKEN);
 			protocolService.indexR++; //Donde deberia estar token
 			if (protocolService.buffer[protocolService.indexR] != ':'){
-				printf("Token invalido");
+				printf("Token invalido\n");
 				SET_FLAG(protocolService.flags, PROTOSERV_RESET);
 				CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 			}else{ //Token valido
 				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_CMD);
 				protocolService.indexR++; //Donde deberia estar CMD
-				protocolService.receivePck.cmd = getResponseCommand(protocolService.buffer[protocolService.indexR]);
-				printf("El comando de respuesta para 0x%X es 0x%X\n", protocolService.buffer[protocolService.indexR], protocolService.receivePck.cmd);
+				protocolService.receivePck.cmd = protocolService.buffer[protocolService.indexR];
 				if(protocolService.receivePck.cmd == CMD_INVALID){
-					printf("Comando invalido");
+					printf("Comando invalido\n");
 					CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 					SET_FLAG(protocolService.flags, PROTOSERV_RESET);
 				}else{
-					printf("Comando valido");
 					printf("Length %u", protocolService.receivePck.length);
-					if(protocolService.receivePck.length < 2){ //Nunca deberia ser menor a 2
-						printf("Length menor a 2");
+					if(protocolService.receivePck.length > PROTOCOL_MAX_BYTE_COUNT){ //Nunca deberia ser mayor a 24, porque + UNER+len+:+cmd == 32 y es el size del buffer
+						printf("Length mayor a 24, se perderia data del buffer\n");
 					}
-					protocolService.receivePck.payload = &protocolService.buffer[protocolService.indexR]; //Apunta a la direccion de memoria del primer elemento, esto deberia seguir hasta minimo 2, osea esta direccion y la siguiente
-					printf("Guardo & a payload");
 					NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_PAYLOAD);
+					protocolService.indexR++; //Donde deberia estar el Payload
+					protocolService.receivePck.payload = &protocolService.buffer[protocolService.indexR]; //Apunta a la direccion de memoria del primer elemento, esto deberia seguir hasta minimo 2, osea esta direccion y la siguiente
+					if(protocolService.receivePck.length > 0){
+						protocolService.indexR += (protocolService.receivePck.length-1); //Si es 0 no pasa nada porque daria lo mismo la suma
+					}
+					protocolService.indexR++; //Donde deberia estar cks
+					NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_CHK);
+					protocolService.receivePck.checksum = protocolService.buffer[protocolService.indexR];
+					NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_CALCULATING_CHK);
+					if(calculatePayload() != protocolService.receivePck.checksum){
+						printf("Cks invalido\n");
+						CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
+						SET_FLAG(protocolService.flags, PROTOSERV_RESET);
+						}else{
+						printf("Cks valido\n");
+						NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_VALIDATED);
+						protocolService.receivePck.cmd = getResponseCommand(protocolService.buffer[protocolService.indexR]); //Asignar comando de respuesta
+						SET_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
+						createPck(protocolService.receivePck.cmd, NULL, 0); //Sin respuesta, deberia enviar el payload si quisiera agregar algo
+						CLEAR_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
+						CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
+						NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);
+					}
 				}
 			}
+		}
+		if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND){
+			printf("Send");
+			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND_DONE);
+		}
+		if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND_DONE){
+			printf("Send done");
+			//NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
 		}
 		if(WAIT_TIME_TRIGGER_PASSED){ //Esta bandera salta cuando se cunplio el tiempo de espera entre triggers
 			WAIT_TIME_TRIGGER_PASSED = 0;
