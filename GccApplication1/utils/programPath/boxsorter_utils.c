@@ -34,6 +34,26 @@ inline void initServos(void){
 
 void initOutputs(){
 	initServos();
+	//TODO Fn para leer EEPROM
+	if(OUTPUT_A_HAS_CONFIG){
+		printf("Salida A find setting\n");
+	}else{
+		printf("Salida A no setting\n");
+		salidaA.boxType = OUTPUT_A_DEFAULT_BOX_TYPE;
+	}
+	if(OUTPUT_B_HAS_CONFIG){
+		printf("Salida B find setting\n");
+	}else{
+		printf("Salida B no setting\n");
+		salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
+		
+	}
+	if(OUTPUT_C_HAS_CONFIG){
+		printf("Salida C find setting\n");
+	}else{
+		printf("Salida C no setting\n");
+		salidaC.boxType = OUTPUT_C_DEFAULT_BOX_TYPE;
+	}
 	salidaA.actuator_pin = SERVOA_PIN;
 	salidaA.sensor_pin = IR_A.pin;
 	salidaA.flags.byte = 0;
@@ -183,50 +203,43 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 
 				if (tipo != NO_BOX)
 				{
-					box_t nueva_caja;
-					nueva_caja.height_mm = ultraDetector->sensor->distance_mm;
-					nueva_caja.flags.byte = 0;
-					nueva_caja.flags.nibbles.bitH = tipo; // Guarda tipo en nibble alto
-					nueva_caja.state = BOX_MEASURED;
-
-					// Debug de tipo
+					if(salidaA.boxType == tipo){
+						SET_FLAG(salidaA.flags, OUTPUT_BUSY); //Setear como busy para que cuando detecte patee
+						printf("Salida A busy\n");
+					}else if(salidaB.boxType == tipo){
+						SET_FLAG(salidaB.flags, OUTPUT_BUSY);
+						printf("Salida B busy\n");
+					}else if(salidaC.boxType == tipo){
+						SET_FLAG(salidaC.flags, OUTPUT_BUSY);
+						printf("Salida C busy\n");
+					}else{
+						printf("BOX_DISCARDED\n");
+					}
 					switch (tipo)
 					{
-						case BOX_SIZE_A: 
-							printf("BOX_SIZE_A\n");
-							SET_FLAG(salidaA.flags, OUTPUT_BUSY); //Setear como busy para que cuando detecte patee
-							break;
-						case BOX_SIZE_B: 
-							printf("BOX_SIZE_B\n");
-							SET_FLAG(salidaB.flags, OUTPUT_BUSY);
-							break;
+						case BOX_SIZE_A:
+						printf("BOX_SIZE_A\n");
+						sorter->stats.total_by_type_array[0]++;
+						break;
+						case BOX_SIZE_B:
+						printf("BOX_SIZE_B\n");
+						sorter->stats.total_by_type_array[1]++;
+						break;
 						case BOX_SIZE_C:
-							printf("BOX_SIZE_C\n");
-							SET_FLAG(salidaC.flags, OUTPUT_BUSY);
-							break;
+						printf("BOX_SIZE_C\n");
+						sorter->stats.total_by_type_array[2]++;
+						break;
 						case BOX_DISCARDED:
-							printf("BOX_DISCARDED\n");
-							break;
-						default: 
-							printf("Tipo no reconocido\n");
-							break;
-					}
-
-					// Estadísticas
-					if (tipo == BOX_DISCARDED)
-					{
-						nueva_caja.flags.bitmap.bit2 = 1; // DISCARDED
+						printf("BOX_DISCARDED\n");
 						sorter->stats.total_discarded++;
+						break;
+						default:
+						printf("Tipo no reconocido\n");
+						break;
 					}
-					else
-					{
-						sorter->stats.total_selected++;
-					}
-
 					sorter->stats.total_measured++;
-					sorter->stats.count_by_type[tipo]++;
-
-					// TODO: guardar nueva_caja en buffer de cajas, si implementás uno
+					printf("Contadas: %u\n", sorter->stats.total_measured);
+					// TODO: Aggregar cola para poder manejar las cajas
 				}
 
 				// Cambio de estado para esperar que se libere nuevamente

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <avr/pgmspace.h>
 #include "main.h"
 #include "utils/macros_utils.h"
 #include "types/bitmapType.h"
@@ -433,7 +434,7 @@ static inline bool calibrateAllIRSensors()
 	static bool init_done = false;
 
 	if (!init_done) {
-		printf("Calibrando sensores IR...\n");
+		printf_P(PSTR("Calibrando sensores IR...\n"));
 		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED)){
 			SET_FLAG(IR_A.flags, TCRT_CALIBRATING);	
 		}
@@ -480,7 +481,7 @@ static inline void buttonTask(void){
 		}else if(BTN_PRESSED && !(PIND & (1 << BUTTON_PIN))){ //Flag activa y no presionado, estuvo presionado y se solto
 		BTN_PRESSED = 0;
 		if(BTN_OVF){ //Se sostuvo demasiado y hubo un overflow en el contador
-			printf("Btn overflowed\n");
+			printf_P(PSTR("Btn overflowed\n"));
 		}
 		if(btn_pressed_time >= BTN_PRESS_TIME || BTN_OVF){ //Overflow marcado como un tiempo valido
 			BTN_RELEASED = 1;
@@ -505,7 +506,10 @@ int main()
 	ULTRASONIC_ENABLE = 1;
 	DEBUG_FLAGS = 0;
 	DEBUG_FLAGS_SORTER = 1;
-	IR_CALIBRATED = 0;
+	IR_CALIBRATED = 0;	
+	OUTPUT_A_HAS_CONFIG = 0; //POR AHORA
+	OUTPUT_B_HAS_CONFIG = 0; //POR AHORA
+	OUTPUT_C_HAS_CONFIG = 0; //POR AHORA
 	// Inicializa la comunicación serial primero
 	USART_Init(8);  // 115200 baudios para un reloj de 16 MHz
 	// Redirigir la salida estándar a USART
@@ -529,7 +533,7 @@ int main()
 	//external_interrupt_init();
 	EMIT_TRIGGER = 1; //Solo si quiero emitir al iniciar, sino sacar
 	//Imprime iniciado
-	printf("Iniciado\n");
+	printf_P(PSTR("Iniciado\n"));
 	sei();
 	while (1)
 	{ 
@@ -537,7 +541,7 @@ int main()
 			irSensorsTask(&SorterSystem);
 		}else{
 			if(calibrateAllIRSensors()){
-				printf("Todos los sensores IR calibrados.\n");
+				printf_P(PSTR("Todos los sensores IR calibrados.\n"));
 				IR_CALIBRATED = 1;
 				IR_A.calibrationCounter = 0;
 				IR_B.calibrationCounter = 0;
@@ -550,7 +554,7 @@ int main()
 		servosTask();
 		buttonTask();
 		if (IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA) && !IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)) {
-			printf("Procesar info\n");
+			printf_P(PSTR("Procesar info\n"));
 			if (process_protocol_buffer()) {
 				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_HEADER);
 				SET_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
@@ -560,73 +564,33 @@ int main()
 		}
 		if(IS_FLAG_SET(protocolService.flags, PROTOSERV_RESET)){
 			protocolService.indexR = protocolService.indexW;
-			printf("Index R = indexW = %u", protocolService.indexR);
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_RESET);
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
 			clear_receive_pck();
 		}
-// 		if(IS_FLAG_SET(protocolService.flags, PROTOSERV_CLEAR_PCK)){
-// 			
-// 		}
 		if(IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)){
-			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_LEN);
-			protocolService.indexR++; //Poner en dinde deberia estar length
-			protocolService.receivePck.length = protocolService.buffer[protocolService.indexR]; 
-			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_TOKEN);
-			protocolService.indexR++; //Donde deberia estar token
-			if (protocolService.buffer[protocolService.indexR] != ':'){
-				printf("Token invalido\n");
-				SET_FLAG(protocolService.flags, PROTOSERV_RESET);
+			if(validatePck()){
+				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_VALIDATED);
+				protocolService.receivePck.cmd = (uint8_t)getResponseCommand(protocolService.receivePck.cmd); //Asignar comando de respuesta
+				SET_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
+				createPck(protocolService.receivePck.cmd, NULL, 0); //Sin respuesta, deberia enviar el payload si quisiera agregar algo
+				CLEAR_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
 				CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
-			}else{ //Token valido
-				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_CMD);
-				protocolService.indexR++; //Donde deberia estar CMD
-				protocolService.receivePck.cmd = protocolService.buffer[protocolService.indexR];
-				if(protocolService.receivePck.cmd == CMD_INVALID){
-					printf("Comando invalido\n");
-					CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
-					SET_FLAG(protocolService.flags, PROTOSERV_RESET);
-				}else{
-					printf("Length %u", protocolService.receivePck.length);
-					if(protocolService.receivePck.length > PROTOCOL_MAX_BYTE_COUNT){ //Nunca deberia ser mayor a 24, porque + UNER+len+:+cmd == 32 y es el size del buffer
-						printf("Length mayor a 24, se perderia data del buffer\n");
-					}
-					NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_PAYLOAD);
-					protocolService.indexR++; //Donde deberia estar el Payload
-					protocolService.receivePck.payload = &protocolService.buffer[protocolService.indexR]; //Apunta a la direccion de memoria del primer elemento, esto deberia seguir hasta minimo 2, osea esta direccion y la siguiente
-					if(protocolService.receivePck.length > 0){
-						protocolService.indexR += (protocolService.receivePck.length-1); //Si es 0 no pasa nada porque daria lo mismo la suma
-					}
-					protocolService.indexR++; //Donde deberia estar cks
-					NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_CHK);
-					protocolService.receivePck.checksum = protocolService.buffer[protocolService.indexR];
-					NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_CALCULATING_CHK);
-					if(calculatePayload() != protocolService.receivePck.checksum){
-						printf("Cks invalido\n");
-						CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
-						SET_FLAG(protocolService.flags, PROTOSERV_RESET);
-						}else{
-						printf("Cks valido\n");
-						NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_VALIDATED);
-						protocolService.receivePck.cmd = getResponseCommand(protocolService.buffer[protocolService.indexR]); //Asignar comando de respuesta
-						SET_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
-						createPck(protocolService.receivePck.cmd, NULL, 0); //Sin respuesta, deberia enviar el payload si quisiera agregar algo
-						CLEAR_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
-						CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
-						NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);
-					}
-				}
+				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);
+			}else{
+				CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
+				SET_FLAG(protocolService.flags, PROTOSERV_RESET);
 			}
 		}
 		if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND){
-			printf("Send");
+			printf_P(PSTR("Send"));
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND_DONE);
 		}
 		if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND_DONE){
-			printf("Send done");
-			//NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
+			printf_P(PSTR("Send done"));
+			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
 		}
 		if(WAIT_TIME_TRIGGER_PASSED){ //Esta bandera salta cuando se cunplio el tiempo de espera entre triggers
 			WAIT_TIME_TRIGGER_PASSED = 0;
@@ -639,8 +603,7 @@ int main()
 		}
 		
 		if(BTN_RELEASED){ //Bandera que controla accion del press del boton
-			BTN_RELEASED = 0; //TEST SERVO A
-			//EMIT_TRIGGER = 1;
+			BTN_RELEASED = 0; 
 		}
 		if(IR_READ_INTERRUPT){
 			IR_READ_INTERRUPT = 0;

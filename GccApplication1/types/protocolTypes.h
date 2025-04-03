@@ -13,6 +13,7 @@
 #include <stdbool.h>
 
 #define PROTOCOL_BUFFER_SIZE 32
+#define PROTOCOL_TXBUFFER_SIZE 8
 #define PROTOCOL_TOKEN ':'
 #define EXPECTED_HEADER_SUM 0x1A
 
@@ -43,35 +44,40 @@ typedef struct {
 } ProtocolFrame;
 
 typedef enum {
-	CMD_ALIVE = 0xA0,       // Comando de respuesta (Alive)
-	CMD_START = 0xA1,       // Comando de inicio
-	CMD_STOP = 0xA2,        // Comando para detener alguna operación
-	CMD_SET_CONFIG = 0xC0,  // Comando de configuración - setear
-	CMD_GET_CONFIG = 0xC1,  // Comando de configuración - obtener
-	CMD_GET_FIRMWARE = 0xF0, // Comando para obtener firmware
-	CMD_INVALID = 0xE0, // Comando para obtener firmware
-	// Agrega otros comandos según necesidad
+	CMD_RESPONSE_ALIVE           = 0x00, // Response: Alive confirmation
+	CMD_RESPONSE_START           = 0x01, // Response for start command
+	CMD_RESPONSE_STOP            = 0x02, // Response for stop command
+	CMD_RESPONSE_SET_CONFIG      = 0x03, // Response for set configuration command
+	CMD_RESPONSE_GET_CONFIG      = 0x04, // Response for get configuration command
+	CMD_RESPONSE_CLEAR_STATS     = 0x05, // Response for clear statistics command
+	CMD_RESPONSE_GET_STATS       = 0x06, // Response for get statistics command
+	CMD_RESPONSE_GET_FIRMWARE    = 0x07, // Response for get firmware command
+	CMD_RESPONSE_GET_REPOSITORY  = 0x08, // Response for get repository command
+	CMD_RESPONSE_RESPONSE_ALIVE  = 0x09, // Response for alive check (response to an alive request)
+	CMD_ALIVE                    = 0xA0, // Command indicating device is alive
+	CMD_START                    = 0xB1, // Start command
+	CMD_STOP                     = 0xB2, // Stop command
+	CMD_SET_CONFIG               = 0xC0, // Command to set configuration
+	CMD_GET_CONFIG               = 0xC1, // Command to get configuration
+	CMD_GET_FIRMWARE             = 0xF0, // Command to get firmware
+	CMD_GET_STATS                = 0xF1, // Command to get statistics
+	CMD_CLEAR_STATS              = 0xF2, // Command to clear statistics
+	CMD_GET_REPOSITORY           = 0xF3, // Command to get repository
+	CMD_INVALID                  = 0xE0, // Invalid command (default error)
+	// Add other commands as needed
 } Command;
+
 
 typedef struct {
 	Command request;
 	Command response;
 } CommandMap;
 
-static const CommandMap commandMap[] = {
-	{ CMD_START,      CMD_ALIVE },
-	{ CMD_STOP,       CMD_ALIVE },
-	{ CMD_SET_CONFIG, CMD_ALIVE },
-	{ CMD_GET_CONFIG, CMD_ALIVE },
-	{ CMD_GET_FIRMWARE, CMD_ALIVE }
-};
-
-#define NUM_COMMANDS (sizeof(commandMap) / sizeof(commandMap[0]))
-
 typedef struct {
 	uint8_t indexW;
 	uint8_t indexR;
 	uint8_t buffer[PROTOCOL_BUFFER_SIZE];
+	uint8_t TXbuffer[PROTOCOL_TXBUFFER_SIZE];
 	Byte_Flag_Struct flags;
 	ProtocolFrame receivePck;
 } ProtocolService;

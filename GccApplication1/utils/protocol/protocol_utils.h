@@ -21,5 +21,6 @@ bool process_protocol_buffer();
 void clear_receive_pck();
 uint8_t calculatePayload();
 void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength);
+bool validatePck();
 
 #endif /* PROTOCOL_UTILS_H_ */

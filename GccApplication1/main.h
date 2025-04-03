@@ -97,6 +97,10 @@
 #define DEBUG_FLAGS bandera2.bitmap.bit6 //DebugFlags de la libreria del HCSR04
 #define DEBUG_FLAGS_SORTER bandera2.bitmap.bit7 //DebugFlags del Sorter
 
+#define OUTPUT_A_HAS_CONFIG bandera3.bitmap.bit0
+#define OUTPUT_B_HAS_CONFIG bandera3.bitmap.bit1
+#define OUTPUT_C_HAS_CONFIG bandera3.bitmap.bit3
+
 #define SERVO_ACTIVE_TIME 10
 
 //Defines para bits individuales

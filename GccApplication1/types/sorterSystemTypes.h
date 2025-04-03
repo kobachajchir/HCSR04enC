@@ -18,10 +18,9 @@
 #define DETECTION_IDLE_DISTANCE_MM 190
 
 typedef struct {
-	uint32_t total_measured;
-	uint32_t total_selected;
-	uint32_t total_discarded;
-	uint32_t count_by_type[BOX_DISCARDED + 1]; // Indexado por box_type_t
+	uint16_t total_measured;
+	uint16_t total_by_type_array[3];
+	uint16_t total_discarded;
 } production_stats_t;
 
 typedef struct {

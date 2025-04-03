@@ -7,6 +7,8 @@
 #include "../../main.h"
 #include "protocol_utils.h"
 #include "../usart/usart_utils.h"
+#include <avr/pgmspace.h>
+
 
 void initProtocolService(ProtocolService* service){
 	service->buffer[0] = NULL;
@@ -138,13 +140,49 @@ bool process_protocol_buffer() {
 }
 
 Command getResponseCommand(Command req) {
-	for (size_t i = 0; i < NUM_COMMANDS; i++) {
-		if (commandMap[i].request == req) {
-			return commandMap[i].response;
-		}
+	uint8_t reqValue = (uint8_t)req;
+	uint8_t responseValue;
+	
+	switch(reqValue) {
+		case CMD_START:
+		responseValue = CMD_RESPONSE_START;
+		break;
+		
+		case CMD_STOP:
+		responseValue = CMD_RESPONSE_STOP;
+		break;
+		
+		case CMD_SET_CONFIG:
+		responseValue = CMD_RESPONSE_SET_CONFIG;
+		break;
+		
+		case CMD_GET_CONFIG:
+		responseValue = CMD_RESPONSE_GET_CONFIG;
+		break;
+		
+		case CMD_GET_STATS:
+		responseValue = CMD_RESPONSE_GET_STATS;
+		break;
+		
+		case CMD_CLEAR_STATS:
+		responseValue = CMD_RESPONSE_CLEAR_STATS;
+		break;
+		
+		case CMD_GET_FIRMWARE:
+		responseValue = CMD_RESPONSE_GET_FIRMWARE;
+		break;
+		
+		case CMD_ALIVE:
+		responseValue = CMD_RESPONSE_RESPONSE_ALIVE;
+		break;
+		
+		default:
+		responseValue = CMD_INVALID;
+		break;
 	}
-	// En caso de no encontrar coincidencia, se retorna CMD_ALIVE como valor por defecto
-	return CMD_ALIVE;
+	
+	printf("DEBUG: Request: 0x%X -> Response: 0x%X\n", reqValue, responseValue);
+	return (Command)responseValue;
 }
 
 void clear_receive_pck(){
@@ -176,7 +214,7 @@ uint8_t calculatePayload() {
 	checksum ^= protocolService.receivePck.cmd;
 	
 	// Imprimir los valores del payload
-	printf("Payload en Hex:\n");
+	printf_P(PSTR("Payload en Hex:\n"));
 	// CHANGED: Removed the -1 to process all bytes
 	for (int i = 0; i < protocolService.receivePck.length; i++) {
 		uint8_t payload_byte = *(protocolService.receivePck.payload + i);
@@ -192,9 +230,9 @@ uint8_t calculatePayload() {
 	
 	// Comparar el checksum calculado con el esperado
 	if (checksum == protocolService.receivePck.checksum) {
-		printf("Cks valido\n");
+		printf_P(PSTR("Cks valido\n"));
 		} else {
-		printf("Cks invalido\n");
+		printf_P(PSTR("Cks invalido\n"));
 	}
 	
 	// Devuelve el checksum calculado
@@ -217,9 +255,9 @@ void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength) {
 	// Set the command
 	protocolService.receivePck.cmd = cmd;
 	
-	// Point the payload to the correct position in the buffer
-	// protocolService.receivePck.payload is already pointing to the right memory location
-	// as mentioned in the description
+	if(payload != NULL){
+		protocolService.receivePck.payload = payload;	
+	}
 	
 	// Calculate the checksum
 	uint8_t checksum = 0;
@@ -246,5 +284,48 @@ void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength) {
 	
 	// Set the checksum field
 	protocolService.receivePck.checksum = checksum;
-	printf("Paquete creado \n");
+	printf("Valor CMD paquete creado %x \n", protocolService.receivePck.cmd);
+}
+
+bool validatePck(){
+	NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_LEN);
+	protocolService.indexR++; //Poner en dinde deberia estar length
+	protocolService.receivePck.length = protocolService.buffer[protocolService.indexR];
+	NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_TOKEN);
+	protocolService.indexR++; //Donde deberia estar token
+	if (protocolService.buffer[protocolService.indexR] != PROTOCOL_TOKEN){
+		printf_P(PSTR("Token invalido\n"));
+		return false;
+		}else{ //Token valido
+		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_CMD);
+		protocolService.indexR++; //Donde deberia estar CMD
+		protocolService.receivePck.cmd = protocolService.buffer[protocolService.indexR];
+		if(protocolService.receivePck.cmd == CMD_INVALID){
+			printf_P(PSTR("Comando invalido\n"));
+			return false;
+			}else{
+			printf("Length %u", protocolService.receivePck.length);
+			if(protocolService.receivePck.length > PROTOCOL_MAX_BYTE_COUNT){ //Nunca deberia ser mayor a 24, porque + UNER+len+:+cmd == 32 y es el size del buffer
+				printf_P(PSTR("Length mayor a 24, se perderia data del buffer\n"));
+				return false;
+			}
+			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_PAYLOAD);
+			protocolService.indexR++; //Donde deberia estar el Payload
+			protocolService.receivePck.payload = &protocolService.buffer[protocolService.indexR]; //Apunta a la direccion de memoria del primer elemento, esto deberia seguir hasta minimo 2, osea esta direccion y la siguiente
+			if(protocolService.receivePck.length > 0){
+				protocolService.indexR += (protocolService.receivePck.length-1); //Si es 0 no pasa nada porque daria lo mismo la suma
+			}
+			protocolService.indexR++; //Donde deberia estar cks
+			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_CHK);
+			protocolService.receivePck.checksum = protocolService.buffer[protocolService.indexR];
+			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_CALCULATING_CHK);
+			if(calculatePayload() != protocolService.receivePck.checksum){
+				printf_P(PSTR("Cks invalido\n"));
+				return false;
+			}else{
+				printf_P(PSTR("Cks valido\n"));
+				return true;
+			}
+		}
+	}
 }

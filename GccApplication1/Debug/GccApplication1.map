@@ -1,6 +1,6 @@
 Archive member included to satisfy reference by file (symbol)
 
-C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
                               main.o (ultrasonic_set_debug_mode)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
                               utils/legacy_hcsr04/hcsr04_utils.o (__udivmodsi4)
@@ -17,7 +17,9 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
                               main.o (__iob)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf.o)
-                              main.o (printf)
+                              utils/legacy_hcsr04/hcsr04_utils.o (printf)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf_p.o)
+                              main.o (printf_P)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
                               main.o (puts)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
@@ -40,23 +42,23 @@ Common symbol       size              file
 
 IR_B                0xf               main.o
 servoA              0x6               main.o
-salidaA             0x3               main.o
+salidaA             0x4               main.o
 IR_U                0xf               main.o
 bandera             0x1               main.o
 IR_C                0xf               main.o
-SorterSystem        0x18              main.o
+SorterSystem        0x12              main.o
 bandera3            0x1               main.o
 bandera2            0x1               main.o
 servoC              0x6               main.o
 IR_A                0xf               main.o
 hcsr04Detector      0x5               main.o
 servosArray         0x6               main.o
-salidaC             0x3               main.o
+salidaC             0x4               main.o
 ultraSensor         0x11              main.o
 servoB              0x6               main.o
 __iob               0x6               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
-protocolService     0x2d              main.o
-salidaB             0x3               main.o
+protocolService     0x35              main.o
+salidaB             0x4               main.o
 
 Discarded input sections
 
@@ -92,14 +94,14 @@ Discarded input sections
                 0x00000000       0x11 utils/legacy_hcsr04/hcsr04_utils.o
  .text.calculate_distance
                 0x00000000       0xb2 utils/legacy_hcsr04/hcsr04_utils.o
- .debug_info    0x00000000      0x1b8 utils/legacy_hcsr04/hcsr04_utils.o
- .debug_abbrev  0x00000000       0xf1 utils/legacy_hcsr04/hcsr04_utils.o
+ .debug_info    0x00000000      0x116 utils/legacy_hcsr04/hcsr04_utils.o
+ .debug_abbrev  0x00000000       0x95 utils/legacy_hcsr04/hcsr04_utils.o
  .debug_loc     0x00000000       0x8e utils/legacy_hcsr04/hcsr04_utils.o
  .debug_aranges
                 0x00000000       0x20 utils/legacy_hcsr04/hcsr04_utils.o
  .debug_ranges  0x00000000       0x10 utils/legacy_hcsr04/hcsr04_utils.o
- .debug_line    0x00000000      0x151 utils/legacy_hcsr04/hcsr04_utils.o
- .debug_str     0x00000000      0x2a6 utils/legacy_hcsr04/hcsr04_utils.o
+ .debug_line    0x00000000      0x119 utils/legacy_hcsr04/hcsr04_utils.o
+ .debug_str     0x00000000      0x1fb utils/legacy_hcsr04/hcsr04_utils.o
  .comment       0x00000000       0x31 utils/legacy_hcsr04/hcsr04_utils.o
  .debug_frame   0x00000000       0x40 utils/legacy_hcsr04/hcsr04_utils.o
  .text          0x00000000        0x0 utils/programPath/boxsorter_utils.o
@@ -140,13 +142,13 @@ Discarded input sections
                 0x00000000        0xe utils/usart/usart_utils.o
  .text.USART_Receive
                 0x00000000        0xe utils/usart/usart_utils.o
- .text          0x00000000        0x0 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
- .data          0x00000000        0x0 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
- .bss           0x00000000        0x0 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .text          0x00000000        0x0 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .data          0x00000000        0x0 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .bss           0x00000000        0x0 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
  .text.ultrasonic_get_distance
-                0x00000000        0xc C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00000000        0xc D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
  .text.ultrasonic_set_print_method
-                0x00000000        0x8 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00000000        0x8 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
@@ -243,6 +245,9 @@ Discarded input sections
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf_p.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf_p.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf_p.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
@@ -315,7 +320,7 @@ LOAD utils/tcrt/tcrt_utils.o
 LOAD utils/ultrasonic_hal.o
 LOAD utils/usart/usart_utils.o
 START GROUP
-LOAD C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a
+LOAD D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a
 END GROUP
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a
@@ -423,7 +428,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x22ee
+.text           0x00000000     0x257a
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -439,35 +444,66 @@ END GROUP
  *libprintf_flt.a:*(.progmem.data)
  *libc.a:*(.progmem.data)
  *(.progmem*)
-                0x00000068                . = ALIGN (0x2)
+ .progmem.data.__c.2339
+                0x00000068       0x10 main.o
+ .progmem.data.__c.2329
+                0x00000078       0x1b main.o
+ .progmem.data.__c.2357
+                0x00000093        0xa main.o
+ .progmem.data.__c.2355
+                0x0000009d        0x5 main.o
+ .progmem.data.__c.2351
+                0x000000a2        0xf main.o
+ .progmem.data.__c.2347
+                0x000000b1       0x23 main.o
+ .progmem.data.__c.2345
+                0x000000d4        0xa main.o
+ .progmem.data.__c.2290
+                0x000000de        0xc utils/protocol/protocol_utils.o
+ .progmem.data.__c.2288
+                0x000000ea        0xe utils/protocol/protocol_utils.o
+ .progmem.data.__c.2286
+                0x000000f8       0x30 utils/protocol/protocol_utils.o
+ .progmem.data.__c.2284
+                0x00000128       0x12 utils/protocol/protocol_utils.o
+ .progmem.data.__c.2282
+                0x0000013a       0x10 utils/protocol/protocol_utils.o
+ .progmem.data.__c.2268
+                0x0000014a        0xe utils/protocol/protocol_utils.o
+ .progmem.data.__c.2266
+                0x00000158        0xc utils/protocol/protocol_utils.o
+ .progmem.data.__c.2259
+                0x00000164       0x11 utils/protocol/protocol_utils.o
+                0x00000176                . = ALIGN (0x2)
+ *fill*         0x00000175        0x1 
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00000068                __ctors_start = .
+                0x00000176                __ctors_start = .
  *(.ctors)
-                0x00000068                __ctors_end = .
-                0x00000068                __dtors_start = .
+                0x00000176                __ctors_end = .
+                0x00000176                __dtors_start = .
  *(.dtors)
-                0x00000068                __dtors_end = .
+                0x00000176                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000068        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
-                0x00000068                __init
+ .init0         0x00000176        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
+                0x00000176                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000068        0xc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
+ .init2         0x00000176        0xc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000074       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
-                0x00000074                __do_copy_data
- .init4         0x0000008a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                0x0000008a                __do_clear_bss
+ .init4         0x00000182       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
+                0x00000182                __do_copy_data
+ .init4         0x00000198       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
+                0x00000198                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -478,218 +514,224 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000009a        0x8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
+ .init9         0x000001a8        0x8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
  *(.init9)
  *(.text)
- .text          0x000000a2        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
-                0x000000a2                __vector_22
-                0x000000a2                __vector_1
-                0x000000a2                __vector_24
-                0x000000a2                __bad_interrupt
-                0x000000a2                __vector_6
-                0x000000a2                __vector_3
-                0x000000a2                __vector_23
-                0x000000a2                __vector_25
-                0x000000a2                __vector_17
-                0x000000a2                __vector_5
-                0x000000a2                __vector_4
-                0x000000a2                __vector_9
-                0x000000a2                __vector_2
-                0x000000a2                __vector_21
-                0x000000a2                __vector_15
-                0x000000a2                __vector_8
-                0x000000a2                __vector_14
-                0x000000a2                __vector_16
-                0x000000a2                __vector_20
-                0x000000a6                . = ALIGN (0x2)
+ .text          0x000001b0        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
+                0x000001b0                __vector_22
+                0x000001b0                __vector_1
+                0x000001b0                __vector_24
+                0x000001b0                __bad_interrupt
+                0x000001b0                __vector_6
+                0x000001b0                __vector_3
+                0x000001b0                __vector_23
+                0x000001b0                __vector_25
+                0x000001b0                __vector_17
+                0x000001b0                __vector_5
+                0x000001b0                __vector_4
+                0x000001b0                __vector_9
+                0x000001b0                __vector_2
+                0x000001b0                __vector_21
+                0x000001b0                __vector_15
+                0x000001b0                __vector_8
+                0x000001b0                __vector_14
+                0x000001b0                __vector_16
+                0x000001b0                __vector_20
+                0x000001b4                . = ALIGN (0x2)
  *(.text.*)
  .text.printfWrapper
-                0x000000a6        0x6 main.o
-                0x000000a6                printfWrapper
+                0x000001b4        0x6 main.o
+                0x000001b4                printfWrapper
  .text.__vector_10
-                0x000000ac       0xc0 main.o
-                0x000000ac                __vector_10
+                0x000001ba       0xc0 main.o
+                0x000001ba                __vector_10
  .text.__vector_13
-                0x0000016c       0x22 main.o
-                0x0000016c                __vector_13
+                0x0000027a       0x22 main.o
+                0x0000027a                __vector_13
  .text.__vector_11
-                0x0000018e      0x106 main.o
-                0x0000018e                __vector_11
+                0x0000029c      0x106 main.o
+                0x0000029c                __vector_11
  .text.__vector_12
-                0x00000294      0x2a0 main.o
-                0x00000294                __vector_12
+                0x000003a2      0x2a0 main.o
+                0x000003a2                __vector_12
  .text.__vector_18
-                0x00000534       0x9a main.o
-                0x00000534                __vector_18
+                0x00000642       0x9a main.o
+                0x00000642                __vector_18
  .text.__vector_19
-                0x000005ce       0x70 main.o
-                0x000005ce                __vector_19
+                0x000006dc       0x70 main.o
+                0x000006dc                __vector_19
  .text.timer1_init
-                0x0000063e       0x3c main.o
-                0x0000063e                timer1_init
+                0x0000074c       0x3c main.o
+                0x0000074c                timer1_init
  .text.timer2_init
-                0x0000067a       0x20 main.o
-                0x0000067a                timer2_init
+                0x00000788       0x20 main.o
+                0x00000788                timer2_init
  .text.gpio_pins_init
-                0x0000069a       0x42 main.o
-                0x0000069a                gpio_pins_init
+                0x000007a8       0x42 main.o
+                0x000007a8                gpio_pins_init
  .text.__vector_7
-                0x000006dc      0x228 main.o
-                0x000006dc                __vector_7
- .text.main     0x00000904      0x4b4 main.o
-                0x00000904                main
+                0x000007ea      0x228 main.o
+                0x000007ea                __vector_7
+ .text.main     0x00000a12      0x3ba main.o
+                0x00000a12                main
  .text.initDetector
-                0x00000db8       0x34 utils/programPath/boxsorter_utils.o
-                0x00000db8                initDetector
+                0x00000dcc       0x34 utils/programPath/boxsorter_utils.o
+                0x00000dcc                initDetector
  .text.initOutputs
-                0x00000dec       0x8a utils/programPath/boxsorter_utils.o
-                0x00000dec                initOutputs
+                0x00000e00       0xea utils/programPath/boxsorter_utils.o
+                0x00000e00                initOutputs
  .text.initSorter
-                0x00000e76       0x3c utils/programPath/boxsorter_utils.o
-                0x00000e76                initSorter
+                0x00000eea       0x3c utils/programPath/boxsorter_utils.o
+                0x00000eea                initSorter
  .text.classify_box
-                0x00000eb2      0x124 utils/programPath/boxsorter_utils.o
-                0x00000eb2                classify_box
+                0x00000f26      0x124 utils/programPath/boxsorter_utils.o
+                0x00000f26                classify_box
  .text.ultraSensorTask
-                0x00000fd6      0x288 utils/programPath/boxsorter_utils.o
-                0x00000fd6                ultraSensorTask
+                0x0000104a      0x298 utils/programPath/boxsorter_utils.o
+                0x0000104a                ultraSensorTask
  .text.irSensorsTask
-                0x0000125e      0x1b6 utils/programPath/boxsorter_utils.o
-                0x0000125e                irSensorsTask
+                0x000012e2      0x1b6 utils/programPath/boxsorter_utils.o
+                0x000012e2                irSensorsTask
  .text.servosTask
-                0x00001414        0x2 utils/programPath/boxsorter_utils.o
-                0x00001414                servosTask
+                0x00001498        0x2 utils/programPath/boxsorter_utils.o
+                0x00001498                servosTask
  .text.verify_header
-                0x00001416       0xb2 utils/protocol/protocol_utils.o
-                0x00001416                verify_header
+                0x0000149a       0xb2 utils/protocol/protocol_utils.o
+                0x0000149a                verify_header
  .text.process_protocol_buffer
-                0x000014c8       0x3c utils/protocol/protocol_utils.o
-                0x000014c8                process_protocol_buffer
+                0x0000154c       0x3c utils/protocol/protocol_utils.o
+                0x0000154c                process_protocol_buffer
  .text.getResponseCommand
-                0x00001504       0x32 utils/protocol/protocol_utils.o
-                0x00001504                getResponseCommand
+                0x00001588       0x74 utils/protocol/protocol_utils.o
+                0x00001588                getResponseCommand
  .text.clear_receive_pck
-                0x00001536       0x1e utils/protocol/protocol_utils.o
-                0x00001536                clear_receive_pck
+                0x000015fc       0x1e utils/protocol/protocol_utils.o
+                0x000015fc                clear_receive_pck
  .text.initProtocolService
-                0x00001554       0x18 utils/protocol/protocol_utils.o
-                0x00001554                initProtocolService
+                0x0000161a       0x18 utils/protocol/protocol_utils.o
+                0x0000161a                initProtocolService
  .text.calculatePayload
-                0x0000156c       0xc6 utils/protocol/protocol_utils.o
-                0x0000156c                calculatePayload
+                0x00001632       0xde utils/protocol/protocol_utils.o
+                0x00001632                calculatePayload
  .text.createPck
-                0x00001632       0x56 utils/protocol/protocol_utils.o
-                0x00001632                createPck
+                0x00001710       0x76 utils/protocol/protocol_utils.o
+                0x00001710                createPck
+ .text.validatePck
+                0x00001786      0x142 utils/protocol/protocol_utils.o
+                0x00001786                validatePck
  .text.calculate_angle_pulseUs
-                0x00001688       0x26 utils/servo/servo_utils.o
-                0x00001688                calculate_angle_pulseUs
+                0x000018c8       0x26 utils/servo/servo_utils.o
+                0x000018c8                calculate_angle_pulseUs
  .text.initServo
-                0x000016ae       0x48 utils/servo/servo_utils.o
-                0x000016ae                initServo
+                0x000018ee       0x48 utils/servo/servo_utils.o
+                0x000018ee                initServo
  .text.tcrt_init
-                0x000016f6       0x1a utils/tcrt/tcrt_utils.o
-                0x000016f6                tcrt_init
+                0x00001936       0x1a utils/tcrt/tcrt_utils.o
+                0x00001936                tcrt_init
  .text.tcrt_read_channel
-                0x00001710       0x32 utils/tcrt/tcrt_utils.o
-                0x00001710                tcrt_read_channel
+                0x00001950       0x32 utils/tcrt/tcrt_utils.o
+                0x00001950                tcrt_read_channel
  .text.TCRT_init_Handlers
-                0x00001742       0x72 utils/tcrt/tcrt_utils.o
-                0x00001742                TCRT_init_Handlers
+                0x00001982       0x72 utils/tcrt/tcrt_utils.o
+                0x00001982                TCRT_init_Handlers
  .text.calibrateIRSensor
-                0x000017b4       0x7e utils/tcrt/tcrt_utils.o
-                0x000017b4                calibrateIRSensor
+                0x000019f4       0x7e utils/tcrt/tcrt_utils.o
+                0x000019f4                calibrateIRSensor
  .text.tcrt_read
-                0x00001832       0x62 utils/tcrt/tcrt_utils.o
-                0x00001832                tcrt_read
+                0x00001a72       0x62 utils/tcrt/tcrt_utils.o
+                0x00001a72                tcrt_read
  .text.tcrt_is_box_detected
-                0x00001894       0x9c utils/tcrt/tcrt_utils.o
-                0x00001894                tcrt_is_box_detected
+                0x00001ad4       0x9c utils/tcrt/tcrt_utils.o
+                0x00001ad4                tcrt_is_box_detected
  .text.ultrasonic_hal_trigger_setHigh
-                0x00001930        0x8 utils/ultrasonic_hal.o
-                0x00001930                ultrasonic_hal_trigger_setHigh
+                0x00001b70        0x8 utils/ultrasonic_hal.o
+                0x00001b70                ultrasonic_hal_trigger_setHigh
  .text.ultrasonic_hal_trigger_setLow
-                0x00001938        0x8 utils/ultrasonic_hal.o
-                0x00001938                ultrasonic_hal_trigger_setLow
+                0x00001b78        0x8 utils/ultrasonic_hal.o
+                0x00001b78                ultrasonic_hal_trigger_setLow
  .text.ultrasonic_hal_echo_setRisingEdge
-                0x00001940        0xc utils/ultrasonic_hal.o
-                0x00001940                ultrasonic_hal_echo_setRisingEdge
+                0x00001b80        0xc utils/ultrasonic_hal.o
+                0x00001b80                ultrasonic_hal_echo_setRisingEdge
  .text.ultrasonic_hal_echo_setFallingEdge
-                0x0000194c        0xc utils/ultrasonic_hal.o
-                0x0000194c                ultrasonic_hal_echo_setFallingEdge
+                0x00001b8c        0xc utils/ultrasonic_hal.o
+                0x00001b8c                ultrasonic_hal_echo_setFallingEdge
  .text.USART_Init
-                0x00001958       0x16 utils/usart/usart_utils.o
-                0x00001958                USART_Init
+                0x00001b98       0x16 utils/usart/usart_utils.o
+                0x00001b98                USART_Init
  .text.USART_putchar
-                0x0000196e       0x22 utils/usart/usart_utils.o
-                0x0000196e                USART_putchar
+                0x00001bae       0x22 utils/usart/usart_utils.o
+                0x00001bae                USART_putchar
  .text.USART_getchar
-                0x00001990       0x3c utils/usart/usart_utils.o
-                0x00001990                USART_getchar
+                0x00001bd0       0x3c utils/usart/usart_utils.o
+                0x00001bd0                USART_getchar
  .text.ultrasonic_set_debug_mode
-                0x000019cc        0x6 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
-                0x000019cc                ultrasonic_set_debug_mode
+                0x00001c0c        0x6 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00001c0c                ultrasonic_set_debug_mode
  .text.ultrasonic_calculate_distance
-                0x000019d2       0x8a C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
-                0x000019d2                ultrasonic_calculate_distance
+                0x00001c12       0x8a D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00001c12                ultrasonic_calculate_distance
  .text.ultrasonic_print
-                0x00001a5c       0x14 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
-                0x00001a5c                ultrasonic_print
+                0x00001c9c       0x14 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00001c9c                ultrasonic_print
  .text.ultrasonic_init_flags
-                0x00001a70       0x4a C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
-                0x00001a70                ultrasonic_init_flags
+                0x00001cb0       0x4a D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00001cb0                ultrasonic_init_flags
  .text.ultrasonic_init
-                0x00001aba       0x3e C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
-                0x00001aba                ultrasonic_init
+                0x00001cfa       0x3e D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00001cfa                ultrasonic_init
  .text.ultrasonic_timeout_clear
-                0x00001af8       0x3a C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
-                0x00001af8                ultrasonic_timeout_clear
+                0x00001d38       0x3a D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00001d38                ultrasonic_timeout_clear
  .text.ultrasonic_start
-                0x00001b32       0x5c C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
-                0x00001b32                ultrasonic_start
+                0x00001d72       0x5c D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00001d72                ultrasonic_start
  .text.ultrasonic_update
-                0x00001b8e       0xc8 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
-                0x00001b8e                ultrasonic_update
+                0x00001dce       0xc8 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00001dce                ultrasonic_update
  .text.libgcc.div
-                0x00001c56       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00001c56                __udivmodsi4
+                0x00001e96       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00001e96                __udivmodsi4
  .text.libgcc.mul
-                0x00001c9a       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00001c9a                __umulhisi3
+                0x00001eda       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00001eda                __umulhisi3
  .text.libgcc.mul
-                0x00001cb8       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
-                0x00001cb8                __muluhisi3
+                0x00001ef8       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_muluhisi3.o)
+                0x00001ef8                __muluhisi3
  .text.avr-libc
-                0x00001cce       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf.o)
-                0x00001cce                printf
+                0x00001f0e       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf.o)
+                0x00001f0e                printf
  .text.avr-libc
-                0x00001cfa       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
-                0x00001cfa                puts
+                0x00001f3a       0x4c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf_p.o)
+                0x00001f3a                printf_P
  .text.avr-libc
-                0x00001d5a      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00001d5a                vfprintf
+                0x00001f86       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
+                0x00001f86                puts
  .text.avr-libc
-                0x0000211c       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x0000211c                strnlen_P
+                0x00001fe6      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00001fe6                vfprintf
  .text.avr-libc
-                0x00002132       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00002132                strnlen
+                0x000023a8       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x000023a8                strnlen_P
  .text.avr-libc
-                0x00002148       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00002148                fputc
+                0x000023be       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x000023be                strnlen
  .text.avr-libc
-                0x000021c0       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x000021c0                __ultoa_invert
+                0x000023d4       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x000023d4                fputc
+ .text.avr-libc
+                0x0000244c       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x0000244c                __ultoa_invert
  .text.libgcc.prologue
-                0x0000227c       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x0000227c                __prologue_saves__
+                0x00002508       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x00002508                __prologue_saves__
  .text.libgcc.prologue
-                0x000022b4       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x000022b4                __epilogue_restores__
-                0x000022ea                . = ALIGN (0x2)
+                0x00002540       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x00002540                __epilogue_restores__
+                0x00002576                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000022ea        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000022ea                _exit
-                0x000022ea                exit
+ .fini9         0x00002576        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00002576                _exit
+                0x00002576                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -708,11 +750,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000022ea        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00002576        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000022ee                _etext = .
+                0x0000257a                _etext = .
 
-.data           0x00800100      0x5f0 load address 0x000022ee
+.data           0x00800100      0x5dc load address 0x0000257a
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -721,90 +763,83 @@ END GROUP
  .data.mystdout
                 0x0080010e        0xe main.o
                 0x0080010e                mystdout
- .data.local_box_ranges.2037
+ .data.local_box_ranges.2050
                 0x0080011c        0x6 utils/programPath/boxsorter_utils.o
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800122       0xef main.o
-                                 0xf8 (size before relaxing)
+                0x00800122      0x32e utils/programPath/boxsorter_utils.o
+                                0x339 (size before relaxing)
  .rodata.str1.1
-                0x00800211      0x278 utils/programPath/boxsorter_utils.o
-                                0x283 (size before relaxing)
+                0x00800450       0xe4 utils/protocol/protocol_utils.o
  .rodata.str1.1
-                0x00800489       0xb4 utils/protocol/protocol_utils.o
-                                 0xcc (size before relaxing)
- .rodata.commandMap
-                0x0080053d        0xa utils/protocol/protocol_utils.o
+                0x00800534        0xf utils/servo/servo_utils.o
  .rodata.str1.1
-                0x00800547        0xf utils/servo/servo_utils.o
+                0x00800543       0x4a utils/tcrt/tcrt_utils.o
  .rodata.str1.1
-                0x00800556       0x4a utils/tcrt/tcrt_utils.o
- .rodata.str1.1
-                0x008005a0      0x14f C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x0080058d      0x14f D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
                                 0x171 (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x008006f0                . = ALIGN (0x2)
- *fill*         0x008006ef        0x1 
-                0x008006f0                _edata = .
-                0x008006f0                PROVIDE (__data_end, .)
+                0x008006dc                . = ALIGN (0x2)
+                0x008006dc                _edata = .
+                0x008006dc                PROVIDE (__data_end, .)
 
-.bss            0x008006f0       0xc8
-                0x008006f0                PROVIDE (__bss_start, .)
+.bss            0x008006dc       0xcd
+                0x008006dc                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.init_done.2156
-                0x008006f0        0x1 main.o
+ .bss.init_done.2328
+                0x008006dc        0x1 main.o
  .bss.current_servo
-                0x008006f1        0x1 main.o
-                0x008006f1                current_servo
+                0x008006dd        0x1 main.o
+                0x008006dd                current_servo
  .bss.veintems_counter
-                0x008006f2        0x1 main.o
-                0x008006f2                veintems_counter
+                0x008006de        0x1 main.o
+                0x008006de                veintems_counter
  .bss.diezMsCounter
-                0x008006f3        0x1 main.o
-                0x008006f3                diezMsCounter
+                0x008006df        0x1 main.o
+                0x008006df                diezMsCounter
  .bss.btn_pressed_time
-                0x008006f4        0x1 main.o
-                0x008006f4                btn_pressed_time
+                0x008006e0        0x1 main.o
+                0x008006e0                btn_pressed_time
  .bss.wait_time
-                0x008006f5        0x1 main.o
-                0x008006f5                wait_time
+                0x008006e1        0x1 main.o
+                0x008006e1                wait_time
  .bss.ovf_count
-                0x008006f6        0x1 main.o
-                0x008006f6                ovf_count
+                0x008006e2        0x1 main.o
+                0x008006e2                ovf_count
  *(COMMON)
- COMMON         0x008006f7       0xbb main.o
-                0x008006f7                IR_B
-                0x00800706                servoA
-                0x0080070c                salidaA
-                0x0080070f                IR_U
-                0x0080071e                bandera
-                0x0080071f                IR_C
-                0x0080072e                SorterSystem
-                0x00800746                bandera3
-                0x00800747                bandera2
-                0x00800748                servoC
-                0x0080074e                IR_A
-                0x0080075d                hcsr04Detector
-                0x00800762                servosArray
-                0x00800768                salidaC
-                0x0080076b                ultraSensor
-                0x0080077c                servoB
-                0x00800782                protocolService
-                0x008007af                salidaB
- COMMON         0x008007b2        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
-                0x008007b2                __iob
-                0x008007b8                PROVIDE (__bss_end, .)
-                0x000022ee                __data_load_start = LOADADDR (.data)
-                0x000028de                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008006e3       0xc0 main.o
+                0x008006e3                IR_B
+                0x008006f2                servoA
+                0x008006f8                salidaA
+                0x008006fc                IR_U
+                0x0080070b                bandera
+                0x0080070c                IR_C
+                0x0080071b                SorterSystem
+                0x0080072d                bandera3
+                0x0080072e                bandera2
+                0x0080072f                servoC
+                0x00800735                IR_A
+                0x00800744                hcsr04Detector
+                0x00800749                servosArray
+                0x0080074f                salidaC
+                0x00800753                ultraSensor
+                0x00800764                servoB
+                0x0080076a                protocolService
+                0x0080079f                salidaB
+ COMMON         0x008007a3        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
+                0x008007a3                __iob
+                0x008007a9                PROVIDE (__bss_end, .)
+                0x0000257a                __data_load_start = LOADADDR (.data)
+                0x00002b56                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008007b8        0x0
+.noinit         0x008007a9        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008007b8                _end = .
+                0x008007a9                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -854,9 +889,10 @@ END GROUP
  .comment       0x00000030       0x31 utils/tcrt/tcrt_utils.o
  .comment       0x00000030       0x31 utils/ultrasonic_hal.o
  .comment       0x00000030       0x31 utils/usart/usart_utils.o
- .comment       0x00000030       0x31 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .comment       0x00000030       0x31 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
  .comment       0x00000030       0x31 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(iob.o)
  .comment       0x00000030       0x31 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf.o)
+ .comment       0x00000030       0x31 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(printf_p.o)
  .comment       0x00000030       0x31 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(puts.o)
  .comment       0x00000030       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
                                  0x2d (size before relaxing)
@@ -882,105 +918,105 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x2a0
+.debug_aranges  0x00000000      0x2a8
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x78 main.o
  .debug_aranges
                 0x00000078       0x50 utils/programPath/boxsorter_utils.o
  .debug_aranges
-                0x000000c8       0x68 utils/protocol/protocol_utils.o
+                0x000000c8       0x70 utils/protocol/protocol_utils.o
  .debug_aranges
-                0x00000130       0x30 utils/servo/servo_utils.o
+                0x00000138       0x30 utils/servo/servo_utils.o
  .debug_aranges
-                0x00000160       0x50 utils/tcrt/tcrt_utils.o
+                0x00000168       0x50 utils/tcrt/tcrt_utils.o
  .debug_aranges
-                0x000001b0       0x48 utils/ultrasonic_hal.o
+                0x000001b8       0x48 utils/ultrasonic_hal.o
  .debug_aranges
-                0x000001f8       0x40 utils/usart/usart_utils.o
+                0x00000200       0x40 utils/usart/usart_utils.o
  .debug_aranges
-                0x00000238       0x68 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+                0x00000240       0x68 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x45ad
+.debug_info     0x00000000     0x42ce
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4     0x12e4 main.o
- .debug_info    0x000018d8      0xe5c utils/programPath/boxsorter_utils.o
- .debug_info    0x00002734      0x65b utils/protocol/protocol_utils.o
- .debug_info    0x00002d8f      0x3b5 utils/servo/servo_utils.o
- .debug_info    0x00003144      0x4bf utils/tcrt/tcrt_utils.o
- .debug_info    0x00003603      0x43f utils/ultrasonic_hal.o
- .debug_info    0x00003a42      0x4e7 utils/usart/usart_utils.o
- .debug_info    0x00003f29      0x684 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .debug_info    0x000005f4     0x11cc main.o
+ .debug_info    0x000017c0      0xe8a utils/programPath/boxsorter_utils.o
+ .debug_info    0x0000264a      0x6d0 utils/protocol/protocol_utils.o
+ .debug_info    0x00002d1a      0x313 utils/servo/servo_utils.o
+ .debug_info    0x0000302d      0x41d utils/tcrt/tcrt_utils.o
+ .debug_info    0x0000344a      0x39d utils/ultrasonic_hal.o
+ .debug_info    0x000037e7      0x463 utils/usart/usart_utils.o
+ .debug_info    0x00003c4a      0x684 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
 
-.debug_abbrev   0x00000000     0x1681
+.debug_abbrev   0x00000000     0x1613
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2      0x33c main.o
- .debug_abbrev  0x000008de      0x2ac utils/programPath/boxsorter_utils.o
- .debug_abbrev  0x00000b8a      0x26e utils/protocol/protocol_utils.o
- .debug_abbrev  0x00000df8      0x18b utils/servo/servo_utils.o
- .debug_abbrev  0x00000f83      0x201 utils/tcrt/tcrt_utils.o
- .debug_abbrev  0x00001184      0x13a utils/ultrasonic_hal.o
- .debug_abbrev  0x000012be      0x1ff utils/usart/usart_utils.o
- .debug_abbrev  0x000014bd      0x1c4 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .debug_abbrev  0x000005a2      0x33e main.o
+ .debug_abbrev  0x000008e0      0x292 utils/programPath/boxsorter_utils.o
+ .debug_abbrev  0x00000b72      0x2d5 utils/protocol/protocol_utils.o
+ .debug_abbrev  0x00000e47      0x15d utils/servo/servo_utils.o
+ .debug_abbrev  0x00000fa4      0x1c1 utils/tcrt/tcrt_utils.o
+ .debug_abbrev  0x00001165      0x119 utils/ultrasonic_hal.o
+ .debug_abbrev  0x0000127e      0x1d1 utils/usart/usart_utils.o
+ .debug_abbrev  0x0000144f      0x1c4 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
 
-.debug_line     0x00000000     0x235b
+.debug_line     0x00000000     0x239b
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000134      0xad4 main.o
- .debug_line    0x00000c08      0x703 utils/programPath/boxsorter_utils.o
- .debug_line    0x0000130b      0x4a6 utils/protocol/protocol_utils.o
- .debug_line    0x000017b1      0x1a7 utils/servo/servo_utils.o
- .debug_line    0x00001958      0x37c utils/tcrt/tcrt_utils.o
- .debug_line    0x00001cd4      0x17d utils/ultrasonic_hal.o
- .debug_line    0x00001e51      0x1dc utils/usart/usart_utils.o
- .debug_line    0x0000202d      0x32e C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .debug_line    0x00000134      0xa2e main.o
+ .debug_line    0x00000b62      0x770 utils/programPath/boxsorter_utils.o
+ .debug_line    0x000012d2      0x55d utils/protocol/protocol_utils.o
+ .debug_line    0x0000182f      0x194 utils/servo/servo_utils.o
+ .debug_line    0x000019c3      0x369 utils/tcrt/tcrt_utils.o
+ .debug_line    0x00001d2c      0x165 utils/ultrasonic_hal.o
+ .debug_line    0x00001e91      0x1dc utils/usart/usart_utils.o
+ .debug_line    0x0000206d      0x32e D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
 
-.debug_frame    0x00000000      0x810
+.debug_frame    0x00000000      0x8d0
  *(.debug_frame)
- .debug_frame   0x00000000      0x2a4 main.o
- .debug_frame   0x000002a4      0x118 utils/programPath/boxsorter_utils.o
- .debug_frame   0x000003bc      0x110 utils/protocol/protocol_utils.o
- .debug_frame   0x000004cc       0x74 utils/servo/servo_utils.o
- .debug_frame   0x00000540       0xe4 utils/tcrt/tcrt_utils.o
- .debug_frame   0x00000624       0x74 utils/ultrasonic_hal.o
- .debug_frame   0x00000698       0x6c utils/usart/usart_utils.o
- .debug_frame   0x00000704      0x10c C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .debug_frame   0x00000000      0x2b4 main.o
+ .debug_frame   0x000002b4      0x128 utils/programPath/boxsorter_utils.o
+ .debug_frame   0x000003dc      0x1b0 utils/protocol/protocol_utils.o
+ .debug_frame   0x0000058c       0x74 utils/servo/servo_utils.o
+ .debug_frame   0x00000600       0xe4 utils/tcrt/tcrt_utils.o
+ .debug_frame   0x000006e4       0x74 utils/ultrasonic_hal.o
+ .debug_frame   0x00000758       0x6c utils/usart/usart_utils.o
+ .debug_frame   0x000007c4      0x10c D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
 
-.debug_str      0x00000000      0xf9e
+.debug_str      0x00000000     0x10a9
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x8ff main.o
-                                0x9aa (size before relaxing)
- .debug_str     0x00000b07      0x118 utils/programPath/boxsorter_utils.o
-                                0x74a (size before relaxing)
- .debug_str     0x00000c1f       0xb6 utils/protocol/protocol_utils.o
-                                0x42f (size before relaxing)
- .debug_str     0x00000cd5       0x52 utils/servo/servo_utils.o
-                                0x32d (size before relaxing)
- .debug_str     0x00000d27       0x7b utils/tcrt/tcrt_utils.o
-                                0x3ec (size before relaxing)
- .debug_str     0x00000da2       0xbd utils/ultrasonic_hal.o
-                                0x445 (size before relaxing)
- .debug_str     0x00000e5f       0x62 utils/usart/usart_utils.o
-                                0x377 (size before relaxing)
- .debug_str     0x00000ec1       0xdd C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .debug_str     0x00000208      0x897 main.o
+                                0x93a (size before relaxing)
+ .debug_str     0x00000a9f       0xf7 utils/programPath/boxsorter_utils.o
+                                0x680 (size before relaxing)
+ .debug_str     0x00000b96      0x24a utils/protocol/protocol_utils.o
+                                0x52d (size before relaxing)
+ .debug_str     0x00000de0       0x52 utils/servo/servo_utils.o
+                                0x282 (size before relaxing)
+ .debug_str     0x00000e32       0x7b utils/tcrt/tcrt_utils.o
+                                0x341 (size before relaxing)
+ .debug_str     0x00000ead       0xbd utils/ultrasonic_hal.o
+                                0x39a (size before relaxing)
+ .debug_str     0x00000f6a       0x62 utils/usart/usart_utils.o
+                                0x2d5 (size before relaxing)
+ .debug_str     0x00000fcc       0xdd D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
                                 0x407 (size before relaxing)
 
-.debug_loc      0x00000000     0x1a60
+.debug_loc      0x00000000     0x1db3
  *(.debug_loc)
- .debug_loc     0x00000000      0x63f main.o
- .debug_loc     0x0000063f      0x5c1 utils/programPath/boxsorter_utils.o
- .debug_loc     0x00000c00      0x428 utils/protocol/protocol_utils.o
- .debug_loc     0x00001028      0x1c5 utils/servo/servo_utils.o
- .debug_loc     0x000011ed      0x2db utils/tcrt/tcrt_utils.o
- .debug_loc     0x000014c8       0x98 utils/ultrasonic_hal.o
- .debug_loc     0x00001560       0xd1 utils/usart/usart_utils.o
- .debug_loc     0x00001631      0x42f C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .debug_loc     0x00000000      0x680 main.o
+ .debug_loc     0x00000680      0x602 utils/programPath/boxsorter_utils.o
+ .debug_loc     0x00000c82      0x6f9 utils/protocol/protocol_utils.o
+ .debug_loc     0x0000137b      0x1c5 utils/servo/servo_utils.o
+ .debug_loc     0x00001540      0x2db utils/tcrt/tcrt_utils.o
+ .debug_loc     0x0000181b       0x98 utils/ultrasonic_hal.o
+ .debug_loc     0x000018b3       0xd1 utils/usart/usart_utils.o
+ .debug_loc     0x00001984      0x42f D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1000,16 +1036,16 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x238
+.debug_ranges   0x00000000      0x240
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x68 main.o
  .debug_ranges  0x00000068       0x40 utils/programPath/boxsorter_utils.o
- .debug_ranges  0x000000a8       0x70 utils/protocol/protocol_utils.o
- .debug_ranges  0x00000118       0x20 utils/servo/servo_utils.o
- .debug_ranges  0x00000138       0x40 utils/tcrt/tcrt_utils.o
- .debug_ranges  0x00000178       0x38 utils/ultrasonic_hal.o
- .debug_ranges  0x000001b0       0x30 utils/usart/usart_utils.o
- .debug_ranges  0x000001e0       0x58 C:\Users\kobac\OneDrive\Documentos\Atmel Studio\7.0\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
+ .debug_ranges  0x000000a8       0x78 utils/protocol/protocol_utils.o
+ .debug_ranges  0x00000120       0x20 utils/servo/servo_utils.o
+ .debug_ranges  0x00000140       0x40 utils/tcrt/tcrt_utils.o
+ .debug_ranges  0x00000180       0x38 utils/ultrasonic_hal.o
+ .debug_ranges  0x000001b8       0x30 utils/usart/usart_utils.o
+ .debug_ranges  0x000001e8       0x58 D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib\Debug\lib_koba_ultrasonic.a(ultrasonic.o)
 
 .debug_macro
  *(.debug_macro)
