@@ -330,6 +330,59 @@ bool validatePck(){
 	}
 }
 
+uint8_t protocolTask(){
+	if (IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA) && !IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)) {
+		printf_P(PSTR("Procesar info\n"));
+		if (process_protocol_buffer()) {
+			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_HEADER);
+			SET_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
+			} else {
+			SET_FLAG(protocolService.flags, PROTOSERV_RESET);
+		}
+	}
+	if(IS_FLAG_SET(protocolService.flags, PROTOSERV_RESET)){
+		protocolService.indexR = protocolService.indexW;
+		CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
+		CLEAR_FLAG(protocolService.flags, PROTOSERV_RESET);
+		CLEAR_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
+		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
+		clear_receive_pck();
+	}
+	if(IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)){
+		if(validatePck()){
+			//PROCESAR DATOS ACA
+			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_VALIDATED);
+			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
+			//POR AHORA SIEMPRE CREA PAQUETE DE RESPUESTA, DESPUES PONEMOS UNA BANDERA
+			CREATE_RESPONSE_PCK = 1;
+			}else{
+			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
+			SET_FLAG(protocolService.flags, PROTOSERV_RESET);
+		}
+	}
+	if(CREATE_RESPONSE_PCK){
+		CREATE_RESPONSE_PCK = 0;
+		protocolService.receivePck.cmd = (uint8_t)getResponseCommand(protocolService.receivePck.cmd); //Asignar comando de respuesta
+		SET_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
+		uint8_t len = create_payload(protocolService.receivePck.cmd);
+		protocolService.indexW = ((protocolService.indexW + len)% PROTOCOL_BUFFER_SIZE);
+		createPck(protocolService.receivePck.cmd, &protocolService.buffer[protocolService.indexW], len);
+		CLEAR_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
+		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);
+	}
+	if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND){
+		if (!IS_TRANSMITTING) {
+			UCSR0B &= ~(1 << RXCIE0);  // Desactiva la interrupción de recepción
+			IS_TRANSMITTING = 1;
+			UCSR0B |= (1 << UDRIE0);   // Activa la interrupción de transmisión para iniciar el envío
+		}
+		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND_DONE);
+	}
+	if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND_DONE){
+		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
+	}
+}
+
 uint8_t create_payload(Command cmd) {
 	uint8_t payload_length = 0;
 	// Posición de inicio en el buffer (donde se escribirá el payload)

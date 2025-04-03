@@ -22,5 +22,7 @@ void clear_receive_pck();
 uint8_t calculatePayload();
 void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength);
 bool validatePck();
+uint8_t create_payload(Command cmd);
+uint8_t protocolTask();
 
 #endif /* PROTOCOL_UTILS_H_ */

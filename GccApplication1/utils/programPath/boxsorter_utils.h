@@ -15,7 +15,6 @@
 void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sorter);
 void irSensorsTask(sorter_system_t * sorter);
 void servosTask();
-void protocolTask();
 void initSorter(sorter_system_t* SystemSorter);
 box_type_t classify_box(uint8_t height_mm, sorter_system_t* SystemSorter);
 
