@@ -230,24 +230,25 @@ ISR(USART_RX_vect)
 }
 
 
-ISR(USART_UDRE_vect)
-{
-	// Si aún hay datos en el buffer...
+ISR(USART_UDRE_vect) {
 	if (protocolService.indexR != protocolService.indexW) {
-		// Enviar el siguiente byte
-		UDR0 = protocolService.buffer[protocolService.indexR];
-			protocolService.indexR = (protocolService.indexR + 1) % PROTOCOL_BUFFER_SIZE;
+		// Hay datos para transmitir, envía el siguiente byte
+		uint8_t byte_to_send = protocolService.buffer[protocolService.indexR];
+		UDR0 = byte_to_send;
+		protocolService.indexR = (protocolService.indexR + 1) % PROTOCOL_BUFFER_SIZE;
 		} else {
-		// Si el buffer está vacío, deshabilitar la interrupción para no seguir disparando
+		// No hay más datos para enviar, deshabilita la interrupción de transmisión
 		UCSR0B &= ~(1 << UDRIE0);
+		// Apaga la bandera de transmisión y reactiva la interrupción de recepción
+		IS_TRANSMITTING = 0;
+		UCSR0B |= (1 << RXCIE0);
 	}
 }
-
 
 /* END Function ISR ----------------------------------------------------------*/
 
 // Redirige printf (stdout) usando la función nativa de transmisión bloqueante.
-FILE mystdout = FDEV_SETUP_STREAM(USART_putchar, NULL, _FDEV_SETUP_WRITE);
+FILE mystdout = FDEV_SETUP_STREAM(USART_putchar_blocking, NULL, _FDEV_SETUP_WRITE);
 
 // Redirige la entrada (stdin) usando una función personalizada que lea de tu buffer RX.
 FILE mystdin = FDEV_SETUP_STREAM(NULL, USART_getchar, _FDEV_SETUP_READ);
@@ -572,24 +573,35 @@ int main()
 		}
 		if(IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)){
 			if(validatePck()){
+				//PROCESAR DATOS ACA
 				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_VALIDATED);
-				protocolService.receivePck.cmd = (uint8_t)getResponseCommand(protocolService.receivePck.cmd); //Asignar comando de respuesta
-				SET_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
-				createPck(protocolService.receivePck.cmd, NULL, 0); //Sin respuesta, deberia enviar el payload si quisiera agregar algo
-				CLEAR_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
 				CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
-				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);
+				//POR AHORA SIEMPRE CREA PAQUETE DE RESPUESTA, DESPUES PONEMOS UNA BANDERA
+				CREATE_RESPONSE_PCK = 1;
 			}else{
 				CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 				SET_FLAG(protocolService.flags, PROTOSERV_RESET);
 			}
 		}
+		if(CREATE_RESPONSE_PCK){
+			CREATE_RESPONSE_PCK = 0;
+			protocolService.receivePck.cmd = (uint8_t)getResponseCommand(protocolService.receivePck.cmd); //Asignar comando de respuesta
+			SET_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
+			uint8_t len = create_payload(protocolService.receivePck.cmd, protocolService.buffer);
+			protocolService.indexW = ((protocolService.indexW + len)% PROTOCOL_BUFFER_SIZE);
+			createPck(protocolService.receivePck.cmd, &protocolService.buffer[protocolService.indexW], len); 
+			CLEAR_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
+			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);
+		}
 		if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND){
-			printf_P(PSTR("Send"));
+			if (!IS_TRANSMITTING) {
+				UCSR0B &= ~(1 << RXCIE0);  // Desactiva la interrupción de recepción
+				IS_TRANSMITTING = 1;
+				UCSR0B |= (1 << UDRIE0);   // Activa la interrupción de transmisión para iniciar el envío
+			}
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND_DONE);
 		}
 		if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND_DONE){
-			printf_P(PSTR("Send done"));
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
 		}
 		if(WAIT_TIME_TRIGGER_PASSED){ //Esta bandera salta cuando se cunplio el tiempo de espera entre triggers

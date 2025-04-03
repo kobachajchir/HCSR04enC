@@ -12,9 +12,9 @@
 #include "bitmapType.h"
 #include <stdbool.h>
 
-#define PROTOCOL_BUFFER_SIZE 32
-#define PROTOCOL_TXBUFFER_SIZE 8
+#define PROTOCOL_BUFFER_SIZE 64  // Buffer circular de 64 bytes
 #define PROTOCOL_TOKEN ':'
+#define PROTOCOL_PACING_TOKEN '-'
 #define EXPECTED_HEADER_SUM 0x1A
 
 #define PROTOSERV_IDLE 0
@@ -74,12 +74,11 @@ typedef struct {
 } CommandMap;
 
 typedef struct {
-	uint8_t indexW;
-	uint8_t indexR;
-	uint8_t buffer[PROTOCOL_BUFFER_SIZE];
-	uint8_t TXbuffer[PROTOCOL_TXBUFFER_SIZE];
-	Byte_Flag_Struct flags;
-	ProtocolFrame receivePck;
+	volatile uint8_t indexW;
+	volatile uint8_t indexR;
+	volatile uint8_t buffer[PROTOCOL_BUFFER_SIZE];
+	volatile Byte_Flag_Struct flags;
+	volatile ProtocolFrame receivePck;
 } ProtocolService;
 
 #endif /* PROTOCOLTYPE_H_ */

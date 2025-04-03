@@ -329,3 +329,79 @@ bool validatePck(){
 		}
 	}
 }
+
+uint8_t create_payload(Command cmd) {
+	uint8_t payload_length = 0;
+	// Posición de inicio en el buffer (donde se escribirá el payload)
+	uint8_t start_index = protocolService.indexW;
+
+	switch (cmd) {
+		case CMD_RESPONSE_ALIVE: {
+			// No hay payload para CMD_RESPONSE_ALIVE
+			payload_length = 0;
+			break;
+		}
+		
+		case CMD_RESPONSE_CLEAR_STATS: {
+			// Payload: 1 byte (0x01 para éxito)
+			protocolService.buffer[start_index] = 0x01;
+			payload_length = 1;
+			break;
+		}
+		
+		case CMD_RESPONSE_START:
+		case CMD_RESPONSE_STOP: {
+			// Payload: 1 byte (0x01 para start, 0x00 para stop)
+			protocolService.buffer[start_index] = (cmd == CMD_RESPONSE_START) ? 0x01 : 0x00;
+			payload_length = 1;
+			break;
+		}
+		
+		case CMD_RESPONSE_SET_CONFIG:
+		case CMD_RESPONSE_GET_CONFIG: {
+			// Payload: Formato "OutputID:BoxSize" (3 bytes)
+			uint8_t output_id = 0;  // Ejemplo: salida 0
+			uint8_t box_size = 1;   // Ejemplo: tamaño A
+			
+			protocolService.buffer[start_index] = output_id;
+			protocolService.buffer[(start_index + 1) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(start_index + 2) % PROTOCOL_BUFFER_SIZE] = box_size;
+			
+			payload_length = 3;
+			break;
+		}
+		
+		case CMD_RESPONSE_GET_FIRMWARE: {
+			// Payload: Cadena de versión del firmware (por ejemplo, "v1.2.3")
+			const char* firmware_version = "v1.2.3";
+			uint8_t i = 0;
+			
+			while (firmware_version[i] != '\0') {
+				protocolService.buffer[(start_index + i) % PROTOCOL_BUFFER_SIZE] = firmware_version[i];
+				i++;
+			}
+			payload_length = i;
+			break;
+		}
+		
+		case CMD_RESPONSE_GET_REPOSITORY: {
+			// Payload: URL del repositorio (por ejemplo, "https://github.com/yourrepo")
+			const char* repo_url = "https://github.com/yourrepo";
+			uint8_t i = 0;
+			
+			while (repo_url[i] != '\0') {
+				protocolService.buffer[(start_index + i) % PROTOCOL_BUFFER_SIZE] = repo_url[i];
+				i++;
+			}
+			payload_length = i;
+			break;
+		}
+		
+		default: {
+			// Comando inválido, sin payload
+			payload_length = 0;
+			break;
+		}
+	}
+	return payload_length;
+}

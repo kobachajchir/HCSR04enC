@@ -25,47 +25,40 @@ void USART_Init(uint16_t ubrr)
 	UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
 }
 
-// Función para enviar un carácter por serial
-void USART_Transmit(unsigned char data)
-{
-	// Espera hasta que el buffer de transmisión esté vacío
-	while (!(UCSR0A & (1 << UDRE0)));
-	// Envía el dato al registro de transmisión (UDR0)
-	UDR0 = data;
-}
+// Función para enviar un byte: Encola el byte y activa la interrupción de transmisión
+int USART_putchar(char c, FILE *stream) {
+	uint8_t next_indexW = (protocolService.indexW + 1) % PROTOCOL_BUFFER_SIZE;
 
-// Función para recibir un carácter por serial
-unsigned char USART_Receive(void)
-{
-	// Espera hasta que se haya recibido un dato
-	while (!(UCSR0A & (1 << RXC0)));
-	// Devuelve el dato recibido desde el registro de datos (UDR0)
-	return UDR0;
-}
+	// Verifica si el buffer está lleno (reserva un espacio para diferenciar vacío de lleno)
+	if (next_indexW == protocolService.indexR) {
+		return 0; // El buffer está lleno, se puede manejar el error aquí si es necesario
+	}
 
-// Redirige printf para usar USART
-int USART_putchar(char c, FILE *stream)
-{
-	// Si se desea manejar la nueva línea con retorno de carro:
-	if (c == '\n')
-	USART_putchar('\r', stream);
-	
-	// Esperar a que el buffer de transmisión (hardware) esté vacío
-	while (!(UCSR0A & (1 << UDRE0)))
-	;  // Espera activa
-	
-	// Enviar el carácter
-	UDR0 = c;
+	// Almacena el byte en el buffer y actualiza el índice de escritura
+	protocolService.buffer[protocolService.indexW] = c;
+	protocolService.indexW = next_indexW;
+
+	// Habilita la interrupción de transmisión para iniciar el envío
+	UCSR0B |= (1 << UDRIE0);
 	return 0;
 }
 
+// Función bloqueante para enviar un byte por USART
+int USART_putchar_blocking(char c, FILE *stream) {
+	// Espera a que el registro de datos esté vacío (bit UDRE0 activo)
+	while (!(UCSR0A & (1 << UDRE0))) {
+		// Espera activa (polling)
+	}
+	UDR0 = c; // Envía el byte
+	return 0;
+}
 
-int USART_getchar(FILE *stream)
-{
-	// Si no hay datos disponibles, se retorna -1 (puedes interpretar esto como EOF)
-	if (protocolService.indexR == protocolService.indexW)
-	return -1;
-	
+int USART_getchar(FILE *stream) {
+	// Verifica si hay datos disponibles
+	if (protocolService.indexR == protocolService.indexW) {
+		return -1; // No hay datos disponibles
+	}
+
 	uint8_t data = protocolService.buffer[protocolService.indexR];
 	protocolService.indexR = (protocolService.indexR + 1) % PROTOCOL_BUFFER_SIZE;
 	return data;

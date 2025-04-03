@@ -99,7 +99,9 @@
 
 #define OUTPUT_A_HAS_CONFIG bandera3.bitmap.bit0
 #define OUTPUT_B_HAS_CONFIG bandera3.bitmap.bit1
-#define OUTPUT_C_HAS_CONFIG bandera3.bitmap.bit3
+#define OUTPUT_C_HAS_CONFIG bandera3.bitmap.bit2
+#define IS_TRANSMITTING bandera3.bitmap.bit3
+#define CREATE_RESPONSE_PCK bandera3.bitmap.bit4
 
 #define SERVO_ACTIVE_TIME 10
 
