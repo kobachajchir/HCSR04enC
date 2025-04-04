@@ -377,17 +377,19 @@ void doAction(uint8_t cmd){
 		}
 		case CMD_GET_STATS:
 		{
-			printf_P(PSTR("Estadisticas: %s\n"), protocolService.receivePck.payload);
+			printf_P(PSTR("Estadisticas\n"));
+			CREATE_RESPONSE_PCK = 1;
 			break;	
 		}
 		case CMD_CLEAR_STATS:
 		{
-			printf("Clear Stats status: %u\n", protocolService.receivePck.payload[0]);
+			printf("Cleared\n");
 			SorterSystem.stats.total_by_type_array[0] = 0;
 			SorterSystem.stats.total_by_type_array[1] = 0;
 			SorterSystem.stats.total_by_type_array[2] = 0;
 			SorterSystem.stats.total_discarded = 0;
 			SorterSystem.stats.total_measured = 0;
+			CREATE_RESPONSE_PCK = 1;
 			break;
 		}
 		case CMD_GET_REPOSITORY:
@@ -501,7 +503,32 @@ uint8_t create_payload(Command cmd) {
 			payload_length = 9;
 			break;
 		}
-		
+		case CMD_RESPONSE_CLEAR_STATS:
+		{
+			protocolService.buffer[start_index] = 0x01;
+			payload_length = 1;
+			break;
+		}
+		case CMD_RESPONSE_GET_STATS:
+		{
+			protocolService.buffer[start_index] = 'M';
+			protocolService.buffer[(start_index + 1) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(start_index + 2) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_measured;
+			protocolService.buffer[(start_index + 3) % PROTOCOL_BUFFER_SIZE] = 'D';
+			protocolService.buffer[(start_index + 4) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(start_index + 5) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_discarded;
+			protocolService.buffer[(start_index + 6) % PROTOCOL_BUFFER_SIZE] = 'A';
+			protocolService.buffer[(start_index + 7) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(start_index + 8) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[0];
+			protocolService.buffer[(start_index + 6) % PROTOCOL_BUFFER_SIZE] = 'B';
+			protocolService.buffer[(start_index + 7) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(start_index + 8) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[1];
+			protocolService.buffer[(start_index + 9) % PROTOCOL_BUFFER_SIZE] = 'C';
+			protocolService.buffer[(start_index + 10) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(start_index + 11) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[2];
+							
+			payload_length = 12;
+		}
 		case CMD_RESPONSE_GET_FIRMWARE: {	
 			const char* firmware_version = DEV_FIRMWARE_VERSION;
 			uint8_t i = 0;
