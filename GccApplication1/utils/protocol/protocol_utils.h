@@ -14,8 +14,6 @@
 
 void initProtocolService(ProtocolService* service);
 uint8_t calculate_checksum(ProtocolFrame* pak);
-void send_protocol_frame(ProtocolFrame* pak);
-ProtocolFrame receive_protocol_frame();
 bool verify_header();
 bool process_protocol_buffer();
 void clear_receive_pck();

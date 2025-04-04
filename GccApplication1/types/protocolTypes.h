@@ -25,9 +25,10 @@
 #define PROTOSERV_READING_PAYLOAD 5
 #define PROTOSERV_READING_CHK 6
 #define PROTOSERV_CALCULATING_CHK 7
-#define PROTOSERV_VALIDATED 8
-#define PROTOSERV_SEND 9
-#define PROTOSERV_SEND_DONE 10
+#define PROTOSERV_PROCESSING_PAYLOAD 8
+#define PROTOSERV_VALIDATED 9
+#define PROTOSERV_SEND 10
+#define PROTOSERV_SEND_DONE 11
 
 #define PROTOSERV_PROCESSING BIT0_MASK
 #define PROTOSERV_CHECKDATA BIT1_MASK
@@ -53,7 +54,6 @@ typedef enum {
 	CMD_RESPONSE_GET_STATS       = 0x06, // Response for get statistics command
 	CMD_RESPONSE_GET_FIRMWARE    = 0x07, // Response for get firmware command
 	CMD_RESPONSE_GET_REPOSITORY  = 0x08, // Response for get repository command
-	CMD_RESPONSE_RESPONSE_ALIVE  = 0x09, // Response for alive check (response to an alive request)
 	CMD_ALIVE                    = 0xA0, // Command indicating device is alive
 	CMD_START                    = 0xB1, // Start command
 	CMD_STOP                     = 0xB2, // Stop command

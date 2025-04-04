@@ -7,6 +7,8 @@
 #include "../../main.h"
 #include "protocol_utils.h"
 #include "../usart/usart_utils.h"
+#include "../../types/boxTypes.h"
+#include <string.h>
 #include <avr/pgmspace.h>
 
 
@@ -31,51 +33,6 @@ uint8_t calculate_checksum(ProtocolFrame* pak) {
 		checksum ^= pak->payload[i];
 	}
 	return checksum;
-}
-
-void send_protocol_frame(ProtocolFrame* pak) {
-// 	// Enviar HEADER
-// 	for (int i = 0; i < 4; i++) {
-// 		USART_Transmit(pak->header[i]);
-// 	}
-// 	// Enviar LENGTH
-// 	USART_Transmit(pak->length);
-// 	// Enviar TOKEN
-// 	USART_Transmit(pak->token);
-// 	// Enviar CMD
-// 	USART_Transmit(pak->cmd);
-// 	// Enviar PAYLOAD
-// 	for (int i = 0; i < pak->length - 1; i++) {
-// 		USART_Transmit(pak->payload[i]);
-// 	}
-// 	// Enviar CHECKSUM
-// 	USART_Transmit(pak->checksum);
-}
-
-ProtocolFrame receive_protocol_frame() {
-// 	ProtocolFrame pak;
-// 	// Leer HEADER
-// 	for (int i = 0; i < 4; i++) {
-// 		pak.header[i] = USART_Receive();
-// 	}
-// 	// Leer LENGTH
-// 	pak.length = USART_Receive();
-// 	// Leer TOKEN
-// 	pak.token = USART_Receive();
-// 	// Leer CMD
-// 	pak.cmd = USART_Receive();
-// 	// Leer PAYLOAD
-// 	pak.payload = malloc(pak.length - 1); // Allocate memory for payload
-// 	for (int i = 0; i < pak.length - 1; i++) {
-// 		pak.payload[i] = USART_Receive();
-// 	}
-// 	// Leer CHECKSUM
-// 	pak.checksum = USART_Receive();
-// 	// Verificar el checksum
-// 	if (pak.checksum != calculate_checksum(&pak)) {
-// 		printf("Error: Checksum inválido\n");
-// 	}
-// 	return pak;
 }
 
 bool verify_header() {
@@ -172,8 +129,12 @@ Command getResponseCommand(Command req) {
 		responseValue = CMD_RESPONSE_GET_FIRMWARE;
 		break;
 		
+		case CMD_GET_REPOSITORY:
+		responseValue = CMD_RESPONSE_GET_REPOSITORY;
+		break;
+		
 		case CMD_ALIVE:
-		responseValue = CMD_RESPONSE_RESPONSE_ALIVE;
+		responseValue = CMD_ALIVE;
 		break;
 		
 		default:
@@ -197,45 +158,39 @@ void clear_receive_pck(){
 
 uint8_t calculatePayload() {
 	uint8_t checksum = 0;  // Inicializa el checksum en 0
-	
-	// Sumar los bytes de 'UNER'
-	checksum ^= 'U';  // XOR de 'U'
-	checksum ^= 'N';  // XOR de 'N'
-	checksum ^= 'E';  // XOR de 'E'
-	checksum ^= 'R';  // XOR de 'R'
-	
-	// Sumar el byte de LENGTH
+
+	// XOR de los bytes del HEADER "UNER"
+	checksum ^= 'U';  // 0x55
+	checksum ^= 'N';  // 0x4E
+	checksum ^= 'E';  // 0x45
+	checksum ^= 'R';  // 0x52
+
+	// XOR con el campo LENGTH (que ahora es solo la cantidad de bytes del payload)
 	checksum ^= protocolService.receivePck.length;
-	
-	// Sumar el byte de TOKEN (usamos el valor de PROTOCOL_TOKEN)
+
+	// XOR con el TOKEN (se usa PROTOCOL_TOKEN, ej. ':' = 58)
 	checksum ^= PROTOCOL_TOKEN;
-	
-	// Sumar el byte de CMD
+
+	// XOR con el CMD
 	checksum ^= protocolService.receivePck.cmd;
-	
-	// Imprimir los valores del payload
+
+	// XOR con cada byte del PAYLOAD (cantidad EXACTA: LENGTH bytes)
 	printf_P(PSTR("Payload en Hex:\n"));
-	// CHANGED: Removed the -1 to process all bytes
 	for (int i = 0; i < protocolService.receivePck.length; i++) {
 		uint8_t payload_byte = *(protocolService.receivePck.payload + i);
 		printf("Byte %d: 0x%02X (Decimal: %d)\n", i, payload_byte, payload_byte);
-		checksum ^= payload_byte;  // XOR de cada byte del payload
+		checksum ^= payload_byte;
 	}
-	
-	// Imprimir el checksum calculado en hexadecimal
+
 	printf("CHECKSUM CALC %02X\n", checksum);
-	
-	// Imprimir el checksum esperado
 	printf("CHECKSUM ESPERADO: %02X\n", protocolService.receivePck.checksum);
-	
-	// Comparar el checksum calculado con el esperado
+
 	if (checksum == protocolService.receivePck.checksum) {
 		printf_P(PSTR("Cks valido\n"));
 		} else {
 		printf_P(PSTR("Cks invalido\n"));
 	}
-	
-	// Devuelve el checksum calculado
+
 	return checksum;
 }
 
@@ -288,42 +243,155 @@ void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength) {
 }
 
 bool validatePck(){
+	// Se asume que el HEADER ("UNER") ya fue procesado o se encuentra en las primeras 4 posiciones
+	// y que protocolService.indexR apunta a la última posición del HEADER (índice 3).
+	// Luego se procede a leer el resto del paquete.
+
+	// Leer LENGTH (payload length) en posición 4
 	NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_LEN);
-	protocolService.indexR++; //Poner en dinde deberia estar length
+	protocolService.indexR++; // Ahora indexR == 4
 	protocolService.receivePck.length = protocolService.buffer[protocolService.indexR];
+
+	// Leer TOKEN en posición 5
 	NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_TOKEN);
-	protocolService.indexR++; //Donde deberia estar token
+	protocolService.indexR++; // Ahora indexR == 5
 	if (protocolService.buffer[protocolService.indexR] != PROTOCOL_TOKEN){
 		printf_P(PSTR("Token invalido\n"));
 		return false;
-		}else{ //Token valido
+		} else {
+		// Leer CMD en posición 6
 		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_CMD);
-		protocolService.indexR++; //Donde deberia estar CMD
+		protocolService.indexR++; // Ahora indexR == 6
 		protocolService.receivePck.cmd = protocolService.buffer[protocolService.indexR];
 		if(protocolService.receivePck.cmd == CMD_INVALID){
 			printf_P(PSTR("Comando invalido\n"));
 			return false;
-			}else{
-			printf("Length %u", protocolService.receivePck.length);
-			if(protocolService.receivePck.length > PROTOCOL_MAX_BYTE_COUNT){ //Nunca deberia ser mayor a 24, porque + UNER+len+:+cmd == 32 y es el size del buffer
-				printf_P(PSTR("Length mayor a 24, se perderia data del buffer\n"));
+			} else {
+			printf("Length %u\n", protocolService.receivePck.length);
+			if(protocolService.receivePck.length > PROTOCOL_MAX_BYTE_COUNT){
+				printf_P(PSTR("Length mayor a %u, se perderia data del buffer\n"), PROTOCOL_MAX_BYTE_COUNT);
 				return false;
 			}
+			// Leer PAYLOAD: el payload tiene exactamente LENGTH bytes
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_PAYLOAD);
-			protocolService.indexR++; //Donde deberia estar el Payload
-			protocolService.receivePck.payload = &protocolService.buffer[protocolService.indexR]; //Apunta a la direccion de memoria del primer elemento, esto deberia seguir hasta minimo 2, osea esta direccion y la siguiente
-			if(protocolService.receivePck.length > 0){
-				protocolService.indexR += (protocolService.receivePck.length-1); //Si es 0 no pasa nada porque daria lo mismo la suma
-			}
-			protocolService.indexR++; //Donde deberia estar cks
+			protocolService.indexR++; // Ahora indexR == 7, inicio del payload
+			protocolService.receivePck.payload = &protocolService.buffer[protocolService.indexR];
+			// Avanza el índice en la cantidad exacta de payload
+			protocolService.indexR += protocolService.receivePck.length;
+			
+			// Leer CHECKSUM, que está justo después del payload
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_CHK);
 			protocolService.receivePck.checksum = protocolService.buffer[protocolService.indexR];
+			
+			// Calcular y comparar el checksum
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_CALCULATING_CHK);
 			if(calculatePayload() != protocolService.receivePck.checksum){
 				printf_P(PSTR("Cks invalido\n"));
 				return false;
-			}else{
+				} else {
 				printf_P(PSTR("Cks valido\n"));
+				// Procesar el payload según el comando recibido
+				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_PROCESSING_PAYLOAD);
+				switch(protocolService.receivePck.cmd){
+					case CMD_ALIVE:
+					{
+						printf_P(PSTR("ALIVE.\n"));
+						CREATE_RESPONSE_PCK = 1;
+					}
+					break;
+					case CMD_START:
+					case CMD_STOP:
+					{
+						// Se espera un byte de estado (ej. 0x01 para On, 0x00 para Off)
+						printf("Status: %u\n", protocolService.receivePck.payload[0]);
+						CREATE_RESPONSE_PCK = 1;
+					}
+					break;
+					case CMD_GET_CONFIG:
+					{
+						CREATE_RESPONSE_PCK = 1;
+						break;
+					}
+					case CMD_SET_CONFIG:
+					{
+						// Copiar el payload a un buffer temporal y agregar terminación nula.
+						char configStr[PROTOCOL_MAX_BYTE_COUNT + 1];
+						uint8_t i;
+						for(i = 0; i < protocolService.receivePck.length && i < PROTOCOL_MAX_BYTE_COUNT; i++){
+							configStr[i] = protocolService.receivePck.payload[i];
+						}
+						configStr[i] = '\0';
+
+						printf_P(PSTR("Configuracion (raw): %s\n"), configStr);
+
+						// Se espera el formato: "0:A-1:B-2:C" (o similar).
+						// Se separa cada token usando '-' como delimitador.
+						char *token;
+						token = strtok(configStr, "-");
+						while(token != NULL){
+							// Cada token debe tener el formato "n:Letra", por ejemplo "0:A"
+							char *colon = strchr(token, ':');
+							if(colon != NULL){
+								*colon = '\0'; // Separa el número de la letra
+								int output = atoi(token);
+								char boxTypeLetter = *(colon + 1);
+								box_type_t boxType;
+								switch(boxTypeLetter){
+									case 'A': boxType = BOX_SIZE_A; break;
+									case 'B': boxType = BOX_SIZE_B; break;
+									case 'C': boxType = BOX_SIZE_C; break;
+									default:  boxType = BOX_DISCARDED; break;
+								}
+								// Asignar el tipo de caja según el número de salida recibido:
+								switch(output){
+									case 0:
+									salidaA.boxType = boxType;
+									break;
+									case 1:
+									salidaB.boxType = boxType;
+									break;
+									case 2:
+									salidaC.boxType = boxType;
+									break;
+									default:
+									// Opcional: manejar números de salida inválidos
+									break;
+								}
+								printf("Salida %d: Box Type = %u\n", output, boxType);
+								CREATE_RESPONSE_PCK = 1;
+								} else {
+								printf_P(PSTR("Formato de token invalido: %s\n"), token);
+							}
+							token = strtok(NULL, "-");
+						}
+						break;
+					}
+
+					case CMD_GET_FIRMWARE:
+					{
+						CREATE_RESPONSE_PCK = 1;
+					}
+					break;
+					case CMD_GET_STATS:
+					printf_P(PSTR("Estadisticas: %s\n"), protocolService.receivePck.payload);
+					break;
+					case CMD_CLEAR_STATS:
+						printf("Clear Stats status: %u\n", protocolService.receivePck.payload[0]);
+						SorterSystem.stats.total_by_type_array[0] = 0;
+						SorterSystem.stats.total_by_type_array[1] = 0;
+						SorterSystem.stats.total_by_type_array[2] = 0;
+						SorterSystem.stats.total_discarded = 0;
+						SorterSystem.stats.total_measured = 0;
+					break;
+					case CMD_GET_REPOSITORY:
+					{
+						CREATE_RESPONSE_PCK = 1;
+						break;
+					}
+					default:
+					printf_P(PSTR("Payload generico: %s\n"), protocolService.receivePck.payload);
+					break;
+				}
 				return true;
 			}
 		}
@@ -354,7 +422,6 @@ uint8_t protocolTask(){
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_VALIDATED);
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 			//POR AHORA SIEMPRE CREA PAQUETE DE RESPUESTA, DESPUES PONEMOS UNA BANDERA
-			CREATE_RESPONSE_PCK = 1;
 			}else{
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 			SET_FLAG(protocolService.flags, PROTOSERV_RESET);
@@ -411,22 +478,29 @@ uint8_t create_payload(Command cmd) {
 		}
 		
 		case CMD_RESPONSE_SET_CONFIG:
+		{
+			protocolService.buffer[start_index] = 0x01;
+			payload_length = 1;
+			break;
+		}		
 		case CMD_RESPONSE_GET_CONFIG: {
-			// Payload: Formato "OutputID:BoxSize" (3 bytes)
-			uint8_t output_id = 0;  // Ejemplo: salida 0
-			uint8_t box_size = 1;   // Ejemplo: tamaño A
 			
-			protocolService.buffer[start_index] = output_id;
+			protocolService.buffer[start_index] = 'A';
 			protocolService.buffer[(start_index + 1) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 2) % PROTOCOL_BUFFER_SIZE] = box_size;
-			
-			payload_length = 3;
+			protocolService.buffer[(start_index + 2) % PROTOCOL_BUFFER_SIZE] = (uint8_t)salidaA.boxType + '0';
+			protocolService.buffer[(start_index + 3) % PROTOCOL_BUFFER_SIZE] = 'B';
+			protocolService.buffer[(start_index + 4) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(start_index + 5) % PROTOCOL_BUFFER_SIZE] = (uint8_t)salidaB.boxType + '0';
+			protocolService.buffer[(start_index + 6) % PROTOCOL_BUFFER_SIZE] = 'C';
+			protocolService.buffer[(start_index + 7) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(start_index + 8) % PROTOCOL_BUFFER_SIZE] = (uint8_t)salidaC.boxType + '0';
+	
+			payload_length = 9;
 			break;
 		}
 		
-		case CMD_RESPONSE_GET_FIRMWARE: {
-			// Payload: Cadena de versión del firmware (por ejemplo, "v1.2.3")
-			const char* firmware_version = "v1.2.3";
+		case CMD_RESPONSE_GET_FIRMWARE: {	
+			const char* firmware_version = DEV_FIRMWARE_VERSION;
 			uint8_t i = 0;
 			
 			while (firmware_version[i] != '\0') {
@@ -438,8 +512,7 @@ uint8_t create_payload(Command cmd) {
 		}
 		
 		case CMD_RESPONSE_GET_REPOSITORY: {
-			// Payload: URL del repositorio (por ejemplo, "https://github.com/yourrepo")
-			const char* repo_url = "https://github.com/yourrepo";
+			const char* repo_url = DEV_REPOSITORY;
 			uint8_t i = 0;
 			
 			while (repo_url[i] != '\0') {

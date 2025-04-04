@@ -70,6 +70,8 @@
 #define PROTOCOL_MIN_BYTE_COUNT 6
 #define PROTOCOL_MAX_BYTE_COUNT 24
 
+#define DEV_REPOSITORY "github.com/kobachajchir/HCSR04enC"
+#define DEV_FIRMWARE_VERSION "0.8.0"
 
 //#define DO_TRIGGER bandera.bitmap.bit0
 //#define TRIGGER_FINISH bandera.bitmap.bit1
