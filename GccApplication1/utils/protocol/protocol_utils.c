@@ -288,113 +288,116 @@ bool validatePck(){
 			if(calculatePayload() != protocolService.receivePck.checksum){
 				printf_P(PSTR("Cks invalido\n"));
 				return false;
-				} else {
-				printf_P(PSTR("Cks valido\n"));
-				// Procesar el payload según el comando recibido
+			} else {
 				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_PROCESSING_PAYLOAD);
-				switch(protocolService.receivePck.cmd){
-					case CMD_ALIVE:
-					{
-						printf_P(PSTR("ALIVE.\n"));
-						CREATE_RESPONSE_PCK = 1;
-					}
-					break;
-					case CMD_START:
-					case CMD_STOP:
-					{
-						// Se espera un byte de estado (ej. 0x01 para On, 0x00 para Off)
-						printf("Status: %u\n", protocolService.receivePck.payload[0]);
-						CREATE_RESPONSE_PCK = 1;
-					}
-					break;
-					case CMD_GET_CONFIG:
-					{
-						CREATE_RESPONSE_PCK = 1;
-						break;
-					}
-					case CMD_SET_CONFIG:
-					{
-						// Copiar el payload a un buffer temporal y agregar terminación nula.
-						char configStr[PROTOCOL_MAX_BYTE_COUNT + 1];
-						uint8_t i;
-						for(i = 0; i < protocolService.receivePck.length && i < PROTOCOL_MAX_BYTE_COUNT; i++){
-							configStr[i] = protocolService.receivePck.payload[i];
-						}
-						configStr[i] = '\0';
-
-						printf_P(PSTR("Configuracion (raw): %s\n"), configStr);
-
-						// Se espera el formato: "0:A-1:B-2:C" (o similar).
-						// Se separa cada token usando '-' como delimitador.
-						char *token;
-						token = strtok(configStr, "-");
-						while(token != NULL){
-							// Cada token debe tener el formato "n:Letra", por ejemplo "0:A"
-							char *colon = strchr(token, ':');
-							if(colon != NULL){
-								*colon = '\0'; // Separa el número de la letra
-								int output = atoi(token);
-								char boxTypeLetter = *(colon + 1);
-								box_type_t boxType;
-								switch(boxTypeLetter){
-									case 'A': boxType = BOX_SIZE_A; break;
-									case 'B': boxType = BOX_SIZE_B; break;
-									case 'C': boxType = BOX_SIZE_C; break;
-									default:  boxType = BOX_DISCARDED; break;
-								}
-								// Asignar el tipo de caja según el número de salida recibido:
-								switch(output){
-									case 0:
-									salidaA.boxType = boxType;
-									break;
-									case 1:
-									salidaB.boxType = boxType;
-									break;
-									case 2:
-									salidaC.boxType = boxType;
-									break;
-									default:
-									// Opcional: manejar números de salida inválidos
-									break;
-								}
-								printf("Salida %d: Box Type = %u\n", output, boxType);
-								CREATE_RESPONSE_PCK = 1;
-								} else {
-								printf_P(PSTR("Formato de token invalido: %s\n"), token);
-							}
-							token = strtok(NULL, "-");
-						}
-						break;
-					}
-
-					case CMD_GET_FIRMWARE:
-					{
-						CREATE_RESPONSE_PCK = 1;
-					}
-					break;
-					case CMD_GET_STATS:
-					printf_P(PSTR("Estadisticas: %s\n"), protocolService.receivePck.payload);
-					break;
-					case CMD_CLEAR_STATS:
-						printf("Clear Stats status: %u\n", protocolService.receivePck.payload[0]);
-						SorterSystem.stats.total_by_type_array[0] = 0;
-						SorterSystem.stats.total_by_type_array[1] = 0;
-						SorterSystem.stats.total_by_type_array[2] = 0;
-						SorterSystem.stats.total_discarded = 0;
-						SorterSystem.stats.total_measured = 0;
-					break;
-					case CMD_GET_REPOSITORY:
-					{
-						CREATE_RESPONSE_PCK = 1;
-						break;
-					}
-					default:
-					printf_P(PSTR("Payload generico: %s\n"), protocolService.receivePck.payload);
-					break;
-				}
+				doAction(protocolService.receivePck.cmd);
 				return true;
 			}
 		}
+	}
+}
+
+void doAction(uint8_t cmd){
+	switch(cmd){
+		case CMD_ALIVE:
+		{
+			printf_P(PSTR("ALIVE\n"));
+			CREATE_RESPONSE_PCK = 1;
+		}
+		break;
+		case CMD_START:
+		case CMD_STOP:
+		{
+			// Se espera un byte de estado (ej. 0x01 para On, 0x00 para Off)
+			printf("Status: %u\n", protocolService.receivePck.payload[0]);
+			CREATE_RESPONSE_PCK = 1;
+		}
+		break;
+		case CMD_GET_CONFIG:
+		{
+			CREATE_RESPONSE_PCK = 1;
+			break;
+		}
+		case CMD_SET_CONFIG:
+		{
+			// Copiar el payload a un buffer temporal y agregar terminación nula.
+			char configStr[PROTOCOL_MAX_BYTE_COUNT + 1];
+			uint8_t i;
+			for(i = 0; i < protocolService.receivePck.length && i < PROTOCOL_MAX_BYTE_COUNT; i++){
+				configStr[i] = protocolService.receivePck.payload[i];
+			}
+			configStr[i] = '\0';
+
+			// Se espera el formato: "0:A-1:B-2:C" (o similar).
+			// Se separa cada token usando '-' como delimitador.
+			char *token;
+			token = strtok(configStr, "-");
+			while(token != NULL){
+				// Cada token debe tener el formato "n:Letra", por ejemplo "0:A"
+				char *colon = strchr(token, ':');
+				if(colon != NULL){
+					*colon = '\0'; // Separa el número de la letra
+					int output = atoi(token);
+					char boxTypeLetter = *(colon + 1);
+					box_type_t boxType;
+					switch(boxTypeLetter){
+						case 'A': boxType = BOX_SIZE_A; break;
+						case 'B': boxType = BOX_SIZE_B; break;
+						case 'C': boxType = BOX_SIZE_C; break;
+						default:  boxType = BOX_DISCARDED; break;
+					}
+					// Asignar el tipo de caja según el número de salida recibido:
+					switch(output){
+						case 0:
+						salidaA.boxType = boxType;
+						break;
+						case 1:
+						salidaB.boxType = boxType;
+						break;
+						case 2:
+						salidaC.boxType = boxType;
+						break;
+						default:
+						// Opcional: manejar números de salida inválidos
+						break;
+					}
+					printf("Salida %d: Box Type = %u\n", output, boxType);
+					CREATE_RESPONSE_PCK = 1;
+					} else {
+					printf_P(PSTR("Formato de token invalido: %s\n"), token);
+				}
+				token = strtok(NULL, "-");
+			}
+			break;
+		}
+		case CMD_GET_FIRMWARE:
+		{
+			CREATE_RESPONSE_PCK = 1;
+			break;
+		}
+		case CMD_GET_STATS:
+		{
+			printf_P(PSTR("Estadisticas: %s\n"), protocolService.receivePck.payload);
+			break;	
+		}
+		case CMD_CLEAR_STATS:
+		{
+			printf("Clear Stats status: %u\n", protocolService.receivePck.payload[0]);
+			SorterSystem.stats.total_by_type_array[0] = 0;
+			SorterSystem.stats.total_by_type_array[1] = 0;
+			SorterSystem.stats.total_by_type_array[2] = 0;
+			SorterSystem.stats.total_discarded = 0;
+			SorterSystem.stats.total_measured = 0;
+			break;
+		}
+		case CMD_GET_REPOSITORY:
+		{
+			CREATE_RESPONSE_PCK = 1;
+			break;
+		}
+		default:
+		printf_P(PSTR("Payload generico: %s\n"), protocolService.receivePck.payload);
+		break;
 	}
 }
 

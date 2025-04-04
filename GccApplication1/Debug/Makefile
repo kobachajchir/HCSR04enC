@@ -110,7 +110,7 @@ ADDITIONAL_DEPENDENCIES:=
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 LIB_DEP+=  \
-D:/Microcontroladores/koba_ultrasonic_lib/koba_ultrasonic_lib/Debug/lib_koba_ultrasonic.a
+C:/Users/kobac/OneDrive/Documentos/Atmel\ Studio/7.0/koba_ultrasonic_lib/koba_ultrasonic_lib/Debug/lib_koba_ultrasonic.a
 
 LINKER_SCRIPT_DEP+= 
 
