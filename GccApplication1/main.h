@@ -17,9 +17,11 @@
 #include "types/outputType.h"
 #include "types/servoType.h"
 #include "types/protocolTypes.h"
+#include "types/configType.h"
 #include "ultrasonic.h"
 #include "ultrasonic_hal.h"
 #include <avr/io.h>
+#include <avr/eeprom.h>
 
 #define ALL_FLAGS flags.byte
 
@@ -155,6 +157,6 @@ extern output_t salidaA;
 extern output_t salidaB;
 extern output_t salidaC;
 extern ProtocolService protocolService;
-
+extern EEMEM Config_t eepromConfig;
 
 #endif /* MAIN_H_ */

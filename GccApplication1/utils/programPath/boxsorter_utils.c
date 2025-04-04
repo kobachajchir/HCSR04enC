@@ -9,6 +9,7 @@
 #include "../../types/boxTypes.h"
 #include "../../types/sorterSystemTypes.h"
 #include "../../types/ultrasonicDetectorType.h"
+#include "../../types/configType.h"
 #include "boxsorter_utils.h"
 #include <stdio.h>
 #include <stdbool.h>
@@ -34,25 +35,17 @@ inline void initServos(void){
 
 void initOutputs(){
 	initServos();
-	//TODO Fn para leer EEPROM
-	if(OUTPUT_A_HAS_CONFIG){
-		printf("Salida A find setting\n");
+	if(existConfig()){
+		loadConfiguration(&eepromConfig);
+		salidaA.boxType = eepromConfig.salidaA;
+		salidaB.boxType = eepromConfig.salidaB;
+		salidaC.boxType = eepromConfig.salidaC;
+		printf("Config set\n");
 	}else{
-		printf("Salida A no setting\n");
 		salidaA.boxType = OUTPUT_A_DEFAULT_BOX_TYPE;
-	}
-	if(OUTPUT_B_HAS_CONFIG){
-		printf("Salida B find setting\n");
-	}else{
-		printf("Salida B no setting\n");
 		salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
-		
-	}
-	if(OUTPUT_C_HAS_CONFIG){
-		printf("Salida C find setting\n");
-	}else{
-		printf("Salida C no setting\n");
 		salidaC.boxType = OUTPUT_C_DEFAULT_BOX_TYPE;
+		printf("Sin config\n");
 	}
 	salidaA.actuator_pin = SERVOA_PIN;
 	salidaA.sensor_pin = IR_A.pin;

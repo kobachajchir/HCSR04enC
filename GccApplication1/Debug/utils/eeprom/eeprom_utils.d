@@ -1,18 +1,26 @@
-utils/ultrasonic_hal.d utils/ultrasonic_hal.o: ../utils/ultrasonic_hal.c \
- ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h \
+utils/eeprom/eeprom_utils.d utils/eeprom/eeprom_utils.o: \
+ ../utils/eeprom/eeprom_utils.c ../utils/eeprom/eeprom_utils.h \
+ ../utils/eeprom/../../types/configType.h \
+ ../utils/eeprom/../../types/boxTypes.h \
+ ../utils/eeprom/../../types/bitmapType.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
+ ../utils/eeprom/../../main.h ../utils/eeprom/../../utils/macros_utils.h \
+ ../utils/eeprom/../../utils/../main.h \
+ ../utils/eeprom/../../types/bitmapType.h \
+ ../utils/eeprom/../../types/ultrasonicDetectorType.h \
+ ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h \
- ../utils/../main.h ../utils/../utils/macros_utils.h \
- ../utils/../utils/../main.h ../utils/../types/bitmapType.h \
- ../utils/../types/ultrasonicDetectorType.h \
- ../utils/../types/bitmapType.h ../utils/../types/TCRTType.h \
- ../utils/../types/sorterSystemTypes.h ../utils/../types/boxTypes.h \
- ../utils/../types/outputType.h ../utils/../types/TCRTType.h \
- ../utils/../types/outputType.h ../utils/../types/servoType.h \
- ../utils/../types/protocolTypes.h ../utils/../types/configType.h \
+ ../utils/eeprom/../../types/TCRTType.h \
+ ../utils/eeprom/../../types/sorterSystemTypes.h \
+ ../utils/eeprom/../../types/outputType.h \
+ ../utils/eeprom/../../types/TCRTType.h \
+ ../utils/eeprom/../../types/outputType.h \
+ ../utils/eeprom/../../types/servoType.h \
+ ../utils/eeprom/../../types/protocolTypes.h \
+ ../utils/eeprom/../../types/configType.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -24,7 +32,13 @@ utils/ultrasonic_hal.d utils/ultrasonic_hal.o: ../utils/ultrasonic_hal.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h
 
-../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h:
+../utils/eeprom/eeprom_utils.h:
+
+../utils/eeprom/../../types/configType.h:
+
+../utils/eeprom/../../types/boxTypes.h:
+
+../utils/eeprom/../../types/bitmapType.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
@@ -32,39 +46,37 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
+../utils/eeprom/../../main.h:
+
+../utils/eeprom/../../utils/macros_utils.h:
+
+../utils/eeprom/../../utils/../main.h:
+
+../utils/eeprom/../../types/bitmapType.h:
+
+../utils/eeprom/../../types/ultrasonicDetectorType.h:
+
+../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h:
+
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
 ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h:
 
-../utils/../main.h:
+../utils/eeprom/../../types/TCRTType.h:
 
-../utils/../utils/macros_utils.h:
+../utils/eeprom/../../types/sorterSystemTypes.h:
 
-../utils/../utils/../main.h:
+../utils/eeprom/../../types/outputType.h:
 
-../utils/../types/bitmapType.h:
+../utils/eeprom/../../types/TCRTType.h:
 
-../utils/../types/ultrasonicDetectorType.h:
+../utils/eeprom/../../types/outputType.h:
 
-../utils/../types/bitmapType.h:
+../utils/eeprom/../../types/servoType.h:
 
-../utils/../types/TCRTType.h:
+../utils/eeprom/../../types/protocolTypes.h:
 
-../utils/../types/sorterSystemTypes.h:
-
-../utils/../types/boxTypes.h:
-
-../utils/../types/outputType.h:
-
-../utils/../types/TCRTType.h:
-
-../utils/../types/outputType.h:
-
-../utils/../types/servoType.h:
-
-../utils/../types/protocolTypes.h:
-
-../utils/../types/configType.h:
+../utils/eeprom/../../types/configType.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 

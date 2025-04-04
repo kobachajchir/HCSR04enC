@@ -361,6 +361,10 @@ void doAction(uint8_t cmd){
 						// Opcional: manejar números de salida inválidos
 						break;
 					}
+					eepromConfig.salidaA = salidaA.boxType;
+					eepromConfig.salidaB = salidaB.boxType;
+					eepromConfig.salidaC = salidaC.boxType;					
+					saveConfiguration(&eepromConfig);
 					printf("Salida %d: Box Type = %u\n", output, boxType);
 					CREATE_RESPONSE_PCK = 1;
 					} else {
@@ -377,7 +381,7 @@ void doAction(uint8_t cmd){
 		}
 		case CMD_GET_STATS:
 		{
-			printf_P(PSTR("Estadisticas\n"));
+			printf_P(PSTR("Obtener stats\n"));
 			CREATE_RESPONSE_PCK = 1;
 			break;	
 		}
@@ -397,6 +401,15 @@ void doAction(uint8_t cmd){
 			CREATE_RESPONSE_PCK = 1;
 			break;
 		}
+		case CMD_CONFIG_RESET:
+		{
+			eepromConfig.salidaA = salidaA.boxType = OUTPUT_A_DEFAULT_BOX_TYPE;
+			eepromConfig.salidaB = salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
+			eepromConfig.salidaC = salidaC.boxType = OUTPUT_C_DEFAULT_BOX_TYPE;
+			saveConfiguration(&eepromConfig);
+			CREATE_RESPONSE_PCK = 1;
+			break;
+		}
 		default:
 		printf_P(PSTR("Payload generico: %s\n"), protocolService.receivePck.payload);
 		break;
@@ -405,7 +418,6 @@ void doAction(uint8_t cmd){
 
 uint8_t protocolTask(){
 	if (IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA) && !IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)) {
-		printf_P(PSTR("Procesar info\n"));
 		if (process_protocol_buffer()) {
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_HEADER);
 			SET_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
@@ -466,14 +478,6 @@ uint8_t create_payload(Command cmd) {
 			payload_length = 0;
 			break;
 		}
-		
-		case CMD_RESPONSE_CLEAR_STATS: {
-			// Payload: 1 byte (0x01 para éxito)
-			protocolService.buffer[start_index] = 0x01;
-			payload_length = 1;
-			break;
-		}
-		
 		case CMD_RESPONSE_START:
 		case CMD_RESPONSE_STOP: {
 			// Payload: 1 byte (0x01 para start, 0x00 para stop)
@@ -552,7 +556,11 @@ uint8_t create_payload(Command cmd) {
 			payload_length = i;
 			break;
 		}
-		
+		case CMD_RESPONSE_CONFIG_RESET: {
+			protocolService.buffer[start_index] = 0x01;
+			payload_length = 1;
+			break;
+		}
 		default: {
 			// Comando inválido, sin payload
 			payload_length = 0;

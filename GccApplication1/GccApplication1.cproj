@@ -147,6 +147,9 @@
     <Compile Include="types\bitmapType.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="types\configType.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="types\outputType.h">
       <SubType>compile</SubType>
     </Compile>
@@ -163,6 +166,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="types\ultrasonicDetectorType.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utils\eeprom\eeprom_utils.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="utils\eeprom\eeprom_utils.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="utils\legacy_hcsr04\hcsr04_utils.c">
@@ -212,6 +221,7 @@
     <Folder Include="utils" />
     <Folder Include="types" />
     <Folder Include="utils\legacy_hcsr04" />
+    <Folder Include="utils\eeprom" />
     <Folder Include="utils\protocol" />
     <Folder Include="utils\tcrt" />
     <Folder Include="utils\programPath" />

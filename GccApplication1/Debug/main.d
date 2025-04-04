@@ -16,6 +16,7 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
  .././main.h .././utils/macros_utils.h .././utils/../main.h \
  .././types/bitmapType.h .././types/ultrasonicDetectorType.h \
  ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h \
@@ -24,8 +25,8 @@ main.d main.o: .././main.c \
  .././types/sorterSystemTypes.h .././types/boxTypes.h \
  .././types/outputType.h .././types/TCRTType.h .././types/outputType.h \
  .././types/servoType.h .././types/protocolTypes.h \
- .././utils/usart/usart_utils.h .././utils/servo/servo_utils.h \
- .././utils/programPath/boxsorter_utils.h \
+ .././types/configType.h .././utils/usart/usart_utils.h \
+ .././utils/servo/servo_utils.h .././utils/programPath/boxsorter_utils.h \
  .././utils/programPath/../../types/boxTypes.h \
  .././utils/protocol/protocol_utils.h .././utils/protocol/../../main.h \
  .././utils/protocol/../../types/protocolTypes.h
@@ -64,6 +65,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h:
+
 .././main.h:
 
 .././utils/macros_utils.h:
@@ -95,6 +98,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././types/servoType.h:
 
 .././types/protocolTypes.h:
+
+.././types/configType.h:
 
 .././utils/usart/usart_utils.h:
 

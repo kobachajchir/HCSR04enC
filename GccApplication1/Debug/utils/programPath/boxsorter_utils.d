@@ -19,6 +19,7 @@ utils/programPath/boxsorter_utils.d utils/programPath/boxsorter_utils.o: \
  ../utils/programPath/../../types/outputType.h \
  ../utils/programPath/../../types/servoType.h \
  ../utils/programPath/../../types/protocolTypes.h \
+ ../utils/programPath/../../types/configType.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -28,9 +29,11 @@ utils/programPath/boxsorter_utils.d utils/programPath/boxsorter_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
  ../utils/programPath/../../types/boxTypes.h \
  ../utils/programPath/../../types/sorterSystemTypes.h \
  ../utils/programPath/../../types/ultrasonicDetectorType.h \
+ ../utils/programPath/../../types/configType.h \
  ../utils/programPath/boxsorter_utils.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h
@@ -75,6 +78,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../utils/programPath/../../types/protocolTypes.h:
 
+../utils/programPath/../../types/configType.h:
+
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h:
@@ -93,11 +98,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h:
+
 ../utils/programPath/../../types/boxTypes.h:
 
 ../utils/programPath/../../types/sorterSystemTypes.h:
 
 ../utils/programPath/../../types/ultrasonicDetectorType.h:
+
+../utils/programPath/../../types/configType.h:
 
 ../utils/programPath/boxsorter_utils.h:
 

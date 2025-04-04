@@ -31,6 +31,8 @@ utils/usart/usart_utils.d utils/usart/usart_utils.o: \
  ../utils/usart/./../../types/outputType.h \
  ../utils/usart/./../../types/servoType.h \
  ../utils/usart/./../../types/protocolTypes.h \
+ ../utils/usart/./../../types/configType.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
  ../utils/usart/./../../types/protocolTypes.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -94,5 +96,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../utils/usart/./../../types/servoType.h:
 
 ../utils/usart/./../../types/protocolTypes.h:
+
+../utils/usart/./../../types/configType.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h:
 
 ../utils/usart/./../../types/protocolTypes.h:

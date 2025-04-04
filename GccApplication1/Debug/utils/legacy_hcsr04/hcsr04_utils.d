@@ -31,6 +31,8 @@ utils/legacy_hcsr04/hcsr04_utils.d utils/legacy_hcsr04/hcsr04_utils.o: \
  ../utils/legacy_hcsr04/./../../types/outputType.h \
  ../utils/legacy_hcsr04/./../../types/servoType.h \
  ../utils/legacy_hcsr04/./../../types/protocolTypes.h \
+ ../utils/legacy_hcsr04/./../../types/configType.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
  ../utils/legacy_hcsr04/hcsr04_utils.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -94,5 +96,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../utils/legacy_hcsr04/./../../types/servoType.h:
 
 ../utils/legacy_hcsr04/./../../types/protocolTypes.h:
+
+../utils/legacy_hcsr04/./../../types/configType.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h:
 
 ../utils/legacy_hcsr04/hcsr04_utils.h:

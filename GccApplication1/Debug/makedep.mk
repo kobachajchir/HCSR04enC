@@ -4,6 +4,8 @@
 
 main.c
 
+utils\eeprom\eeprom_utils.c
+
 utils\legacy_hcsr04\hcsr04_utils.c
 
 utils\programPath\boxsorter_utils.c

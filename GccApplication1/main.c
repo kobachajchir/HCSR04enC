@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <avr/pgmspace.h>
+#include <avr/eeprom.h>
 #include "main.h"
 #include "utils/macros_utils.h"
 #include "types/bitmapType.h"
@@ -13,6 +14,7 @@
 #include "utils/servo/servo_utils.h"
 #include "types/ultrasonicDetectorType.h"
 #include "types/TCRTType.h"
+#include "types/configType.h"
 #include "utils/programPath/boxsorter_utils.h"
 #include "utils/protocol/protocol_utils.h"
 #include "ultrasonic.h"
@@ -67,7 +69,7 @@ output_t salidaB;
 output_t salidaC;
 sorter_system_t SorterSystem;
 ProtocolService protocolService;
-
+EEMEM Config_t eepromConfig;
 
 /* END Global variables ------------------------------------------------------*/
 

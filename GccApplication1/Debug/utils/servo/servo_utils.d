@@ -31,6 +31,8 @@ utils/servo/servo_utils.d utils/servo/servo_utils.o: \
  ../utils/servo/./../../types/outputType.h \
  ../utils/servo/./../../types/servoType.h \
  ../utils/servo/./../../types/protocolTypes.h \
+ ../utils/servo/./../../types/configType.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
  ../utils/servo/../../types/servoType.h ../utils/servo/servo_utils.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -94,6 +96,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../utils/servo/./../../types/servoType.h:
 
 ../utils/servo/./../../types/protocolTypes.h:
+
+../utils/servo/./../../types/configType.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h:
 
 ../utils/servo/../../types/servoType.h:
 

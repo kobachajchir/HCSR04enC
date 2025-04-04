@@ -61,6 +61,7 @@ typedef enum {
 	CMD_RESPONSE_GET_STATS       = 0x06, // Response for get statistics command
 	CMD_RESPONSE_GET_FIRMWARE    = 0x07, // Response for get firmware command
 	CMD_RESPONSE_GET_REPOSITORY  = 0x08, // Response for get repository command
+	CMD_RESPONSE_CONFIG_RESET	 = 0x09, // Response for get repository command
 	CMD_ALIVE                    = 0xA0, // Command indicating device is alive
 	CMD_START                    = 0xB1, // Start command
 	CMD_STOP                     = 0xB2, // Stop command
@@ -70,6 +71,7 @@ typedef enum {
 	CMD_GET_STATS                = 0xF1, // Command to get statistics
 	CMD_CLEAR_STATS              = 0xF2, // Command to clear statistics
 	CMD_GET_REPOSITORY           = 0xF3, // Command to get repository
+	CMD_CONFIG_RESET			 = 0xF4, // Command to reset config
 	CMD_INVALID                  = 0xE0, // Invalid command (default error)
 	// Add other commands as needed
 } Command;

@@ -29,7 +29,9 @@ utils/tcrt/tcrt_utils.d utils/tcrt/tcrt_utils.o: \
  ../utils/tcrt/../../types/TCRTType.h \
  ../utils/tcrt/../../types/outputType.h \
  ../utils/tcrt/../../types/servoType.h \
- ../utils/tcrt/../../types/protocolTypes.h
+ ../utils/tcrt/../../types/protocolTypes.h \
+ ../utils/tcrt/../../types/configType.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -92,3 +94,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../utils/tcrt/../../types/servoType.h:
 
 ../utils/tcrt/../../types/protocolTypes.h:
+
+../utils/tcrt/../../types/configType.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h:
