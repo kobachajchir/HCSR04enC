@@ -18,21 +18,6 @@ void initProtocolService(ProtocolService* service){
 	service->indexW = 0;
 	service->flags.byte = 0;
 	clear_receive_pck();
-	printf("Init protocol service\n");
-}
-
-uint8_t calculate_checksum(ProtocolFrame* pak) {
-	uint8_t checksum = 0;
-	for (int i = 0; i < 4; i++) {
-		checksum ^= pak->header[i];
-	}
-	checksum ^= pak->length;
-	checksum ^= pak->token;
-	checksum ^= pak->cmd;
-	for (int i = 0; i < pak->length - 1; i++) {
-		checksum ^= pak->payload[i];
-	}
-	return checksum;
 }
 
 bool verify_header() {
@@ -84,7 +69,6 @@ bool process_protocol_buffer() {
 	}
 
 	if (available < PROTOCOL_MIN_BYTE_COUNT) {
-		printf("Menos de %u bytes en buffer\n", PROTOCOL_MIN_BYTE_COUNT);
 		return false;
 	}
 	
@@ -142,18 +126,12 @@ Command getResponseCommand(Command req) {
 		break;
 	}
 	
-	printf("DEBUG: Request: 0x%X -> Response: 0x%X\n", reqValue, responseValue);
+	//printf("DEBUG: Request: 0x%X -> Response: 0x%X\n", reqValue, responseValue);
 	return (Command)responseValue;
 }
 
 void clear_receive_pck(){
-	protocolService.receivePck.checksum = 0;
-	protocolService.receivePck.cmd = 0;
-	protocolService.receivePck.length = 0;
-	protocolService.receivePck.token = 0;
-	protocolService.receivePck.payload[0] = NULL;
-	protocolService.receivePck.header[0] = NULL;
-	printf("Paquete RCV cleared \n");
+	memset(&protocolService.receivePck, 0, sizeof(protocolService.receivePck));
 }
 
 uint8_t calculatePayload() {
@@ -175,22 +153,12 @@ uint8_t calculatePayload() {
 	checksum ^= protocolService.receivePck.cmd;
 
 	// XOR con cada byte del PAYLOAD (cantidad EXACTA: LENGTH bytes)
-	printf_P(PSTR("Payload en Hex:\n"));
-	for (int i = 0; i < protocolService.receivePck.length; i++) {
+	for (int i = 0; i < protocolService.receivePck.length; i++) { //HACK: Aca puse un =, tendria que checkear el cks, pero como lo adelanta 1, es valido
 		uint8_t payload_byte = *(protocolService.receivePck.payload + i);
 		printf("Byte %d: 0x%02X (Decimal: %d)\n", i, payload_byte, payload_byte);
 		checksum ^= payload_byte;
 	}
-
-	printf("CHECKSUM CALC %02X\n", checksum);
-	printf("CHECKSUM ESPERADO: %02X\n", protocolService.receivePck.checksum);
-
-	if (checksum == protocolService.receivePck.checksum) {
-		printf_P(PSTR("Cks valido\n"));
-		} else {
-		printf_P(PSTR("Cks invalido\n"));
-	}
-
+	protocolService.receivePck.checksum = *(protocolService.receivePck.payload + protocolService.receivePck.length);
 	return checksum;
 }
 
@@ -239,7 +207,6 @@ void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength) {
 	
 	// Set the checksum field
 	protocolService.receivePck.checksum = checksum;
-	printf("Valor CMD paquete creado %x \n", protocolService.receivePck.cmd);
 }
 
 bool validatePck(){
@@ -267,7 +234,6 @@ bool validatePck(){
 			printf_P(PSTR("Comando invalido\n"));
 			return false;
 			} else {
-			printf("Length %u\n", protocolService.receivePck.length);
 			if(protocolService.receivePck.length > PROTOCOL_MAX_BYTE_COUNT){
 				printf_P(PSTR("Length mayor a %u, se perderia data del buffer\n"), PROTOCOL_MAX_BYTE_COUNT);
 				return false;
@@ -286,11 +252,8 @@ bool validatePck(){
 			// Calcular y comparar el checksum
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_CALCULATING_CHK);
 			if(calculatePayload() != protocolService.receivePck.checksum){
-				printf_P(PSTR("Cks invalido\n"));
 				return false;
 			} else {
-				NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_PROCESSING_PAYLOAD);
-				doAction(protocolService.receivePck.cmd);
 				return true;
 			}
 		}
@@ -309,7 +272,7 @@ void doAction(uint8_t cmd){
 		case CMD_STOP:
 		{
 			// Se espera un byte de estado (ej. 0x01 para On, 0x00 para Off)
-			printf("Status: %u\n", protocolService.receivePck.payload[0]);
+			printf_P(PSTR("Status: %u\n"), protocolService.receivePck.payload[0]);
 			CREATE_RESPONSE_PCK = 1;
 		}
 		break;
@@ -349,28 +312,38 @@ void doAction(uint8_t cmd){
 					// Asignar el tipo de caja según el número de salida recibido:
 					switch(output){
 						case 0:
-						salidaA.boxType = boxType;
+							salidaA.boxType = boxType;
 						break;
 						case 1:
-						salidaB.boxType = boxType;
+							salidaB.boxType = boxType;
 						break;
 						case 2:
-						salidaC.boxType = boxType;
+							salidaC.boxType = boxType;
 						break;
 						default:
 						// Opcional: manejar números de salida inválidos
 						break;
 					}
-					eepromConfig.salidaA = salidaA.boxType;
-					eepromConfig.salidaB = salidaB.boxType;
-					eepromConfig.salidaC = salidaC.boxType;					
-					saveConfiguration(&eepromConfig);
-					printf("Salida %d: Box Type = %u\n", output, boxType);
-					CREATE_RESPONSE_PCK = 1;
+					char caja_tipo;
+					switch (boxType)
+					{
+						case BOX_SIZE_A:
+							caja_tipo = 'A';
+							break;
+						case BOX_SIZE_B:
+							caja_tipo = 'B';
+							break;
+						case BOX_SIZE_C:
+							caja_tipo = 'C';
+							break;
+					}
+					printf_P(PSTR("Salida %d: Caja tipo = %c\n"), output, caja_tipo);
 					} else {
 					printf_P(PSTR("Formato de token invalido: %s\n"), token);
 				}
 				token = strtok(NULL, "-");
+				CREATE_RESPONSE_PCK = 1;
+				NEW_CONFIG = 1;
 			}
 			break;
 		}
@@ -403,10 +376,10 @@ void doAction(uint8_t cmd){
 		}
 		case CMD_CONFIG_RESET:
 		{
-			eepromConfig.salidaA = salidaA.boxType = OUTPUT_A_DEFAULT_BOX_TYPE;
-			eepromConfig.salidaB = salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
-			eepromConfig.salidaC = salidaC.boxType = OUTPUT_C_DEFAULT_BOX_TYPE;
-			saveConfiguration(&eepromConfig);
+			currentConfig.salidaA = salidaA.boxType = OUTPUT_A_DEFAULT_BOX_TYPE;
+			currentConfig.salidaB = salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
+			currentConfig.salidaC = salidaC.boxType = OUTPUT_C_DEFAULT_BOX_TYPE;
+			saveConfigurationRAM(&currentConfig);
 			CREATE_RESPONSE_PCK = 1;
 			break;
 		}
@@ -417,7 +390,7 @@ void doAction(uint8_t cmd){
 }
 
 uint8_t protocolTask(){
-	if (IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA) && !IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)) {
+	if (NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_IDLE && IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA) && !IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)) {
 		if (process_protocol_buffer()) {
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_READING_HEADER);
 			SET_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
@@ -426,20 +399,31 @@ uint8_t protocolTask(){
 		}
 	}
 	if(IS_FLAG_SET(protocolService.flags, PROTOSERV_RESET)){
-		protocolService.indexR = protocolService.indexW;
+		uint8_t highest;
+		if (protocolService.indexR > protocolService.indexW) {
+			highest = protocolService.indexR;
+			} else {
+			highest = protocolService.indexW;
+		}
+		// Asegurarse de que el índice esté dentro del rango usando el módulo
+		highest %= PROTOCOL_BUFFER_SIZE;
+
+		protocolService.indexR = highest;
+		protocolService.indexW = highest;
+		clear_receive_pck();
 		CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 		CLEAR_FLAG(protocolService.flags, PROTOSERV_RESET);
 		CLEAR_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
 		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
-		clear_receive_pck();
 	}
 	if(IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)){
 		if(validatePck()){
-			//PROCESAR DATOS ACA
+			DO_ACTION = 1;
+			doActionCmd = protocolService.receivePck.cmd;
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_VALIDATED);
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
-			//POR AHORA SIEMPRE CREA PAQUETE DE RESPUESTA, DESPUES PONEMOS UNA BANDERA
-			}else{
+		}else{
+			printf_P(PSTR("Comando rechazado\n"));
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
 			SET_FLAG(protocolService.flags, PROTOSERV_RESET);
 		}
@@ -449,20 +433,21 @@ uint8_t protocolTask(){
 		protocolService.receivePck.cmd = (uint8_t)getResponseCommand(protocolService.receivePck.cmd); //Asignar comando de respuesta
 		SET_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
 		uint8_t len = create_payload(protocolService.receivePck.cmd);
-		protocolService.indexW = ((protocolService.indexW + len)% PROTOCOL_BUFFER_SIZE);
 		createPck(protocolService.receivePck.cmd, &protocolService.buffer[protocolService.indexW], len);
+		protocolService.indexW = ((protocolService.indexW + len) % PROTOCOL_BUFFER_SIZE);
 		CLEAR_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
 		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);
 	}
 	if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND){
 		if (!IS_TRANSMITTING) {
+			transmit_counter = 0;
 			UCSR0B &= ~(1 << RXCIE0);  // Desactiva la interrupción de recepción
 			IS_TRANSMITTING = 1;
 			UCSR0B |= (1 << UDRIE0);   // Activa la interrupción de transmisión para iniciar el envío
 		}
-		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND_DONE);
 	}
 	if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND_DONE){
+		SET_FLAG(protocolService.flags, PROTOSERV_RESET);
 		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_IDLE);
 	}
 }
@@ -493,18 +478,75 @@ uint8_t create_payload(Command cmd) {
 			break;
 		}		
 		case CMD_RESPONSE_GET_CONFIG: {
-			
-			protocolService.buffer[start_index] = 'A';
-			protocolService.buffer[(start_index + 1) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 2) % PROTOCOL_BUFFER_SIZE] = (uint8_t)salidaA.boxType + '0';
-			protocolService.buffer[(start_index + 3) % PROTOCOL_BUFFER_SIZE] = 'B';
-			protocolService.buffer[(start_index + 4) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 5) % PROTOCOL_BUFFER_SIZE] = (uint8_t)salidaB.boxType + '0';
-			protocolService.buffer[(start_index + 6) % PROTOCOL_BUFFER_SIZE] = 'C';
-			protocolService.buffer[(start_index + 7) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 8) % PROTOCOL_BUFFER_SIZE] = (uint8_t)salidaC.boxType + '0';
+			uint8_t pos = start_index;
+			char tipo_caja;
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			switch(salidaA.boxType){
+				case BOX_SIZE_A:
+				{
+					tipo_caja = 'A';
+					
+					break;
+				}
+				case BOX_SIZE_B:
+				{
+					tipo_caja = 'B';
+					
+					break;
+				}
+				case BOX_SIZE_C:
+				{
+					tipo_caja = 'C';
+					break;
+				}
+			}
+			printf_P(PSTR("Salida 0: Caja tipo = %c\n"), tipo_caja);
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = (uint8_t)tipo_caja + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = '1';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			switch(salidaB.boxType){
+				case BOX_SIZE_A:
+				{
+					tipo_caja = 'A';
+					break;
+				}
+				case BOX_SIZE_B:
+				{
+					tipo_caja = 'B';
+					break;
+				}
+				case BOX_SIZE_C:
+				{
+					tipo_caja = 'C';
+					break;
+				}
+			}
+			printf_P(PSTR("Salida 1: Caja tipo = %c\n"), tipo_caja);
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = (uint8_t)tipo_caja + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = '2';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			switch(salidaC.boxType){
+				case BOX_SIZE_A:
+				{
+					tipo_caja = 'A';
+					break;
+				}
+				case BOX_SIZE_B:
+				{
+					tipo_caja = 'B';
+					break;
+				}
+				case BOX_SIZE_C:
+				{
+					tipo_caja = 'C';
+					break;
+				}
+			}
+			printf_P(PSTR("Salida 2: Caja tipo = %c\n"), tipo_caja);
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = (uint8_t)tipo_caja + '0';
 	
-			payload_length = 9;
+			payload_length = pos - start_index;
 			break;
 		}
 		case CMD_RESPONSE_CLEAR_STATS:
@@ -515,23 +557,30 @@ uint8_t create_payload(Command cmd) {
 		}
 		case CMD_RESPONSE_GET_STATS:
 		{
-			protocolService.buffer[start_index] = 'M';
-			protocolService.buffer[(start_index + 1) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 2) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_measured;
-			protocolService.buffer[(start_index + 3) % PROTOCOL_BUFFER_SIZE] = 'D';
-			protocolService.buffer[(start_index + 4) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 5) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_discarded;
-			protocolService.buffer[(start_index + 6) % PROTOCOL_BUFFER_SIZE] = 'A';
-			protocolService.buffer[(start_index + 7) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 8) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[0];
-			protocolService.buffer[(start_index + 6) % PROTOCOL_BUFFER_SIZE] = 'B';
-			protocolService.buffer[(start_index + 7) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 8) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[1];
-			protocolService.buffer[(start_index + 9) % PROTOCOL_BUFFER_SIZE] = 'C';
-			protocolService.buffer[(start_index + 10) % PROTOCOL_BUFFER_SIZE] = ':';
-			protocolService.buffer[(start_index + 11) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[2];
-							
-			payload_length = 12;
+			printf_P(PSTR("Medidas: %u\n"), SorterSystem.stats.total_measured);
+			printf_P(PSTR("Descartadas: %u\n"), SorterSystem.stats.total_discarded);
+			printf_P(PSTR("Tipo A: %u\n"), SorterSystem.stats.total_by_type_array[0]);
+			printf_P(PSTR("Tipo B: %u\n"), SorterSystem.stats.total_by_type_array[1]);
+			printf_P(PSTR("Tipo C: %u\n"), SorterSystem.stats.total_by_type_array[2]);
+			uint8_t pos = start_index;
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'M';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_measured + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'D';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_discarded + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'A';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[0] + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'B';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[1] + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'C';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = (uint8_t)SorterSystem.stats.total_by_type_array[2] + '0';
+
+			payload_length = pos - start_index;
+			break;
 		}
 		case CMD_RESPONSE_GET_FIRMWARE: {	
 			const char* firmware_version = DEV_FIRMWARE_VERSION;
@@ -568,4 +617,45 @@ uint8_t create_payload(Command cmd) {
 		}
 	}
 	return payload_length;
+}
+
+void printCommandMessage(Command cmd) {
+	switch(cmd) {
+		case CMD_ALIVE:
+		printf_P(PSTR("Comando ALIVE recibido\n"));
+		break;
+		case CMD_START:
+		printf_P(PSTR("Iniciar operación\n"));
+		break;
+		case CMD_STOP:
+		printf_P(PSTR("Detener operación\n"));
+		break;
+		case CMD_SET_CONFIG:
+		printf_P(PSTR("Setear nueva configuracion\n"));
+		break;
+		case CMD_GET_CONFIG:
+		printf_P(PSTR("Obtener configuracion\n"));
+		break;
+		case CMD_GET_FIRMWARE:
+		printf_P(PSTR("Obtener firmware\n"));
+		break;
+		case CMD_GET_STATS:
+		printf_P(PSTR("Obtener estadisticas\n"));
+		break;
+		case CMD_CLEAR_STATS:
+		printf_P(PSTR("Limpiar estadisticas\n"));
+		break;
+		case CMD_GET_REPOSITORY:
+		printf_P(PSTR("Obtener repositorio\n"));
+		break;
+		case CMD_CONFIG_RESET:
+		printf_P(PSTR("Resetear configuracion\n"));
+		break;
+		case CMD_INVALID:
+		printf_P(PSTR("Comando invalido\n"));
+		break;
+		default:
+		printf_P(PSTR("Comando desconocido\n"));
+		break;
+	}
 }

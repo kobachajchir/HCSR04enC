@@ -12,9 +12,9 @@
 #include "../../types/configType.h"
 #include <stdbool.h>
 
-void saveConfiguration(Config_t *config);
-void loadConfiguration(Config_t *config);
+void saveConfigurationRAM(const Config_t *config);
 bool existConfig(void);
-
+uint8_t calculate_config_checksum(Config_t* config);
+void loadConfigurationRAM(Config_t *config);
 
 #endif /* EEPROM_UTILS_H_ */

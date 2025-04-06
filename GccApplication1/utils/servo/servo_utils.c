@@ -11,7 +11,6 @@
 #include "servo_utils.h"
 
 void initServo(volatile servo_t* servo, uint8_t index, uint8_t pin, uint8_t startAngle){
-	printf("Init Servo %u\n", index);
 	servo->flags.byte = 0;
 	servo->pulse_us = calculate_angle_pulseUs(startAngle);
 	servo->pin = pin;

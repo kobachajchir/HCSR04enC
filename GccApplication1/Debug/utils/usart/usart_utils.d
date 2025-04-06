@@ -19,9 +19,9 @@ utils/usart/usart_utils.d utils/usart/usart_utils.o: \
  ../utils/usart/./../../utils/../main.h \
  ../utils/usart/./../../types/bitmapType.h \
  ../utils/usart/./../../types/ultrasonicDetectorType.h \
- ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h \
+ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h \
+ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
  ../utils/usart/./../../types/bitmapType.h \
  ../utils/usart/./../../types/TCRTType.h \
  ../utils/usart/./../../types/sorterSystemTypes.h \
@@ -33,6 +33,7 @@ utils/usart/usart_utils.d utils/usart/usart_utils.o: \
  ../utils/usart/./../../types/protocolTypes.h \
  ../utils/usart/./../../types/configType.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
  ../utils/usart/./../../types/protocolTypes.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
@@ -73,11 +74,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../utils/usart/./../../types/ultrasonicDetectorType.h:
 
-../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h:
+D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
-../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h:
+D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 
 ../utils/usart/./../../types/bitmapType.h:
 
@@ -100,5 +101,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../utils/usart/./../../types/configType.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
 
 ../utils/usart/./../../types/protocolTypes.h:

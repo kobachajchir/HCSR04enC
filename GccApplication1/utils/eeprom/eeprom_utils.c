@@ -9,27 +9,43 @@
 #include "../../main.h"
 #include <stdbool.h>
 
-// Función para guardar la configuración en la EEPROM
-void saveConfiguration(Config_t *config) {
-	// Usa eeprom_update_block para escribir solo si ha habido cambios
-	printf("Save config\n");
-	eeprom_update_block((const void*)config, (void*)&eepromConfig, sizeof(Config_t));
+// Guarda la configuración desde RAM en la EEPROM
+void saveConfigurationRAM(const Config_t *config) {
+	Config_t temp = *config; // Copia local en RAM
+	temp.checksum = calculate_config_checksum(&temp);
+	eeprom_update_block((const void*)&temp, (void*)&eepromConfig, sizeof(Config_t));
+	printf_P(PSTR("Config guardada en EEPROM\n"));
 }
 
-// Función para cargar la configuración de la EEPROM
-void loadConfiguration(Config_t *config) {
-	printf("Load config\n");
-	eeprom_read_block((void*)config, (const void*)&eepromConfig, sizeof(Config_t));
+// Función para calcular el checksum de la configuración
+uint8_t calculate_config_checksum(Config_t* config) {
+	// Simple XOR de los campos de salida
+	return config->salidaA ^ config->salidaB ^ config->salidaC;
 }
 
+void loadConfigurationRAM(Config_t *config) {
+	if (config == NULL) return;
+	eeprom_read_block((void *)config, (const void *)&eepromConfig, sizeof(Config_t));
+	printf_P(PSTR("Config cargada desde EEPROM\n"));
+}
+
+
+// Verifica si existe una configuración válida en la EEPROM
 bool existConfig(void) {
 	Config_t temp;
-	eeprom_read_block((void*)&temp, (const void*)&eepromConfig, sizeof(Config_t));
-	// Si todos los bytes son 0xFF, se asume que no hay configuración seteada.
+	eeprom_read_block((void*)&temp, (const void *)&eepromConfig, sizeof(Config_t));
+	
+	// Si todas las salidas son 0xFF se asume que no hay configuración seteada.
 	if (temp.salidaA == 0xFF && temp.salidaB == 0xFF && temp.salidaC == 0xFF) {
 		return false;
-	}else{
-		printf("Exists config\n");
 	}
+	
+	uint8_t expected = calculate_config_checksum(&temp);
+	if (temp.checksum != expected) {
+		printf_P(PSTR("Checksum EEPROM invalido\n"));
+		return false;
+	}
+	
+	printf_P(PSTR("Configuración válida en EEPROM\n"));
 	return true;
 }

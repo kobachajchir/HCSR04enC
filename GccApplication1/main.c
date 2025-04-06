@@ -52,6 +52,8 @@ volatile uint8_t diezMsCounter = 0; //Counter de 10ms, max 255 ovf cada 2.55 seg
 volatile uint8_t veintems_counter = 0;
 volatile uint8_t trigger_timeout_counter = 0;
 volatile uint8_t servo_active_counter = 0;
+volatile uint8_t transmit_counter;
+uint8_t doActionCmd;
 uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
 ultrasonic_t ultraSensor;
 Ultrasonic_Detector_t hcsr04Detector;
@@ -69,6 +71,7 @@ output_t salidaB;
 output_t salidaC;
 sorter_system_t SorterSystem;
 ProtocolService protocolService;
+Config_t currentConfig;
 EEMEM Config_t eepromConfig;
 
 /* END Global variables ------------------------------------------------------*/
@@ -205,43 +208,36 @@ ISR(USART_RX_vect)
 
 	// Verifica si el buffer está lleno: si el próximo índice de escritura es igual al índice de lectura
 	if (next_indexW == protocolService.indexR) {
-		// El buffer está lleno; activa la bandera para procesar datos antes de sobrescribir
-			if (!(IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA))) {
-				// Si la bandera de procesamiento no está activa, no se debe sobreescribir
-				SET_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
-			}
-		// Opcional: podrías descartar el byte recibido
-		} else {
-		// Hay espacio: copia el byte en el buffer
-		protocolService.buffer[protocolService.indexW] = received_byte;
-		protocolService.indexW = next_indexW;
-
-		// Calcular la cantidad de bytes disponibles en el buffer (caso circular)
-		uint8_t available;
-		if (protocolService.indexW >= protocolService.indexR) {
-			available = protocolService.indexW - protocolService.indexR;
-			} else {
-			available = PROTOCOL_BUFFER_SIZE - protocolService.indexR + protocolService.indexW;
-		}
-
-		// Si hay al menos 6 bytes (mínimo para un paquete) disponibles, activa processData
-        if (available >= PROTOCOL_MIN_BYTE_COUNT && !IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA)) {
-	        SET_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
-        }
+		// Buffer lleno: sobrescribir el byte más viejo (avanzar indexR)
+		protocolService.indexR = (protocolService.indexR + 1) % PROTOCOL_BUFFER_SIZE;
 	}
+	protocolService.buffer[protocolService.indexW] = received_byte;
+	protocolService.indexW = next_indexW;
+
+	// Calcular la cantidad de bytes disponibles en el buffer (caso circular)
+	uint8_t available;
+	if (protocolService.indexW >= protocolService.indexR) {
+		available = protocolService.indexW - protocolService.indexR;
+		} else {
+		available = PROTOCOL_BUFFER_SIZE - protocolService.indexR + protocolService.indexW;
+	}
+
+	// Si hay al menos 6 bytes (mínimo para un paquete) disponibles, activa processData
+    if (available >= PROTOCOL_MIN_BYTE_COUNT && !IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA)) {
+	    SET_FLAG(protocolService.flags, PROTOSERV_CHECKDATA);
+    }
 }
 
 
-ISR(USART_UDRE_vect) {
-	if (protocolService.indexR != protocolService.indexW) {
-		// Hay datos para transmitir, envía el siguiente byte
-		uint8_t byte_to_send = protocolService.buffer[protocolService.indexR];
-		UDR0 = byte_to_send;
+ISR(USART_UDRE_vect) {//							UNER + : + len + cmd + cks = 8 
+	if (transmit_counter < (protocolService.receivePck.length + 8)) {
+		// Hay datos pendientes
+		transmit_counter++;
+		UDR0 = protocolService.buffer[protocolService.indexR];
 		protocolService.indexR = (protocolService.indexR + 1) % PROTOCOL_BUFFER_SIZE;
-		} else {
-		// No hay más datos para enviar, deshabilita la interrupción de transmisión
+	} else {
+		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND_DONE);
 		UCSR0B &= ~(1 << UDRIE0);
-		// Apaga la bandera de transmisión y reactiva la interrupción de recepción
 		IS_TRANSMITTING = 0;
 		UCSR0B |= (1 << RXCIE0);
 	}
@@ -557,6 +553,19 @@ int main()
 		servosTask();
 		buttonTask();
 		protocolTask();
+		if(DO_ACTION){ //Esto habilita o deshabilita las acciones de los comandos
+			DO_ACTION = 0;
+			printf_P(PSTR("Comando aceptado \n"));
+			printCommandMessage(doActionCmd);
+			doAction(doActionCmd);
+		}
+		if(NEW_CONFIG){
+			NEW_CONFIG = 0;
+			currentConfig.salidaA = salidaA.boxType;
+			currentConfig.salidaB = salidaB.boxType;
+			currentConfig.salidaC = salidaC.boxType;
+			saveConfigurationRAM(&currentConfig);
+		}
 		if(WAIT_TIME_TRIGGER_PASSED){ //Esta bandera salta cuando se cunplio el tiempo de espera entre triggers
 			WAIT_TIME_TRIGGER_PASSED = 0;
 			ultraSensor.TRIGGER_ALLOWED = 1;

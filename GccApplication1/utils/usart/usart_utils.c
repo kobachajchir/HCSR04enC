@@ -26,22 +26,22 @@ void USART_Init(uint16_t ubrr)
 }
 
 // Función para enviar un byte: Encola el byte y activa la interrupción de transmisión
-int USART_putchar(char c, FILE *stream) {
-	uint8_t next_indexW = (protocolService.indexW + 1) % PROTOCOL_BUFFER_SIZE;
-
-	// Verifica si el buffer está lleno (reserva un espacio para diferenciar vacío de lleno)
-	if (next_indexW == protocolService.indexR) {
-		return 0; // El buffer está lleno, se puede manejar el error aquí si es necesario
-	}
-
-	// Almacena el byte en el buffer y actualiza el índice de escritura
-	protocolService.buffer[protocolService.indexW] = c;
-	protocolService.indexW = next_indexW;
-
-	// Habilita la interrupción de transmisión para iniciar el envío
-	UCSR0B |= (1 << UDRIE0);
-	return 0;
-}
+// int USART_putchar(char c, FILE *stream) {
+// 	uint8_t next_indexW = (protocolService.indexW + 1) % PROTOCOL_BUFFER_SIZE;
+// 
+// 	// Verifica si el buffer está lleno (reserva un espacio para diferenciar vacío de lleno)
+// 	if (next_indexW == protocolService.indexR) {
+// 		return 0; // El buffer está lleno, se puede manejar el error aquí si es necesario
+// 	}
+// 
+// 	// Almacena el byte en el buffer y actualiza el índice de escritura
+// 	protocolService.buffer[protocolService.indexW] = c;
+// 	protocolService.indexW = next_indexW;
+// 
+// 	// Habilita la interrupción de transmisión para iniciar el envío
+// 	UCSR0B |= (1 << UDRIE0);
+// 	return 0;
+// }
 
 // Función bloqueante para enviar un byte por USART
 int USART_putchar_blocking(char c, FILE *stream) {

@@ -10,9 +10,9 @@ utils/eeprom/eeprom_utils.d utils/eeprom/eeprom_utils.o: \
  ../utils/eeprom/../../utils/../main.h \
  ../utils/eeprom/../../types/bitmapType.h \
  ../utils/eeprom/../../types/ultrasonicDetectorType.h \
- ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h \
+ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h \
+ D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
  ../utils/eeprom/../../types/TCRTType.h \
  ../utils/eeprom/../../types/sorterSystemTypes.h \
  ../utils/eeprom/../../types/outputType.h \
@@ -30,7 +30,8 @@ utils/eeprom/eeprom_utils.d utils/eeprom/eeprom_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h
 
 ../utils/eeprom/eeprom_utils.h:
 
@@ -56,11 +57,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../utils/eeprom/../../types/ultrasonicDetectorType.h:
 
-../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h:
+D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
-../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h:
+D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
 
 ../utils/eeprom/../../types/TCRTType.h:
 
@@ -97,3 +98,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:

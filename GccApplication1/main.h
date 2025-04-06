@@ -22,6 +22,7 @@
 #include "ultrasonic_hal.h"
 #include <avr/io.h>
 #include <avr/eeprom.h>
+#include <avr/pgmspace.h>
 
 #define ALL_FLAGS flags.byte
 
@@ -106,6 +107,8 @@
 #define OUTPUT_C_HAS_CONFIG bandera3.bitmap.bit2
 #define IS_TRANSMITTING bandera3.bitmap.bit3
 #define CREATE_RESPONSE_PCK bandera3.bitmap.bit4
+#define DO_ACTION bandera3.bitmap.bit5
+#define NEW_CONFIG bandera3.bitmap.bit6
 
 #define SERVO_ACTIVE_TIME 10
 
@@ -141,6 +144,8 @@ extern volatile uint8_t wait_time; // Contador de desbordamientos del Timer 1
 extern volatile uint8_t btn_pressed_time; // Contador de btn presionado en multiplos de 10ms
 extern volatile uint8_t echo_state; // Estado de la señal de eco
 extern volatile uint8_t servo_counter;
+extern volatile uint8_t transmit_counter;
+extern uint8_t doActionCmd;
 extern ultrasonic_t ultraSensor;
 extern Ultrasonic_Detector_t hcsr04Detector;
 extern sorter_system_t SorterSystem;
@@ -157,6 +162,7 @@ extern output_t salidaA;
 extern output_t salidaB;
 extern output_t salidaC;
 extern ProtocolService protocolService;
+extern Config_t currentConfig;
 extern EEMEM Config_t eepromConfig;
 
 #endif /* MAIN_H_ */
