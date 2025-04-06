@@ -7,6 +7,7 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include "./../../main.h"
+#include "hcsr04_utils.h"
 
 void calculate_distance()
 {

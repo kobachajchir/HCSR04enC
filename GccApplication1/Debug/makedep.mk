@@ -4,9 +4,17 @@
 
 main.c
 
-utils\hcsr04\hcsr04_utils.c
+utils\eeprom\eeprom_utils.c
+
+utils\legacy_hcsr04\hcsr04_utils.c
+
+utils\programPath\boxsorter_utils.c
+
+utils\protocol\protocol_utils.c
 
 utils\servo\servo_utils.c
+
+utils\tcrt\tcrt_utils.c
 
 utils\ultrasonic_hal.c
 

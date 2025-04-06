@@ -9,6 +9,8 @@
 #ifndef SERVO_UTILS_H_
 #define SERVO_UTILS_H_
 
-void servoA_set_angle(uint8_t angle);
+void initServo(volatile servo_t* servo, uint8_t index, uint8_t pin, uint8_t startAngle);
+uint16_t calculate_angle_pulseUs(uint8_t angle);
+void servo_set_angle(uint8_t index, uint8_t angle);
 
 #endif /* SERVO_UTILS_H_ */
