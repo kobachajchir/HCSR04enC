@@ -38,8 +38,8 @@ void initOutputs(){
 	initServos();
 	if(existConfig()){
 		loadConfigurationRAM(&currentConfig);
-		printf_P(PSTR("Config cargada: Salida A = %u, Salida B = %u, Salida C = %u\n"),
-		currentConfig.salidaA, currentConfig.salidaB, currentConfig.salidaC);
+		printf_P(PSTR("Config cargada: Salida 0 = %u, Salida 1 = %u, Salida 3 = %u\n"),
+		(currentConfig.salidaA + 'A'), (currentConfig.salidaB + 'A'), (currentConfig.salidaC + 'A'));
 	}else{
 		salidaA.boxType = OUTPUT_A_DEFAULT_BOX_TYPE;
 		salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
@@ -194,38 +194,44 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 				tipo = classify_box(ultraDetector->sensor->distance_mm, sorter);
 
 			if (tipo != NO_BOX) {
-				int outputIndex = -1;
-	
-				// Buscar si alguna salida coincide con el tipo recibido
-				if (salidaA.boxType == tipo) {
-					outputIndex = 0;
-					} else if (salidaB.boxType == tipo) {
-					outputIndex = 1;
-					} else if (salidaC.boxType == tipo) {
-					outputIndex = 2;
-				}
-	
-				// Si se encontró una salida, se marca como busy
-				if (outputIndex != -1) {
-					switch (outputIndex) {
-						case 0:
-						SET_FLAG(salidaA.flags, OUTPUT_BUSY);
-						printf_P(PSTR("Salida A busy\n"));
-						break;
-						case 1:
-						SET_FLAG(salidaB.flags, OUTPUT_BUSY);
-						printf_P(PSTR("Salida B busy\n"));
-						break;
-						case 2:
-						SET_FLAG(salidaC.flags, OUTPUT_BUSY);
-						printf_P(PSTR("Salida C busy\n"));
-						break;
-					}
-					} else {
-					// Si no se encontró, se considera que la caja se descarta
+				// Si el tipo es BOX_DISCARDED, no se marca busy, se notifica y se actualizan las estadísticas.
+				if (tipo == BOX_DISCARDED) {
 					printf_P(PSTR("BOX_DISCARDED\n"));
+					} else {
+					int outputIndex = -1;
+					// Buscar si alguna salida coincide con el tipo recibido
+					if (salidaA.boxType == tipo) {
+						outputIndex = 0;
+						} else if (salidaB.boxType == tipo) {
+						outputIndex = 1;
+						} else if (salidaC.boxType == tipo) {
+						outputIndex = 2;
+					}
+					
+					// Si se encontró una salida, se marca como busy
+					if (outputIndex != -1) {
+						switch (outputIndex) {
+							case 0:
+							SET_FLAG(salidaA.flags, OUTPUT_BUSY);
+							printf_P(PSTR("Salida A busy\n"));
+							break;
+							case 1:
+							SET_FLAG(salidaB.flags, OUTPUT_BUSY);
+							printf_P(PSTR("Salida B busy\n"));
+							break;
+							case 2:
+							SET_FLAG(salidaC.flags, OUTPUT_BUSY);
+							printf_P(PSTR("Salida C busy\n"));
+							break;
+							default:
+							break;
+						}
+						} else {
+						// Si no se encontró coincidencia, se descarta la caja.
+						printf_P(PSTR("BOX_DISCARDED\n"));
+					}
 				}
-	
+				
 				// Actualizar estadísticas según el tipo
 				switch (tipo) {
 					case BOX_SIZE_A:
@@ -248,12 +254,11 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 					printf("Tipo no reconocido\n");
 					break;
 				}
-	
+				
 				sorter->stats.total_measured++;
 				printf("Contadas: %u\n", sorter->stats.total_measured);
 				// TODO: Agregar cola para manejo de cajas si es necesario.
 			}
-
 
 				// Cambio de estado para esperar que se libere nuevamente
 				NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_WAITING_CLEAR);

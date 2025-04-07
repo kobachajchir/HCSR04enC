@@ -422,6 +422,7 @@ uint8_t protocolTask(){
 			doActionCmd = protocolService.receivePck.cmd;
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_VALIDATED);
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
+			SET_FLAG(protocolService.flags, PROTOSERV_RESET);
 		}else{
 			printf_P(PSTR("Comando rechazado\n"));
 			CLEAR_FLAG(protocolService.flags, PROTOSERV_PROCESSING);
@@ -430,13 +431,13 @@ uint8_t protocolTask(){
 	}
 	if(CREATE_RESPONSE_PCK){
 		CREATE_RESPONSE_PCK = 0;
-		protocolService.receivePck.cmd = (uint8_t)getResponseCommand(protocolService.receivePck.cmd); //Asignar comando de respuesta
+		/*protocolService.receivePck.cmd = (uint8_t)getResponseCommand(protocolService.receivePck.cmd); //Asignar comando de respuesta
 		SET_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
 		uint8_t len = create_payload(protocolService.receivePck.cmd);
 		createPck(protocolService.receivePck.cmd, &protocolService.buffer[protocolService.indexW], len);
 		protocolService.indexW = ((protocolService.indexW + len) % PROTOCOL_BUFFER_SIZE);
 		CLEAR_FLAG(protocolService.flags, PROTOSERV_CREATE_PCK);
-		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);
+		NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_SEND);*/
 	}
 	if(NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_SEND){
 		if (!IS_TRANSMITTING) {

@@ -53,6 +53,7 @@
 #define DISTANCE_MIN_MM 30 //3cm min
 #define DISTANCE_MAX_MM 2000 //2m max
 #define ECHO_INTERVAL_TENMS 10 //Max 2.5s que es 255, porque el contador es uint8
+#define TRIGGER_WAIT_TIME_TENMS 6
 
 #define SERVO_MIN_PULSE 2000UL // 1ms (2000 * 0.5us)
 #define SERVO_START_PULSE 3000UL // 1ms (2000 * 0.5us)
@@ -72,17 +73,10 @@
 
 #define PROTOCOL_MIN_BYTE_COUNT 6
 #define PROTOCOL_MAX_BYTE_COUNT 24
+#define PROTOCOL_FIXED_SIZE 8
 
 #define DEV_REPOSITORY "github.com/kobachajchir/HCSR04enC"
-#define DEV_FIRMWARE_VERSION "0.8.0"
-
-//#define DO_TRIGGER bandera.bitmap.bit0
-//#define TRIGGER_FINISH bandera.bitmap.bit1
-//#define ECHO_RISING bandera.bitmap.bit2
-//#define ECHO_STATE bandera.bitmap.bit3  // Usamos el bit 3 para el estado de ECHO
-// #define TRIGGER_STATE bandera.bitmap.bit4 // Usamos el bit 4 para el estado de TRIGGER
-// #define TRIGGER_ALLOWED bandera.bitmap.bit5 // Usamos el bit 5 para el allow del TRIGGER
-// #define CALCULATE bandera.bitmap.bit6 // Usamos el bit 6 para el allow del TRIGGER
+#define DEV_FIRMWARE_VERSION "1.0.0"
 
 #define BTN_RELEASED bandera.bitmap.bit0
 #define TIMER2_ACTIVE bandera.bitmap.bit1
@@ -102,9 +96,9 @@
 #define DEBUG_FLAGS bandera2.bitmap.bit6 //DebugFlags de la libreria del HCSR04
 #define DEBUG_FLAGS_SORTER bandera2.bitmap.bit7 //DebugFlags del Sorter
 
-#define OUTPUT_A_HAS_CONFIG bandera3.bitmap.bit0
-#define OUTPUT_B_HAS_CONFIG bandera3.bitmap.bit1
-#define OUTPUT_C_HAS_CONFIG bandera3.bitmap.bit2
+#define DEBUG_FLAGS_SERVOS bandera3.bitmap.bit0
+#define DEBUG_FLAGS_EEPROM bandera3.bitmap.bit1
+//#define OUTPUT_C_HAS_CONFIG bandera3.bitmap.bit2
 #define IS_TRANSMITTING bandera3.bitmap.bit3
 #define CREATE_RESPONSE_PCK bandera3.bitmap.bit4
 #define DO_ACTION bandera3.bitmap.bit5
