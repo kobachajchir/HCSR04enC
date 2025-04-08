@@ -17,7 +17,7 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\eeprom.h \
- .././main.h .././utils/macros_utils.h .././utils/../main.h \
+ .././main.h .././utils/macros_utils.h .././utils/../types/bitmapType.h \
  .././types/bitmapType.h .././types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
@@ -71,7 +71,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 .././utils/macros_utils.h:
 
-.././utils/../main.h:
+.././utils/../types/bitmapType.h:
 
 .././types/bitmapType.h:
 

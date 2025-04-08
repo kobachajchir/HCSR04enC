@@ -15,7 +15,15 @@
 #include <stdbool.h>
 #include <avr/pgmspace.h>
 
-
+/**
+ * @brief Inicializa el detector ultrasónico.
+ *
+ * Configura el puntero al sensor ultrasónico y al sensor IR asociado.
+ *
+ * @param [out] hcsr04Detector Estructura del detector ultrasónico.
+ * @param [in] sensor_ultra Puntero al sensor ultrasónico.
+ * @param [in] sensor_IR Puntero al sensor IR.
+ */
 void initDetector(Ultrasonic_Detector_t* hcsr04Detector, ultrasonic_t* sensor_ultra, TCRT_t* sensor_IR){
 	hcsr04Detector->sensor = &ultraSensor;
 	hcsr04Detector->sensor_IR = &sensor_IR;
@@ -23,7 +31,12 @@ void initDetector(Ultrasonic_Detector_t* hcsr04Detector, ultrasonic_t* sensor_ul
 	NIBBLEH_SET_STATE(hcsr04Detector->flags, ULTRADET_SENSOR_IDLE);;
 }
 
-inline void initServos(void){
+/**
+ * @brief Inicializa los servos utilizados por el sistema.
+ *
+ * Asigna ángulo inicial y pines de control. Los servos son almacenados en un arreglo global.
+ */
+inline void initServos(void){ //Funcion solo estructural, es inline
 	initServo(&servoA, 0, SERVOA_PIN, SERVO_IDLE_ANGLE);
 	initServo(&servoB, 1, SERVOB_PIN, SERVO_IDLE_ANGLE);
 	//initServo(&servoC, 2, SERVOC_PIN, SERVO_IDLE_ANGLE); //Recordar que tenemos que habilitar este cuando pongamos el servo
@@ -34,17 +47,23 @@ inline void initServos(void){
 	//printf("Init servos\n");
 }
 
+/**
+ * @brief Inicializa las salidas del sistema de clasificación.
+ *
+ * Carga configuración desde EEPROM si existe, o aplica valores por defecto.
+ * Asocia pines y marca todas las salidas como listas (READY).
+ */
 void initOutputs(){
 	initServos();
 	if(existConfig()){
 		loadConfigurationRAM(&currentConfig);
-		printf_P(PSTR("Config cargada: Salida A = %u, Salida B = %u, Salida C = %u\n"),
-		currentConfig.salidaA, currentConfig.salidaB, currentConfig.salidaC);
 	}else{
 		salidaA.boxType = OUTPUT_A_DEFAULT_BOX_TYPE;
 		salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
 		salidaC.boxType = OUTPUT_C_DEFAULT_BOX_TYPE;
-		printf_P(PSTR("Sin configuracion guardada\n"));
+		if(DEBUG_FLAGS_SORTER){
+			printf_P(PSTR("SYS SORTER DEBUG - Sin configuracion guardada\n"));
+		}
 	}
 	salidaA.actuator_pin = SERVOA_PIN;
 	salidaA.sensor_pin = IR_A.pin;
@@ -61,6 +80,13 @@ void initOutputs(){
 	//printf("Init outputs\n");
 }
 
+/**
+ * @brief Inicializa el sistema de clasificación (Sorter).
+ *
+ * Asocia rangos de altura de cajas, salidas y configura estado inicial.
+ *
+ * @param [out] SystemSorter Puntero al sistema de clasificación a inicializar.
+ */
 void initSorter(sorter_system_t* SystemSorter){
 	static box_height_range_matrix_t local_box_ranges = {
 		.box_size_a = { BOX_A_MIN_MM, BOX_A_MAX_MM },
@@ -77,7 +103,15 @@ void initSorter(sorter_system_t* SystemSorter){
 	}
 }
 
-
+/**
+ * @brief Clasifica una caja en función de su altura medida.
+ *
+ * Determina si es tipo A, B, C o descartada, comparando contra los rangos predefinidos.
+ *
+ * @param [in] distance_mm Distancia medida por el sensor ultrasónico.
+ * @param [in] SystemSorter Sistema de clasificación que contiene los rangos.
+ * @retval box_type_t Tipo de caja detectada.
+ */
 box_type_t classify_box(uint8_t distance_mm, sorter_system_t* SystemSorter)
 {
 	// Si la distancia es mayor o igual a la distancia de reposo (pared)
@@ -128,8 +162,15 @@ box_type_t classify_box(uint8_t distance_mm, sorter_system_t* SystemSorter)
 	return BOX_DISCARDED;
 }
 
-
-
+/**
+ * @brief Tarea que ejecuta el control principal del sensor ultrasónico.
+ *
+ * Se encarga de disparar el sensor, verificar el eco, clasificar la caja,
+ * actualizar estadísticas y manejar errores por timeout.
+ *
+ * @param [in,out] ultraDetector Estructura de control del sensor ultrasónico.
+ * @param [in,out] sorter Sistema de clasificación.
+ */
 void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sorter)
 {
 	// 1. Si está habilitado, el trigger está permitido y hay solicitud de emisión
@@ -137,7 +178,7 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 	{
 		if (ultrasonic_start(ultraDetector->sensor))
 		{
-			if (DEBUG_FLAGS)
+			if (DEBUG_FLAGS_SORTER)
 			{
 				printf_P(PSTR("InitHCSR04\n"));
 			}
@@ -148,7 +189,7 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 		}
 		else
 		{
-			if (DEBUG_FLAGS)
+			if (DEBUG_FLAGS_SORTER)
 			{
 				printf_P(PSTR("ErrorInitHCSR04\n"));
 			}
@@ -194,66 +235,68 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 				tipo = classify_box(ultraDetector->sensor->distance_mm, sorter);
 
 			if (tipo != NO_BOX) {
-				int outputIndex = -1;
-	
-				// Buscar si alguna salida coincide con el tipo recibido
-				if (salidaA.boxType == tipo) {
-					outputIndex = 0;
-					} else if (salidaB.boxType == tipo) {
-					outputIndex = 1;
-					} else if (salidaC.boxType == tipo) {
-					outputIndex = 2;
-				}
-	
-				// Si se encontró una salida, se marca como busy
-				if (outputIndex != -1) {
-					switch (outputIndex) {
-						case 0:
-						SET_FLAG(salidaA.flags, OUTPUT_BUSY);
-						printf_P(PSTR("Salida A busy\n"));
-						break;
-						case 1:
-						SET_FLAG(salidaB.flags, OUTPUT_BUSY);
-						printf_P(PSTR("Salida B busy\n"));
-						break;
-						case 2:
-						SET_FLAG(salidaC.flags, OUTPUT_BUSY);
-						printf_P(PSTR("Salida C busy\n"));
-						break;
+				// Si el tipo es BOX_DISCARDED, no se marca busy, se notifica y se actualizan las estadísticas.
+				if (tipo == BOX_DISCARDED) {
+					if(DEBUG_FLAGS_SORTER){
+						printf_P(PSTR("BOX_DISCARDED\n"));
 					}
 					} else {
-					// Si no se encontró, se considera que la caja se descarta
-					printf_P(PSTR("BOX_DISCARDED\n"));
-				}
-	
+					// Buscar si alguna salida coincide con el tipo recibido
+					if (salidaA.boxType == tipo) {
+							SET_FLAG(salidaA.flags, OUTPUT_BUSY);
+							if(DEBUG_FLAGS_SORTER){
+								printf_P(PSTR("Salida A busy\n"));
+							}
+						} else if (salidaB.boxType == tipo) {
+							SET_FLAG(salidaB.flags, OUTPUT_BUSY);
+							if(DEBUG_FLAGS_SORTER){
+								printf_P(PSTR("Salida B busy\n"));
+							}
+						} else if (salidaC.boxType == tipo) {
+							SET_FLAG(salidaC.flags, OUTPUT_BUSY);
+							if(DEBUG_FLAGS_SORTER){
+								printf_P(PSTR("Salida C busy\n"));
+							}
+						}
+					}
+				
 				// Actualizar estadísticas según el tipo
 				switch (tipo) {
 					case BOX_SIZE_A:
-					printf("BOX_SIZE_A\n");
+					if(DEBUG_FLAGS_SORTER){
+						printf_P(PSTR("BOX_SIZE_A\n"));
+					}
 					sorter->stats.total_by_type_array[0]++;
 					break;
 					case BOX_SIZE_B:
-					printf("BOX_SIZE_B\n");
+					if(DEBUG_FLAGS_SORTER){
+						printf_P(PSTR("BOX_SIZE_B\n"));
+					}
 					sorter->stats.total_by_type_array[1]++;
 					break;
 					case BOX_SIZE_C:
-					printf("BOX_SIZE_C\n");
+					if(DEBUG_FLAGS_SORTER){
+						printf_P(PSTR("BOX_SIZE_C\n"));
+					}
 					sorter->stats.total_by_type_array[2]++;
 					break;
 					case BOX_DISCARDED:
-					printf("BOX_DISCARDED\n");
+					if(DEBUG_FLAGS_SORTER){
+						printf_P(PSTR("BOX_DISCARTED\n"));
+					}
 					sorter->stats.total_discarded++;
 					break;
 					default:
-					printf("Tipo no reconocido\n");
+					if(DEBUG_FLAGS_SORTER){
+						printf_P(PSTR("Tipo no reconocido\n"));
+					}
 					break;
 				}
-	
+				
 				sorter->stats.total_measured++;
-				printf("Contadas: %u\n", sorter->stats.total_measured);
+				printf_P(PSTR("Contadas: %u\n"), sorter->stats.total_measured);
 				// TODO: Agregar cola para manejo de cajas si es necesario.
 			}
-
 
 				// Cambio de estado para esperar que se libere nuevamente
 				NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_WAITING_CLEAR);
@@ -271,7 +314,7 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 	{
 		if (DEBUG_FLAGS)
 		{
-			printf("HCSR04 perdio ECHO\n");
+			printf_P(PSTR("HCSR04 perdio ECHO\n"));
 		}
 		VEINTEMS_PASSED = 0;
 		WAITING_ECHO = 0;
@@ -281,18 +324,24 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 
 		if (ultrasonic_timeout_clear(ultraDetector->sensor, DEBUG_FLAGS ? true : false) && DEBUG_FLAGS)
 		{
-			printf("LIB DEBUG - HCSR04 TMDOUT Cleared\n");
+			if (DEBUG_FLAGS)
+			{
+				printf_P(PSTR("LIB DEBUG - HCSR04 TMDOUT Cleared\n"));
+			}
 		}
 
 		ULTRASONIC_ENABLE = 1;
 	}
 }
 
+/**
+ * @brief Tarea que procesa los sensores IR.
+ *
+ * Realiza lectura de cada sensor, detecta cajas, y activa los servos correspondientes.
+ *
+ * @param [in,out] sorter Sistema de clasificación.
+ */
 void irSensorsTask(sorter_system_t * sorter){
-	
-	//printf("IR A: %u\n", IR_A.ADCConvertedValue);	
-	//printf("IR B: %u\n", IR_A.ADCConvertedValue);	
-	//printf("IR C: %u\n", IR_C.ADCConvertedValue);
 	//Para ir_U, hay que hacer otro debug, no tiene una salida asignada
 	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 10 ms se activa
 		CLEAR_FLAG(IR_A.flags, TCRT_NEW_VALUE);
@@ -304,10 +353,14 @@ void irSensorsTask(sorter_system_t * sorter){
 				CLEAR_FLAG(salidaA.flags, OUTPUT_READY);
 				SET_FLAG(servoA.flags, SERVO_PUSH);
 				servoA.state_time = 0;
-				printf("Pushed servo A and zeroed state time\n");
+				if(DEBUG_FLAGS_SORTER){
+					printf_P(PSTR("Pushed servo A and zeroed state time\n"));
+				}
 			}
 			NIBBLEH_SET_STATE(IR_A.flags, TCRT_STATUS_IDLE);
-			printf("Detecto en IR A\n");
+			if(DEBUG_FLAGS_SORTER){
+				printf_P(PSTR("Detecto en IR A\n"));
+			};
 		}
 	}
 	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
@@ -320,10 +373,14 @@ void irSensorsTask(sorter_system_t * sorter){
 				CLEAR_FLAG(salidaB.flags, OUTPUT_READY);
 				SET_FLAG(servoB.flags, SERVO_PUSH);
 				servoB.state_time = 0;
-				printf("Pushed servo B and zeroed state time\n");
+				if(DEBUG_FLAGS_SORTER){
+					printf_P(PSTR("Pushed servo B and zeroed state time\n"));
+				}
 			}
 			NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
-			printf("Detecto en IR B\n");
+			if(DEBUG_FLAGS_SORTER){
+				printf_P(PSTR("Detecto en IR B\n"));
+			}
 		}
 	}
 	if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
@@ -336,10 +393,14 @@ void irSensorsTask(sorter_system_t * sorter){
 				CLEAR_FLAG(salidaC.flags, OUTPUT_READY);
 				SET_FLAG(servoC.flags, SERVO_PUSH);
 				servoC.state_time = 0;
-				printf("Pushed servo C and zeroed state time\n");
+				if(DEBUG_FLAGS_SORTER){
+					printf_P(PSTR("Pushed servo C and zeroed state time\n"));
+				}
 			}
 			NIBBLEH_SET_STATE(IR_C.flags, TCRT_STATUS_IDLE);
-			printf("Detecto en IR C\n");
+			if(DEBUG_FLAGS_SORTER){
+				printf_P(PSTR("Detecto en IR C\n"));
+			}
 		}
 	}
 	if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa IR U del ultrasonido, no tiene salida
@@ -367,11 +428,18 @@ void irSensorsTask(sorter_system_t * sorter){
 				// Ya no hay caja y se había detectado previamente
 				CLEAR_FLAG(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING);
 				NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);  // Poner el sensor en estado idle
-				//printf("IR U Idle again\n");
+				if(DEBUG_FLAGS_SORTER){
+					printf_P(PSTR("IR U Idle again\n"));	
+				}
 			}
 	}
 }
 
+/**
+ * @brief Función placeholder para futuras tareas relacionadas con los servos.
+ *
+ * Actualmente vacía.
+ */
 void servosTask() {
 
 }

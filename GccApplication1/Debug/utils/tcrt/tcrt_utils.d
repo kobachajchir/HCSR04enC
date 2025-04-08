@@ -15,7 +15,7 @@ utils/tcrt/tcrt_utils.d utils/tcrt/tcrt_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
  ../utils/tcrt/../../main.h ../utils/tcrt/../../utils/macros_utils.h \
- ../utils/tcrt/../../utils/../main.h \
+ ../utils/tcrt/../../utils/../types/bitmapType.h \
  ../utils/tcrt/../../types/bitmapType.h \
  ../utils/tcrt/../../types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
@@ -66,7 +66,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../utils/tcrt/../../utils/macros_utils.h:
 
-../utils/tcrt/../../utils/../main.h:
+../utils/tcrt/../../utils/../types/bitmapType.h:
 
 ../utils/tcrt/../../types/bitmapType.h:
 

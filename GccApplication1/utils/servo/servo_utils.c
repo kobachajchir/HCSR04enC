@@ -10,6 +10,16 @@
 #include "../../types/servoType.h"
 #include "servo_utils.h"
 
+/**
+ * @brief Inicializa un servo específico.
+ *
+ * Asigna valores iniciales de ángulo, pin, y estado. Habilita el servo.
+ *
+ * @param [in,out] servo Puntero a la estructura del servo a inicializar.
+ * @param [in] index Índice del servo en el arreglo global.
+ * @param [in] pin Pin de salida asociado al servo.
+ * @param [in] startAngle Ángulo inicial en grados (0 a 180).
+ */
 void initServo(volatile servo_t* servo, uint8_t index, uint8_t pin, uint8_t startAngle){
 	servo->flags.byte = 0;
 	servo->pulse_us = calculate_angle_pulseUs(startAngle);
@@ -19,6 +29,15 @@ void initServo(volatile servo_t* servo, uint8_t index, uint8_t pin, uint8_t star
 	SET_FLAG(servo->flags, SERVO_ENABLE);
 }
 
+/**
+ * @brief Convierte un ángulo en microsegundos de pulso.
+ *
+ * Realiza un escalado lineal entre `SERVO_MIN_PULSE` y `SERVO_MAX_PULSE`.
+ *
+ * @param [in] angle Ángulo deseado (0–180 grados).
+ *
+ * @retval Duración del pulso en microsegundos correspondiente al ángulo.
+ */
 uint16_t calculate_angle_pulseUs(uint8_t angle){
 	if (angle > 180) angle = 180;
 	uint16_t min_ticks = SERVO_MIN_PULSE;
@@ -26,6 +45,14 @@ uint16_t calculate_angle_pulseUs(uint8_t angle){
 	return (uint16_t)(min_ticks + (((uint32_t)(max_ticks - min_ticks) * angle) / 180U));
 }
 
+/**
+ * @brief Establece el ángulo de un servo del arreglo global `servosArray`.
+ *
+ * Calcula y asigna la duración del pulso correspondiente al ángulo deseado.
+ *
+ * @param [in] index Índice del servo (0 a NUM_OUTPUTS-1).
+ * @param [in] angle Ángulo deseado (0–180 grados).
+ */
 void servo_set_angle(uint8_t index, uint8_t angle)
 {
 	if (index >= NUM_OUTPUTS) return;
