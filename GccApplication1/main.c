@@ -303,115 +303,113 @@ ISR(USART_UDRE_vect) {//							UNER + : + len + cmd + cks = 8
 
 ISR(TIMER2_COMPA_vect)
 {
-	if(TIMER2_ACTIVE) {
-		if(ultraSensor.state == ULTRA_TRIGGERING) {
-			if(!TRIGGER_ACTIVE) {
-				ultrasonic_hal_trigger_setHigh();
-				ultraSensor.DO_TRIGGER = 1;
-				TRIGGER_ACTIVE = 1;
-				} else {
-				ultrasonic_hal_trigger_setLow();
-				ultraSensor.TRIGGER_FINISH = 1;
-				ultraSensor.TRIGGER_ALLOWED = 0;
-				ultraSensor.state = ULTRA_WAIT_RISING;
-				ultraSensor.ECHO_RISING = 1; 
-				ultraSensor.TRIGGER_FINISH = 0; 
-				TRIGGER_ACTIVE = 0;
-				EMIT_TRIGGER = 0;
-				WAITING_ECHO = 1;
-			}
-		}
-		
-		// --- Timeout de 20ms para el ECHO ---
-		if(ultraSensor.state == ULTRA_WAIT_RISING && ultraSensor.ECHO_RISING && !VEINTEMS_PASSED && WAITING_ECHO) {
-			if(veintems_counter < 1) { // 1 * 10ms = 10ms (ajusta si lo deseas a 2 para 20ms)
-				veintems_counter++;
-				} else {
-				VEINTEMS_PASSED = 1;
-				veintems_counter = 0;
-			}
-		}
-		// --- Habilitar el trigger nuevamente en estados IDLE o DONE (70ms) ---
-		if(!ultraSensor.TRIGGER_ALLOWED && !WAIT_TIME_TRIGGER_PASSED) {
-			if(wait_time < TRIGGER_WAIT_TIME_TENMS){ // 6 * 10ms = 60ms
-				wait_time++;
-				} else {
-				WAIT_TIME_TRIGGER_PASSED = 1;
-				wait_time = 0;
-			}
-			if(ultraSensor.TIMEDOUT){
-				ultrasonic_timeout_clear(&ultraSensor, DEBUG_FLAGS ? true : false);
-			}
-		}
-		//De esto depende cada cuanto se hace un trigger
-		if(diezMsCounter < ECHO_INTERVAL_TENMS){
-			diezMsCounter++;
+	if(ultraSensor.state == ULTRA_TRIGGERING) {
+		if(!TRIGGER_ACTIVE) {
+			ultrasonic_hal_trigger_setHigh();
+			ultraSensor.DO_TRIGGER = 1;
+			TRIGGER_ACTIVE = 1;
 			} else {
-			ECHO_INTERVAL_FLAG = 1;
-			diezMsCounter = 0;
+			ultrasonic_hal_trigger_setLow();
+			ultraSensor.TRIGGER_FINISH = 1;
+			ultraSensor.TRIGGER_ALLOWED = 0;
+			ultraSensor.state = ULTRA_WAIT_RISING;
+			ultraSensor.ECHO_RISING = 1; 
+			ultraSensor.TRIGGER_FINISH = 0; 
+			TRIGGER_ACTIVE = 0;
+			EMIT_TRIGGER = 0;
+			WAITING_ECHO = 1;
 		}
+	}
 		
-		if(BTN_PRESSED){
-			if(btn_pressed_time == 255){
-				BTN_OVF = 1;
+	// --- Timeout de 20ms para el ECHO ---
+	if(ultraSensor.state == ULTRA_WAIT_RISING && ultraSensor.ECHO_RISING && !VEINTEMS_PASSED && WAITING_ECHO) {
+		if(veintems_counter < 1) { // 1 * 10ms = 10ms (ajusta si lo deseas a 2 para 20ms)
+			veintems_counter++;
+			} else {
+			VEINTEMS_PASSED = 1;
+			veintems_counter = 0;
+		}
+	}
+	// --- Habilitar el trigger nuevamente en estados IDLE o DONE (70ms) ---
+	if(!ultraSensor.TRIGGER_ALLOWED && !WAIT_TIME_TRIGGER_PASSED) {
+		if(wait_time < TRIGGER_WAIT_TIME_TENMS){ // 6 * 10ms = 60ms
+			wait_time++;
+			} else {
+			WAIT_TIME_TRIGGER_PASSED = 1;
+			wait_time = 0;
+		}
+		if(ultraSensor.TIMEDOUT){
+			ultrasonic_timeout_clear(&ultraSensor, DEBUG_FLAGS ? true : false);
+		}
+	}
+	//De esto depende cada cuanto se hace un trigger
+	if(diezMsCounter < ECHO_INTERVAL_TENMS){
+		diezMsCounter++;
+		} else {
+		ECHO_INTERVAL_FLAG = 1;
+		diezMsCounter = 0;
+	}
+		
+	if(BTN_PRESSED){
+		if(btn_pressed_time == 255){
+			BTN_OVF = 1;
+		}
+		btn_pressed_time++;
+	}
+	if(IS_FLAG_SET(servoA.flags, SERVO_PUSH)){
+		if(servoA.state_time < SERVO_ACTIVE_TIME){
+			servoA.state_time++;
+			if(DEBUG_FLAGS_SERVOS){
+				printf_P(PSTR("Servo A PUSH: state_time = %d\n"), servoA.state_time);
 			}
-			btn_pressed_time++;
-		}
-		if(IS_FLAG_SET(servoA.flags, SERVO_PUSH)){
-			if(servoA.state_time < SERVO_ACTIVE_TIME){
-				servoA.state_time++;
-				if(DEBUG_FLAGS_SERVOS){
-					printf_P(PSTR("Servo A PUSH: state_time = %d\n"), servoA.state_time);
-				}
-				} else {
-				servoA.state_time = 0;
-				SET_FLAG(servoA.flags, SERVO_RESET);
-				if(DEBUG_FLAGS_SERVOS){
-					printf_P(PSTR("Servo A RESET"));
-				}
+			} else {
+			servoA.state_time = 0;
+			SET_FLAG(servoA.flags, SERVO_RESET);
+			if(DEBUG_FLAGS_SERVOS){
+				printf_P(PSTR("Servo A RESET"));
 			}
 		}
-		if(IS_FLAG_SET(servoB.flags, SERVO_PUSH)){
-			if(servoB.state_time < SERVO_ACTIVE_TIME){
-				servoB.state_time++; 
-				if(DEBUG_FLAGS_SERVOS){
-					printf_P(PSTR("Servo B PUSH: state_time = %d\n"), servoA.state_time);
-				}
-				} else {
-				servoB.state_time = 0;
-				SET_FLAG(servoB.flags, SERVO_RESET);
-				if(DEBUG_FLAGS_SERVOS){
-					printf_P(PSTR("Servo B RESET"));
-				}
+	}
+	if(IS_FLAG_SET(servoB.flags, SERVO_PUSH)){
+		if(servoB.state_time < SERVO_ACTIVE_TIME){
+			servoB.state_time++; 
+			if(DEBUG_FLAGS_SERVOS){
+				printf_P(PSTR("Servo B PUSH: state_time = %d\n"), servoB.state_time);
+			}
+			} else {
+			servoB.state_time = 0;
+			SET_FLAG(servoB.flags, SERVO_RESET);
+			if(DEBUG_FLAGS_SERVOS){
+				printf_P(PSTR("Servo B RESET"));
 			}
 		}
-		if(IS_FLAG_SET(servoC.flags, SERVO_PUSH)){
-			if(servoC.state_time < SERVO_ACTIVE_TIME){
-				servoC.state_time++;
-				if(DEBUG_FLAGS_SERVOS){
-					printf_P(PSTR("Servo C PUSH: state_time = %d\n"), servoA.state_time);
-				}
-				} else {
-				servoC.state_time = 0;
-				SET_FLAG(servoC.flags, SERVO_RESET);
-				if(DEBUG_FLAGS_SERVOS){
-					printf_P(PSTR("Servo C RESET"));
-				}
+	}
+	if(IS_FLAG_SET(servoC.flags, SERVO_PUSH)){
+		if(servoC.state_time < SERVO_ACTIVE_TIME){
+			servoC.state_time++;
+			if(DEBUG_FLAGS_SERVOS){
+				printf_P(PSTR("Servo C PUSH: state_time = %d\n"), servoC.state_time);
+			}
+			} else {
+			servoC.state_time = 0;
+			SET_FLAG(servoC.flags, SERVO_RESET);
+			if(DEBUG_FLAGS_SERVOS){
+				printf_P(PSTR("Servo C RESET"));
 			}
 		}
-		// Codigo lectura TCRT cada 10ms
-		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){
-			SET_FLAG(IR_A.flags, TCRT_NEW_VALUE);
-		}
-		if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){
-			SET_FLAG(IR_B.flags, TCRT_NEW_VALUE);
-		}
-		if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){
-			SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
-		}
-		if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){
-			SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
-		}
+	}
+	// Codigo lectura TCRT cada 10ms
+	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){
+		SET_FLAG(IR_A.flags, TCRT_NEW_VALUE);
+	}
+	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){
+		SET_FLAG(IR_B.flags, TCRT_NEW_VALUE);
+	}
+	if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){
+		SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
+	}
+	if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && !IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){
+		SET_FLAG(IR_U.flags, TCRT_NEW_VALUE);
 	}
 }
 /* END Function ISR ----------------------------------------------------------*/
@@ -688,6 +686,9 @@ int main()
 			currentConfig.salidaB = salidaB.boxType;
 			currentConfig.salidaC = salidaC.boxType;
 			saveConfigurationRAM(&currentConfig);
+			if(DEBUG_FLAGS_EEPROM){
+				printf_P(PSTR("Config guardada en EEPROM\n"));
+			}
 		}
 		if(WAIT_TIME_TRIGGER_PASSED){ //Esta bandera salta cuando se cunplio el tiempo de espera entre triggers
 			WAIT_TIME_TRIGGER_PASSED = 0;
