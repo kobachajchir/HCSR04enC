@@ -20,9 +20,6 @@ void saveConfigurationRAM(const Config_t *config) {
 	Config_t temp = *config; // Copia local en RAM
 	temp.checksum = calculate_config_checksum(&temp);
 	eeprom_update_block((const void*)&temp, (void*)&eepromConfig, sizeof(Config_t));
-	if(DEBUG_FLAGS_EEPROM){
-		printf_P(PSTR("Config guardada en EEPROM\n"));
-	}
 }
 
 /**
@@ -48,10 +45,6 @@ uint8_t calculate_config_checksum(Config_t* config) {
 void loadConfigurationRAM(Config_t *config) {
 	if (config == NULL) return;
 	eeprom_read_block((void *)config, (const void *)&eepromConfig, sizeof(Config_t));
-	if(DEBUG_FLAGS_EEPROM){
-		printf_P(PSTR("Config cargada: Salida 0 = %c, Salida 1 = %c, Salida 2 = %c\n"),
-		config->salidaA + 'A', config->salidaB + 'A', config->salidaC + 'A');
-	}
 }
 
 /**

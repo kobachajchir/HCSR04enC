@@ -57,6 +57,13 @@ void initOutputs(){
 	initServos();
 	if(existConfig()){
 		loadConfigurationRAM(&currentConfig);
+		salidaA.boxType = currentConfig.salidaA;
+		salidaB.boxType = currentConfig.salidaB;
+		salidaC.boxType = currentConfig.salidaC;
+		if(DEBUG_FLAGS_EEPROM){
+			printf_P(PSTR("Config cargada: Salida 0 = %u, Salida 1 = %u, Salida 2 = %u\n"),
+			salidaA.boxType, salidaB.boxType, salidaC.boxType);
+		}
 	}else{
 		salidaA.boxType = OUTPUT_A_DEFAULT_BOX_TYPE;
 		salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
@@ -171,28 +178,21 @@ box_type_t classify_box(uint8_t distance_mm, sorter_system_t* SystemSorter)
  * @param [in,out] ultraDetector Estructura de control del sensor ultrasónico.
  * @param [in,out] sorter Sistema de clasificación.
  */
-void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sorter)
+void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t* sorter)
 {
 	// 1. Si está habilitado, el trigger está permitido y hay solicitud de emisión
-	if (ULTRASONIC_ENABLE && ultraDetector->sensor->TRIGGER_ALLOWED && EMIT_TRIGGER && IS_FLAG_SET(ultraDetector->flags, ULTRADET_ZONE_TRCT_U_DETECTING)) //tiene que estar detectando en ul U para que pueda sensar ultrasonido
+	if (ULTRASONIC_ENABLE &&
+		ultraDetector->sensor->TRIGGER_ALLOWED &&
+		EMIT_TRIGGER &&
+		IS_FLAG_SET(ultraDetector->flags, ULTRADET_ZONE_TRCT_U_DETECTING))
 	{
-		if (ultrasonic_start(ultraDetector->sensor))
-		{
+		if (ultrasonic_start(ultraDetector->sensor)) {
+			ULTRASONIC_ENABLE = 0;
+			EMIT_TRIGGER = 0;
+			ultraDetector->sensor->TRIGGER_ALLOWED = 0;
+		} else {
 			if (DEBUG_FLAGS_SORTER)
-			{
-				printf_P(PSTR("InitHCSR04\n"));
-			}
-
-			ULTRASONIC_ENABLE = 0;     // Desactivar para esperar fin de medición
-			EMIT_TRIGGER = 0;          // Limpiar bandera de emisión
-			ultraDetector->sensor->TRIGGER_ALLOWED = 0;  // Inhabilitar trigger hasta que se permita de nuevo
-		}
-		else
-		{
-			if (DEBUG_FLAGS_SORTER)
-			{
 				printf_P(PSTR("ErrorInitHCSR04\n"));
-			}
 			EMIT_FAILED = 1;
 			EMIT_TRIGGER = 0;
 		}
@@ -202,137 +202,101 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
 	ultrasonic_update(ultraDetector->sensor);
 
 	// 3. Si la medición finalizó exitosamente
-	if (ultraDetector->sensor->state == ULTRA_DONE && ultraDetector->sensor->NEW_RESULT)
-	{
-		//printf("HCSR04 Dist[mm] %lu\n", (uint32_t)ultrasonic_get_distance(ultraDetector->sensor));
+	if (ultraDetector->sensor->state == ULTRA_DONE && ultraDetector->sensor->NEW_RESULT) {
 		ultraDetector->sensor->NEW_RESULT = 0;
 
 		box_type_t tipo;
 
-		// Si la distancia es mayor al límite de zona activa -> no hay caja
-		if (ultraDetector->sensor->distance_mm > DETECTION_IDLE_DISTANCE_MM)
-		{
+		if (ultraDetector->sensor->distance_mm > DETECTION_IDLE_DISTANCE_MM) {
 			tipo = NO_BOX;
 			SET_FLAG(ultraDetector->flags, ULTRADET_ZONE_ULTRA_CLEAR);
 
-			// Si estaba esperando que se libere, volvemos a IDLE
-			if (NIBBLEH_GET_STATE(ultraDetector->flags) == ULTRADET_SENSOR_WAITING_CLEAR)
-			{
+			if (NIBBLEH_GET_STATE(ultraDetector->flags) == ULTRADET_SENSOR_WAITING_CLEAR) {
 				NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_IDLE);
-				if (DEBUG_FLAGS_SORTER) {
+				if (DEBUG_FLAGS_SORTER)
 					printf_P(PSTR("Sensor liberado de nuevo\n"));
-				}
 			}
 
-			NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_IDLE); // Momentáneo, se puede sacar si no se requiere más
-		}
-		else
-		{
-			// Si el sensor ya está libre (estado IDLE), se procede a clasificar la caja
+			NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_IDLE);
+		} else {
 			if (NIBBLEH_GET_STATE(ultraDetector->flags) == ULTRADET_SENSOR_IDLE) {
-				// Hay algo en la zona
 				NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_DETECTING);
 				tipo = classify_box(ultraDetector->sensor->distance_mm, sorter);
 
-			if (tipo != NO_BOX) {
-				// Si el tipo es BOX_DISCARDED, no se marca busy, se notifica y se actualizan las estadísticas.
-				if (tipo == BOX_DISCARDED) {
-					if(DEBUG_FLAGS_SORTER){
-						printf_P(PSTR("BOX_DISCARDED\n"));
+				if (tipo != NO_BOX) {
+					if (DEBUG_FLAGS_SORTER) {
+						printf_P(PSTR("Tipo detectado: %u - Salida 0: %u, 1: %u, 2: %u\n"),
+								tipo, salidaA.boxType, salidaB.boxType, salidaC.boxType);
 					}
-					} else {
-					// Buscar si alguna salida coincide con el tipo recibido
-					if (salidaA.boxType == tipo) {
-							SET_FLAG(salidaA.flags, OUTPUT_BUSY);
-							if(DEBUG_FLAGS_SORTER){
-								printf_P(PSTR("Salida A busy\n"));
-							}
-						} else if (salidaB.boxType == tipo) {
-							SET_FLAG(salidaB.flags, OUTPUT_BUSY);
-							if(DEBUG_FLAGS_SORTER){
-								printf_P(PSTR("Salida B busy\n"));
-							}
-						} else if (salidaC.boxType == tipo) {
-							SET_FLAG(salidaC.flags, OUTPUT_BUSY);
-							if(DEBUG_FLAGS_SORTER){
-								printf_P(PSTR("Salida C busy\n"));
+
+					if (tipo != BOX_DISCARDED) {
+						output_t* outputs[] = { &salidaA, &salidaB, &salidaC };
+
+						for (uint8_t i = 0; i < NUM_OUTPUTS; i++) {
+							if (outputs[i]->boxType == tipo) {
+								SET_FLAG(outputs[i]->flags, OUTPUT_BUSY);
+								if (DEBUG_FLAGS_SORTER)
+									printf_P(PSTR("Salida %c busy\n"), 'A' + i);
+								break;
 							}
 						}
+					} else if (DEBUG_FLAGS_SORTER) {
+						printf_P(PSTR("BOX_DISCARDED\n"));
 					}
-				
-				// Actualizar estadísticas según el tipo
-				switch (tipo) {
-					case BOX_SIZE_A:
-					if(DEBUG_FLAGS_SORTER){
-						printf_P(PSTR("BOX_SIZE_A\n"));
-					}
-					sorter->stats.total_by_type_array[0]++;
-					break;
-					case BOX_SIZE_B:
-					if(DEBUG_FLAGS_SORTER){
-						printf_P(PSTR("BOX_SIZE_B\n"));
-					}
-					sorter->stats.total_by_type_array[1]++;
-					break;
-					case BOX_SIZE_C:
-					if(DEBUG_FLAGS_SORTER){
-						printf_P(PSTR("BOX_SIZE_C\n"));
-					}
-					sorter->stats.total_by_type_array[2]++;
-					break;
-					case BOX_DISCARDED:
-					if(DEBUG_FLAGS_SORTER){
-						printf_P(PSTR("BOX_DISCARTED\n"));
-					}
-					sorter->stats.total_discarded++;
-					break;
-					default:
-					if(DEBUG_FLAGS_SORTER){
-						printf_P(PSTR("Tipo no reconocido\n"));
-					}
-					break;
-				}
-				
-				sorter->stats.total_measured++;
-				printf_P(PSTR("Contadas: %u\n"), sorter->stats.total_measured);
-				// TODO: Agregar cola para manejo de cajas si es necesario.
-			}
 
-				// Cambio de estado para esperar que se libere nuevamente
+					// Actualizar estadísticas
+					switch (tipo) {
+						case BOX_SIZE_A:
+						case BOX_SIZE_B:
+						case BOX_SIZE_C:
+							sorter->stats.total_by_type_array[tipo - 1]++;
+							if (DEBUG_FLAGS_SORTER)
+								printf_P(PSTR("BOX_SIZE_%c\n"), 'A' + (tipo - 1));
+							break;
+
+						case BOX_DISCARDED:
+							sorter->stats.total_discarded++;
+							if (DEBUG_FLAGS_SORTER)
+								printf_P(PSTR("BOX_DISCARDED\n"));
+							break;
+
+						default:
+							if (DEBUG_FLAGS_SORTER)
+								printf_P(PSTR("Tipo no reconocido\n"));
+							break;
+					}
+
+					sorter->stats.total_measured++;
+					if (DEBUG_FLAGS_SORTER)
+						printf_P(PSTR("Contadas: %u\n"), sorter->stats.total_measured);
+				}
+
 				NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_WAITING_CLEAR);
 			}
 		}
 
-		ultrasonic_init_flags(ultraDetector->sensor); // Reinicia las flags del sensor
-		ultraDetector->sensor->state = ULTRA_IDLE;   // Reinicia el estado del sensor
-		ULTRASONIC_ENABLE = 1; // Habilita nueva medición
+		ultrasonic_init_flags(ultraDetector->sensor);
+		ultraDetector->sensor->state = ULTRA_IDLE;
+		ULTRASONIC_ENABLE = 1;
 	}
 
-
-	// 4. Si pasó el tiempo de espera y no hubo ECHO
-	if (VEINTEMS_PASSED)
-	{
+	// 4. Timeout por falta de eco
+	if (VEINTEMS_PASSED) {
 		if (DEBUG_FLAGS)
-		{
 			printf_P(PSTR("HCSR04 perdio ECHO\n"));
-		}
+
 		VEINTEMS_PASSED = 0;
 		WAITING_ECHO = 0;
-
 		ultraDetector->sensor->TIMEDOUT = 1;
 		ultraDetector->sensor->state = ULTRA_TIMEOUT;
 
 		if (ultrasonic_timeout_clear(ultraDetector->sensor, DEBUG_FLAGS ? true : false) && DEBUG_FLAGS)
-		{
-			if (DEBUG_FLAGS)
-			{
-				printf_P(PSTR("LIB DEBUG - HCSR04 TMDOUT Cleared\n"));
-			}
-		}
+			printf_P(PSTR("LIB DEBUG - HCSR04 TMDOUT Cleared\n"));
 
 		ULTRASONIC_ENABLE = 1;
 	}
 }
+
 
 /**
  * @brief Tarea que procesa los sensores IR.
@@ -342,96 +306,86 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t * sor
  * @param [in,out] sorter Sistema de clasificación.
  */
 void irSensorsTask(sorter_system_t * sorter){
-	//Para ir_U, hay que hacer otro debug, no tiene una salida asignada
-	if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)){ //Cada 10 ms se activa
+	// IR A
+	if (IS_FLAG_SET(IR_A.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_A.flags, TCRT_NEW_VALUE)) {
 		CLEAR_FLAG(IR_A.flags, TCRT_NEW_VALUE);
 		tcrt_read(&IR_A);
 	}
-	if(tcrt_is_box_detected(&IR_A)){
-		if(NIBBLEH_GET_STATE(IR_A.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
-			if(IS_FLAG_SET(salidaA.flags, OUTPUT_READY) && IS_FLAG_SET(salidaA.flags, OUTPUT_BUSY)){
-				CLEAR_FLAG(salidaA.flags, OUTPUT_READY);
-				SET_FLAG(servoA.flags, SERVO_PUSH);
-				servoA.state_time = 0;
-				if(DEBUG_FLAGS_SORTER){
-					printf_P(PSTR("Pushed servo A and zeroed state time\n"));
-				}
+	tcrt_is_box_detected(&IR_A); // Solo actualiza estados
+	if (NIBBLEH_GET_STATE(IR_A.flags) == TCRT_COUNTED) {
+		if (IS_FLAG_SET(salidaA.flags, OUTPUT_READY) && IS_FLAG_SET(salidaA.flags, OUTPUT_BUSY)) {
+			CLEAR_FLAG(salidaA.flags, OUTPUT_READY);
+			SET_FLAG(servoA.flags, SERVO_PUSH);
+			servoA.state_time = 0;
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("SERVO_PUSH A\n"));
+				printf_P(PSTR("Pushed servo A and zeroed state time\n"));
 			}
-			NIBBLEH_SET_STATE(IR_A.flags, TCRT_STATUS_IDLE);
-			if(DEBUG_FLAGS_SORTER){
-				printf_P(PSTR("Detecto en IR A\n"));
-			};
+		}
+		NIBBLEH_SET_STATE(IR_A.flags, TCRT_STATUS_IDLE);
+		if (DEBUG_FLAGS_SORTER) {
+			printf_P(PSTR("Detecto en IR A\n"));
 		}
 	}
-	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
+
+	// IR B
+	if (IS_FLAG_SET(IR_B.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_B.flags, TCRT_NEW_VALUE)) {
 		CLEAR_FLAG(IR_B.flags, TCRT_NEW_VALUE);
 		tcrt_read(&IR_B);
 	}
-	if(tcrt_is_box_detected(&IR_B)){
-		if(NIBBLEH_GET_STATE(IR_B.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
-			if(IS_FLAG_SET(salidaB.flags, OUTPUT_READY) && IS_FLAG_SET(salidaB.flags, OUTPUT_BUSY)){
-				CLEAR_FLAG(salidaB.flags, OUTPUT_READY);
-				SET_FLAG(servoB.flags, SERVO_PUSH);
-				servoB.state_time = 0;
-				if(DEBUG_FLAGS_SORTER){
-					printf_P(PSTR("Pushed servo B and zeroed state time\n"));
-				}
-			}
-			NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
-			if(DEBUG_FLAGS_SORTER){
-				printf_P(PSTR("Detecto en IR B\n"));
+	tcrt_is_box_detected(&IR_B);
+	if (NIBBLEH_GET_STATE(IR_B.flags) == TCRT_COUNTED) {
+		if (IS_FLAG_SET(salidaB.flags, OUTPUT_READY) && IS_FLAG_SET(salidaB.flags, OUTPUT_BUSY)) {
+			CLEAR_FLAG(salidaB.flags, OUTPUT_READY);
+			SET_FLAG(servoB.flags, SERVO_PUSH);
+			servoB.state_time = 0;
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("Pushed servo B and zeroed state time\n"));
 			}
 		}
+		NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
+		if (DEBUG_FLAGS_SORTER) {
+			printf_P(PSTR("Detecto en IR B\n"));
+		}
 	}
-	if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa
+
+	// IR C
+	if (IS_FLAG_SET(IR_C.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_C.flags, TCRT_NEW_VALUE)) {
 		CLEAR_FLAG(IR_C.flags, TCRT_NEW_VALUE);
 		tcrt_read(&IR_C);
 	}
-	if(tcrt_is_box_detected(&IR_C)){
-		if(NIBBLEH_GET_STATE(IR_C.flags) == TCRT_COUNTED){ //Ya detecto y paso a contarlo
-			if(IS_FLAG_SET(salidaC.flags, OUTPUT_READY) && IS_FLAG_SET(salidaC.flags, OUTPUT_BUSY)){
-				CLEAR_FLAG(salidaC.flags, OUTPUT_READY);
-				SET_FLAG(servoC.flags, SERVO_PUSH);
-				servoC.state_time = 0;
-				if(DEBUG_FLAGS_SORTER){
-					printf_P(PSTR("Pushed servo C and zeroed state time\n"));
-				}
-			}
-			NIBBLEH_SET_STATE(IR_C.flags, TCRT_STATUS_IDLE);
-			if(DEBUG_FLAGS_SORTER){
-				printf_P(PSTR("Detecto en IR C\n"));
+	tcrt_is_box_detected(&IR_C);
+	if (NIBBLEH_GET_STATE(IR_C.flags) == TCRT_COUNTED) {
+		if (IS_FLAG_SET(salidaC.flags, OUTPUT_READY) && IS_FLAG_SET(salidaC.flags, OUTPUT_BUSY)) {
+			CLEAR_FLAG(salidaC.flags, OUTPUT_READY);
+			SET_FLAG(servoC.flags, SERVO_PUSH);
+			servoC.state_time = 0;
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("Pushed servo C and zeroed state time\n"));
 			}
 		}
+		NIBBLEH_SET_STATE(IR_C.flags, TCRT_STATUS_IDLE);
+		if (DEBUG_FLAGS_SORTER) {
+			printf_P(PSTR("Detecto en IR C\n"));
+		}
 	}
-	if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)){ //Cada 20 ms se activa IR U del ultrasonido, no tiene salida
+
+	// IR U (ultrasonido - sin salida asociada)
+	if (IS_FLAG_SET(IR_U.flags, TCRT_ENABLED) && IS_FLAG_SET(IR_U.flags, TCRT_NEW_VALUE)) {
 		CLEAR_FLAG(IR_U.flags, TCRT_NEW_VALUE);
 		tcrt_read(&IR_U);
 	}
-	if(tcrt_is_box_detected(&IR_U)){
-		// La caja está detectada y es un flanco de subida (recibimos la caja)
-		if(NIBBLEH_GET_STATE(IR_U.flags) == TCRT_READ && !IS_FLAG_SET(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING)){
-			// Solo entra aquí si la caja está detectada y no está marcando la zona como detectada
-			SET_FLAG(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING);
-			//printf("IR U detecto\n");
-		}
-		// La caja está detectada y es un flanco de bajada (la caja salió)
-		else if(NIBBLEH_GET_STATE(IR_U.flags) == TCRT_COUNTED && IS_FLAG_SET(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING)){
-			// Esto garantiza que solo se imprimirá cuando la caja haya salido
-			//printf("IR U detecto: la caja salió\n");
-			// Limpiar la zona de detección, ya que la caja salió
-			CLEAR_FLAG(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING);
-			NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);  // Restablecer el estado
-		}
-		} else {
-			// Si no hay caja y estábamos detectando una, limpiar las banderas
-			if(IS_FLAG_SET(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING)){
-				// Ya no hay caja y se había detectado previamente
-				CLEAR_FLAG(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING);
-				NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);  // Poner el sensor en estado idle
-				if(DEBUG_FLAGS_SORTER){
-					printf_P(PSTR("IR U Idle again\n"));	
-				}
-			}
+	tcrt_is_box_detected(&IR_U);
+
+	if (NIBBLEH_GET_STATE(IR_U.flags) == TCRT_READ && !IS_FLAG_SET(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING)) {
+		SET_FLAG(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING);
+	}
+	else if (NIBBLEH_GET_STATE(IR_U.flags) == TCRT_COUNTED && IS_FLAG_SET(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING)) {
+		CLEAR_FLAG(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING);
+		NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);
+	}
+	else if (!IS_FLAG_SET(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING)) {
+		NIBBLEH_SET_STATE(IR_U.flags, TCRT_STATUS_IDLE);
 	}
 }
 

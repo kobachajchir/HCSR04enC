@@ -111,7 +111,7 @@ bool process_protocol_buffer() {
  * @param [in] req Comando recibido.
  * @retval Command Comando de respuesta correspondiente.
  */
-Command getResponseCommand(Command req) {
+ Command getResponseCommand(Command req) {
 	uint8_t reqValue = (uint8_t)req;
 	uint8_t responseValue;
 	
@@ -150,6 +150,22 @@ Command getResponseCommand(Command req) {
 		
 		case CMD_ALIVE:
 		responseValue = CMD_ALIVE;
+		break;
+		
+		case CMD_DEBUG_ULTRA:
+		responseValue = CMD_RESPONSE_DEBUG_ULTRA;
+		break;
+
+		case CMD_DEBUG_SERVOS:
+		responseValue = CMD_RESPONSE_DEBUG_SERVOS;
+		break;
+
+		case CMD_DEBUG_SORTER:
+		responseValue = CMD_RESPONSE_DEBUG_SORTER;
+		break;
+
+		case CMD_DEBUG_EEPROM:
+		responseValue = CMD_RESPONSE_DEBUG_EEPROM;
 		break;
 		
 		default:
@@ -314,7 +330,9 @@ bool validatePck(){
 			
 			// Calcular y comparar el checksum
 			NIBBLEH_SET_STATE(protocolService.flags, PROTOSERV_CALCULATING_CHK);
-			if(calculatePayload() != protocolService.receivePck.checksum){
+			uint8_t calculated_cks = calculatePayload();
+			if(calculated_cks != protocolService.receivePck.checksum){
+				printf_P(PSTR("Cks invalido, calculado: 0x%02X, recibido: 0x%02X\n"), calculated_cks, protocolService.receivePck.checksum);
 				return false;
 			} else {
 				return true;
@@ -451,6 +469,30 @@ void doAction(uint8_t cmd){
 			currentConfig.salidaB = salidaB.boxType = OUTPUT_B_DEFAULT_BOX_TYPE;
 			currentConfig.salidaC = salidaC.boxType = OUTPUT_C_DEFAULT_BOX_TYPE;
 			saveConfigurationRAM(&currentConfig);
+			CREATE_RESPONSE_PCK = 1;
+			break;
+		}
+		case CMD_DEBUG_ULTRA:
+		{
+			DEBUG_FLAGS = !DEBUG_FLAGS;
+			CREATE_RESPONSE_PCK = 1;
+			break;
+		}
+		case CMD_DEBUG_SERVOS:
+		{
+			DEBUG_FLAGS_SERVOS = !DEBUG_FLAGS_SERVOS;
+			CREATE_RESPONSE_PCK = 1;
+			break;
+		}
+		case CMD_DEBUG_SORTER:
+		{
+			DEBUG_FLAGS_SORTER = !DEBUG_FLAGS_SORTER;
+			CREATE_RESPONSE_PCK = 1;
+			break;
+		}
+		case CMD_DEBUG_EEPROM:
+		{
+			DEBUG_FLAGS_EEPROM = !DEBUG_FLAGS_EEPROM;
 			CREATE_RESPONSE_PCK = 1;
 			break;
 		}
@@ -699,6 +741,29 @@ uint8_t create_payload(Command cmd) {
 			payload_length = 1;
 			break;
 		}
+		case CMD_RESPONSE_DEBUG_ULTRA: {
+			protocolService.buffer[start_index] = DEBUG_FLAGS ? 0x01 : 0x00;
+			payload_length = 1;
+		}
+		break;
+
+		case CMD_RESPONSE_DEBUG_SERVOS: {
+			protocolService.buffer[start_index] = DEBUG_FLAGS_SERVOS ? 0x01 : 0x00;
+			payload_length = 1;
+		}
+		break;
+
+		case CMD_RESPONSE_DEBUG_SORTER: {
+			protocolService.buffer[start_index] = DEBUG_FLAGS_SORTER ? 0x01 : 0x00;
+			payload_length = 1;
+		}
+		break;
+
+		case CMD_RESPONSE_DEBUG_EEPROM: {
+			protocolService.buffer[start_index] = DEBUG_FLAGS_EEPROM ? 0x01 : 0x00;
+			payload_length = 1;
+		}
+		break;
 		default: {
 			// Comando inválido, sin payload
 			payload_length = 0;
@@ -730,19 +795,27 @@ void printCommandMessage(Command cmd) {
 		printf_P(PSTR("Setear nueva configuracion\n"));
 		break;
 		case CMD_GET_CONFIG:
-		printf_P(PSTR("Obtener configuracion\n"));
+		printf_P(PSTR("Obtener configuración:\n"));
+		printf_P(PSTR("Salida 0: Tipo = %c\n"), 'A' + (salidaA.boxType - 1));
+		printf_P(PSTR("Salida 1: Tipo = %c\n"), 'A' + (salidaB.boxType - 1));
+		printf_P(PSTR("Salida 2: Tipo = %c\n"), 'A' + (salidaC.boxType - 1));
 		break;
 		case CMD_GET_FIRMWARE:
-		printf_P(PSTR("Obtener firmware\n"));
+		printf_P(PSTR("Obtener firmware: %S\n"), PSTR(DEV_FIRMWARE_VERSION));
 		break;
 		case CMD_GET_STATS:
 		printf_P(PSTR("Obtener estadisticas\n"));
+		printf_P(PSTR("Medidas: %u\n"), SorterSystem.stats.total_measured);
+		printf_P(PSTR("Descartadas: %u\n"), SorterSystem.stats.total_discarded);
+		printf_P(PSTR("Tipo A: %u\n"), SorterSystem.stats.total_by_type_array[0]);
+		printf_P(PSTR("Tipo B: %u\n"), SorterSystem.stats.total_by_type_array[1]);
+		printf_P(PSTR("Tipo C: %u\n"), SorterSystem.stats.total_by_type_array[2]);
 		break;
 		case CMD_CLEAR_STATS:
 		printf_P(PSTR("Limpiar estadisticas\n"));
 		break;
 		case CMD_GET_REPOSITORY:
-		printf_P(PSTR("Obtener repositorio\n"));
+		printf_P(PSTR("Obtener repositorio: %S\n"), PSTR(DEV_REPOSITORY));
 		break;
 		case CMD_CONFIG_RESET:
 		printf_P(PSTR("Resetear configuracion\n"));
@@ -750,6 +823,19 @@ void printCommandMessage(Command cmd) {
 		case CMD_INVALID:
 		printf_P(PSTR("Comando invalido\n"));
 		break;
+		case CMD_DEBUG_ULTRA:
+		printf_P(PSTR("Debug ULTRA %s\n"), DEBUG_FLAGS ? PSTR("ON") : PSTR("OFF"));
+		break;
+		case CMD_DEBUG_SERVOS:
+		printf_P(PSTR("Debug SERVOS %s\n"), DEBUG_FLAGS_SERVOS ? PSTR("ON") : PSTR("OFF"));
+		break;
+		case CMD_DEBUG_SORTER:
+		printf_P(PSTR("Debug SORTER %s\n"), DEBUG_FLAGS_SORTER ? PSTR("ON") : PSTR("OFF"));
+		break;
+		case CMD_DEBUG_EEPROM:
+		printf_P(PSTR("Debug EEPROM %s\n"), DEBUG_FLAGS_EEPROM ? PSTR("ON") : PSTR("OFF"));
+		break;
+		
 		default:
 		printf_P(PSTR("Comando desconocido\n"));
 		break;
