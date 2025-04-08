@@ -1,0 +1,59 @@
+\doxysection{Referencia de la estructura output\+\_\+t}
+\label{structoutput__t}\index{output\_t@{output\_t}}
+
+
+Estructura que representa una salida del sistema de clasificaciÛn.  
+
+
+
+
+{\ttfamily \#include $<$output\+Type.\+h$>$}
+
+\doxysubsubsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \textbf{ sensor\+\_\+pin}
+\item 
+uint8\+\_\+t \textbf{ actuator\+\_\+pin}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ flags}
+\item 
+\textbf{ box\+\_\+type\+\_\+t} \textbf{ box\+Type}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripci√≥n detallada}
+Estructura que representa una salida del sistema de clasificaciÛn. 
+
+Contiene informaciÛn sobre el pin del sensor, pin del actuador, flags de estado y el tipo de caja asignado a la salida. 
+
+\doxysubsection{Documentaci√≥n de campos}
+\index{output\_t@{output\_t}!actuator\_pin@{actuator\_pin}}
+\index{actuator\_pin@{actuator\_pin}!output\_t@{output\_t}}
+\doxysubsubsection{actuator\_pin}
+{\footnotesize\ttfamily \label{structoutput__t_a39c366a2a9286ef43f584095ae8ee969} 
+uint8\+\_\+t actuator\+\_\+pin}
+
+Pin digital conectado al actuador (servo). \index{output\_t@{output\_t}!boxType@{boxType}}
+\index{boxType@{boxType}!output\_t@{output\_t}}
+\doxysubsubsection{boxType}
+{\footnotesize\ttfamily \label{structoutput__t_a76b13e8cb37786b397fc332784fc0aa9} 
+\textbf{ box\+\_\+type\+\_\+t} box\+Type}
+
+Tipo de caja que esta salida est· configurada para recibir. \index{output\_t@{output\_t}!flags@{flags}}
+\index{flags@{flags}!output\_t@{output\_t}}
+\doxysubsubsection{flags}
+{\footnotesize\ttfamily \label{structoutput__t_a3678d26acc883f3c39c9970857aaf88f} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} flags}
+
+Flags de control\+: nibble bajo para estado, nibble alto opcional. \index{output\_t@{output\_t}!sensor\_pin@{sensor\_pin}}
+\index{sensor\_pin@{sensor\_pin}!output\_t@{output\_t}}
+\doxysubsubsection{sensor\_pin}
+{\footnotesize\ttfamily \label{structoutput__t_a12762504cb4679e3934edb23c9100949} 
+uint8\+\_\+t sensor\+\_\+pin}
+
+Pin digital conectado al sensor TCRT de la salida. 
+
+La documentaci√≥n de esta estructura est√° generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Gcc\+Application1/types/\textbf{ output\+Type.\+h}\end{DoxyCompactItemize}

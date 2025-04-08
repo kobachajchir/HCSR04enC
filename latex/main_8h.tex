@@ -1,0 +1,916 @@
+\doxysection{Referencia del archivo Gcc\+Application1/main.h}
+\label{main_8h}\index{GccApplication1/main.h@{GccApplication1/main.h}}
+{\ttfamily \#include "{}utils/macros\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}types/bitmap\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}types/ultrasonic\+Detector\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}types/sorter\+System\+Types.\+h"{}}\newline
+{\ttfamily \#include "{}types/\+TCRTType.\+h"{}}\newline
+{\ttfamily \#include "{}types/output\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}types/servo\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}types/protocol\+Types.\+h"{}}\newline
+{\ttfamily \#include "{}types/config\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}ultrasonic.\+h"{}}\newline
+{\ttfamily \#include "{}ultrasonic\+\_\+hal.\+h"{}}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/eeprom.\+h$>$}\newline
+{\ttfamily \#include $<$avr/pgmspace.\+h$>$}\newline
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ F\+\_\+\+CPU}~16000000\+UL
+\item 
+\#define \textbf{ TRIGGER\+\_\+\+PIN}~PD3
+\item 
+\#define \textbf{ TRIGGER\+\_\+\+DDR}~DDRD
+\item 
+\#define \textbf{ TRIGGER\+\_\+\+PORT}~PORTD
+\item 
+\#define \textbf{ ECHO\+\_\+\+PIN}~PB0
+\item 
+\#define \textbf{ BUTTON\+\_\+\+PIN}~PD4
+\item 
+\#define \textbf{ LED\+\_\+\+BUILTIN\+\_\+\+PIN}~PB5
+\item 
+\#define \textbf{ SERVOA\+\_\+\+PIN}~PB1
+\item 
+\#define \textbf{ SERVOB\+\_\+\+PIN}~PB2
+\item 
+\#define \textbf{ SERVOC\+\_\+\+PIN}~PB3
+\item 
+\#define \textbf{ TCRT\+\_\+A}~PC0
+\item 
+\#define \textbf{ TCRT\+\_\+B}~PC1
+\item 
+\#define \textbf{ TCRT\+\_\+C}~PC2
+\item 
+\#define \textbf{ TCRT\+\_\+U}~PC3
+\item 
+\#define \textbf{ TCRT\+\_\+\+A\+\_\+\+CHANNEL}~0
+\item 
+\#define \textbf{ TCRT\+\_\+\+B\+\_\+\+CHANNEL}~1
+\item 
+\#define \textbf{ TCRT\+\_\+\+C\+\_\+\+CHANNEL}~2
+\item 
+\#define \textbf{ TCRT\+\_\+\+U\+\_\+\+CHANNEL}~3
+\item 
+\#define \textbf{ TCRT\+\_\+\+CALIBRATION\+\_\+\+SAMPLES}~10
+\item 
+\#define \textbf{ TCRT\+\_\+\+FILTER\+\_\+\+SAMPLES}~10
+\item 
+\#define \textbf{ DISTANCE\+\_\+\+MIN\+\_\+\+MM}~30
+\item 
+\#define \textbf{ DISTANCE\+\_\+\+MAX\+\_\+\+MM}~2000
+\item 
+\#define \textbf{ ECHO\+\_\+\+INTERVAL\+\_\+\+TENMS}~10
+\item 
+\#define \textbf{ TRIGGER\+\_\+\+WAIT\+\_\+\+TIME\+\_\+\+TENMS}~6
+\item 
+\#define \textbf{ SERVO\+\_\+\+MIN\+\_\+\+PULSE}~2000\+UL
+\item 
+\#define \textbf{ SERVO\+\_\+\+START\+\_\+\+PULSE}~3000\+UL
+\item 
+\#define \textbf{ SERVO\+\_\+\+MAX\+\_\+\+PULSE}~4000\+UL
+\item 
+\#define \textbf{ SERVO\+\_\+\+FRAME\+\_\+\+PERIOD}~40000
+\item 
+\#define \textbf{ SERVO\+\_\+\+RESET\+\_\+\+TIME}~30
+\item 
+\#define \textbf{ SERVO\+\_\+\+ACTIVE\+\_\+\+TIME}~10
+\item 
+\#define \textbf{ SERVO\+\_\+\+PUSH\+\_\+\+ANGLE}~0
+\item 
+\#define \textbf{ SERVO\+\_\+\+IDLE\+\_\+\+ANGLE}~90
+\item 
+\#define \textbf{ CAJA\+\_\+\+GRANDE}~3
+\item 
+\#define \textbf{ CAJA\+\_\+\+MEDIA}~2
+\item 
+\#define \textbf{ CAJA\+\_\+\+CHICA}~1
+\item 
+\#define \textbf{ DESCARTE}~0
+\item 
+\#define \textbf{ BTN\+\_\+\+PRESS\+\_\+\+TIME}~10
+\item 
+\#define \textbf{ PROTOCOL\+\_\+\+MIN\+\_\+\+BYTE\+\_\+\+COUNT}~6
+\item 
+\#define \textbf{ PROTOCOL\+\_\+\+MAX\+\_\+\+BYTE\+\_\+\+COUNT}~24
+\item 
+\#define \textbf{ PROTOCOL\+\_\+\+FIXED\+\_\+\+SIZE}~8
+\item 
+\#define \textbf{ DEV\+\_\+\+REPOSITORY}~"{}github.\+com/kobachajchir/HCSR04en\+C"{}
+\item 
+\#define \textbf{ DEV\+\_\+\+FIRMWARE\+\_\+\+VERSION}~"{}1.\+0.\+0"{}
+\item 
+\#define \textbf{ ALL\+\_\+\+FLAGS}~flags.\+byte
+\item 
+\#define \textbf{ BTN\+\_\+\+RELEASED}~bandera.\+bitmap.\+bit0
+\item 
+\#define \textbf{ TIMER2\+\_\+\+ACTIVE}~bandera.\+bitmap.\+bit1
+\item 
+\#define \textbf{ BTN\+\_\+\+OVF}~bandera.\+bitmap.\+bit2
+\item 
+\#define \textbf{ ECHO\+\_\+\+INTERVAL\+\_\+\+FLAG}~bandera.\+bitmap.\+bit3
+\item 
+\#define \textbf{ IR\+\_\+\+READ\+\_\+\+INTERRUPT}~bandera.\+bitmap.\+bit4
+\item 
+\#define \textbf{ IR\+\_\+\+CALIBRATED}~bandera.\+bitmap.\+bit5
+\item 
+\#define \textbf{ BTN\+\_\+\+PRESSED}~bandera.\+bitmap.\+bit6
+\item 
+\#define \textbf{ ULTRASONIC\+\_\+\+ENABLE}~bandera.\+bitmap.\+bit7
+\item 
+\#define \textbf{ VEINTEMS\+\_\+\+PASSED}~bandera2.\+bitmap.\+bit0
+\item 
+\#define \textbf{ EMIT\+\_\+\+TRIGGER}~bandera2.\+bitmap.\+bit1
+\item 
+\#define \textbf{ EMIT\+\_\+\+FAILED}~bandera2.\+bitmap.\+bit2
+\item 
+\#define \textbf{ WAITING\+\_\+\+ECHO}~bandera2.\+bitmap.\+bit3
+\item 
+\#define \textbf{ WAIT\+\_\+\+TIME\+\_\+\+TRIGGER\+\_\+\+PASSED}~bandera2.\+bitmap.\+bit4
+\item 
+\#define \textbf{ TRIGGER\+\_\+\+ACTIVE}~bandera2.\+bitmap.\+bit5
+\item 
+\#define \textbf{ DEBUG\+\_\+\+FLAGS}~bandera2.\+bitmap.\+bit6
+\item 
+\#define \textbf{ DEBUG\+\_\+\+FLAGS\+\_\+\+SORTER}~bandera2.\+bitmap.\+bit7
+\item 
+\#define \textbf{ DEBUG\+\_\+\+FLAGS\+\_\+\+SERVOS}~bandera3.\+bitmap.\+bit0
+\item 
+\#define \textbf{ DEBUG\+\_\+\+FLAGS\+\_\+\+EEPROM}~bandera3.\+bitmap.\+bit1
+\item 
+\#define \textbf{ IS\+\_\+\+TRANSMITTING}~bandera3.\+bitmap.\+bit3
+\item 
+\#define \textbf{ CREATE\+\_\+\+RESPONSE\+\_\+\+PCK}~bandera3.\+bitmap.\+bit4
+\item 
+\#define \textbf{ DO\+\_\+\+ACTION}~bandera3.\+bitmap.\+bit5
+\item 
+\#define \textbf{ NEW\+\_\+\+CONFIG}~bandera3.\+bitmap.\+bit6
+\item 
+\#define \textbf{ BIT0\+\_\+\+MASK}~0x01
+\item 
+\#define \textbf{ BIT1\+\_\+\+MASK}~0x02
+\item 
+\#define \textbf{ BIT2\+\_\+\+MASK}~0x04
+\item 
+\#define \textbf{ BIT3\+\_\+\+MASK}~0x08
+\item 
+\#define \textbf{ BIT4\+\_\+\+MASK}~0x10
+\item 
+\#define \textbf{ BIT5\+\_\+\+MASK}~0x20
+\item 
+\#define \textbf{ BIT6\+\_\+\+MASK}~0x40
+\item 
+\#define \textbf{ BIT7\+\_\+\+MASK}~0x80
+\item 
+\#define \textbf{ BITS01\+\_\+\+MASK}~0x03
+\item 
+\#define \textbf{ BITS23\+\_\+\+MASK}~0x0C
+\item 
+\#define \textbf{ BITS45\+\_\+\+MASK}~0x30
+\item 
+\#define \textbf{ BITS67\+\_\+\+MASK}~0x\+C0
+\item 
+\#define \textbf{ NIBBLE\+\_\+\+L\+\_\+\+MASK}~0x0F
+\item 
+\#define \textbf{ NIBBLE\+\_\+\+H\+\_\+\+MASK}~0x\+F0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ bandera}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ bandera2}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ bandera3}
+\item 
+volatile uint16\+\_\+t \textbf{ echo\+\_\+init\+\_\+time}
+\item 
+volatile uint16\+\_\+t \textbf{ echo\+\_\+finish\+\_\+time}
+\item 
+volatile uint16\+\_\+t \textbf{ distance\+\_\+mm}
+\item 
+volatile uint32\+\_\+t \textbf{ pulse\+\_\+width\+\_\+A}
+\item 
+volatile uint8\+\_\+t \textbf{ ovf\+\_\+count}
+\item 
+volatile uint8\+\_\+t \textbf{ wait\+\_\+time}
+\item 
+volatile uint8\+\_\+t \textbf{ btn\+\_\+pressed\+\_\+time}
+\item 
+volatile uint8\+\_\+t \textbf{ echo\+\_\+state}
+\item 
+volatile uint8\+\_\+t \textbf{ servo\+\_\+counter}
+\item 
+volatile uint8\+\_\+t \textbf{ transmit\+\_\+counter}
+\item 
+uint8\+\_\+t \textbf{ do\+Action\+Cmd}
+\item 
+ultrasonic\+\_\+t \textbf{ ultra\+Sensor}
+\item 
+\textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t} \textbf{ hcsr04\+Detector}
+\item 
+\textbf{ sorter\+\_\+system\+\_\+t} \textbf{ Sorter\+System}
+\item 
+\textbf{ TCRT\+\_\+t} \textbf{ IR\+\_\+A}
+\item 
+\textbf{ TCRT\+\_\+t} \textbf{ IR\+\_\+B}
+\item 
+\textbf{ TCRT\+\_\+t} \textbf{ IR\+\_\+C}
+\item 
+\textbf{ TCRT\+\_\+t} \textbf{ IR\+\_\+U}
+\item 
+\textbf{ servo\+\_\+t} \textbf{ servoA}
+\item 
+\textbf{ servo\+\_\+t} \textbf{ servoB}
+\item 
+\textbf{ servo\+\_\+t} \textbf{ servoC}
+\item 
+volatile \textbf{ servo\+\_\+t} $\ast$ \textbf{ servos\+Array} [3]
+\item 
+volatile uint8\+\_\+t \textbf{ current\+\_\+servo}
+\item 
+\textbf{ output\+\_\+t} \textbf{ salidaA}
+\item 
+\textbf{ output\+\_\+t} \textbf{ salidaB}
+\item 
+\textbf{ output\+\_\+t} \textbf{ salidaC}
+\item 
+\textbf{ Protocol\+Service} \textbf{ protocol\+Service}
+\item 
+\textbf{ Config\+\_\+t} \textbf{ current\+Config}
+\item 
+EEMEM \textbf{ Config\+\_\+t} \textbf{ eeprom\+Config}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de «define»}
+\index{main.h@{main.h}!ALL\_FLAGS@{ALL\_FLAGS}}
+\index{ALL\_FLAGS@{ALL\_FLAGS}!main.h@{main.h}}
+\doxysubsubsection{ALL\_FLAGS}
+{\footnotesize\ttfamily \label{main_8h_a45acc2e7b473af8fcb48d80c73e9f0ca} 
+\#define ALL\+\_\+\+FLAGS~flags.\+byte}
+
+\index{main.h@{main.h}!BIT0\_MASK@{BIT0\_MASK}}
+\index{BIT0\_MASK@{BIT0\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BIT0\_MASK}
+{\footnotesize\ttfamily \label{main_8h_add50893ff5f5bc55497a9f6d7e265ef9} 
+\#define BIT0\+\_\+\+MASK~0x01}
+
+\index{main.h@{main.h}!BIT1\_MASK@{BIT1\_MASK}}
+\index{BIT1\_MASK@{BIT1\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BIT1\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a4d6a0d98f52a25f6ff6ff1b519ef663c} 
+\#define BIT1\+\_\+\+MASK~0x02}
+
+\index{main.h@{main.h}!BIT2\_MASK@{BIT2\_MASK}}
+\index{BIT2\_MASK@{BIT2\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BIT2\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a1d1dbd806d14df9516e092d996df7d03} 
+\#define BIT2\+\_\+\+MASK~0x04}
+
+\index{main.h@{main.h}!BIT3\_MASK@{BIT3\_MASK}}
+\index{BIT3\_MASK@{BIT3\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BIT3\_MASK}
+{\footnotesize\ttfamily \label{main_8h_aba81c2db01945bbf220930737a7e1f83} 
+\#define BIT3\+\_\+\+MASK~0x08}
+
+\index{main.h@{main.h}!BIT4\_MASK@{BIT4\_MASK}}
+\index{BIT4\_MASK@{BIT4\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BIT4\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a0437ab515e31994a1b57bf14d5a42e10} 
+\#define BIT4\+\_\+\+MASK~0x10}
+
+\index{main.h@{main.h}!BIT5\_MASK@{BIT5\_MASK}}
+\index{BIT5\_MASK@{BIT5\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BIT5\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a466255081601f06f0b1542e998c28187} 
+\#define BIT5\+\_\+\+MASK~0x20}
+
+\index{main.h@{main.h}!BIT6\_MASK@{BIT6\_MASK}}
+\index{BIT6\_MASK@{BIT6\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BIT6\_MASK}
+{\footnotesize\ttfamily \label{main_8h_ac177d7cd0cf5191a5a5f82f366e3f258} 
+\#define BIT6\+\_\+\+MASK~0x40}
+
+\index{main.h@{main.h}!BIT7\_MASK@{BIT7\_MASK}}
+\index{BIT7\_MASK@{BIT7\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BIT7\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a6b4e07dfac3758845ce0e92fc5df7cd0} 
+\#define BIT7\+\_\+\+MASK~0x80}
+
+\index{main.h@{main.h}!BITS01\_MASK@{BITS01\_MASK}}
+\index{BITS01\_MASK@{BITS01\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BITS01\_MASK}
+{\footnotesize\ttfamily \label{main_8h_aedfa42e2969b472cdf8e2ec482c2ad15} 
+\#define BITS01\+\_\+\+MASK~0x03}
+
+\index{main.h@{main.h}!BITS23\_MASK@{BITS23\_MASK}}
+\index{BITS23\_MASK@{BITS23\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BITS23\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a706fc7575b90a7c0076d741d223097d4} 
+\#define BITS23\+\_\+\+MASK~0x0C}
+
+\index{main.h@{main.h}!BITS45\_MASK@{BITS45\_MASK}}
+\index{BITS45\_MASK@{BITS45\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BITS45\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a5b0807d9452a2a51514adb487a316828} 
+\#define BITS45\+\_\+\+MASK~0x30}
+
+\index{main.h@{main.h}!BITS67\_MASK@{BITS67\_MASK}}
+\index{BITS67\_MASK@{BITS67\_MASK}!main.h@{main.h}}
+\doxysubsubsection{BITS67\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a631bad2e010e3767740deba8173a697a} 
+\#define BITS67\+\_\+\+MASK~0x\+C0}
+
+\index{main.h@{main.h}!BTN\_OVF@{BTN\_OVF}}
+\index{BTN\_OVF@{BTN\_OVF}!main.h@{main.h}}
+\doxysubsubsection{BTN\_OVF}
+{\footnotesize\ttfamily \label{main_8h_a2f4083e3dfb0f340fc0a466273a63925} 
+\#define BTN\+\_\+\+OVF~bandera.\+bitmap.\+bit2}
+
+\index{main.h@{main.h}!BTN\_PRESS\_TIME@{BTN\_PRESS\_TIME}}
+\index{BTN\_PRESS\_TIME@{BTN\_PRESS\_TIME}!main.h@{main.h}}
+\doxysubsubsection{BTN\_PRESS\_TIME}
+{\footnotesize\ttfamily \label{main_8h_a9c732c007115b4e4db98240c82ba5f79} 
+\#define BTN\+\_\+\+PRESS\+\_\+\+TIME~10}
+
+\index{main.h@{main.h}!BTN\_PRESSED@{BTN\_PRESSED}}
+\index{BTN\_PRESSED@{BTN\_PRESSED}!main.h@{main.h}}
+\doxysubsubsection{BTN\_PRESSED}
+{\footnotesize\ttfamily \label{main_8h_a8d4279b3e4f6e937a5a4585207169dd3} 
+\#define BTN\+\_\+\+PRESSED~bandera.\+bitmap.\+bit6}
+
+\index{main.h@{main.h}!BTN\_RELEASED@{BTN\_RELEASED}}
+\index{BTN\_RELEASED@{BTN\_RELEASED}!main.h@{main.h}}
+\doxysubsubsection{BTN\_RELEASED}
+{\footnotesize\ttfamily \label{main_8h_a822bac3daf31a336d8ed6e54d6be09a0} 
+\#define BTN\+\_\+\+RELEASED~bandera.\+bitmap.\+bit0}
+
+\index{main.h@{main.h}!BUTTON\_PIN@{BUTTON\_PIN}}
+\index{BUTTON\_PIN@{BUTTON\_PIN}!main.h@{main.h}}
+\doxysubsubsection{BUTTON\_PIN}
+{\footnotesize\ttfamily \label{main_8h_abc2ad14f0789907024ac765711ffd3da} 
+\#define BUTTON\+\_\+\+PIN~PD4}
+
+\index{main.h@{main.h}!CAJA\_CHICA@{CAJA\_CHICA}}
+\index{CAJA\_CHICA@{CAJA\_CHICA}!main.h@{main.h}}
+\doxysubsubsection{CAJA\_CHICA}
+{\footnotesize\ttfamily \label{main_8h_a1076279e9d22fdf5dfa0ae13f0ecb79f} 
+\#define CAJA\+\_\+\+CHICA~1}
+
+\index{main.h@{main.h}!CAJA\_GRANDE@{CAJA\_GRANDE}}
+\index{CAJA\_GRANDE@{CAJA\_GRANDE}!main.h@{main.h}}
+\doxysubsubsection{CAJA\_GRANDE}
+{\footnotesize\ttfamily \label{main_8h_a668bd3e8e6f703aeb670f49d0ace485a} 
+\#define CAJA\+\_\+\+GRANDE~3}
+
+\index{main.h@{main.h}!CAJA\_MEDIA@{CAJA\_MEDIA}}
+\index{CAJA\_MEDIA@{CAJA\_MEDIA}!main.h@{main.h}}
+\doxysubsubsection{CAJA\_MEDIA}
+{\footnotesize\ttfamily \label{main_8h_aed839b782097b49aaf6a3403f8b2841e} 
+\#define CAJA\+\_\+\+MEDIA~2}
+
+\index{main.h@{main.h}!CREATE\_RESPONSE\_PCK@{CREATE\_RESPONSE\_PCK}}
+\index{CREATE\_RESPONSE\_PCK@{CREATE\_RESPONSE\_PCK}!main.h@{main.h}}
+\doxysubsubsection{CREATE\_RESPONSE\_PCK}
+{\footnotesize\ttfamily \label{main_8h_a7b0dbbe1132d56c4401ae473afa04501} 
+\#define CREATE\+\_\+\+RESPONSE\+\_\+\+PCK~bandera3.\+bitmap.\+bit4}
+
+\index{main.h@{main.h}!DEBUG\_FLAGS@{DEBUG\_FLAGS}}
+\index{DEBUG\_FLAGS@{DEBUG\_FLAGS}!main.h@{main.h}}
+\doxysubsubsection{DEBUG\_FLAGS}
+{\footnotesize\ttfamily \label{main_8h_a26145c69bacfdcc3281d2e2270c67c59} 
+\#define DEBUG\+\_\+\+FLAGS~bandera2.\+bitmap.\+bit6}
+
+\index{main.h@{main.h}!DEBUG\_FLAGS\_EEPROM@{DEBUG\_FLAGS\_EEPROM}}
+\index{DEBUG\_FLAGS\_EEPROM@{DEBUG\_FLAGS\_EEPROM}!main.h@{main.h}}
+\doxysubsubsection{DEBUG\_FLAGS\_EEPROM}
+{\footnotesize\ttfamily \label{main_8h_a8ce054fae2ecc8b516767b82567e2e0b} 
+\#define DEBUG\+\_\+\+FLAGS\+\_\+\+EEPROM~bandera3.\+bitmap.\+bit1}
+
+\index{main.h@{main.h}!DEBUG\_FLAGS\_SERVOS@{DEBUG\_FLAGS\_SERVOS}}
+\index{DEBUG\_FLAGS\_SERVOS@{DEBUG\_FLAGS\_SERVOS}!main.h@{main.h}}
+\doxysubsubsection{DEBUG\_FLAGS\_SERVOS}
+{\footnotesize\ttfamily \label{main_8h_a59ce31af2d099c0b489c96bb3a84f40f} 
+\#define DEBUG\+\_\+\+FLAGS\+\_\+\+SERVOS~bandera3.\+bitmap.\+bit0}
+
+\index{main.h@{main.h}!DEBUG\_FLAGS\_SORTER@{DEBUG\_FLAGS\_SORTER}}
+\index{DEBUG\_FLAGS\_SORTER@{DEBUG\_FLAGS\_SORTER}!main.h@{main.h}}
+\doxysubsubsection{DEBUG\_FLAGS\_SORTER}
+{\footnotesize\ttfamily \label{main_8h_a3be3d02b4ed127e14b10516f652a74b1} 
+\#define DEBUG\+\_\+\+FLAGS\+\_\+\+SORTER~bandera2.\+bitmap.\+bit7}
+
+\index{main.h@{main.h}!DESCARTE@{DESCARTE}}
+\index{DESCARTE@{DESCARTE}!main.h@{main.h}}
+\doxysubsubsection{DESCARTE}
+{\footnotesize\ttfamily \label{main_8h_ac336927f125e4c764927d21eb3513f12} 
+\#define DESCARTE~0}
+
+\index{main.h@{main.h}!DEV\_FIRMWARE\_VERSION@{DEV\_FIRMWARE\_VERSION}}
+\index{DEV\_FIRMWARE\_VERSION@{DEV\_FIRMWARE\_VERSION}!main.h@{main.h}}
+\doxysubsubsection{DEV\_FIRMWARE\_VERSION}
+{\footnotesize\ttfamily \label{main_8h_ae40ea5f87ae7d9d36498ccc607e3c9c5} 
+\#define DEV\+\_\+\+FIRMWARE\+\_\+\+VERSION~"{}1.\+0.\+0"{}}
+
+\index{main.h@{main.h}!DEV\_REPOSITORY@{DEV\_REPOSITORY}}
+\index{DEV\_REPOSITORY@{DEV\_REPOSITORY}!main.h@{main.h}}
+\doxysubsubsection{DEV\_REPOSITORY}
+{\footnotesize\ttfamily \label{main_8h_a4b9f2d9e8831f351258b2e029c78c5c7} 
+\#define DEV\+\_\+\+REPOSITORY~"{}github.\+com/kobachajchir/HCSR04en\+C"{}}
+
+\index{main.h@{main.h}!DISTANCE\_MAX\_MM@{DISTANCE\_MAX\_MM}}
+\index{DISTANCE\_MAX\_MM@{DISTANCE\_MAX\_MM}!main.h@{main.h}}
+\doxysubsubsection{DISTANCE\_MAX\_MM}
+{\footnotesize\ttfamily \label{main_8h_a9f3a07f92daef05637368a743cb28087} 
+\#define DISTANCE\+\_\+\+MAX\+\_\+\+MM~2000}
+
+\index{main.h@{main.h}!DISTANCE\_MIN\_MM@{DISTANCE\_MIN\_MM}}
+\index{DISTANCE\_MIN\_MM@{DISTANCE\_MIN\_MM}!main.h@{main.h}}
+\doxysubsubsection{DISTANCE\_MIN\_MM}
+{\footnotesize\ttfamily \label{main_8h_a7dfc5b4c9a4eb0bb61977f1f968a01d5} 
+\#define DISTANCE\+\_\+\+MIN\+\_\+\+MM~30}
+
+\index{main.h@{main.h}!DO\_ACTION@{DO\_ACTION}}
+\index{DO\_ACTION@{DO\_ACTION}!main.h@{main.h}}
+\doxysubsubsection{DO\_ACTION}
+{\footnotesize\ttfamily \label{main_8h_a5eae87ad68d6e1dbcacbbd1c2099db89} 
+\#define DO\+\_\+\+ACTION~bandera3.\+bitmap.\+bit5}
+
+\index{main.h@{main.h}!ECHO\_INTERVAL\_FLAG@{ECHO\_INTERVAL\_FLAG}}
+\index{ECHO\_INTERVAL\_FLAG@{ECHO\_INTERVAL\_FLAG}!main.h@{main.h}}
+\doxysubsubsection{ECHO\_INTERVAL\_FLAG}
+{\footnotesize\ttfamily \label{main_8h_a26841f168a9569169e8754e0bcc51bf5} 
+\#define ECHO\+\_\+\+INTERVAL\+\_\+\+FLAG~bandera.\+bitmap.\+bit3}
+
+\index{main.h@{main.h}!ECHO\_INTERVAL\_TENMS@{ECHO\_INTERVAL\_TENMS}}
+\index{ECHO\_INTERVAL\_TENMS@{ECHO\_INTERVAL\_TENMS}!main.h@{main.h}}
+\doxysubsubsection{ECHO\_INTERVAL\_TENMS}
+{\footnotesize\ttfamily \label{main_8h_a57c4777544b6f70725a457858bf3cccf} 
+\#define ECHO\+\_\+\+INTERVAL\+\_\+\+TENMS~10}
+
+\index{main.h@{main.h}!ECHO\_PIN@{ECHO\_PIN}}
+\index{ECHO\_PIN@{ECHO\_PIN}!main.h@{main.h}}
+\doxysubsubsection{ECHO\_PIN}
+{\footnotesize\ttfamily \label{main_8h_acea96cea4a13b6cb38e57a86788adf90} 
+\#define ECHO\+\_\+\+PIN~PB0}
+
+\index{main.h@{main.h}!EMIT\_FAILED@{EMIT\_FAILED}}
+\index{EMIT\_FAILED@{EMIT\_FAILED}!main.h@{main.h}}
+\doxysubsubsection{EMIT\_FAILED}
+{\footnotesize\ttfamily \label{main_8h_a3edd2df0af9eab52d4c7df5ae8d0ea01} 
+\#define EMIT\+\_\+\+FAILED~bandera2.\+bitmap.\+bit2}
+
+\index{main.h@{main.h}!EMIT\_TRIGGER@{EMIT\_TRIGGER}}
+\index{EMIT\_TRIGGER@{EMIT\_TRIGGER}!main.h@{main.h}}
+\doxysubsubsection{EMIT\_TRIGGER}
+{\footnotesize\ttfamily \label{main_8h_a4099cd261972aa4f89c62be169cf5795} 
+\#define EMIT\+\_\+\+TRIGGER~bandera2.\+bitmap.\+bit1}
+
+\index{main.h@{main.h}!F\_CPU@{F\_CPU}}
+\index{F\_CPU@{F\_CPU}!main.h@{main.h}}
+\doxysubsubsection{F\_CPU}
+{\footnotesize\ttfamily \label{main_8h_a43bafb28b29491ec7f871319b5a3b2f8} 
+\#define F\+\_\+\+CPU~16000000\+UL}
+
+\index{main.h@{main.h}!IR\_CALIBRATED@{IR\_CALIBRATED}}
+\index{IR\_CALIBRATED@{IR\_CALIBRATED}!main.h@{main.h}}
+\doxysubsubsection{IR\_CALIBRATED}
+{\footnotesize\ttfamily \label{main_8h_a7ea26bbc38d16675879791bdd206acdc} 
+\#define IR\+\_\+\+CALIBRATED~bandera.\+bitmap.\+bit5}
+
+\index{main.h@{main.h}!IR\_READ\_INTERRUPT@{IR\_READ\_INTERRUPT}}
+\index{IR\_READ\_INTERRUPT@{IR\_READ\_INTERRUPT}!main.h@{main.h}}
+\doxysubsubsection{IR\_READ\_INTERRUPT}
+{\footnotesize\ttfamily \label{main_8h_a9693ca1a62b1706768729ea8a689c0fa} 
+\#define IR\+\_\+\+READ\+\_\+\+INTERRUPT~bandera.\+bitmap.\+bit4}
+
+\index{main.h@{main.h}!IS\_TRANSMITTING@{IS\_TRANSMITTING}}
+\index{IS\_TRANSMITTING@{IS\_TRANSMITTING}!main.h@{main.h}}
+\doxysubsubsection{IS\_TRANSMITTING}
+{\footnotesize\ttfamily \label{main_8h_aec52f24e859d57b8570d20930ee4c604} 
+\#define IS\+\_\+\+TRANSMITTING~bandera3.\+bitmap.\+bit3}
+
+\index{main.h@{main.h}!LED\_BUILTIN\_PIN@{LED\_BUILTIN\_PIN}}
+\index{LED\_BUILTIN\_PIN@{LED\_BUILTIN\_PIN}!main.h@{main.h}}
+\doxysubsubsection{LED\_BUILTIN\_PIN}
+{\footnotesize\ttfamily \label{main_8h_a6040dce63c15d7bc740f19238d7a51ad} 
+\#define LED\+\_\+\+BUILTIN\+\_\+\+PIN~PB5}
+
+\index{main.h@{main.h}!NEW\_CONFIG@{NEW\_CONFIG}}
+\index{NEW\_CONFIG@{NEW\_CONFIG}!main.h@{main.h}}
+\doxysubsubsection{NEW\_CONFIG}
+{\footnotesize\ttfamily \label{main_8h_a1f153ff97664fb3694359a8ca501b031} 
+\#define NEW\+\_\+\+CONFIG~bandera3.\+bitmap.\+bit6}
+
+\index{main.h@{main.h}!NIBBLE\_H\_MASK@{NIBBLE\_H\_MASK}}
+\index{NIBBLE\_H\_MASK@{NIBBLE\_H\_MASK}!main.h@{main.h}}
+\doxysubsubsection{NIBBLE\_H\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a4cfad317113fd78929258a1126ea0c34} 
+\#define NIBBLE\+\_\+\+H\+\_\+\+MASK~0x\+F0}
+
+\index{main.h@{main.h}!NIBBLE\_L\_MASK@{NIBBLE\_L\_MASK}}
+\index{NIBBLE\_L\_MASK@{NIBBLE\_L\_MASK}!main.h@{main.h}}
+\doxysubsubsection{NIBBLE\_L\_MASK}
+{\footnotesize\ttfamily \label{main_8h_a946dec6ac719557a2f8b621fadf7980f} 
+\#define NIBBLE\+\_\+\+L\+\_\+\+MASK~0x0F}
+
+\index{main.h@{main.h}!PROTOCOL\_FIXED\_SIZE@{PROTOCOL\_FIXED\_SIZE}}
+\index{PROTOCOL\_FIXED\_SIZE@{PROTOCOL\_FIXED\_SIZE}!main.h@{main.h}}
+\doxysubsubsection{PROTOCOL\_FIXED\_SIZE}
+{\footnotesize\ttfamily \label{main_8h_a0d413286d423274e6921b0932fbeffa9} 
+\#define PROTOCOL\+\_\+\+FIXED\+\_\+\+SIZE~8}
+
+\index{main.h@{main.h}!PROTOCOL\_MAX\_BYTE\_COUNT@{PROTOCOL\_MAX\_BYTE\_COUNT}}
+\index{PROTOCOL\_MAX\_BYTE\_COUNT@{PROTOCOL\_MAX\_BYTE\_COUNT}!main.h@{main.h}}
+\doxysubsubsection{PROTOCOL\_MAX\_BYTE\_COUNT}
+{\footnotesize\ttfamily \label{main_8h_a3dd9f21474871d24a82a7377802ba19e} 
+\#define PROTOCOL\+\_\+\+MAX\+\_\+\+BYTE\+\_\+\+COUNT~24}
+
+\index{main.h@{main.h}!PROTOCOL\_MIN\_BYTE\_COUNT@{PROTOCOL\_MIN\_BYTE\_COUNT}}
+\index{PROTOCOL\_MIN\_BYTE\_COUNT@{PROTOCOL\_MIN\_BYTE\_COUNT}!main.h@{main.h}}
+\doxysubsubsection{PROTOCOL\_MIN\_BYTE\_COUNT}
+{\footnotesize\ttfamily \label{main_8h_abae7a0523f7be9c60cb11253da408954} 
+\#define PROTOCOL\+\_\+\+MIN\+\_\+\+BYTE\+\_\+\+COUNT~6}
+
+\index{main.h@{main.h}!SERVO\_ACTIVE\_TIME@{SERVO\_ACTIVE\_TIME}}
+\index{SERVO\_ACTIVE\_TIME@{SERVO\_ACTIVE\_TIME}!main.h@{main.h}}
+\doxysubsubsection{SERVO\_ACTIVE\_TIME}
+{\footnotesize\ttfamily \label{main_8h_a4126af1775fd3e22e87395e862a84ff5} 
+\#define SERVO\+\_\+\+ACTIVE\+\_\+\+TIME~10}
+
+\index{main.h@{main.h}!SERVO\_FRAME\_PERIOD@{SERVO\_FRAME\_PERIOD}}
+\index{SERVO\_FRAME\_PERIOD@{SERVO\_FRAME\_PERIOD}!main.h@{main.h}}
+\doxysubsubsection{SERVO\_FRAME\_PERIOD}
+{\footnotesize\ttfamily \label{main_8h_ab043ff8dd967fc30fcdba40b169e3397} 
+\#define SERVO\+\_\+\+FRAME\+\_\+\+PERIOD~40000}
+
+\index{main.h@{main.h}!SERVO\_IDLE\_ANGLE@{SERVO\_IDLE\_ANGLE}}
+\index{SERVO\_IDLE\_ANGLE@{SERVO\_IDLE\_ANGLE}!main.h@{main.h}}
+\doxysubsubsection{SERVO\_IDLE\_ANGLE}
+{\footnotesize\ttfamily \label{main_8h_abeaee8f79ed95eafcc6670c16ac33c01} 
+\#define SERVO\+\_\+\+IDLE\+\_\+\+ANGLE~90}
+
+\index{main.h@{main.h}!SERVO\_MAX\_PULSE@{SERVO\_MAX\_PULSE}}
+\index{SERVO\_MAX\_PULSE@{SERVO\_MAX\_PULSE}!main.h@{main.h}}
+\doxysubsubsection{SERVO\_MAX\_PULSE}
+{\footnotesize\ttfamily \label{main_8h_a0ffde0a9cfa57775eef67831f0a6da54} 
+\#define SERVO\+\_\+\+MAX\+\_\+\+PULSE~4000\+UL}
+
+\index{main.h@{main.h}!SERVO\_MIN\_PULSE@{SERVO\_MIN\_PULSE}}
+\index{SERVO\_MIN\_PULSE@{SERVO\_MIN\_PULSE}!main.h@{main.h}}
+\doxysubsubsection{SERVO\_MIN\_PULSE}
+{\footnotesize\ttfamily \label{main_8h_aaee3e47827f209f898338b76dfb1866b} 
+\#define SERVO\+\_\+\+MIN\+\_\+\+PULSE~2000\+UL}
+
+\index{main.h@{main.h}!SERVO\_PUSH\_ANGLE@{SERVO\_PUSH\_ANGLE}}
+\index{SERVO\_PUSH\_ANGLE@{SERVO\_PUSH\_ANGLE}!main.h@{main.h}}
+\doxysubsubsection{SERVO\_PUSH\_ANGLE}
+{\footnotesize\ttfamily \label{main_8h_a13035bd06cff8fb9a8f219a00f1ae01a} 
+\#define SERVO\+\_\+\+PUSH\+\_\+\+ANGLE~0}
+
+\index{main.h@{main.h}!SERVO\_RESET\_TIME@{SERVO\_RESET\_TIME}}
+\index{SERVO\_RESET\_TIME@{SERVO\_RESET\_TIME}!main.h@{main.h}}
+\doxysubsubsection{SERVO\_RESET\_TIME}
+{\footnotesize\ttfamily \label{main_8h_a64fb4d8820c62416d025b97474ab34ab} 
+\#define SERVO\+\_\+\+RESET\+\_\+\+TIME~30}
+
+\index{main.h@{main.h}!SERVO\_START\_PULSE@{SERVO\_START\_PULSE}}
+\index{SERVO\_START\_PULSE@{SERVO\_START\_PULSE}!main.h@{main.h}}
+\doxysubsubsection{SERVO\_START\_PULSE}
+{\footnotesize\ttfamily \label{main_8h_af528fd876b84e4b01aac81b2b8eb5d94} 
+\#define SERVO\+\_\+\+START\+\_\+\+PULSE~3000\+UL}
+
+\index{main.h@{main.h}!SERVOA\_PIN@{SERVOA\_PIN}}
+\index{SERVOA\_PIN@{SERVOA\_PIN}!main.h@{main.h}}
+\doxysubsubsection{SERVOA\_PIN}
+{\footnotesize\ttfamily \label{main_8h_a703ad9781c3f0606d96e144a414901e6} 
+\#define SERVOA\+\_\+\+PIN~PB1}
+
+\index{main.h@{main.h}!SERVOB\_PIN@{SERVOB\_PIN}}
+\index{SERVOB\_PIN@{SERVOB\_PIN}!main.h@{main.h}}
+\doxysubsubsection{SERVOB\_PIN}
+{\footnotesize\ttfamily \label{main_8h_adce3f4db0447f2892fb53a1fd8dda5ba} 
+\#define SERVOB\+\_\+\+PIN~PB2}
+
+\index{main.h@{main.h}!SERVOC\_PIN@{SERVOC\_PIN}}
+\index{SERVOC\_PIN@{SERVOC\_PIN}!main.h@{main.h}}
+\doxysubsubsection{SERVOC\_PIN}
+{\footnotesize\ttfamily \label{main_8h_aacd6c9c98e07c727a33798e977ffdbbb} 
+\#define SERVOC\+\_\+\+PIN~PB3}
+
+\index{main.h@{main.h}!TCRT\_A@{TCRT\_A}}
+\index{TCRT\_A@{TCRT\_A}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_A}
+{\footnotesize\ttfamily \label{main_8h_a2a046c1cf46c5ef97cba3fdc2717ab17} 
+\#define TCRT\+\_\+A~PC0}
+
+\index{main.h@{main.h}!TCRT\_A\_CHANNEL@{TCRT\_A\_CHANNEL}}
+\index{TCRT\_A\_CHANNEL@{TCRT\_A\_CHANNEL}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_A\_CHANNEL}
+{\footnotesize\ttfamily \label{main_8h_ab41282b9efa703a8200a45f84e2eb0e9} 
+\#define TCRT\+\_\+\+A\+\_\+\+CHANNEL~0}
+
+\index{main.h@{main.h}!TCRT\_B@{TCRT\_B}}
+\index{TCRT\_B@{TCRT\_B}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_B}
+{\footnotesize\ttfamily \label{main_8h_a2985a5f35e6658f1127305a92ad444db} 
+\#define TCRT\+\_\+B~PC1}
+
+\index{main.h@{main.h}!TCRT\_B\_CHANNEL@{TCRT\_B\_CHANNEL}}
+\index{TCRT\_B\_CHANNEL@{TCRT\_B\_CHANNEL}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_B\_CHANNEL}
+{\footnotesize\ttfamily \label{main_8h_aff4afef09637970155d3d198c4198387} 
+\#define TCRT\+\_\+\+B\+\_\+\+CHANNEL~1}
+
+\index{main.h@{main.h}!TCRT\_C@{TCRT\_C}}
+\index{TCRT\_C@{TCRT\_C}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_C}
+{\footnotesize\ttfamily \label{main_8h_ad5365904c85925e7b0ef4197aeda38da} 
+\#define TCRT\+\_\+C~PC2}
+
+\index{main.h@{main.h}!TCRT\_C\_CHANNEL@{TCRT\_C\_CHANNEL}}
+\index{TCRT\_C\_CHANNEL@{TCRT\_C\_CHANNEL}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_C\_CHANNEL}
+{\footnotesize\ttfamily \label{main_8h_a86168a540ce4753f221dd4150716f3b8} 
+\#define TCRT\+\_\+\+C\+\_\+\+CHANNEL~2}
+
+\index{main.h@{main.h}!TCRT\_CALIBRATION\_SAMPLES@{TCRT\_CALIBRATION\_SAMPLES}}
+\index{TCRT\_CALIBRATION\_SAMPLES@{TCRT\_CALIBRATION\_SAMPLES}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_CALIBRATION\_SAMPLES}
+{\footnotesize\ttfamily \label{main_8h_a742540e08531ab429d04c662f38f445a} 
+\#define TCRT\+\_\+\+CALIBRATION\+\_\+\+SAMPLES~10}
+
+\index{main.h@{main.h}!TCRT\_FILTER\_SAMPLES@{TCRT\_FILTER\_SAMPLES}}
+\index{TCRT\_FILTER\_SAMPLES@{TCRT\_FILTER\_SAMPLES}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_FILTER\_SAMPLES}
+{\footnotesize\ttfamily \label{main_8h_a149ac50281c50614a19428fe2a194959} 
+\#define TCRT\+\_\+\+FILTER\+\_\+\+SAMPLES~10}
+
+\index{main.h@{main.h}!TCRT\_U@{TCRT\_U}}
+\index{TCRT\_U@{TCRT\_U}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_U}
+{\footnotesize\ttfamily \label{main_8h_a875d52ca1a6faa4f6aadb2ec1fa3e405} 
+\#define TCRT\+\_\+U~PC3}
+
+\index{main.h@{main.h}!TCRT\_U\_CHANNEL@{TCRT\_U\_CHANNEL}}
+\index{TCRT\_U\_CHANNEL@{TCRT\_U\_CHANNEL}!main.h@{main.h}}
+\doxysubsubsection{TCRT\_U\_CHANNEL}
+{\footnotesize\ttfamily \label{main_8h_a3f77fc16a2c007cb1b92a092d9f0c599} 
+\#define TCRT\+\_\+\+U\+\_\+\+CHANNEL~3}
+
+\index{main.h@{main.h}!TIMER2\_ACTIVE@{TIMER2\_ACTIVE}}
+\index{TIMER2\_ACTIVE@{TIMER2\_ACTIVE}!main.h@{main.h}}
+\doxysubsubsection{TIMER2\_ACTIVE}
+{\footnotesize\ttfamily \label{main_8h_ae9fc4786d4b93cac5165ce136cb5c7fa} 
+\#define TIMER2\+\_\+\+ACTIVE~bandera.\+bitmap.\+bit1}
+
+\index{main.h@{main.h}!TRIGGER\_ACTIVE@{TRIGGER\_ACTIVE}}
+\index{TRIGGER\_ACTIVE@{TRIGGER\_ACTIVE}!main.h@{main.h}}
+\doxysubsubsection{TRIGGER\_ACTIVE}
+{\footnotesize\ttfamily \label{main_8h_aacb43fb59e5976f8c4c6a2143386f4b0} 
+\#define TRIGGER\+\_\+\+ACTIVE~bandera2.\+bitmap.\+bit5}
+
+\index{main.h@{main.h}!TRIGGER\_DDR@{TRIGGER\_DDR}}
+\index{TRIGGER\_DDR@{TRIGGER\_DDR}!main.h@{main.h}}
+\doxysubsubsection{TRIGGER\_DDR}
+{\footnotesize\ttfamily \label{main_8h_aa37795c1a663743dfa7910f6cd4de805} 
+\#define TRIGGER\+\_\+\+DDR~DDRD}
+
+\index{main.h@{main.h}!TRIGGER\_PIN@{TRIGGER\_PIN}}
+\index{TRIGGER\_PIN@{TRIGGER\_PIN}!main.h@{main.h}}
+\doxysubsubsection{TRIGGER\_PIN}
+{\footnotesize\ttfamily \label{main_8h_adacee581176b7076b7baf0f72d81460f} 
+\#define TRIGGER\+\_\+\+PIN~PD3}
+
+\index{main.h@{main.h}!TRIGGER\_PORT@{TRIGGER\_PORT}}
+\index{TRIGGER\_PORT@{TRIGGER\_PORT}!main.h@{main.h}}
+\doxysubsubsection{TRIGGER\_PORT}
+{\footnotesize\ttfamily \label{main_8h_a4b6e515e6bd9995d85a203b8326fc49f} 
+\#define TRIGGER\+\_\+\+PORT~PORTD}
+
+\index{main.h@{main.h}!TRIGGER\_WAIT\_TIME\_TENMS@{TRIGGER\_WAIT\_TIME\_TENMS}}
+\index{TRIGGER\_WAIT\_TIME\_TENMS@{TRIGGER\_WAIT\_TIME\_TENMS}!main.h@{main.h}}
+\doxysubsubsection{TRIGGER\_WAIT\_TIME\_TENMS}
+{\footnotesize\ttfamily \label{main_8h_a0d890da839b2db6347eb322c96be0b43} 
+\#define TRIGGER\+\_\+\+WAIT\+\_\+\+TIME\+\_\+\+TENMS~6}
+
+\index{main.h@{main.h}!ULTRASONIC\_ENABLE@{ULTRASONIC\_ENABLE}}
+\index{ULTRASONIC\_ENABLE@{ULTRASONIC\_ENABLE}!main.h@{main.h}}
+\doxysubsubsection{ULTRASONIC\_ENABLE}
+{\footnotesize\ttfamily \label{main_8h_a3288d1172a8f0a4cef930ed6a5ef3b36} 
+\#define ULTRASONIC\+\_\+\+ENABLE~bandera.\+bitmap.\+bit7}
+
+\index{main.h@{main.h}!VEINTEMS\_PASSED@{VEINTEMS\_PASSED}}
+\index{VEINTEMS\_PASSED@{VEINTEMS\_PASSED}!main.h@{main.h}}
+\doxysubsubsection{VEINTEMS\_PASSED}
+{\footnotesize\ttfamily \label{main_8h_a1ffec8251901880dd377d709ea08eb0c} 
+\#define VEINTEMS\+\_\+\+PASSED~bandera2.\+bitmap.\+bit0}
+
+\index{main.h@{main.h}!WAIT\_TIME\_TRIGGER\_PASSED@{WAIT\_TIME\_TRIGGER\_PASSED}}
+\index{WAIT\_TIME\_TRIGGER\_PASSED@{WAIT\_TIME\_TRIGGER\_PASSED}!main.h@{main.h}}
+\doxysubsubsection{WAIT\_TIME\_TRIGGER\_PASSED}
+{\footnotesize\ttfamily \label{main_8h_af6fcf29957b43440e2d69d558dac470c} 
+\#define WAIT\+\_\+\+TIME\+\_\+\+TRIGGER\+\_\+\+PASSED~bandera2.\+bitmap.\+bit4}
+
+\index{main.h@{main.h}!WAITING\_ECHO@{WAITING\_ECHO}}
+\index{WAITING\_ECHO@{WAITING\_ECHO}!main.h@{main.h}}
+\doxysubsubsection{WAITING\_ECHO}
+{\footnotesize\ttfamily \label{main_8h_a8f18a4d496f8bda37627e79abc08bc17} 
+\#define WAITING\+\_\+\+ECHO~bandera2.\+bitmap.\+bit3}
+
+
+
+\doxysubsection{Documentación de variables}
+\index{main.h@{main.h}!bandera@{bandera}}
+\index{bandera@{bandera}!main.h@{main.h}}
+\doxysubsubsection{bandera}
+{\footnotesize\ttfamily \label{main_8h_abaf9d105ac1cfa3d1cb984806de4e93d} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} bandera\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!bandera2@{bandera2}}
+\index{bandera2@{bandera2}!main.h@{main.h}}
+\doxysubsubsection{bandera2}
+{\footnotesize\ttfamily \label{main_8h_aa05f09fd171c189b5b1e24e414dabcdc} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} bandera2\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!bandera3@{bandera3}}
+\index{bandera3@{bandera3}!main.h@{main.h}}
+\doxysubsubsection{bandera3}
+{\footnotesize\ttfamily \label{main_8h_a2a8d961a96d1c17573e37bf8f18fac90} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} bandera3\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!btn\_pressed\_time@{btn\_pressed\_time}}
+\index{btn\_pressed\_time@{btn\_pressed\_time}!main.h@{main.h}}
+\doxysubsubsection{btn\_pressed\_time}
+{\footnotesize\ttfamily \label{main_8h_a39d0eb7a23365e89195c7cd01c4d5adc} 
+volatile uint8\+\_\+t btn\+\_\+pressed\+\_\+time\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!current\_servo@{current\_servo}}
+\index{current\_servo@{current\_servo}!main.h@{main.h}}
+\doxysubsubsection{current\_servo}
+{\footnotesize\ttfamily \label{main_8h_ad1e4fa10601db976f3be9392f5203dfb} 
+volatile uint8\+\_\+t current\+\_\+servo\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!currentConfig@{currentConfig}}
+\index{currentConfig@{currentConfig}!main.h@{main.h}}
+\doxysubsubsection{currentConfig}
+{\footnotesize\ttfamily \label{main_8h_a8e0bde3c252441976d34b2e0542266fd} 
+\textbf{ Config\+\_\+t} current\+Config\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!distance\_mm@{distance\_mm}}
+\index{distance\_mm@{distance\_mm}!main.h@{main.h}}
+\doxysubsubsection{distance\_mm}
+{\footnotesize\ttfamily \label{main_8h_ab1d02bbc368f5045da7543804a031fca} 
+volatile uint16\+\_\+t distance\+\_\+mm\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!doActionCmd@{doActionCmd}}
+\index{doActionCmd@{doActionCmd}!main.h@{main.h}}
+\doxysubsubsection{doActionCmd}
+{\footnotesize\ttfamily \label{main_8h_a3f8282cb87eff12a48807d2e1c11d078} 
+uint8\+\_\+t do\+Action\+Cmd\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!echo\_finish\_time@{echo\_finish\_time}}
+\index{echo\_finish\_time@{echo\_finish\_time}!main.h@{main.h}}
+\doxysubsubsection{echo\_finish\_time}
+{\footnotesize\ttfamily \label{main_8h_a6cb8d4c8c7542dbf595586d7c0b4c5a5} 
+volatile uint16\+\_\+t echo\+\_\+finish\+\_\+time\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!echo\_init\_time@{echo\_init\_time}}
+\index{echo\_init\_time@{echo\_init\_time}!main.h@{main.h}}
+\doxysubsubsection{echo\_init\_time}
+{\footnotesize\ttfamily \label{main_8h_ad30d5942b66b232f3156405c78f551d5} 
+volatile uint16\+\_\+t echo\+\_\+init\+\_\+time\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!echo\_state@{echo\_state}}
+\index{echo\_state@{echo\_state}!main.h@{main.h}}
+\doxysubsubsection{echo\_state}
+{\footnotesize\ttfamily \label{main_8h_a8a6e8c4d6645f2f82f0551bb3dd5da78} 
+volatile uint8\+\_\+t echo\+\_\+state\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!eepromConfig@{eepromConfig}}
+\index{eepromConfig@{eepromConfig}!main.h@{main.h}}
+\doxysubsubsection{eepromConfig}
+{\footnotesize\ttfamily \label{main_8h_ac8dc19927a84b4761e18f650b084f1e6} 
+EEMEM \textbf{ Config\+\_\+t} eeprom\+Config\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!hcsr04Detector@{hcsr04Detector}}
+\index{hcsr04Detector@{hcsr04Detector}!main.h@{main.h}}
+\doxysubsubsection{hcsr04Detector}
+{\footnotesize\ttfamily \label{main_8h_a64cf5b1735bc17f8bea57cd8516216f1} 
+\textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t} hcsr04\+Detector\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!IR\_A@{IR\_A}}
+\index{IR\_A@{IR\_A}!main.h@{main.h}}
+\doxysubsubsection{IR\_A}
+{\footnotesize\ttfamily \label{main_8h_a2a60131ca1e382dfb2c6273d236c4e2c} 
+\textbf{ TCRT\+\_\+t} IR\+\_\+A\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!IR\_B@{IR\_B}}
+\index{IR\_B@{IR\_B}!main.h@{main.h}}
+\doxysubsubsection{IR\_B}
+{\footnotesize\ttfamily \label{main_8h_ab38d51300ec0ce64dec3bc391e0a51e9} 
+\textbf{ TCRT\+\_\+t} IR\+\_\+B\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!IR\_C@{IR\_C}}
+\index{IR\_C@{IR\_C}!main.h@{main.h}}
+\doxysubsubsection{IR\_C}
+{\footnotesize\ttfamily \label{main_8h_a4dd21f397d78c9096f97df93bc5845a7} 
+\textbf{ TCRT\+\_\+t} IR\+\_\+C\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!IR\_U@{IR\_U}}
+\index{IR\_U@{IR\_U}!main.h@{main.h}}
+\doxysubsubsection{IR\_U}
+{\footnotesize\ttfamily \label{main_8h_aa5c2257eac0fba0588336c2cf375acd5} 
+\textbf{ TCRT\+\_\+t} IR\+\_\+U\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!ovf\_count@{ovf\_count}}
+\index{ovf\_count@{ovf\_count}!main.h@{main.h}}
+\doxysubsubsection{ovf\_count}
+{\footnotesize\ttfamily \label{main_8h_abbd387e7138a4c76bc186cd5ed969ede} 
+volatile uint8\+\_\+t ovf\+\_\+count\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!protocolService@{protocolService}}
+\index{protocolService@{protocolService}!main.h@{main.h}}
+\doxysubsubsection{protocolService}
+{\footnotesize\ttfamily \label{main_8h_a2483443e25b1561e49f23d3c48e97db3} 
+\textbf{ Protocol\+Service} protocol\+Service\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!pulse\_width\_A@{pulse\_width\_A}}
+\index{pulse\_width\_A@{pulse\_width\_A}!main.h@{main.h}}
+\doxysubsubsection{pulse\_width\_A}
+{\footnotesize\ttfamily \label{main_8h_ac0d0e51d9e4c426d6bba6ece0e8e7858} 
+volatile uint32\+\_\+t pulse\+\_\+width\+\_\+A\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!salidaA@{salidaA}}
+\index{salidaA@{salidaA}!main.h@{main.h}}
+\doxysubsubsection{salidaA}
+{\footnotesize\ttfamily \label{main_8h_a3e724f77222b7d549e8d575af36aaecc} 
+\textbf{ output\+\_\+t} salidaA\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!salidaB@{salidaB}}
+\index{salidaB@{salidaB}!main.h@{main.h}}
+\doxysubsubsection{salidaB}
+{\footnotesize\ttfamily \label{main_8h_a16b14a740bcd865c4ffe58f857b764f5} 
+\textbf{ output\+\_\+t} salidaB\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!salidaC@{salidaC}}
+\index{salidaC@{salidaC}!main.h@{main.h}}
+\doxysubsubsection{salidaC}
+{\footnotesize\ttfamily \label{main_8h_aecbd75740710683f7c084eb6da2b1fcf} 
+\textbf{ output\+\_\+t} salidaC\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!servo\_counter@{servo\_counter}}
+\index{servo\_counter@{servo\_counter}!main.h@{main.h}}
+\doxysubsubsection{servo\_counter}
+{\footnotesize\ttfamily \label{main_8h_a25f564e62121593a86e26ebe723fcde7} 
+volatile uint8\+\_\+t servo\+\_\+counter\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!servoA@{servoA}}
+\index{servoA@{servoA}!main.h@{main.h}}
+\doxysubsubsection{servoA}
+{\footnotesize\ttfamily \label{main_8h_a5e019a3047bf049271f3329c862eed61} 
+\textbf{ servo\+\_\+t} servoA\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!servoB@{servoB}}
+\index{servoB@{servoB}!main.h@{main.h}}
+\doxysubsubsection{servoB}
+{\footnotesize\ttfamily \label{main_8h_a834a14206b5c59a2f4d0bb1aa391587e} 
+\textbf{ servo\+\_\+t} servoB\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!servoC@{servoC}}
+\index{servoC@{servoC}!main.h@{main.h}}
+\doxysubsubsection{servoC}
+{\footnotesize\ttfamily \label{main_8h_a4a829f2e7a8bcff5033cf7a95c4f9af6} 
+\textbf{ servo\+\_\+t} servoC\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!servosArray@{servosArray}}
+\index{servosArray@{servosArray}!main.h@{main.h}}
+\doxysubsubsection{servosArray}
+{\footnotesize\ttfamily \label{main_8h_a874d63f2df613859c3225f2a9f66893c} 
+volatile \textbf{ servo\+\_\+t}$\ast$ servos\+Array[3]\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!SorterSystem@{SorterSystem}}
+\index{SorterSystem@{SorterSystem}!main.h@{main.h}}
+\doxysubsubsection{SorterSystem}
+{\footnotesize\ttfamily \label{main_8h_a7099de9259fc88558d53f64564c0af9a} 
+\textbf{ sorter\+\_\+system\+\_\+t} Sorter\+System\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!transmit\_counter@{transmit\_counter}}
+\index{transmit\_counter@{transmit\_counter}!main.h@{main.h}}
+\doxysubsubsection{transmit\_counter}
+{\footnotesize\ttfamily \label{main_8h_a9f784b799146813512b3e9453c5d6826} 
+volatile uint8\+\_\+t transmit\+\_\+counter\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!ultraSensor@{ultraSensor}}
+\index{ultraSensor@{ultraSensor}!main.h@{main.h}}
+\doxysubsubsection{ultraSensor}
+{\footnotesize\ttfamily \label{main_8h_a7620d2a7632969ee3cfd057511b0a200} 
+ultrasonic\+\_\+t ultra\+Sensor\hspace{0.3cm}{\ttfamily [extern]}}
+
+\index{main.h@{main.h}!wait\_time@{wait\_time}}
+\index{wait\_time@{wait\_time}!main.h@{main.h}}
+\doxysubsubsection{wait\_time}
+{\footnotesize\ttfamily \label{main_8h_a95f29f6ffe2da2da6684e9299ec289f7} 
+volatile uint8\+\_\+t wait\+\_\+time\hspace{0.3cm}{\ttfamily [extern]}}
+

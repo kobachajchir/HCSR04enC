@@ -1,0 +1,95 @@
+\doxysection{Referencia del archivo Gcc\+Application1/types/ultrasonic\+Detector\+Type.h}
+\label{ultrasonic_detector_type_8h}\index{GccApplication1/types/ultrasonicDetectorType.h@{GccApplication1/types/ultrasonicDetectorType.h}}
+
+
+Definición de la estructura y macros para el detector ultrasónico compuesto.  
+
+
+{\ttfamily \#include "{}ultrasonic.\+h"{}}\newline
+{\ttfamily \#include "{}ultrasonic\+\_\+hal.\+h"{}}\newline
+{\ttfamily \#include "{}bitmap\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}TCRTType.\+h"{}}\newline
+\doxysubsubsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Estructura que representa un sistema de detección basado en sensor ultrasónico e IR. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ ULTRADET\+\_\+\+ZONE\+\_\+\+ULTRA\+\_\+\+CLEAR}~\textbf{ BIT0\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag que indica que la zona del sensor ultrasónico está despejada. \end{DoxyCompactList}\item 
+\#define \textbf{ ULTRADET\+\_\+\+ZONE\+\_\+\+TRCT\+\_\+\+U\+\_\+\+DETECTING}~\textbf{ BIT1\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag que indica que el sensor IR U está detectando una caja. \end{DoxyCompactList}\item 
+\#define \textbf{ ULTRADET\+\_\+\+SENSOR\+\_\+\+IDLE}~0
+\begin{DoxyCompactList}\small\item\em Estado del sensor\+: en reposo (esperando una detección). \end{DoxyCompactList}\item 
+\#define \textbf{ ULTRADET\+\_\+\+SENSOR\+\_\+\+DETECTING}~1
+\begin{DoxyCompactList}\small\item\em Estado del sensor\+: detectando una caja. \end{DoxyCompactList}\item 
+\#define \textbf{ ULTRADET\+\_\+\+SENSOR\+\_\+\+WAITING\+\_\+\+CLEAR}~2
+\begin{DoxyCompactList}\small\item\em Estado del sensor\+: esperando que se libere la zona (la caja se retire). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Definición de la estructura y macros para el detector ultrasónico compuesto. 
+
+Este archivo define la estructura {\ttfamily \doxyref{Ultrasonic\+\_\+\+Detector\+\_\+t}{pÃ¡g.}{struct_ultrasonic___detector__t}}, que combina un sensor ultrasónico con un sensor infrarrojo (TCRT), así como los flags y estados utilizados para el control del proceso de detección de cajas mediante ultrasonido.
+
+\begin{DoxyAuthor}{Autor}
+kobac 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+26-\/Mar-\/25 
+\end{DoxyDate}
+
+
+\doxysubsection{DocumentaciÃ³n de Â«defineÂ»}
+\index{ultrasonicDetectorType.h@{ultrasonicDetectorType.h}!ULTRADET\_SENSOR\_DETECTING@{ULTRADET\_SENSOR\_DETECTING}}
+\index{ULTRADET\_SENSOR\_DETECTING@{ULTRADET\_SENSOR\_DETECTING}!ultrasonicDetectorType.h@{ultrasonicDetectorType.h}}
+\doxysubsubsection{ULTRADET\_SENSOR\_DETECTING}
+{\footnotesize\ttfamily \label{ultrasonic_detector_type_8h_abf668f9657cfbd0241a9c71b507e9a0a} 
+\#define ULTRADET\+\_\+\+SENSOR\+\_\+\+DETECTING~1}
+
+
+
+Estado del sensor\+: detectando una caja. 
+
+\index{ultrasonicDetectorType.h@{ultrasonicDetectorType.h}!ULTRADET\_SENSOR\_IDLE@{ULTRADET\_SENSOR\_IDLE}}
+\index{ULTRADET\_SENSOR\_IDLE@{ULTRADET\_SENSOR\_IDLE}!ultrasonicDetectorType.h@{ultrasonicDetectorType.h}}
+\doxysubsubsection{ULTRADET\_SENSOR\_IDLE}
+{\footnotesize\ttfamily \label{ultrasonic_detector_type_8h_a3fa3cbe4cb61c685b82f6a6d3f14e9d0} 
+\#define ULTRADET\+\_\+\+SENSOR\+\_\+\+IDLE~0}
+
+
+
+Estado del sensor\+: en reposo (esperando una detección). 
+
+\index{ultrasonicDetectorType.h@{ultrasonicDetectorType.h}!ULTRADET\_SENSOR\_WAITING\_CLEAR@{ULTRADET\_SENSOR\_WAITING\_CLEAR}}
+\index{ULTRADET\_SENSOR\_WAITING\_CLEAR@{ULTRADET\_SENSOR\_WAITING\_CLEAR}!ultrasonicDetectorType.h@{ultrasonicDetectorType.h}}
+\doxysubsubsection{ULTRADET\_SENSOR\_WAITING\_CLEAR}
+{\footnotesize\ttfamily \label{ultrasonic_detector_type_8h_a70719b5f6a028c6ed27495cdde3dfca0} 
+\#define ULTRADET\+\_\+\+SENSOR\+\_\+\+WAITING\+\_\+\+CLEAR~2}
+
+
+
+Estado del sensor\+: esperando que se libere la zona (la caja se retire). 
+
+\index{ultrasonicDetectorType.h@{ultrasonicDetectorType.h}!ULTRADET\_ZONE\_TRCT\_U\_DETECTING@{ULTRADET\_ZONE\_TRCT\_U\_DETECTING}}
+\index{ULTRADET\_ZONE\_TRCT\_U\_DETECTING@{ULTRADET\_ZONE\_TRCT\_U\_DETECTING}!ultrasonicDetectorType.h@{ultrasonicDetectorType.h}}
+\doxysubsubsection{ULTRADET\_ZONE\_TRCT\_U\_DETECTING}
+{\footnotesize\ttfamily \label{ultrasonic_detector_type_8h_aef75c2c112e690f2ff5969bfec3e3815} 
+\#define ULTRADET\+\_\+\+ZONE\+\_\+\+TRCT\+\_\+\+U\+\_\+\+DETECTING~\textbf{ BIT1\+\_\+\+MASK}}
+
+
+
+Flag que indica que el sensor IR U está detectando una caja. 
+
+\index{ultrasonicDetectorType.h@{ultrasonicDetectorType.h}!ULTRADET\_ZONE\_ULTRA\_CLEAR@{ULTRADET\_ZONE\_ULTRA\_CLEAR}}
+\index{ULTRADET\_ZONE\_ULTRA\_CLEAR@{ULTRADET\_ZONE\_ULTRA\_CLEAR}!ultrasonicDetectorType.h@{ultrasonicDetectorType.h}}
+\doxysubsubsection{ULTRADET\_ZONE\_ULTRA\_CLEAR}
+{\footnotesize\ttfamily \label{ultrasonic_detector_type_8h_a53bf4eeed7e0f3724dd6c1ff17056ce0} 
+\#define ULTRADET\+\_\+\+ZONE\+\_\+\+ULTRA\+\_\+\+CLEAR~\textbf{ BIT0\+\_\+\+MASK}}
+
+
+
+Flag que indica que la zona del sensor ultrasónico está despejada. 
+

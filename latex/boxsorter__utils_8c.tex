@@ -1,0 +1,161 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/program\+Path/boxsorter\+\_\+utils.c}
+\label{boxsorter__utils_8c}\index{GccApplication1/utils/programPath/boxsorter\_utils.c@{GccApplication1/utils/programPath/boxsorter\_utils.c}}
+{\ttfamily \#include "{}../../main.\+h"{}}\newline
+{\ttfamily \#include "{}../../types/box\+Types.\+h"{}}\newline
+{\ttfamily \#include "{}../../types/sorter\+System\+Types.\+h"{}}\newline
+{\ttfamily \#include "{}../../types/ultrasonic\+Detector\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}../../types/config\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}boxsorter\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$avr/pgmspace.\+h$>$}\newline
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ init\+Detector} (\textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t} $\ast$\textbf{ hcsr04\+Detector}, ultrasonic\+\_\+t $\ast$sensor\+\_\+ultra, \textbf{ TCRT\+\_\+t} $\ast$sensor\+\_\+\+IR)
+\begin{DoxyCompactList}\small\item\em Inicializa el detector ultrasónico. \end{DoxyCompactList}\item 
+void \textbf{ init\+Servos} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa los servos utilizados por el sistema. \end{DoxyCompactList}\item 
+void \textbf{ init\+Outputs} ()
+\begin{DoxyCompactList}\small\item\em Inicializa las salidas del sistema de clasificación. \end{DoxyCompactList}\item 
+void \textbf{ init\+Sorter} (\textbf{ sorter\+\_\+system\+\_\+t} $\ast$System\+Sorter)
+\begin{DoxyCompactList}\small\item\em Inicializa el sistema de clasificación (Sorter). \end{DoxyCompactList}\item 
+\textbf{ box\+\_\+type\+\_\+t} \textbf{ classify\+\_\+box} (uint8\+\_\+t \textbf{ distance\+\_\+mm}, \textbf{ sorter\+\_\+system\+\_\+t} $\ast$System\+Sorter)
+\begin{DoxyCompactList}\small\item\em Clasifica una caja en función de su altura medida. \end{DoxyCompactList}\item 
+void \textbf{ ultra\+Sensor\+Task} (\textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t} $\ast$ultra\+Detector, \textbf{ sorter\+\_\+system\+\_\+t} $\ast$sorter)
+\begin{DoxyCompactList}\small\item\em Tarea que ejecuta el control principal del sensor ultrasónico. \end{DoxyCompactList}\item 
+void \textbf{ ir\+Sensors\+Task} (\textbf{ sorter\+\_\+system\+\_\+t} $\ast$sorter)
+\begin{DoxyCompactList}\small\item\em Tarea que procesa los sensores IR. \end{DoxyCompactList}\item 
+void \textbf{ servos\+Task} ()
+\begin{DoxyCompactList}\small\item\em Función placeholder para futuras tareas relacionadas con los servos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DocumentaciÃ³n de funciones}
+\index{boxsorter\_utils.c@{boxsorter\_utils.c}!classify\_box@{classify\_box}}
+\index{classify\_box@{classify\_box}!boxsorter\_utils.c@{boxsorter\_utils.c}}
+\doxysubsubsection{classify\_box()}
+{\footnotesize\ttfamily \label{boxsorter__utils_8c_a4562adac5d13f7b61b8bfa840df39e58} 
+\textbf{ box\+\_\+type\+\_\+t} classify\+\_\+box (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{distance\+\_\+mm}{, }\item[{\textbf{ sorter\+\_\+system\+\_\+t} $\ast$}]{System\+Sorter}{}\end{DoxyParamCaption})}
+
+
+
+Clasifica una caja en función de su altura medida. 
+
+Determina si es tipo A, B, C o descartada, comparando contra los rangos predefinidos.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em distance\+\_\+mm} & Distancia medida por el sensor ultrasónico. \\
+\hline
+\mbox{\texttt{ in}}  & {\em System\+Sorter} & Sistema de clasificación que contiene los rangos. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em \doxyref{box\+\_\+type\+\_\+t}{pÃ¡g.}{box_types_8h_acbdca706d57c8a5517434a35679203d1}} & Tipo de caja detectada. \\
+\hline
+\end{DoxyRetVals}
+\index{boxsorter\_utils.c@{boxsorter\_utils.c}!initDetector@{initDetector}}
+\index{initDetector@{initDetector}!boxsorter\_utils.c@{boxsorter\_utils.c}}
+\doxysubsubsection{initDetector()}
+{\footnotesize\ttfamily \label{boxsorter__utils_8c_a17f05d303b2b8f8241647d984b12a97e} 
+void init\+Detector (\begin{DoxyParamCaption}\item[{\textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t} $\ast$}]{hcsr04\+Detector}{, }\item[{ultrasonic\+\_\+t $\ast$}]{sensor\+\_\+ultra}{, }\item[{\textbf{ TCRT\+\_\+t} $\ast$}]{sensor\+\_\+\+IR}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa el detector ultrasónico. 
+
+Configura el puntero al sensor ultrasónico y al sensor IR asociado.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ out}}  & {\em hcsr04\+Detector} & Estructura del detector ultrasónico. \\
+\hline
+\mbox{\texttt{ in}}  & {\em sensor\+\_\+ultra} & Puntero al sensor ultrasónico. \\
+\hline
+\mbox{\texttt{ in}}  & {\em sensor\+\_\+\+IR} & Puntero al sensor IR. \\
+\hline
+\end{DoxyParams}
+\index{boxsorter\_utils.c@{boxsorter\_utils.c}!initOutputs@{initOutputs}}
+\index{initOutputs@{initOutputs}!boxsorter\_utils.c@{boxsorter\_utils.c}}
+\doxysubsubsection{initOutputs()}
+{\footnotesize\ttfamily \label{boxsorter__utils_8c_ac3988d0a14e12e52073709af9b93fe9d} 
+void init\+Outputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa las salidas del sistema de clasificación. 
+
+Carga configuración desde EEPROM si existe, o aplica valores por defecto. Asocia pines y marca todas las salidas como listas (READY). \index{boxsorter\_utils.c@{boxsorter\_utils.c}!initServos@{initServos}}
+\index{initServos@{initServos}!boxsorter\_utils.c@{boxsorter\_utils.c}}
+\doxysubsubsection{initServos()}
+{\footnotesize\ttfamily \label{boxsorter__utils_8c_ad978a60fb09963ff64dba6092ee48c2f} 
+void init\+Servos (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inicializa los servos utilizados por el sistema. 
+
+Asigna ángulo inicial y pines de control. Los servos son almacenados en un arreglo global. \index{boxsorter\_utils.c@{boxsorter\_utils.c}!initSorter@{initSorter}}
+\index{initSorter@{initSorter}!boxsorter\_utils.c@{boxsorter\_utils.c}}
+\doxysubsubsection{initSorter()}
+{\footnotesize\ttfamily \label{boxsorter__utils_8c_aa3c646ee656c4a2b207ebb0779a3693b} 
+void init\+Sorter (\begin{DoxyParamCaption}\item[{\textbf{ sorter\+\_\+system\+\_\+t} $\ast$}]{System\+Sorter}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa el sistema de clasificación (Sorter). 
+
+Asocia rangos de altura de cajas, salidas y configura estado inicial.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ out}}  & {\em System\+Sorter} & Puntero al sistema de clasificación a inicializar. \\
+\hline
+\end{DoxyParams}
+\index{boxsorter\_utils.c@{boxsorter\_utils.c}!irSensorsTask@{irSensorsTask}}
+\index{irSensorsTask@{irSensorsTask}!boxsorter\_utils.c@{boxsorter\_utils.c}}
+\doxysubsubsection{irSensorsTask()}
+{\footnotesize\ttfamily \label{boxsorter__utils_8c_a4f7cf5974fc873b6a0036fb285e6189c} 
+void ir\+Sensors\+Task (\begin{DoxyParamCaption}\item[{\textbf{ sorter\+\_\+system\+\_\+t} $\ast$}]{sorter}{}\end{DoxyParamCaption})}
+
+
+
+Tarea que procesa los sensores IR. 
+
+Realiza lectura de cada sensor, detecta cajas, y activa los servos correspondientes.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in,out}}  & {\em sorter} & Sistema de clasificación. \\
+\hline
+\end{DoxyParams}
+\index{boxsorter\_utils.c@{boxsorter\_utils.c}!servosTask@{servosTask}}
+\index{servosTask@{servosTask}!boxsorter\_utils.c@{boxsorter\_utils.c}}
+\doxysubsubsection{servosTask()}
+{\footnotesize\ttfamily \label{boxsorter__utils_8c_a8e5960349b41ab72dbc29f06048d8145} 
+void servos\+Task (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Función placeholder para futuras tareas relacionadas con los servos. 
+
+Actualmente vacía. \index{boxsorter\_utils.c@{boxsorter\_utils.c}!ultraSensorTask@{ultraSensorTask}}
+\index{ultraSensorTask@{ultraSensorTask}!boxsorter\_utils.c@{boxsorter\_utils.c}}
+\doxysubsubsection{ultraSensorTask()}
+{\footnotesize\ttfamily \label{boxsorter__utils_8c_af0e381d6f0d88428934b9854cddb037f} 
+void ultra\+Sensor\+Task (\begin{DoxyParamCaption}\item[{\textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t} $\ast$}]{ultra\+Detector}{, }\item[{\textbf{ sorter\+\_\+system\+\_\+t} $\ast$}]{sorter}{}\end{DoxyParamCaption})}
+
+
+
+Tarea que ejecuta el control principal del sensor ultrasónico. 
+
+Se encarga de disparar el sensor, verificar el eco, clasificar la caja, actualizar estadísticas y manejar errores por timeout.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in,out}}  & {\em ultra\+Detector} & Estructura de control del sensor ultrasónico. \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em sorter} & Sistema de clasificación. \\
+\hline
+\end{DoxyParams}

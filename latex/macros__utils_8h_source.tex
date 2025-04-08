@@ -1,0 +1,52 @@
+\doxysection{macros\+\_\+utils.\+h}
+\label{macros__utils_8h_source}\index{GccApplication1/utils/macros\_utils.h@{GccApplication1/utils/macros\_utils.h}}
+\textbf{ Ir a la documentaciÃ³n de este archivo.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ macros\_utils.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created:\ 27-\/Mar-\/25\ 12:08:38\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Author:\ kobac}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ MACROS\_UTILS\_H\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MACROS\_UTILS\_H\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}../types/bitmapType.h"{}}\ \ \textcolor{comment}{//\ Importa\ definiciones\ globales,\ máscaras\ y\ estructuras}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ =====================\ FLAGS\ ==============================\ //}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ -\/-\/-\/\ Macros\ generales\ para\ manipular\ flags\ de\ tipo\ Byte\_Flag\_Struct\ -\/-\/-\/}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Setea\ los\ bits\ especificados\ en\ el\ byte\ de\ flags}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ SET\_FLAG(flag\_struct,\ BIT\_MASK)\ \ \ \ \ ((flag\_struct).byte\ |=\ \ (BIT\_MASK))}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ Limpia\ los\ bits\ especificados}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ CLEAR\_FLAG(flag\_struct,\ BIT\_MASK)\ \ \ ((flag\_struct).byte\ \&=\ \string~(BIT\_MASK))}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ Cambia\ el\ estado\ (toggle)\ de\ los\ bits\ especificados}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ TOGGLE\_FLAG(flag\_struct,\ BIT\_MASK)\ \ ((flag\_struct).byte\ \string^=\ \ (BIT\_MASK))}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ Verifica\ si\ uno\ o\ más bits\ están seteados\ (devuelve\ true\ si\ alguno\ está activo)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ IS\_FLAG\_SET(flag\_struct,\ BIT\_MASK)\ \ (((flag\_struct).byte\ \&\ (BIT\_MASK))\ !=\ 0)}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ =====================\ NIBBLES\ ==============================\ //}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ -\/-\/-\/\ Operaciones\ específicas\ para\ nibbles\ (mitades\ de\ un\ byte)\ -\/-\/-\/}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ Esto\ permite\ codificar\ estados\ dentro\ de\ 4\ bits,\ dividiendo\ el\ byte\ en\ 2.}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ Setea\ el\ nibble\ bajo\ (bits\ 0–3)\ al\ valor\ dado,\ preservando\ el\ alto}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ NIBBLEL\_SET\_STATE(object,\ state)\ \(\backslash\)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\ \ \ \ ((object).byte\ =\ ((object).byte\ \&\ NIBBLE\_H\_MASK)\ |\ ((state)\ \&\ NIBBLE\_L\_MASK))}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ Setea\ el\ nibble\ alto\ (bits\ 4–7)\ al\ valor\ dado,\ preservando\ el\ bajo}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ NIBBLEH\_SET\_STATE(object,\ state)\ \(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ ((object).byte\ =\ ((object).byte\ \&\ NIBBLE\_L\_MASK)\ |\ (((state)\ \&\ NIBBLE\_L\_MASK)\ <<\ 4))}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ Obtiene\ el\ estado\ actual\ del\ nibble\ alto\ (4\ bits\ de\ estado)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ NIBBLEH\_GET\_STATE(flag\_struct)\ (((flag\_struct).byte\ \&\ NIBBLE\_H\_MASK)\ >>\ 4)}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ Obtiene\ el\ estado\ actual\ del\ nibble\ bajo}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ NIBBLEL\_GET\_STATE(flag\_struct)\ ((flag\_struct).byte\ \&\ NIBBLE\_L\_MASK)}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MACROS\_UTILS\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

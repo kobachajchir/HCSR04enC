@@ -1,0 +1,38 @@
+\doxysection{bitmap\+Type.\+h}
+\label{bitmap_type_8h_source}\index{GccApplication1/types/bitmapType.h@{GccApplication1/types/bitmapType.h}}
+\textbf{ Ir a la documentación de este archivo.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ BITMAPTYPE.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created:\ 22-\/Mar-\/25\ 5:31:54\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ Author:\ kobac}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ BITMAPTYPE\_H\_}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ BITMAPTYPE\_H\_}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <stdint.h>}\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ uint8\_t\ bit0:\ 1;\ \ \textcolor{comment}{//\ Bit\ 0\ -\/\ Parte\ del\ nibble\ bajo\ (bitL)}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ uint8\_t\ bit1:\ 1;\ \ \textcolor{comment}{//\ Bit\ 1\ -\/\ Parte\ del\ nibble\ bajo\ (bitL)}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ uint8\_t\ bit2:\ 1;\ \ \textcolor{comment}{//\ Bit\ 2\ -\/\ Parte\ del\ nibble\ bajo\ (bitL)}}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ uint8\_t\ bit3:\ 1;\ \ \textcolor{comment}{//\ Bit\ 3\ -\/\ Parte\ del\ nibble\ bajo\ (bitL)}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ uint8\_t\ bit4:\ 1;\ \ \textcolor{comment}{//\ Bit\ 4\ -\/\ Parte\ del\ nibble\ alto\ (bitH)}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ uint8\_t\ bit5:\ 1;\ \ \textcolor{comment}{//\ Bit\ 5\ -\/\ Parte\ del\ nibble\ alto\ (bitH)}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ uint8\_t\ bit6:\ 1;\ \ \textcolor{comment}{//\ Bit\ 6\ -\/\ Parte\ del\ nibble\ alto\ (bitH)}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ uint8\_t\ bit7:\ 1;\ \ \textcolor{comment}{//\ Bit\ 7\ -\/\ Parte\ del\ nibble\ alto\ (bitH)}}
+\DoxyCodeLine{00024\ \ \ \ \ \}\ bitmap;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ uint8\_t\ bitL:\ 4;\ \ \textcolor{comment}{//\ Nibble\ bajo\ (bits\ 0-\/3)}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ uint8\_t\ bitH:\ 4;\ \ \textcolor{comment}{//\ Nibble\ alto\ (bits\ 4-\/7)}}
+\DoxyCodeLine{00028\ \ \ \ \ \}\ nibbles;}
+\DoxyCodeLine{00029\ \ \ \ \ uint8\_t\ byte;}
+\DoxyCodeLine{00030\ \}\ Byte\_Flag\_Struct;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BITMAPTYPE\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

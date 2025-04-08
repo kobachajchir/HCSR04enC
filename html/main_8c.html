@@ -1,0 +1,1216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clasificadora_Microcontroladores_CHAJCHIR_ARRUA: Referencia del archivo GccApplication1/main.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Clasificadora_Microcontroladores_CHAJCHIR_ARRUA<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">El proyecto desarrolla un sistema de clasificacion de cajas a traves de medicion de altura, con configuracion mediante un protocolo de comunicaciÃ³n serial no bloqueante - AVR C- ATMEGA328p</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('main_8c.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funciones</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo main.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;avr/io.h&gt;</code><br />
+<code>#include &lt;avr/interrupt.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;avr/pgmspace.h&gt;</code><br />
+<code>#include &lt;avr/eeprom.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="macros__utils_8h_source.html">utils/macros_utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="bitmap_type_8h_source.html">types/bitmapType.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="sorter_system_types_8h_source.html">types/sorterSystemTypes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="usart__utils_8h_source.html">utils/usart/usart_utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="servo__utils_8h_source.html">utils/servo/servo_utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ultrasonic_detector_type_8h_source.html">types/ultrasonicDetectorType.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_t_c_r_t_type_8h_source.html">types/TCRTType.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="config_type_8h_source.html">types/configType.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="boxsorter__utils_8h_source.html">utils/programPath/boxsorter_utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="protocol__utils_8h_source.html">utils/protocol/protocol_utils.h</a>&quot;</code><br />
+<code>#include &quot;ultrasonic.h&quot;</code><br />
+<code>#include &quot;ultrasonic_hal.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a79d21f91f71c72b5a90d52532da94e54" id="r_a79d21f91f71c72b5a90d52532da94e54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79d21f91f71c72b5a90d52532da94e54">printfWrapper</a> (const char *message)</td></tr>
+<tr class="memdesc:a79d21f91f71c72b5a90d52532da94e54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper para imprimir mensajes por consola.  <br /></td></tr>
+<tr class="separator:a79d21f91f71c72b5a90d52532da94e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb302081b7dbd40d0fea4bbe53fd9b7b" id="r_abb302081b7dbd40d0fea4bbe53fd9b7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb302081b7dbd40d0fea4bbe53fd9b7b">timer1_init</a> ()</td></tr>
+<tr class="memdesc:abb302081b7dbd40d0fea4bbe53fd9b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa el Timer 1 (timer1_init)  <br /></td></tr>
+<tr class="separator:abb302081b7dbd40d0fea4bbe53fd9b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cd8cee0c5bd8d8b2f528216f7dd487d" id="r_a2cd8cee0c5bd8d8b2f528216f7dd487d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2cd8cee0c5bd8d8b2f528216f7dd487d">timer2_init</a> ()</td></tr>
+<tr class="memdesc:a2cd8cee0c5bd8d8b2f528216f7dd487d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa los pines GPIO del sistema (gpio_pins_init)  <br /></td></tr>
+<tr class="separator:a2cd8cee0c5bd8d8b2f528216f7dd487d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1b187dc53f7dc2a9137c3fb5ba41e8" id="r_a7e1b187dc53f7dc2a9137c3fb5ba41e8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e1b187dc53f7dc2a9137c3fb5ba41e8">gpio_pins_init</a> ()</td></tr>
+<tr class="memdesc:a7e1b187dc53f7dc2a9137c3fb5ba41e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa los pines GPIO del sistema.  <br /></td></tr>
+<tr class="separator:a7e1b187dc53f7dc2a9137c3fb5ba41e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb509803ce847466e3c3604a4af1a29" id="r_a0cb509803ce847466e3c3604a4af1a29"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0cb509803ce847466e3c3604a4af1a29">buttonTask</a> (void)</td></tr>
+<tr class="memdesc:a0cb509803ce847466e3c3604a4af1a29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea asociada al botón de entrada.  <br /></td></tr>
+<tr class="separator:a0cb509803ce847466e3c3604a4af1a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9113131aefbfe0c08577bde786c89596" id="r_a9113131aefbfe0c08577bde786c89596"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9113131aefbfe0c08577bde786c89596">calibrateAllIRSensors</a> ()</td></tr>
+<tr class="memdesc:a9113131aefbfe0c08577bde786c89596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calibra todos los sensores IR habilitados.  <br /></td></tr>
+<tr class="separator:a9113131aefbfe0c08577bde786c89596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5da59e05fa5ade4be7c7656aee78291a" id="r_a5da59e05fa5ade4be7c7656aee78291a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5da59e05fa5ade4be7c7656aee78291a">ISR</a> (TIMER1_CAPT_vect)</td></tr>
+<tr class="memdesc:a5da59e05fa5ade4be7c7656aee78291a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR del evento de captura del Timer1 para el sensor ultrasónico.  <br /></td></tr>
+<tr class="separator:a5da59e05fa5ade4be7c7656aee78291a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab16889ae984b9b798989a0d239283cac" id="r_ab16889ae984b9b798989a0d239283cac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab16889ae984b9b798989a0d239283cac">ISR</a> (TIMER1_OVF_vect)</td></tr>
+<tr class="memdesc:ab16889ae984b9b798989a0d239283cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR de desbordamiento del Timer1.  <br /></td></tr>
+<tr class="separator:ab16889ae984b9b798989a0d239283cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad39420cdd896dd12c68e36313139d0a5" id="r_ad39420cdd896dd12c68e36313139d0a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad39420cdd896dd12c68e36313139d0a5">ISR</a> (TIMER1_COMPA_vect)</td></tr>
+<tr class="memdesc:ad39420cdd896dd12c68e36313139d0a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR del Timer1 Compare Match A.  <br /></td></tr>
+<tr class="separator:ad39420cdd896dd12c68e36313139d0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a317c504c8745a1256efed69e0dbf6e66" id="r_a317c504c8745a1256efed69e0dbf6e66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a317c504c8745a1256efed69e0dbf6e66">ISR</a> (TIMER1_COMPB_vect)</td></tr>
+<tr class="memdesc:a317c504c8745a1256efed69e0dbf6e66"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR del Timer1 Compare Match B.  <br /></td></tr>
+<tr class="separator:a317c504c8745a1256efed69e0dbf6e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ce999e15ad60b8a3f07d08af1946f9" id="r_a09ce999e15ad60b8a3f07d08af1946f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09ce999e15ad60b8a3f07d08af1946f9">ISR</a> (USART_RX_vect)</td></tr>
+<tr class="memdesc:a09ce999e15ad60b8a3f07d08af1946f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR de recepción por USART.  <br /></td></tr>
+<tr class="separator:a09ce999e15ad60b8a3f07d08af1946f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad878deb12efde50ce23b8afa0cd310d1" id="r_ad878deb12efde50ce23b8afa0cd310d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad878deb12efde50ce23b8afa0cd310d1">ISR</a> (USART_UDRE_vect)</td></tr>
+<tr class="memdesc:ad878deb12efde50ce23b8afa0cd310d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR de transmisión por USART (UDRE).  <br /></td></tr>
+<tr class="separator:ad878deb12efde50ce23b8afa0cd310d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5686c229bdef50123688ab6cb1404230" id="r_a5686c229bdef50123688ab6cb1404230"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5686c229bdef50123688ab6cb1404230">ISR</a> (TIMER2_COMPA_vect)</td></tr>
+<tr class="memdesc:a5686c229bdef50123688ab6cb1404230"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISR de comparación A del Timer 2 (TIMER2_COMPA_vect)  <br /></td></tr>
+<tr class="separator:a5686c229bdef50123688ab6cb1404230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4" id="r_ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:abaf9d105ac1cfa3d1cb984806de4e93d" id="r_abaf9d105ac1cfa3d1cb984806de4e93d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="union_byte___flag___struct.html">Byte_Flag_Struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abaf9d105ac1cfa3d1cb984806de4e93d">bandera</a></td></tr>
+<tr class="separator:abaf9d105ac1cfa3d1cb984806de4e93d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa05f09fd171c189b5b1e24e414dabcdc" id="r_aa05f09fd171c189b5b1e24e414dabcdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="union_byte___flag___struct.html">Byte_Flag_Struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa05f09fd171c189b5b1e24e414dabcdc">bandera2</a></td></tr>
+<tr class="separator:aa05f09fd171c189b5b1e24e414dabcdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a8d961a96d1c17573e37bf8f18fac90" id="r_a2a8d961a96d1c17573e37bf8f18fac90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="union_byte___flag___struct.html">Byte_Flag_Struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a8d961a96d1c17573e37bf8f18fac90">bandera3</a></td></tr>
+<tr class="separator:a2a8d961a96d1c17573e37bf8f18fac90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad30d5942b66b232f3156405c78f551d5" id="r_ad30d5942b66b232f3156405c78f551d5"><td class="memItemLeft" align="right" valign="top">volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad30d5942b66b232f3156405c78f551d5">echo_init_time</a> = 0</td></tr>
+<tr class="separator:ad30d5942b66b232f3156405c78f551d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cb8d4c8c7542dbf595586d7c0b4c5a5" id="r_a6cb8d4c8c7542dbf595586d7c0b4c5a5"><td class="memItemLeft" align="right" valign="top">volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6cb8d4c8c7542dbf595586d7c0b4c5a5">echo_finish_time</a> = 0</td></tr>
+<tr class="separator:a6cb8d4c8c7542dbf595586d7c0b4c5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1d02bbc368f5045da7543804a031fca" id="r_ab1d02bbc368f5045da7543804a031fca"><td class="memItemLeft" align="right" valign="top">volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1d02bbc368f5045da7543804a031fca">distance_mm</a> = 0</td></tr>
+<tr class="separator:ab1d02bbc368f5045da7543804a031fca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25f564e62121593a86e26ebe723fcde7" id="r_a25f564e62121593a86e26ebe723fcde7"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25f564e62121593a86e26ebe723fcde7">servo_counter</a> = 0</td></tr>
+<tr class="separator:a25f564e62121593a86e26ebe723fcde7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d0e51d9e4c426d6bba6ece0e8e7858" id="r_ac0d0e51d9e4c426d6bba6ece0e8e7858"><td class="memItemLeft" align="right" valign="top">volatile uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0d0e51d9e4c426d6bba6ece0e8e7858">pulse_width_A</a> = 3000UL</td></tr>
+<tr class="separator:ac0d0e51d9e4c426d6bba6ece0e8e7858"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a399762ad1749155357375979f81386dc" id="r_a399762ad1749155357375979f81386dc"><td class="memItemLeft" align="right" valign="top">volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a399762ad1749155357375979f81386dc">target_tick_A</a> = 0</td></tr>
+<tr class="separator:a399762ad1749155357375979f81386dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbd387e7138a4c76bc186cd5ed969ede" id="r_abbd387e7138a4c76bc186cd5ed969ede"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbd387e7138a4c76bc186cd5ed969ede">ovf_count</a> = 0</td></tr>
+<tr class="separator:abbd387e7138a4c76bc186cd5ed969ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95f29f6ffe2da2da6684e9299ec289f7" id="r_a95f29f6ffe2da2da6684e9299ec289f7"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95f29f6ffe2da2da6684e9299ec289f7">wait_time</a> = 0</td></tr>
+<tr class="separator:a95f29f6ffe2da2da6684e9299ec289f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d0eb7a23365e89195c7cd01c4d5adc" id="r_a39d0eb7a23365e89195c7cd01c4d5adc"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39d0eb7a23365e89195c7cd01c4d5adc">btn_pressed_time</a> = 0</td></tr>
+<tr class="separator:a39d0eb7a23365e89195c7cd01c4d5adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a6e8c4d6645f2f82f0551bb3dd5da78" id="r_a8a6e8c4d6645f2f82f0551bb3dd5da78"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a6e8c4d6645f2f82f0551bb3dd5da78">echo_state</a> = 0</td></tr>
+<tr class="separator:a8a6e8c4d6645f2f82f0551bb3dd5da78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c929b87d5b3753dec215ab140204e3" id="r_a99c929b87d5b3753dec215ab140204e3"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99c929b87d5b3753dec215ab140204e3">diezMsCounter</a> = 0</td></tr>
+<tr class="separator:a99c929b87d5b3753dec215ab140204e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab71a97a20c4240cdd01bee2b1907082e" id="r_ab71a97a20c4240cdd01bee2b1907082e"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab71a97a20c4240cdd01bee2b1907082e">veintems_counter</a> = 0</td></tr>
+<tr class="separator:ab71a97a20c4240cdd01bee2b1907082e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6ba5dc15d6295e02e79aa0b703fd856" id="r_ac6ba5dc15d6295e02e79aa0b703fd856"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6ba5dc15d6295e02e79aa0b703fd856">trigger_timeout_counter</a> = 0</td></tr>
+<tr class="separator:ac6ba5dc15d6295e02e79aa0b703fd856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f7a4cc47f065d0b6d195cfef1f1c1e6" id="r_a0f7a4cc47f065d0b6d195cfef1f1c1e6"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f7a4cc47f065d0b6d195cfef1f1c1e6">servo_active_counter</a> = 0</td></tr>
+<tr class="separator:a0f7a4cc47f065d0b6d195cfef1f1c1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f784b799146813512b3e9453c5d6826" id="r_a9f784b799146813512b3e9453c5d6826"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f784b799146813512b3e9453c5d6826">transmit_counter</a></td></tr>
+<tr class="separator:a9f784b799146813512b3e9453c5d6826"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f8282cb87eff12a48807d2e1c11d078" id="r_a3f8282cb87eff12a48807d2e1c11d078"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f8282cb87eff12a48807d2e1c11d078">doActionCmd</a></td></tr>
+<tr class="separator:a3f8282cb87eff12a48807d2e1c11d078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b3279e00a3846bf80b037cf2c6c6be6" id="r_a5b3279e00a3846bf80b037cf2c6c6be6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b3279e00a3846bf80b037cf2c6c6be6">servoAVal</a> = 0</td></tr>
+<tr class="separator:a5b3279e00a3846bf80b037cf2c6c6be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7620d2a7632969ee3cfd057511b0a200" id="r_a7620d2a7632969ee3cfd057511b0a200"><td class="memItemLeft" align="right" valign="top">ultrasonic_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7620d2a7632969ee3cfd057511b0a200">ultraSensor</a></td></tr>
+<tr class="separator:a7620d2a7632969ee3cfd057511b0a200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64cf5b1735bc17f8bea57cd8516216f1" id="r_a64cf5b1735bc17f8bea57cd8516216f1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_ultrasonic___detector__t.html">Ultrasonic_Detector_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64cf5b1735bc17f8bea57cd8516216f1">hcsr04Detector</a></td></tr>
+<tr class="separator:a64cf5b1735bc17f8bea57cd8516216f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a60131ca1e382dfb2c6273d236c4e2c" id="r_a2a60131ca1e382dfb2c6273d236c4e2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_t_c_r_t__t.html">TCRT_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a60131ca1e382dfb2c6273d236c4e2c">IR_A</a></td></tr>
+<tr class="separator:a2a60131ca1e382dfb2c6273d236c4e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab38d51300ec0ce64dec3bc391e0a51e9" id="r_ab38d51300ec0ce64dec3bc391e0a51e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_t_c_r_t__t.html">TCRT_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab38d51300ec0ce64dec3bc391e0a51e9">IR_B</a></td></tr>
+<tr class="separator:ab38d51300ec0ce64dec3bc391e0a51e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd21f397d78c9096f97df93bc5845a7" id="r_a4dd21f397d78c9096f97df93bc5845a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_t_c_r_t__t.html">TCRT_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4dd21f397d78c9096f97df93bc5845a7">IR_C</a></td></tr>
+<tr class="separator:a4dd21f397d78c9096f97df93bc5845a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5c2257eac0fba0588336c2cf375acd5" id="r_aa5c2257eac0fba0588336c2cf375acd5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_t_c_r_t__t.html">TCRT_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa5c2257eac0fba0588336c2cf375acd5">IR_U</a></td></tr>
+<tr class="separator:aa5c2257eac0fba0588336c2cf375acd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e019a3047bf049271f3329c862eed61" id="r_a5e019a3047bf049271f3329c862eed61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structservo__t.html">servo_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e019a3047bf049271f3329c862eed61">servoA</a></td></tr>
+<tr class="separator:a5e019a3047bf049271f3329c862eed61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a834a14206b5c59a2f4d0bb1aa391587e" id="r_a834a14206b5c59a2f4d0bb1aa391587e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structservo__t.html">servo_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a834a14206b5c59a2f4d0bb1aa391587e">servoB</a></td></tr>
+<tr class="separator:a834a14206b5c59a2f4d0bb1aa391587e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a829f2e7a8bcff5033cf7a95c4f9af6" id="r_a4a829f2e7a8bcff5033cf7a95c4f9af6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structservo__t.html">servo_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a829f2e7a8bcff5033cf7a95c4f9af6">servoC</a></td></tr>
+<tr class="separator:a4a829f2e7a8bcff5033cf7a95c4f9af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a874d63f2df613859c3225f2a9f66893c" id="r_a874d63f2df613859c3225f2a9f66893c"><td class="memItemLeft" align="right" valign="top">volatile <a class="el" href="structservo__t.html">servo_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a874d63f2df613859c3225f2a9f66893c">servosArray</a> [3]</td></tr>
+<tr class="separator:a874d63f2df613859c3225f2a9f66893c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1e4fa10601db976f3be9392f5203dfb" id="r_ad1e4fa10601db976f3be9392f5203dfb"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1e4fa10601db976f3be9392f5203dfb">current_servo</a> = 0</td></tr>
+<tr class="separator:ad1e4fa10601db976f3be9392f5203dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e724f77222b7d549e8d575af36aaecc" id="r_a3e724f77222b7d549e8d575af36aaecc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structoutput__t.html">output_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e724f77222b7d549e8d575af36aaecc">salidaA</a></td></tr>
+<tr class="separator:a3e724f77222b7d549e8d575af36aaecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16b14a740bcd865c4ffe58f857b764f5" id="r_a16b14a740bcd865c4ffe58f857b764f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structoutput__t.html">output_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16b14a740bcd865c4ffe58f857b764f5">salidaB</a></td></tr>
+<tr class="separator:a16b14a740bcd865c4ffe58f857b764f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecbd75740710683f7c084eb6da2b1fcf" id="r_aecbd75740710683f7c084eb6da2b1fcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structoutput__t.html">output_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecbd75740710683f7c084eb6da2b1fcf">salidaC</a></td></tr>
+<tr class="separator:aecbd75740710683f7c084eb6da2b1fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7099de9259fc88558d53f64564c0af9a" id="r_a7099de9259fc88558d53f64564c0af9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsorter__system__t.html">sorter_system_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7099de9259fc88558d53f64564c0af9a">SorterSystem</a></td></tr>
+<tr class="separator:a7099de9259fc88558d53f64564c0af9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2483443e25b1561e49f23d3c48e97db3" id="r_a2483443e25b1561e49f23d3c48e97db3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_protocol_service.html">ProtocolService</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2483443e25b1561e49f23d3c48e97db3">protocolService</a></td></tr>
+<tr class="separator:a2483443e25b1561e49f23d3c48e97db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e0bde3c252441976d34b2e0542266fd" id="r_a8e0bde3c252441976d34b2e0542266fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_config__t.html">Config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e0bde3c252441976d34b2e0542266fd">currentConfig</a></td></tr>
+<tr class="separator:a8e0bde3c252441976d34b2e0542266fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dc19927a84b4761e18f650b084f1e6" id="r_ac8dc19927a84b4761e18f650b084f1e6"><td class="memItemLeft" align="right" valign="top">EEMEM <a class="el" href="struct_config__t.html">Config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8dc19927a84b4761e18f650b084f1e6">eepromConfig</a></td></tr>
+<tr class="separator:ac8dc19927a84b4761e18f650b084f1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa1fc0ff1aeb77f1feff261fa5ea792b" id="r_aaa1fc0ff1aeb77f1feff261fa5ea792b"><td class="memItemLeft" align="right" valign="top">FILE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa1fc0ff1aeb77f1feff261fa5ea792b">mystdout</a> = FDEV_SETUP_STREAM(<a class="el" href="usart__utils_8c.html#a3615a6a73667c24518d953c3d4d05de5">USART_putchar_blocking</a>, NULL, _FDEV_SETUP_WRITE)</td></tr>
+<tr class="separator:aaa1fc0ff1aeb77f1feff261fa5ea792b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d3822358b228d94f0927a1cc7af7433" id="r_a3d3822358b228d94f0927a1cc7af7433"><td class="memItemLeft" align="right" valign="top">FILE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d3822358b228d94f0927a1cc7af7433">mystdin</a> = FDEV_SETUP_STREAM(NULL, <a class="el" href="usart__utils_8c.html#a5c3788b11dde5e3933b29e1b6e48fc13">USART_getchar</a>, _FDEV_SETUP_READ)</td></tr>
+<tr class="separator:a3d3822358b228d94f0927a1cc7af7433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">DocumentaciÃ³n de funciones</h2>
+<a id="a0cb509803ce847466e3c3604a4af1a29" name="a0cb509803ce847466e3c3604a4af1a29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cb509803ce847466e3c3604a4af1a29">&#9670;&#160;</a></span>buttonTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void buttonTask </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tarea asociada al botón de entrada. </p>
+<p>Verifica si el botón ha sido presionado y soltado, y determina si la duración fue suficiente. Si se detecta una presión larga (con overflow del contador) también es aceptada como válida.</p>
+<dl class="section note"><dt>Nota</dt><dd>Modifica las banderas <code>BTN_PRESSED</code>, <code>BTN_RELEASED</code> y <code>BTN_OVF</code>.</dd>
+<dd>
+Esta función está declarada como <code>inline</code> para optimizar el manejo rápido de eventos relacionados al botón, que puede ser llamado con alta frecuencia dentro de un ciclo de tareas. </dd></dl>
+
+</div>
+</div>
+<a id="a9113131aefbfe0c08577bde786c89596" name="a9113131aefbfe0c08577bde786c89596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9113131aefbfe0c08577bde786c89596">&#9670;&#160;</a></span>calibrateAllIRSensors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool calibrateAllIRSensors </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calibra todos los sensores IR habilitados. </p>
+<p>Esta función inicia la calibración de los sensores IR (A, B, C, U) que estén marcados como habilitados. La calibración se realiza una sola vez gracias a un flag interno <code>init_done</code>. La función debe ser llamada periódicamente hasta que retorne <code>true</code>.</p>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>Si todos los sensores han terminado su calibración. </td></tr>
+    <tr><td class="paramname">false</td><td>Si alguno aún está en proceso de calibración.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Nota</dt><dd>Esta función está declarada como <code>inline</code> para permitir su expansión directa en el lugar donde se use, lo cual mejora el rendimiento en este tipo de funciónes que son solo para estructurar el codigo. </dd></dl>
+
+</div>
+</div>
+<a id="a7e1b187dc53f7dc2a9137c3fb5ba41e8" name="a7e1b187dc53f7dc2a9137c3fb5ba41e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e1b187dc53f7dc2a9137c3fb5ba41e8">&#9670;&#160;</a></span>gpio_pins_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void gpio_pins_init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Inicializa los pines GPIO del sistema. </p>
+<p>Configura los pines de entrada/salida para los periféricos como LED, botón, trigger ultrasónico, pines de servo y sensores TCRT. También se asegura de poner ciertos pines en bajo por seguridad.</p>
+<dl class="section note"><dt>Nota</dt><dd>Esta función está declarada como <code>inline</code> porque se espera que se llame una única vez al inicio del programa, y no tiene sentido agregarle sobrecarga de llamada. </dd></dl>
+
+</div>
+</div>
+<a id="a5da59e05fa5ade4be7c7656aee78291a" name="a5da59e05fa5ade4be7c7656aee78291a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5da59e05fa5ade4be7c7656aee78291a">&#9670;&#160;</a></span>ISR() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">TIMER1_CAPT_vect</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISR del evento de captura del Timer1 para el sensor ultrasónico. </p>
+<p>Esta rutina de servicio de interrupción se invoca cuando se produce un evento de captura (TIMER1_CAPT_vect). <br  />
+ Según el estado del sensor ultrasónico (almacenado en la variable global <code>ultraSensor</code>), la ISR realiza:</p><ul>
+<li><b>ULTRA_WAIT_RISING:</b> <br  />
+ Si la bandera <code>ECHO_RISING</code> está activa, se guarda el tiempo inicial de eco en <code>echo_init_time</code> usando el valor de ICR1 sumado al número de desbordamientos (<code>ovf_count * 65536UL</code>), y se limpia la bandera.</li>
+<li><b>ULTRA_WAIT_FALLING:</b> <br  />
+ Se guarda el tiempo final de eco en <code>echo_finish_time</code> (calculado de forma similar) y se activa la bandera <code>ECHO_RECEIVED</code> para indicar que se recibió la señal completa.</li>
+</ul>
+<dl class="section note"><dt>Nota</dt><dd>Se utilizan variables globales como <code>ultraSensor</code> y <code>ovf_count</code>.</dd></dl>
+<p>@retVal No aplica (ISR). </p>
+
+</div>
+</div>
+<a id="ad39420cdd896dd12c68e36313139d0a5" name="ad39420cdd896dd12c68e36313139d0a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad39420cdd896dd12c68e36313139d0a5">&#9670;&#160;</a></span>ISR() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">TIMER1_COMPA_vect</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISR del Timer1 Compare Match A. </p>
+<p>Programa la siguiente interrupción cada 20 ms para manejar el ciclo completo de actualización de servos. Recorre todos los servos y ajusta el pulso de control según su estado. Si el servo está en modo "push", se le asigna un pulso máximo. Si no, se calcula el pulso a partir del ángulo.</p>
+<dl class="section note"><dt>Nota</dt><dd>Marca <code>IR_READ_INTERRUPT = 1</code> para indicar que debe procesarse lectura IR. Solo activa el pin del primer servo en la lista, programando su apagado mediante OCR1B.</dd></dl>
+<p>@retVal No aplica (ISR).</p>
+<dl class="section see"><dt>Ver tambiÃ©n</dt><dd><a class="el" href="servo__utils_8c.html#a9be00cc746a4b23036719dce077dd2f4" title="Convierte un ángulo en microsegundos de pulso.">calculate_angle_pulseUs</a> </dd></dl>
+
+</div>
+</div>
+<a id="a317c504c8745a1256efed69e0dbf6e66" name="a317c504c8745a1256efed69e0dbf6e66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a317c504c8745a1256efed69e0dbf6e66">&#9670;&#160;</a></span>ISR() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">TIMER1_COMPB_vect</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISR del Timer1 Compare Match B. </p>
+<p>Se encarga de apagar el pin del servo actualmente activo y actualizar su estado si estaba en modo de "push" con "reset". Luego avanza al siguiente servo activo y configura su señal PWM correspondiente en el mismo frame de 20 ms.</p>
+<dl class="section note"><dt>Nota</dt><dd>Al volver de un push, se limpia el estado y se posiciona el servo en el ángulo idle. También se liberan las flags OUTPUT_BUSY y se activa OUTPUT_READY en la salida correspondiente.</dd></dl>
+<p>@retVal No aplica (ISR).</p>
+<dl class="section see"><dt>Ver tambiÃ©n</dt><dd><a class="el" href="servo__utils_8c.html#a9be00cc746a4b23036719dce077dd2f4" title="Convierte un ángulo en microsegundos de pulso.">calculate_angle_pulseUs</a> </dd></dl>
+
+</div>
+</div>
+<a id="ab16889ae984b9b798989a0d239283cac" name="ab16889ae984b9b798989a0d239283cac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab16889ae984b9b798989a0d239283cac">&#9670;&#160;</a></span>ISR() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">TIMER1_OVF_vect</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISR de desbordamiento del Timer1. </p>
+<p>Esta rutina de interrupción se ejecuta cada vez que el Timer1 se desborda (TIMER1_OVF_vect). <br  />
+ Incrementa el contador global <code>ovf_count</code>, que se utiliza junto con <code>ICR1</code> para calcular el tiempo total de captura en aplicaciones como medición con sensor ultrasónico.</p>
+<dl class="section note"><dt>Nota</dt><dd>No recibe parámetros. Utiliza la variable global <code>ovf_count</code>.</dd></dl>
+<p>@retVal No aplica (ISR). </p>
+
+</div>
+</div>
+<a id="a5686c229bdef50123688ab6cb1404230" name="a5686c229bdef50123688ab6cb1404230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5686c229bdef50123688ab6cb1404230">&#9670;&#160;</a></span>ISR() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">TIMER2_COMPA_vect</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISR de comparación A del Timer 2 (TIMER2_COMPA_vect) </p>
+<p>Rutina de interrupción que se ejecuta cada 10 ms. Controla el proceso completo del sensor ultrasónico: el pulso de trigger, el tiempo de espera por el echo, el restablecimiento del trigger, y maneja el tiempo de activación de los servos, así como la gestión de flags de los sensores TCRT.</p>
+<ul>
+<li>Activa/desactiva el pulso de trigger del sensor ultrasónico.</li>
+<li>Maneja los timeout de echo y tiempo de espera entre triggers de 60ms.</li>
+<li>Actualiza flags para la lectura de sensores IR (TCRT).</li>
+<li>Gestiona el tiempo de activación (pulsos) de los servos y sus flags.</li>
+<li>Maneja la lectura del botón y sus estados de desbordamiento.</li>
+</ul>
+<dl class="section note"><dt>Nota</dt><dd>Esta rutina se ejecuta solo si <code>TIMER2_ACTIVE</code> está activado.</dd></dl>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">No</td><td>aplica (ISR) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a09ce999e15ad60b8a3f07d08af1946f9" name="a09ce999e15ad60b8a3f07d08af1946f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09ce999e15ad60b8a3f07d08af1946f9">&#9670;&#160;</a></span>ISR() <span class="overload">[6/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">USART_RX_vect</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISR de recepción por USART. </p>
+<p>Interrupción que se activa al recibir un byte por USART. Guarda el byte en un buffer circular. Si el buffer está lleno, sobrescribe el dato más antiguo. Además, verifica si hay suficiente información para iniciar el procesamiento de un paquete.</p>
+<dl class="section note"><dt>Nota</dt><dd>Esta rutina actualiza <code>indexW</code>, y avanza <code>indexR</code> si el buffer está lleno para evitar bloqueo.</dd></dl>
+<p>@retVal No aplica (ISR). </p>
+
+</div>
+</div>
+<a id="ad878deb12efde50ce23b8afa0cd310d1" name="ad878deb12efde50ce23b8afa0cd310d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad878deb12efde50ce23b8afa0cd310d1">&#9670;&#160;</a></span>ISR() <span class="overload">[7/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ISR </td>
+          <td>(</td>
+          <td class="paramtype">USART_UDRE_vect</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISR de transmisión por USART (UDRE). </p>
+<p>Envia secuencialmente los bytes del paquete almacenado en el buffer circular. Cuando se transmiten todos los bytes del paquete (payload + (header + length + token + cmd + checksum)), desactiva la interrupción de transmisión y reactiva la de recepción.</p>
+<dl class="section note"><dt>Nota</dt><dd>Se utiliza un contador (<code>transmit_counter</code>) para saber cuántos bytes se han enviado.</dd></dl>
+<p>@retVal No aplica (ISR). </p>
+
+</div>
+</div>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4" name="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79d21f91f71c72b5a90d52532da94e54" name="a79d21f91f71c72b5a90d52532da94e54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79d21f91f71c72b5a90d52532da94e54">&#9670;&#160;</a></span>printfWrapper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printfWrapper </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wrapper para imprimir mensajes por consola. </p>
+<p>Imprime el mensaje recibido utilizando <code>printf</code>. Está pensado para ser usado como función de callback en bibliotecas externas que requieren una función con este formato para redirigir la salida.</p>
+<dl class="params"><dt>ParÃ¡metros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">message</td><td>Cadena de texto terminada en NULL a imprimir. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abb302081b7dbd40d0fea4bbe53fd9b7b" name="abb302081b7dbd40d0fea4bbe53fd9b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb302081b7dbd40d0fea4bbe53fd9b7b">&#9670;&#160;</a></span>timer1_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void timer1_init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicializa el Timer 1 (timer1_init) </p>
+<p>Configura el Timer 1 para manejar:</p><ul>
+<li>Captura de entrada (Input Capture) para medición del sensor ultrasónico.</li>
+<li>Interrupción por desbordamiento (Overflow) para ampliar la resolución del temporizador.</li>
+<li>Interrupciones de comparación A y B para el control de servos.</li>
+</ul>
+<ul>
+<li>Se configura el Timer en modo normal.</li>
+<li>Se activa la captura en flanco ascendente inicialmente.</li>
+<li>Se establece un prescaler de 8 para una buena resolución temporal.</li>
+<li>Se carga <code>OCR1A</code> para la primera interrupción de servo en 20ms.</li>
+</ul>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">No</td><td>aplica (void) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2cd8cee0c5bd8d8b2f528216f7dd487d" name="a2cd8cee0c5bd8d8b2f528216f7dd487d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cd8cee0c5bd8d8b2f528216f7dd487d">&#9670;&#160;</a></span>timer2_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void timer2_init </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicializa los pines GPIO del sistema (gpio_pins_init) </p>
+<p>Configura la dirección y el estado inicial de los pines de entrada/salida utilizados por el sistema: LED, TRIGGER, ECHO, botón, y pines de servos.</p>
+<ul>
+<li>LED configurado como salida y encendido.</li>
+<li>TRIGGER como salida, ECHO como entrada.</li>
+<li>Botón como entrada.</li>
+<li>Pines de servo (A, B, C) como salidas.</li>
+<li>Se inicializa el sensor TCRT con <code><a class="el" href="tcrt__utils_8c.html#a640932133dbc070f018c88daa1988cde" title="Inicializa los sensores TCRT conectados a los pines analógicos.">tcrt_init()</a></code>.</li>
+<li>Se garantiza que TRIGGER y BUTTON estén en bajo inicialmente.</li>
+</ul>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">No</td><td>aplica (void) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">DocumentaciÃ³n de variables</h2>
+<a id="abaf9d105ac1cfa3d1cb984806de4e93d" name="abaf9d105ac1cfa3d1cb984806de4e93d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaf9d105ac1cfa3d1cb984806de4e93d">&#9670;&#160;</a></span>bandera</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="union_byte___flag___struct.html">Byte_Flag_Struct</a> bandera</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa05f09fd171c189b5b1e24e414dabcdc" name="aa05f09fd171c189b5b1e24e414dabcdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa05f09fd171c189b5b1e24e414dabcdc">&#9670;&#160;</a></span>bandera2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="union_byte___flag___struct.html">Byte_Flag_Struct</a> bandera2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a8d961a96d1c17573e37bf8f18fac90" name="a2a8d961a96d1c17573e37bf8f18fac90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a8d961a96d1c17573e37bf8f18fac90">&#9670;&#160;</a></span>bandera3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="union_byte___flag___struct.html">Byte_Flag_Struct</a> bandera3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39d0eb7a23365e89195c7cd01c4d5adc" name="a39d0eb7a23365e89195c7cd01c4d5adc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39d0eb7a23365e89195c7cd01c4d5adc">&#9670;&#160;</a></span>btn_pressed_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t btn_pressed_time = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1e4fa10601db976f3be9392f5203dfb" name="ad1e4fa10601db976f3be9392f5203dfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1e4fa10601db976f3be9392f5203dfb">&#9670;&#160;</a></span>current_servo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t current_servo = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8e0bde3c252441976d34b2e0542266fd" name="a8e0bde3c252441976d34b2e0542266fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e0bde3c252441976d34b2e0542266fd">&#9670;&#160;</a></span>currentConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_config__t.html">Config_t</a> currentConfig</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99c929b87d5b3753dec215ab140204e3" name="a99c929b87d5b3753dec215ab140204e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99c929b87d5b3753dec215ab140204e3">&#9670;&#160;</a></span>diezMsCounter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t diezMsCounter = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab1d02bbc368f5045da7543804a031fca" name="ab1d02bbc368f5045da7543804a031fca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1d02bbc368f5045da7543804a031fca">&#9670;&#160;</a></span>distance_mm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint16_t distance_mm = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f8282cb87eff12a48807d2e1c11d078" name="a3f8282cb87eff12a48807d2e1c11d078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f8282cb87eff12a48807d2e1c11d078">&#9670;&#160;</a></span>doActionCmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t doActionCmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6cb8d4c8c7542dbf595586d7c0b4c5a5" name="a6cb8d4c8c7542dbf595586d7c0b4c5a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cb8d4c8c7542dbf595586d7c0b4c5a5">&#9670;&#160;</a></span>echo_finish_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint16_t echo_finish_time = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad30d5942b66b232f3156405c78f551d5" name="ad30d5942b66b232f3156405c78f551d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30d5942b66b232f3156405c78f551d5">&#9670;&#160;</a></span>echo_init_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint16_t echo_init_time = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a6e8c4d6645f2f82f0551bb3dd5da78" name="a8a6e8c4d6645f2f82f0551bb3dd5da78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a6e8c4d6645f2f82f0551bb3dd5da78">&#9670;&#160;</a></span>echo_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t echo_state = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac8dc19927a84b4761e18f650b084f1e6" name="ac8dc19927a84b4761e18f650b084f1e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8dc19927a84b4761e18f650b084f1e6">&#9670;&#160;</a></span>eepromConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EEMEM <a class="el" href="struct_config__t.html">Config_t</a> eepromConfig</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a64cf5b1735bc17f8bea57cd8516216f1" name="a64cf5b1735bc17f8bea57cd8516216f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64cf5b1735bc17f8bea57cd8516216f1">&#9670;&#160;</a></span>hcsr04Detector</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_ultrasonic___detector__t.html">Ultrasonic_Detector_t</a> hcsr04Detector</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a60131ca1e382dfb2c6273d236c4e2c" name="a2a60131ca1e382dfb2c6273d236c4e2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a60131ca1e382dfb2c6273d236c4e2c">&#9670;&#160;</a></span>IR_A</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_t_c_r_t__t.html">TCRT_t</a> IR_A</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab38d51300ec0ce64dec3bc391e0a51e9" name="ab38d51300ec0ce64dec3bc391e0a51e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab38d51300ec0ce64dec3bc391e0a51e9">&#9670;&#160;</a></span>IR_B</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_t_c_r_t__t.html">TCRT_t</a> IR_B</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4dd21f397d78c9096f97df93bc5845a7" name="a4dd21f397d78c9096f97df93bc5845a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd21f397d78c9096f97df93bc5845a7">&#9670;&#160;</a></span>IR_C</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_t_c_r_t__t.html">TCRT_t</a> IR_C</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5c2257eac0fba0588336c2cf375acd5" name="aa5c2257eac0fba0588336c2cf375acd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5c2257eac0fba0588336c2cf375acd5">&#9670;&#160;</a></span>IR_U</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_t_c_r_t__t.html">TCRT_t</a> IR_U</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d3822358b228d94f0927a1cc7af7433" name="a3d3822358b228d94f0927a1cc7af7433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d3822358b228d94f0927a1cc7af7433">&#9670;&#160;</a></span>mystdin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE mystdin = FDEV_SETUP_STREAM(NULL, <a class="el" href="usart__utils_8c.html#a5c3788b11dde5e3933b29e1b6e48fc13">USART_getchar</a>, _FDEV_SETUP_READ)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa1fc0ff1aeb77f1feff261fa5ea792b" name="aaa1fc0ff1aeb77f1feff261fa5ea792b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa1fc0ff1aeb77f1feff261fa5ea792b">&#9670;&#160;</a></span>mystdout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE mystdout = FDEV_SETUP_STREAM(<a class="el" href="usart__utils_8c.html#a3615a6a73667c24518d953c3d4d05de5">USART_putchar_blocking</a>, NULL, _FDEV_SETUP_WRITE)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abbd387e7138a4c76bc186cd5ed969ede" name="abbd387e7138a4c76bc186cd5ed969ede"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbd387e7138a4c76bc186cd5ed969ede">&#9670;&#160;</a></span>ovf_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t ovf_count = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2483443e25b1561e49f23d3c48e97db3" name="a2483443e25b1561e49f23d3c48e97db3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2483443e25b1561e49f23d3c48e97db3">&#9670;&#160;</a></span>protocolService</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_protocol_service.html">ProtocolService</a> protocolService</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac0d0e51d9e4c426d6bba6ece0e8e7858" name="ac0d0e51d9e4c426d6bba6ece0e8e7858"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0d0e51d9e4c426d6bba6ece0e8e7858">&#9670;&#160;</a></span>pulse_width_A</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint32_t pulse_width_A = 3000UL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e724f77222b7d549e8d575af36aaecc" name="a3e724f77222b7d549e8d575af36aaecc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e724f77222b7d549e8d575af36aaecc">&#9670;&#160;</a></span>salidaA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structoutput__t.html">output_t</a> salidaA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a16b14a740bcd865c4ffe58f857b764f5" name="a16b14a740bcd865c4ffe58f857b764f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16b14a740bcd865c4ffe58f857b764f5">&#9670;&#160;</a></span>salidaB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structoutput__t.html">output_t</a> salidaB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aecbd75740710683f7c084eb6da2b1fcf" name="aecbd75740710683f7c084eb6da2b1fcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecbd75740710683f7c084eb6da2b1fcf">&#9670;&#160;</a></span>salidaC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structoutput__t.html">output_t</a> salidaC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f7a4cc47f065d0b6d195cfef1f1c1e6" name="a0f7a4cc47f065d0b6d195cfef1f1c1e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f7a4cc47f065d0b6d195cfef1f1c1e6">&#9670;&#160;</a></span>servo_active_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t servo_active_counter = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a25f564e62121593a86e26ebe723fcde7" name="a25f564e62121593a86e26ebe723fcde7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25f564e62121593a86e26ebe723fcde7">&#9670;&#160;</a></span>servo_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t servo_counter = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e019a3047bf049271f3329c862eed61" name="a5e019a3047bf049271f3329c862eed61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e019a3047bf049271f3329c862eed61">&#9670;&#160;</a></span>servoA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structservo__t.html">servo_t</a> servoA</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b3279e00a3846bf80b037cf2c6c6be6" name="a5b3279e00a3846bf80b037cf2c6c6be6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b3279e00a3846bf80b037cf2c6c6be6">&#9670;&#160;</a></span>servoAVal</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t servoAVal = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a834a14206b5c59a2f4d0bb1aa391587e" name="a834a14206b5c59a2f4d0bb1aa391587e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a834a14206b5c59a2f4d0bb1aa391587e">&#9670;&#160;</a></span>servoB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structservo__t.html">servo_t</a> servoB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a829f2e7a8bcff5033cf7a95c4f9af6" name="a4a829f2e7a8bcff5033cf7a95c4f9af6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a829f2e7a8bcff5033cf7a95c4f9af6">&#9670;&#160;</a></span>servoC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structservo__t.html">servo_t</a> servoC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a874d63f2df613859c3225f2a9f66893c" name="a874d63f2df613859c3225f2a9f66893c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a874d63f2df613859c3225f2a9f66893c">&#9670;&#160;</a></span>servosArray</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile <a class="el" href="structservo__t.html">servo_t</a>* servosArray[3]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7099de9259fc88558d53f64564c0af9a" name="a7099de9259fc88558d53f64564c0af9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7099de9259fc88558d53f64564c0af9a">&#9670;&#160;</a></span>SorterSystem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsorter__system__t.html">sorter_system_t</a> SorterSystem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a399762ad1749155357375979f81386dc" name="a399762ad1749155357375979f81386dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a399762ad1749155357375979f81386dc">&#9670;&#160;</a></span>target_tick_A</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint16_t target_tick_A = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f784b799146813512b3e9453c5d6826" name="a9f784b799146813512b3e9453c5d6826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f784b799146813512b3e9453c5d6826">&#9670;&#160;</a></span>transmit_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t transmit_counter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6ba5dc15d6295e02e79aa0b703fd856" name="ac6ba5dc15d6295e02e79aa0b703fd856"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6ba5dc15d6295e02e79aa0b703fd856">&#9670;&#160;</a></span>trigger_timeout_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t trigger_timeout_counter = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7620d2a7632969ee3cfd057511b0a200" name="a7620d2a7632969ee3cfd057511b0a200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7620d2a7632969ee3cfd057511b0a200">&#9670;&#160;</a></span>ultraSensor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ultrasonic_t ultraSensor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab71a97a20c4240cdd01bee2b1907082e" name="ab71a97a20c4240cdd01bee2b1907082e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab71a97a20c4240cdd01bee2b1907082e">&#9670;&#160;</a></span>veintems_counter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t veintems_counter = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95f29f6ffe2da2da6684e9299ec289f7" name="a95f29f6ffe2da2da6684e9299ec289f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95f29f6ffe2da2da6684e9299ec289f7">&#9670;&#160;</a></span>wait_time</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint8_t wait_time = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_027ef9e0f692986d43197b4d06e3469a.html">GccApplication1</a></li><li class="navelem"><a class="el" href="main_8c.html">main.c</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

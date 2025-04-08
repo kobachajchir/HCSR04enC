@@ -1,0 +1,556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clasificadora_Microcontroladores_CHAJCHIR_ARRUA: Referencia del archivo GccApplication1/types/protocolTypes.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Clasificadora_Microcontroladores_CHAJCHIR_ARRUA<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">El proyecto desarrolla un sistema de clasificacion de cajas a traves de medicion de altura, con configuracion mediante un protocolo de comunicación serial no bloqueante - AVR C- ATMEGA328p</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('protocol_types_8h.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a> &#124;
+<a href="#define-members">defines</a> &#124;
+<a href="#enum-members">Enumeraciones</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo protocolTypes.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="bitmap_type_8h_source.html">bitmapType.h</a>&quot;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+</div>
+<p><a href="protocol_types_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_protocol_frame.html">ProtocolFrame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representa una trama de comunicaci�n del protocolo.  <a href="struct_protocol_frame.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_command_map.html">CommandMap</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura para mapear comandos con sus respuestas correspondientes.  <a href="struct_command_map.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_protocol_service.html">ProtocolService</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura que maneja el estado del servicio de protocolo serial.  <a href="struct_protocol_service.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a97dca2d0b0106e4ec570f56e57a19828" id="r_a97dca2d0b0106e4ec570f56e57a19828"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97dca2d0b0106e4ec570f56e57a19828">PROTOCOL_BUFFER_SIZE</a>&#160;&#160;&#160;64</td></tr>
+<tr class="separator:a97dca2d0b0106e4ec570f56e57a19828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afce7b983af6e0a7030312f191f7436c3" id="r_afce7b983af6e0a7030312f191f7436c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afce7b983af6e0a7030312f191f7436c3">PROTOCOL_TOKEN</a>&#160;&#160;&#160;':'</td></tr>
+<tr class="separator:afce7b983af6e0a7030312f191f7436c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f231e93356740a14cef227c561e23a" id="r_a67f231e93356740a14cef227c561e23a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67f231e93356740a14cef227c561e23a">PROTOCOL_PACING_TOKEN</a>&#160;&#160;&#160;'-'</td></tr>
+<tr class="separator:a67f231e93356740a14cef227c561e23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afec2f77f903d62337db067cc091a3b6f" id="r_afec2f77f903d62337db067cc091a3b6f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afec2f77f903d62337db067cc091a3b6f">EXPECTED_HEADER_SUM</a>&#160;&#160;&#160;0x1A</td></tr>
+<tr class="separator:afec2f77f903d62337db067cc091a3b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83b2ba59b5d89fe8d0bffef1706c0074" id="r_a83b2ba59b5d89fe8d0bffef1706c0074"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83b2ba59b5d89fe8d0bffef1706c0074">PROTOSERV_IDLE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a83b2ba59b5d89fe8d0bffef1706c0074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29ce89b81ff9dc83ba6fb3efef25cdaa" id="r_a29ce89b81ff9dc83ba6fb3efef25cdaa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29ce89b81ff9dc83ba6fb3efef25cdaa">PROTOSERV_READING_HEADER</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a29ce89b81ff9dc83ba6fb3efef25cdaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afae02f42e89ab2ec4a00fb3a6f8506d5" id="r_afae02f42e89ab2ec4a00fb3a6f8506d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afae02f42e89ab2ec4a00fb3a6f8506d5">PROTOSERV_READING_LEN</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:afae02f42e89ab2ec4a00fb3a6f8506d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a018d8f99dc97a5755671fa127bcf3cdf" id="r_a018d8f99dc97a5755671fa127bcf3cdf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a018d8f99dc97a5755671fa127bcf3cdf">PROTOSERV_READING_TOKEN</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a018d8f99dc97a5755671fa127bcf3cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a127ef9515f27712ebcdaabca5d5d31ba" id="r_a127ef9515f27712ebcdaabca5d5d31ba"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a127ef9515f27712ebcdaabca5d5d31ba">PROTOSERV_READING_CMD</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a127ef9515f27712ebcdaabca5d5d31ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a642bf4dd0d7cd473f675c25ef8b11680" id="r_a642bf4dd0d7cd473f675c25ef8b11680"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a642bf4dd0d7cd473f675c25ef8b11680">PROTOSERV_READING_PAYLOAD</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a642bf4dd0d7cd473f675c25ef8b11680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9784f0833be32605c6eed1cbc1949a0e" id="r_a9784f0833be32605c6eed1cbc1949a0e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9784f0833be32605c6eed1cbc1949a0e">PROTOSERV_READING_CHK</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a9784f0833be32605c6eed1cbc1949a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05bce06dc6718985cdf92e7a2b8855eb" id="r_a05bce06dc6718985cdf92e7a2b8855eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05bce06dc6718985cdf92e7a2b8855eb">PROTOSERV_CALCULATING_CHK</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:a05bce06dc6718985cdf92e7a2b8855eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a107bb2716f3e0d52d1f644620517af79" id="r_a107bb2716f3e0d52d1f644620517af79"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a107bb2716f3e0d52d1f644620517af79">PROTOSERV_PROCESSING_PAYLOAD</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a107bb2716f3e0d52d1f644620517af79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fea8937093eb1182d665cfa3adba072" id="r_a3fea8937093eb1182d665cfa3adba072"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fea8937093eb1182d665cfa3adba072">PROTOSERV_VALIDATED</a>&#160;&#160;&#160;9</td></tr>
+<tr class="separator:a3fea8937093eb1182d665cfa3adba072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf73bd77064a890f4dc7efa001c8c14" id="r_acdf73bd77064a890f4dc7efa001c8c14"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdf73bd77064a890f4dc7efa001c8c14">PROTOSERV_SEND</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:acdf73bd77064a890f4dc7efa001c8c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3c1967f3d19eb7aa640878b20b94437" id="r_af3c1967f3d19eb7aa640878b20b94437"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3c1967f3d19eb7aa640878b20b94437">PROTOSERV_SEND_DONE</a>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:af3c1967f3d19eb7aa640878b20b94437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9e6ba86d6b493519b630c6825f46a2a" id="r_ae9e6ba86d6b493519b630c6825f46a2a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9e6ba86d6b493519b630c6825f46a2a">PROTOSERV_PROCESSING</a>&#160;&#160;&#160;<a class="el" href="main_8h.html#add50893ff5f5bc55497a9f6d7e265ef9">BIT0_MASK</a></td></tr>
+<tr class="separator:ae9e6ba86d6b493519b630c6825f46a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72147e705b550a1d8dd7302a59c3c2d4" id="r_a72147e705b550a1d8dd7302a59c3c2d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72147e705b550a1d8dd7302a59c3c2d4">PROTOSERV_CHECKDATA</a>&#160;&#160;&#160;<a class="el" href="main_8h.html#a4d6a0d98f52a25f6ff6ff1b519ef663c">BIT1_MASK</a></td></tr>
+<tr class="separator:a72147e705b550a1d8dd7302a59c3c2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00243a90ba8adda8e3a5511ea5e34a64" id="r_a00243a90ba8adda8e3a5511ea5e34a64"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00243a90ba8adda8e3a5511ea5e34a64">PROTOSERV_RESET</a>&#160;&#160;&#160;<a class="el" href="main_8h.html#a1d1dbd806d14df9516e092d996df7d03">BIT2_MASK</a></td></tr>
+<tr class="separator:a00243a90ba8adda8e3a5511ea5e34a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c6674f5c02cbb5157b8b8990fd38bef" id="r_a9c6674f5c02cbb5157b8b8990fd38bef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c6674f5c02cbb5157b8b8990fd38bef">PROTOSERV_CREATE_PCK</a>&#160;&#160;&#160;<a class="el" href="main_8h.html#aba81c2db01945bbf220930737a7e1f83">BIT3_MASK</a></td></tr>
+<tr class="separator:a9c6674f5c02cbb5157b8b8990fd38bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumeraciones</h2></td></tr>
+<tr class="memitem:a2afce0a47a93eee73a314d53e4890153" id="r_a2afce0a47a93eee73a314d53e4890153"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2afce0a47a93eee73a314d53e4890153">Command</a> { <br />
+&#160;&#160;<a class="el" href="#a2afce0a47a93eee73a314d53e4890153ae71d8347b3a378275d25c0fa2390a656">CMD_RESPONSE_ALIVE</a> = 0x00
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a6217a381c5786a155085bfaba7ec13e7">CMD_RESPONSE_START</a> = 0x01
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153aadcc6e5ea864b7a393caa60a6b2c21cc">CMD_RESPONSE_STOP</a> = 0x02
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153acaff8db12249596e200bfa164b1635ce">CMD_RESPONSE_SET_CONFIG</a> = 0x03
+, <br />
+&#160;&#160;<a class="el" href="#a2afce0a47a93eee73a314d53e4890153ac7bb9d98ad702fa7111b56d0e6cb0566">CMD_RESPONSE_GET_CONFIG</a> = 0x04
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a090163e2fae1e30931cd9ac2375d18e1">CMD_RESPONSE_CLEAR_STATS</a> = 0x05
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153aa056e9e94661dc04354c66720f1fa3ca">CMD_RESPONSE_GET_STATS</a> = 0x06
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153afe4ad3aedccf8e8724bd15419b8386a5">CMD_RESPONSE_GET_FIRMWARE</a> = 0x07
+, <br />
+&#160;&#160;<a class="el" href="#a2afce0a47a93eee73a314d53e4890153ada903e8272ed337ff9b9eb3a43e466e1">CMD_RESPONSE_GET_REPOSITORY</a> = 0x08
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a299d7c38ee6f60295ecfba88ac21203d">CMD_RESPONSE_CONFIG_RESET</a> = 0x09
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a9d0d1fded8cfc6c0ea499069e47b9a6d">CMD_ALIVE</a> = 0xA0
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153af2e188a52388c10d5e2f48ca37b28287">CMD_START</a> = 0xB1
+, <br />
+&#160;&#160;<a class="el" href="#a2afce0a47a93eee73a314d53e4890153a1e0ceff2d6f13742786f42dac58149bc">CMD_STOP</a> = 0xB2
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a77553c4f9197b5892c5827a04c25a968">CMD_SET_CONFIG</a> = 0xC0
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a72722dc0846a5fc226f850301b703609">CMD_GET_CONFIG</a> = 0xC1
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a741e61299ea78bb03b9626d8f08cb560">CMD_GET_FIRMWARE</a> = 0xF0
+, <br />
+&#160;&#160;<a class="el" href="#a2afce0a47a93eee73a314d53e4890153a193c61fec5859d400a7be6c5004d53e1">CMD_GET_STATS</a> = 0xF1
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153ad9e5adb03d3a730515fa242ada2dbf07">CMD_CLEAR_STATS</a> = 0xF2
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a69bbf851a56abbc6aa8071b0c65de361">CMD_GET_REPOSITORY</a> = 0xF3
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a2614ba7375b53f5c79e26a4336d141e4">CMD_CONFIG_RESET</a> = 0xF4
+, <br />
+&#160;&#160;<a class="el" href="#a2afce0a47a93eee73a314d53e4890153acc6119a105ceede6b8e6504ecc4e6aa2">CMD_DEBUG_ULTRA</a> = 0xE1
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a9369af5b4a3ee3506d8c843afae5283d">CMD_DEBUG_SERVOS</a> = 0xE2
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153aea7d37b475d634f7a56b2cd6003c43a4">CMD_DEBUG_SORTER</a> = 0xE3
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153ae54ab9a4321541e41e3550f87b56cb65">CMD_DEBUG_EEPROM</a> = 0xE4
+, <br />
+&#160;&#160;<a class="el" href="#a2afce0a47a93eee73a314d53e4890153a7211269bed65fac5327f695eff84b029">CMD_RESPONSE_DEBUG_ULTRA</a> = 0x0A
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a2b0c16a57a97aa8ae4a9ece588c6fc59">CMD_RESPONSE_DEBUG_SERVOS</a> = 0x0B
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153a2f95b197115257659189e9c7902fc8a6">CMD_RESPONSE_DEBUG_SORTER</a> = 0x0C
+, <a class="el" href="#a2afce0a47a93eee73a314d53e4890153aff76a8635a0d75ee0eb5440a940df8f3">CMD_RESPONSE_DEBUG_EEPROM</a> = 0x0D
+, <br />
+&#160;&#160;<a class="el" href="#a2afce0a47a93eee73a314d53e4890153a506aa3525e0378ccdbc9e0a14a86aec5">CMD_INVALID</a> = 0xE0
+<br />
+ }</td></tr>
+<tr class="memdesc:a2afce0a47a93eee73a314d53e4890153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum que contiene todos los comandos del protocolo, incluyendo comandos y sus respuestas.  <a href="#a2afce0a47a93eee73a314d53e4890153">Más...</a><br /></td></tr>
+<tr class="separator:a2afce0a47a93eee73a314d53e4890153"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de «define»</h2>
+<a id="afec2f77f903d62337db067cc091a3b6f" name="afec2f77f903d62337db067cc091a3b6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afec2f77f903d62337db067cc091a3b6f">&#9670;&#160;</a></span>EXPECTED_HEADER_SUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXPECTED_HEADER_SUM&#160;&#160;&#160;0x1A</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a97dca2d0b0106e4ec570f56e57a19828" name="a97dca2d0b0106e4ec570f56e57a19828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97dca2d0b0106e4ec570f56e57a19828">&#9670;&#160;</a></span>PROTOCOL_BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOCOL_BUFFER_SIZE&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a67f231e93356740a14cef227c561e23a" name="a67f231e93356740a14cef227c561e23a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67f231e93356740a14cef227c561e23a">&#9670;&#160;</a></span>PROTOCOL_PACING_TOKEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOCOL_PACING_TOKEN&#160;&#160;&#160;'-'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afce7b983af6e0a7030312f191f7436c3" name="afce7b983af6e0a7030312f191f7436c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afce7b983af6e0a7030312f191f7436c3">&#9670;&#160;</a></span>PROTOCOL_TOKEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOCOL_TOKEN&#160;&#160;&#160;':'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a05bce06dc6718985cdf92e7a2b8855eb" name="a05bce06dc6718985cdf92e7a2b8855eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05bce06dc6718985cdf92e7a2b8855eb">&#9670;&#160;</a></span>PROTOSERV_CALCULATING_CHK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_CALCULATING_CHK&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72147e705b550a1d8dd7302a59c3c2d4" name="a72147e705b550a1d8dd7302a59c3c2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72147e705b550a1d8dd7302a59c3c2d4">&#9670;&#160;</a></span>PROTOSERV_CHECKDATA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_CHECKDATA&#160;&#160;&#160;<a class="el" href="main_8h.html#a4d6a0d98f52a25f6ff6ff1b519ef663c">BIT1_MASK</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9c6674f5c02cbb5157b8b8990fd38bef" name="a9c6674f5c02cbb5157b8b8990fd38bef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c6674f5c02cbb5157b8b8990fd38bef">&#9670;&#160;</a></span>PROTOSERV_CREATE_PCK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_CREATE_PCK&#160;&#160;&#160;<a class="el" href="main_8h.html#aba81c2db01945bbf220930737a7e1f83">BIT3_MASK</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a83b2ba59b5d89fe8d0bffef1706c0074" name="a83b2ba59b5d89fe8d0bffef1706c0074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83b2ba59b5d89fe8d0bffef1706c0074">&#9670;&#160;</a></span>PROTOSERV_IDLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_IDLE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9e6ba86d6b493519b630c6825f46a2a" name="ae9e6ba86d6b493519b630c6825f46a2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9e6ba86d6b493519b630c6825f46a2a">&#9670;&#160;</a></span>PROTOSERV_PROCESSING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_PROCESSING&#160;&#160;&#160;<a class="el" href="main_8h.html#add50893ff5f5bc55497a9f6d7e265ef9">BIT0_MASK</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a107bb2716f3e0d52d1f644620517af79" name="a107bb2716f3e0d52d1f644620517af79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a107bb2716f3e0d52d1f644620517af79">&#9670;&#160;</a></span>PROTOSERV_PROCESSING_PAYLOAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_PROCESSING_PAYLOAD&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9784f0833be32605c6eed1cbc1949a0e" name="a9784f0833be32605c6eed1cbc1949a0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9784f0833be32605c6eed1cbc1949a0e">&#9670;&#160;</a></span>PROTOSERV_READING_CHK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_READING_CHK&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a127ef9515f27712ebcdaabca5d5d31ba" name="a127ef9515f27712ebcdaabca5d5d31ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a127ef9515f27712ebcdaabca5d5d31ba">&#9670;&#160;</a></span>PROTOSERV_READING_CMD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_READING_CMD&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29ce89b81ff9dc83ba6fb3efef25cdaa" name="a29ce89b81ff9dc83ba6fb3efef25cdaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29ce89b81ff9dc83ba6fb3efef25cdaa">&#9670;&#160;</a></span>PROTOSERV_READING_HEADER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_READING_HEADER&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afae02f42e89ab2ec4a00fb3a6f8506d5" name="afae02f42e89ab2ec4a00fb3a6f8506d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afae02f42e89ab2ec4a00fb3a6f8506d5">&#9670;&#160;</a></span>PROTOSERV_READING_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_READING_LEN&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a642bf4dd0d7cd473f675c25ef8b11680" name="a642bf4dd0d7cd473f675c25ef8b11680"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a642bf4dd0d7cd473f675c25ef8b11680">&#9670;&#160;</a></span>PROTOSERV_READING_PAYLOAD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_READING_PAYLOAD&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a018d8f99dc97a5755671fa127bcf3cdf" name="a018d8f99dc97a5755671fa127bcf3cdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a018d8f99dc97a5755671fa127bcf3cdf">&#9670;&#160;</a></span>PROTOSERV_READING_TOKEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_READING_TOKEN&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a00243a90ba8adda8e3a5511ea5e34a64" name="a00243a90ba8adda8e3a5511ea5e34a64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00243a90ba8adda8e3a5511ea5e34a64">&#9670;&#160;</a></span>PROTOSERV_RESET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_RESET&#160;&#160;&#160;<a class="el" href="main_8h.html#a1d1dbd806d14df9516e092d996df7d03">BIT2_MASK</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acdf73bd77064a890f4dc7efa001c8c14" name="acdf73bd77064a890f4dc7efa001c8c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdf73bd77064a890f4dc7efa001c8c14">&#9670;&#160;</a></span>PROTOSERV_SEND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_SEND&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af3c1967f3d19eb7aa640878b20b94437" name="af3c1967f3d19eb7aa640878b20b94437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3c1967f3d19eb7aa640878b20b94437">&#9670;&#160;</a></span>PROTOSERV_SEND_DONE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_SEND_DONE&#160;&#160;&#160;11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3fea8937093eb1182d665cfa3adba072" name="a3fea8937093eb1182d665cfa3adba072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fea8937093eb1182d665cfa3adba072">&#9670;&#160;</a></span>PROTOSERV_VALIDATED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROTOSERV_VALIDATED&#160;&#160;&#160;9</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de enumeraciones</h2>
+<a id="a2afce0a47a93eee73a314d53e4890153" name="a2afce0a47a93eee73a314d53e4890153"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2afce0a47a93eee73a314d53e4890153">&#9670;&#160;</a></span>Command</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a2afce0a47a93eee73a314d53e4890153">Command</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enum que contiene todos los comandos del protocolo, incluyendo comandos y sus respuestas. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153ae71d8347b3a378275d25c0fa2390a656" name="a2afce0a47a93eee73a314d53e4890153ae71d8347b3a378275d25c0fa2390a656"></a>CMD_RESPONSE_ALIVE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a6217a381c5786a155085bfaba7ec13e7" name="a2afce0a47a93eee73a314d53e4890153a6217a381c5786a155085bfaba7ec13e7"></a>CMD_RESPONSE_START&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153aadcc6e5ea864b7a393caa60a6b2c21cc" name="a2afce0a47a93eee73a314d53e4890153aadcc6e5ea864b7a393caa60a6b2c21cc"></a>CMD_RESPONSE_STOP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153acaff8db12249596e200bfa164b1635ce" name="a2afce0a47a93eee73a314d53e4890153acaff8db12249596e200bfa164b1635ce"></a>CMD_RESPONSE_SET_CONFIG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153ac7bb9d98ad702fa7111b56d0e6cb0566" name="a2afce0a47a93eee73a314d53e4890153ac7bb9d98ad702fa7111b56d0e6cb0566"></a>CMD_RESPONSE_GET_CONFIG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a090163e2fae1e30931cd9ac2375d18e1" name="a2afce0a47a93eee73a314d53e4890153a090163e2fae1e30931cd9ac2375d18e1"></a>CMD_RESPONSE_CLEAR_STATS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153aa056e9e94661dc04354c66720f1fa3ca" name="a2afce0a47a93eee73a314d53e4890153aa056e9e94661dc04354c66720f1fa3ca"></a>CMD_RESPONSE_GET_STATS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153afe4ad3aedccf8e8724bd15419b8386a5" name="a2afce0a47a93eee73a314d53e4890153afe4ad3aedccf8e8724bd15419b8386a5"></a>CMD_RESPONSE_GET_FIRMWARE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153ada903e8272ed337ff9b9eb3a43e466e1" name="a2afce0a47a93eee73a314d53e4890153ada903e8272ed337ff9b9eb3a43e466e1"></a>CMD_RESPONSE_GET_REPOSITORY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a299d7c38ee6f60295ecfba88ac21203d" name="a2afce0a47a93eee73a314d53e4890153a299d7c38ee6f60295ecfba88ac21203d"></a>CMD_RESPONSE_CONFIG_RESET&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a9d0d1fded8cfc6c0ea499069e47b9a6d" name="a2afce0a47a93eee73a314d53e4890153a9d0d1fded8cfc6c0ea499069e47b9a6d"></a>CMD_ALIVE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153af2e188a52388c10d5e2f48ca37b28287" name="a2afce0a47a93eee73a314d53e4890153af2e188a52388c10d5e2f48ca37b28287"></a>CMD_START&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a1e0ceff2d6f13742786f42dac58149bc" name="a2afce0a47a93eee73a314d53e4890153a1e0ceff2d6f13742786f42dac58149bc"></a>CMD_STOP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a77553c4f9197b5892c5827a04c25a968" name="a2afce0a47a93eee73a314d53e4890153a77553c4f9197b5892c5827a04c25a968"></a>CMD_SET_CONFIG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a72722dc0846a5fc226f850301b703609" name="a2afce0a47a93eee73a314d53e4890153a72722dc0846a5fc226f850301b703609"></a>CMD_GET_CONFIG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a741e61299ea78bb03b9626d8f08cb560" name="a2afce0a47a93eee73a314d53e4890153a741e61299ea78bb03b9626d8f08cb560"></a>CMD_GET_FIRMWARE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a193c61fec5859d400a7be6c5004d53e1" name="a2afce0a47a93eee73a314d53e4890153a193c61fec5859d400a7be6c5004d53e1"></a>CMD_GET_STATS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153ad9e5adb03d3a730515fa242ada2dbf07" name="a2afce0a47a93eee73a314d53e4890153ad9e5adb03d3a730515fa242ada2dbf07"></a>CMD_CLEAR_STATS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a69bbf851a56abbc6aa8071b0c65de361" name="a2afce0a47a93eee73a314d53e4890153a69bbf851a56abbc6aa8071b0c65de361"></a>CMD_GET_REPOSITORY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a2614ba7375b53f5c79e26a4336d141e4" name="a2afce0a47a93eee73a314d53e4890153a2614ba7375b53f5c79e26a4336d141e4"></a>CMD_CONFIG_RESET&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153acc6119a105ceede6b8e6504ecc4e6aa2" name="a2afce0a47a93eee73a314d53e4890153acc6119a105ceede6b8e6504ecc4e6aa2"></a>CMD_DEBUG_ULTRA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a9369af5b4a3ee3506d8c843afae5283d" name="a2afce0a47a93eee73a314d53e4890153a9369af5b4a3ee3506d8c843afae5283d"></a>CMD_DEBUG_SERVOS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153aea7d37b475d634f7a56b2cd6003c43a4" name="a2afce0a47a93eee73a314d53e4890153aea7d37b475d634f7a56b2cd6003c43a4"></a>CMD_DEBUG_SORTER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153ae54ab9a4321541e41e3550f87b56cb65" name="a2afce0a47a93eee73a314d53e4890153ae54ab9a4321541e41e3550f87b56cb65"></a>CMD_DEBUG_EEPROM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a7211269bed65fac5327f695eff84b029" name="a2afce0a47a93eee73a314d53e4890153a7211269bed65fac5327f695eff84b029"></a>CMD_RESPONSE_DEBUG_ULTRA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a2b0c16a57a97aa8ae4a9ece588c6fc59" name="a2afce0a47a93eee73a314d53e4890153a2b0c16a57a97aa8ae4a9ece588c6fc59"></a>CMD_RESPONSE_DEBUG_SERVOS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a2f95b197115257659189e9c7902fc8a6" name="a2afce0a47a93eee73a314d53e4890153a2f95b197115257659189e9c7902fc8a6"></a>CMD_RESPONSE_DEBUG_SORTER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153aff76a8635a0d75ee0eb5440a940df8f3" name="a2afce0a47a93eee73a314d53e4890153aff76a8635a0d75ee0eb5440a940df8f3"></a>CMD_RESPONSE_DEBUG_EEPROM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2afce0a47a93eee73a314d53e4890153a506aa3525e0378ccdbc9e0a14a86aec5" name="a2afce0a47a93eee73a314d53e4890153a506aa3525e0378ccdbc9e0a14a86aec5"></a>CMD_INVALID&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_027ef9e0f692986d43197b4d06e3469a.html">GccApplication1</a></li><li class="navelem"><a class="el" href="dir_ea5c804158e414c9d7b86e6bc12c96fa.html">types</a></li><li class="navelem"><a class="el" href="protocol_types_8h.html">protocolTypes.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

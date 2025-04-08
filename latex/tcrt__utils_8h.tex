@@ -1,0 +1,132 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/tcrt/tcrt\+\_\+utils.h}
+\label{tcrt__utils_8h}\index{GccApplication1/utils/tcrt/tcrt\_utils.h@{GccApplication1/utils/tcrt/tcrt\_utils.h}}
+{\ttfamily \#include "{}types/\+TCRTType.\+h"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ tcrt\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa los sensores TCRT conectados a los pines analógicos. \end{DoxyCompactList}\item 
+uint16\+\_\+t \textbf{ tcrt\+\_\+read\+\_\+channel} (uint8\+\_\+t channel)
+\begin{DoxyCompactList}\small\item\em Realiza una lectura del canal ADC correspondiente al sensor TCRT. \end{DoxyCompactList}\item 
+bool \textbf{ detect\+\_\+rising\+\_\+edge} (\textbf{ TCRT\+\_\+t} $\ast$sensor, uint8\+\_\+t current\+\_\+state) void \textbf{ TCRT\+\_\+init\+\_\+\+Handlers}()
+\begin{DoxyCompactList}\small\item\em Detecta un flanco de subida en la lectura del sensor. \end{DoxyCompactList}\item 
+void \textbf{ calibrate\+IRSensor} (\textbf{ TCRT\+\_\+t} $\ast$sensor)
+\begin{DoxyCompactList}\small\item\em Calibra el sensor IR promediando un número de muestras. \end{DoxyCompactList}\item 
+void \textbf{ tcrt\+\_\+read} (\textbf{ TCRT\+\_\+t} $\ast$sensor)
+\begin{DoxyCompactList}\small\item\em Realiza una lectura filtrada del sensor TCRT. \end{DoxyCompactList}\item 
+bool \textbf{ tcrt\+\_\+is\+\_\+box\+\_\+detected} (\textbf{ TCRT\+\_\+t} $\ast$sensor)
+\begin{DoxyCompactList}\small\item\em Determina si hay una caja presente frente al sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DocumentaciÃ³n de funciones}
+\index{tcrt\_utils.h@{tcrt\_utils.h}!calibrateIRSensor@{calibrateIRSensor}}
+\index{calibrateIRSensor@{calibrateIRSensor}!tcrt\_utils.h@{tcrt\_utils.h}}
+\doxysubsubsection{calibrateIRSensor()}
+{\footnotesize\ttfamily \label{tcrt__utils_8h_ae09ff4102347ab8d40f5b4fc600e67ca} 
+void calibrate\+IRSensor (\begin{DoxyParamCaption}\item[{\textbf{ TCRT\+\_\+t} $\ast$}]{sensor}{}\end{DoxyParamCaption})}
+
+
+
+Calibra el sensor IR promediando un número de muestras. 
+
+Utiliza el canal ADC asociado al sensor para obtener un umbral inicial.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in,out}}  & {\em sensor} & Puntero al sensor a calibrar. \\
+\hline
+\end{DoxyParams}
+\index{tcrt\_utils.h@{tcrt\_utils.h}!detect\_rising\_edge@{detect\_rising\_edge}}
+\index{detect\_rising\_edge@{detect\_rising\_edge}!tcrt\_utils.h@{tcrt\_utils.h}}
+\doxysubsubsection{detect\_rising\_edge()}
+{\footnotesize\ttfamily \label{tcrt__utils_8h_a4db1e5e0aafa846325148fc7e3b68e12} 
+bool detect\+\_\+rising\+\_\+edge (\begin{DoxyParamCaption}\item[{\textbf{ TCRT\+\_\+t} $\ast$}]{sensor}{, }\item[{uint8\+\_\+t}]{current\+\_\+state}{}\end{DoxyParamCaption})}
+
+
+
+Detecta un flanco de subida en la lectura del sensor. 
+
+Compara el estado anterior con el actual para determinar si hubo flanco ascendente.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in,out}}  & {\em sensor} & Puntero a la estructura del sensor TCRT. \\
+\hline
+\mbox{\texttt{ in}}  & {\em current\+\_\+state} & Estado actual (1 o 0) del sensor.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em true} & Si hubo flanco de subida. \\
+\hline
+\end{DoxyRetVals}
+\index{tcrt\_utils.h@{tcrt\_utils.h}!tcrt\_init@{tcrt\_init}}
+\index{tcrt\_init@{tcrt\_init}!tcrt\_utils.h@{tcrt\_utils.h}}
+\doxysubsubsection{tcrt\_init()}
+{\footnotesize\ttfamily \label{tcrt__utils_8h_a640932133dbc070f018c88daa1988cde} 
+void tcrt\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa los sensores TCRT conectados a los pines analógicos. 
+
+Configura los pines PC0–\+PC3 como entradas, desactiva pull-\/ups, y configura el ADC para su uso. \index{tcrt\_utils.h@{tcrt\_utils.h}!tcrt\_is\_box\_detected@{tcrt\_is\_box\_detected}}
+\index{tcrt\_is\_box\_detected@{tcrt\_is\_box\_detected}!tcrt\_utils.h@{tcrt\_utils.h}}
+\doxysubsubsection{tcrt\_is\_box\_detected()}
+{\footnotesize\ttfamily \label{tcrt__utils_8h_ab6c59b4ce307ce1bbe252421d22d06ae} 
+bool tcrt\+\_\+is\+\_\+box\+\_\+detected (\begin{DoxyParamCaption}\item[{\textbf{ TCRT\+\_\+t} $\ast$}]{sensor}{}\end{DoxyParamCaption})}
+
+
+
+Determina si hay una caja presente frente al sensor. 
+
+Utiliza el valor de umbral ajustado con histéresis para detectar presencia de objetos. También detecta flancos de subida/bajada y actualiza el estado del sensor.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in,out}}  & {\em sensor} & Puntero al sensor.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em true} & Si se detecta una caja. \\
+\hline
+\end{DoxyRetVals}
+\index{tcrt\_utils.h@{tcrt\_utils.h}!tcrt\_read@{tcrt\_read}}
+\index{tcrt\_read@{tcrt\_read}!tcrt\_utils.h@{tcrt\_utils.h}}
+\doxysubsubsection{tcrt\_read()}
+{\footnotesize\ttfamily \label{tcrt__utils_8h_a088ecc5d18c61778d47fbcfa19746250} 
+void tcrt\+\_\+read (\begin{DoxyParamCaption}\item[{\textbf{ TCRT\+\_\+t} $\ast$}]{sensor}{}\end{DoxyParamCaption})}
+
+
+
+Realiza una lectura filtrada del sensor TCRT. 
+
+Acumula múltiples lecturas para aplicar un filtro promedio.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in,out}}  & {\em sensor} & Puntero al sensor a leer. \\
+\hline
+\end{DoxyParams}
+\index{tcrt\_utils.h@{tcrt\_utils.h}!tcrt\_read\_channel@{tcrt\_read\_channel}}
+\index{tcrt\_read\_channel@{tcrt\_read\_channel}!tcrt\_utils.h@{tcrt\_utils.h}}
+\doxysubsubsection{tcrt\_read\_channel()}
+{\footnotesize\ttfamily \label{tcrt__utils_8h_a6a9f4f05c2e44d7839a90a16a7bf5874} 
+uint16\+\_\+t tcrt\+\_\+read\+\_\+channel (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{channel}{}\end{DoxyParamCaption})}
+
+
+
+Realiza una lectura del canal ADC correspondiente al sensor TCRT. 
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em channel} & Canal ADC (0 a 3) del sensor. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em Valor} & de 10 bits de la conversión ADC (0–1023). \\
+\hline
+\end{DoxyRetVals}

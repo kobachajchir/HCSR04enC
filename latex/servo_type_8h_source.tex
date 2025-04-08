@@ -1,0 +1,27 @@
+\doxysection{servo\+Type.\+h}
+\label{servo_type_8h_source}\index{GccApplication1/types/servoType.h@{GccApplication1/types/servoType.h}}
+\textbf{ Ir a la documentación de este archivo.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ SERVOTYPE\_H\_}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ SERVOTYPE\_H\_}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}bitmapType.h"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ SERVO\_ENABLE\ BIT0\_MASK}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ SERVO\_PUSH\ BIT1\_MASK}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ SERVO\_RESET\ BIT2\_MASK}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ SERVO\_MOVE\ BIT3\_MASK}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00034\ \ \ \ \ uint8\_t\ pin;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ Byte\_Flag\_Struct\ flags;\ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ uint16\_t\ pulse\_us;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ uint8\_t\ angle;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ uint8\_t\ state\_time;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \}\ servo\_t;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ SERVOTYPE\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,99 @@
+\doxysection{Referencia de la estructura TCRT\+\_\+t}
+\label{struct_t_c_r_t__t}\index{TCRT\_t@{TCRT\_t}}
+
+
+Representa un sensor TCRT (IR reflectivo) con filtrado y calibración.  
+
+
+
+
+{\ttfamily \#include $<$TCRTType.\+h$>$}
+
+\doxysubsubsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ flags}
+\item 
+uint16\+\_\+t \textbf{ ADCConverted\+Value}
+\item 
+uint16\+\_\+t \textbf{ threshold}
+\item 
+uint16\+\_\+t \textbf{ last\+Reading}
+\item 
+uint8\+\_\+t \textbf{ channel}
+\item 
+uint8\+\_\+t \textbf{ pin}
+\item 
+uint8\+\_\+t \textbf{ calibration\+Counter}
+\item 
+uint32\+\_\+t \textbf{ filter\+Accumulator}
+\item 
+uint8\+\_\+t \textbf{ hysteresis\+\_\+percent}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Representa un sensor TCRT (IR reflectivo) con filtrado y calibración. 
+
+Contiene datos asociados a la lectura ADC, umbral, calibración, estado de lectura, y otros parámetros relacionados con el procesamiento del sensor. 
+
+\doxysubsection{DocumentaciÃ³n de campos}
+\index{TCRT\_t@{TCRT\_t}!ADCConvertedValue@{ADCConvertedValue}}
+\index{ADCConvertedValue@{ADCConvertedValue}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{ADCConvertedValue}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_ad79927ef7699e8859954e5bcd7e86417} 
+uint16\+\_\+t ADCConverted\+Value}
+
+Último valor promedio convertido del ADC (0–1023) \index{TCRT\_t@{TCRT\_t}!calibrationCounter@{calibrationCounter}}
+\index{calibrationCounter@{calibrationCounter}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{calibrationCounter}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_a82c809412c11b9390dda6ac6cc342f97} 
+uint8\+\_\+t calibration\+Counter}
+
+Contador de muestras para calibración/filtrado \index{TCRT\_t@{TCRT\_t}!channel@{channel}}
+\index{channel@{channel}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{channel}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_a715f5cb061d11eb75981741eda4dafcd} 
+uint8\+\_\+t channel}
+
+Canal ADC asignado al sensor \index{TCRT\_t@{TCRT\_t}!filterAccumulator@{filterAccumulator}}
+\index{filterAccumulator@{filterAccumulator}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{filterAccumulator}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_a300a0352bd22c335dbb8727cc99b05b5} 
+uint32\+\_\+t filter\+Accumulator}
+
+Acumulador de muestras para filtrado \index{TCRT\_t@{TCRT\_t}!flags@{flags}}
+\index{flags@{flags}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{flags}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_a3678d26acc883f3c39c9970857aaf88f} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} flags}
+
+Flags de estado y control (nibble H\+: estado, nibble L\+: banderas) \index{TCRT\_t@{TCRT\_t}!hysteresis\_percent@{hysteresis\_percent}}
+\index{hysteresis\_percent@{hysteresis\_percent}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{hysteresis\_percent}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_a6b4c9dfdcfe709a6391f4fddbd974b61} 
+uint8\+\_\+t hysteresis\+\_\+percent}
+
+Porcentaje de histéresis aplicado sobre el threshold \index{TCRT\_t@{TCRT\_t}!lastReading@{lastReading}}
+\index{lastReading@{lastReading}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{lastReading}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_a947752ae9c4c44a94a0e55784a0d5c47} 
+uint16\+\_\+t last\+Reading}
+
+Última lectura o acumulación de calibración \index{TCRT\_t@{TCRT\_t}!pin@{pin}}
+\index{pin@{pin}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{pin}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_ab40a673fb19c1e650e1f79de91788aa5} 
+uint8\+\_\+t pin}
+
+Pin físico asociado al sensor \index{TCRT\_t@{TCRT\_t}!threshold@{threshold}}
+\index{threshold@{threshold}!TCRT\_t@{TCRT\_t}}
+\doxysubsubsection{threshold}
+{\footnotesize\ttfamily \label{struct_t_c_r_t__t_ab1306e35299d8bdd10ea0adfbf9827ad} 
+uint16\+\_\+t threshold}
+
+Umbral de comparación para detección de objetos 
+
+La documentaciÃ³n de esta estructura estÃ¡ generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Gcc\+Application1/types/\textbf{ TCRTType.\+h}\end{DoxyCompactItemize}

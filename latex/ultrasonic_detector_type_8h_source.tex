@@ -1,0 +1,34 @@
+\doxysection{ultrasonic\+Detector\+Type.\+h}
+\label{ultrasonic_detector_type_8h_source}\index{GccApplication1/types/ultrasonicDetectorType.h@{GccApplication1/types/ultrasonicDetectorType.h}}
+\textbf{ Ir a la documentación de este archivo.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ ULTRASONICDETECTORTYPE\_H\_}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ ULTRASONICDETECTORTYPE\_H\_}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}ultrasonic.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}ultrasonic\_hal.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}bitmapType.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}TCRTType.h"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ ULTRADET\_ZONE\_ULTRA\_CLEAR\ BIT0\_MASK}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ ULTRADET\_ZONE\_TRCT\_U\_DETECTING\ BIT1\_MASK}}
+\DoxyCodeLine{00026\ \textcolor{comment}{/*\#define\ DISCARDED\ flags.bitmap.bit2;}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\#define\ DISCARDED\ flags.bitmap.bit3;*/}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ NO\ AGREGAR\ MAS\ -\/>\ Nibble\ H\ lo\ usamos\ para\ el\ tipo}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ ULTRADET\_SENSOR\_IDLE\ 0}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ ULTRADET\_SENSOR\_DETECTING\ 1}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ ULTRADET\_SENSOR\_WAITING\_CLEAR\ 2}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{00045\ \ \ \ \ ultrasonic\_t*\ sensor;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ TCRT\_t*\ sensor\_IR;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ Byte\_Flag\_Struct\ flags;\ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \}\ Ultrasonic\_Detector\_t;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ULTRASONICDETECTORTYPE\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

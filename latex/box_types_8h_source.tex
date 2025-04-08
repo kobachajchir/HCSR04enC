@@ -1,0 +1,67 @@
+\doxysection{box\+Types.\+h}
+\label{box_types_8h_source}\index{GccApplication1/types/boxTypes.h@{GccApplication1/types/boxTypes.h}}
+\textbf{ Ir a la documentaciÃ³n de este archivo.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ boxTypes.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created:\ 26-\/Mar-\/25\ 9:22:39\ AM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ Author:\ kobac}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ BOXTYPES\_H\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ BOXTYPES\_H\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}bitmapType.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ ZONE\_ULTRA\_CLEAR\ flags.bitmap.bit0;}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ SELECTED\ flags.bitmap.bit1;}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ DISCARDED\ flags.bitmap.bit2;}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\#define\ DISCARDED\ flags.bitmap.bit3;}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ NO\ AGREGAR\ MAS\ -\/>\ Nibble\ H\ lo\ usamos\ para\ el\ tipo\ }}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//Definicion\ de\ constantes\ de\ dimensiones\ de\ las\ cajas}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BOX\_A\_MIN\_MM\ 55}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ BOX\_A\_MAX\_MM\ 65}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ BOX\_B\_MIN\_MM\ 75}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ BOX\_B\_MAX\_MM\ 85}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ BOX\_C\_MIN\_MM\ 95}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ BOX\_C\_MAX\_MM\ 105}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ BOX\_LENGTH\_MM\ 80}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//Definiciones\ de\ los\ tipos\ de\ cajas\ -\/>\ Nibble\ H\ de\ las\ flags}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ BOX\_DISCARDED\ 0\ \ }\textcolor{comment}{//\ Define\ de\ descarte}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ BOX\_SIZE\_A\ 1\ \ }\textcolor{comment}{//\ Define\ de\ caja\ grande}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ BOX\_SIZE\_B\ 2\ \ }\textcolor{comment}{//\ Define\ de\ caja\ media}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ BOX\_SIZE\_C\ 3\ \ }\textcolor{comment}{//\ Define\ de\ caja\ chica}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ NO\_BOX\ 4\ }\textcolor{comment}{//No\ definida}}
+\DoxyCodeLine{00034\ \textcolor{keyword}{typedef}\ uint8\_t\ box\_type\_t;\ \textcolor{comment}{//Tipo\ de\ caja}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ BOX\_WAITING\_MEASURE\ 0\ \ \ }\textcolor{comment}{//\ Esperando\ en\ zona\ de\ medición}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ BOX\_MEASURED\ 1\ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ Altura\ ya\ medida\ y\ clasificada}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ BOX\_MOVING\ 2\ \ \ \ }\textcolor{comment}{//\ En\ tránsito\ hacia\ una\ salida}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ BOX\_AT\_OUTPUT\ 3\ \ \ \ }\textcolor{comment}{//\ Detectada\ en\ sensor\ IR}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ BOX\_PUSHED\ \ 4\ \ \ \ }\textcolor{comment}{//\ Ya\ empujada}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ BOX\_COMPLETED\ 5\ }\textcolor{comment}{//Listo,\ guardar\ en\ estadisticas}}
+\DoxyCodeLine{00042\ \textcolor{keyword}{typedef}\ uint8\_t\ box\_state\_t;\ \textcolor{comment}{//Estado\ de\ la\ caja}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00045\ \ \ \ \ uint8\_t\ min\_height\_mm;\ \ \textcolor{comment}{//\ Minimum\ height\ in\ millimeters}}
+\DoxyCodeLine{00046\ \ \ \ \ uint8\_t\ max\_height\_mm;\ \ \textcolor{comment}{//\ Maximum\ height\ in\ millimeters}}
+\DoxyCodeLine{00047\ \}\ box\_height\_range\_t;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00050\ \ \ \ \ box\_height\_range\_t\ box\_size\_a;\ \ \textcolor{comment}{//\ Large\ box\ range}}
+\DoxyCodeLine{00051\ \ \ \ \ box\_height\_range\_t\ box\_size\_b;\ \ \textcolor{comment}{//\ Medium\ box\ range}}
+\DoxyCodeLine{00052\ \ \ \ \ box\_height\_range\_t\ box\_size\_c;\ \ \textcolor{comment}{//\ Small\ box\ range}}
+\DoxyCodeLine{00053\ \}\ box\_height\_range\_matrix\_t;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00056\ \ \ \ \ uint8\_t\ height\_mm;\ \ \ \ \ \textcolor{comment}{//\ Altura\ medida}}
+\DoxyCodeLine{00057\ \ \ \ \ Byte\_Flag\_Struct\ flags;\ \textcolor{comment}{//Nibble\ H\ tiene\ el\ tipo,\ Nibble\ L\ tiene\ las\ banderas}}
+\DoxyCodeLine{00058\ \}\ box\_t;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BOXTYPES\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

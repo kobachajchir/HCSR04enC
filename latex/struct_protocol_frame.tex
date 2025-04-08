@@ -1,0 +1,75 @@
+\doxysection{Referencia de la estructura Protocol\+Frame}
+\label{struct_protocol_frame}\index{ProtocolFrame@{ProtocolFrame}}
+
+
+Representa una trama de comunicaci�n del protocolo.  
+
+
+
+
+{\ttfamily \#include $<$protocol\+Types.\+h$>$}
+
+\doxysubsubsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \textbf{ header} [4]
+\item 
+uint8\+\_\+t \textbf{ length}
+\item 
+uint8\+\_\+t \textbf{ token}
+\item 
+uint8\+\_\+t \textbf{ cmd}
+\item 
+uint8\+\_\+t $\ast$ \textbf{ payload}
+\item 
+uint8\+\_\+t \textbf{ checksum}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Representa una trama de comunicaci�n del protocolo. 
+
+Contiene la cabecera, longitud del payload, token, comando, puntero al payload y checksum. 
+
+\doxysubsection{Documentación de campos}
+\index{ProtocolFrame@{ProtocolFrame}!checksum@{checksum}}
+\index{checksum@{checksum}!ProtocolFrame@{ProtocolFrame}}
+\doxysubsubsection{checksum}
+{\footnotesize\ttfamily \label{struct_protocol_frame_a59eac9627282a484fbaf0aa7aa3b8a9a} 
+uint8\+\_\+t checksum}
+
+\index{ProtocolFrame@{ProtocolFrame}!cmd@{cmd}}
+\index{cmd@{cmd}!ProtocolFrame@{ProtocolFrame}}
+\doxysubsubsection{cmd}
+{\footnotesize\ttfamily \label{struct_protocol_frame_a4d43e8212bdc9dbee866506f04effcea} 
+uint8\+\_\+t cmd}
+
+\index{ProtocolFrame@{ProtocolFrame}!header@{header}}
+\index{header@{header}!ProtocolFrame@{ProtocolFrame}}
+\doxysubsubsection{header}
+{\footnotesize\ttfamily \label{struct_protocol_frame_a2c189e50aec5ffd2583d1e6ca0ac818d} 
+uint8\+\_\+t header[4]}
+
+\index{ProtocolFrame@{ProtocolFrame}!length@{length}}
+\index{length@{length}!ProtocolFrame@{ProtocolFrame}}
+\doxysubsubsection{length}
+{\footnotesize\ttfamily \label{struct_protocol_frame_ab2b3adeb2a67e656ff030b56727fd0ac} 
+uint8\+\_\+t length}
+
+\index{ProtocolFrame@{ProtocolFrame}!payload@{payload}}
+\index{payload@{payload}!ProtocolFrame@{ProtocolFrame}}
+\doxysubsubsection{payload}
+{\footnotesize\ttfamily \label{struct_protocol_frame_aa5cbdad2c57e9b3f949e1a4d96382b66} 
+uint8\+\_\+t$\ast$ payload}
+
+\index{ProtocolFrame@{ProtocolFrame}!token@{token}}
+\index{token@{token}!ProtocolFrame@{ProtocolFrame}}
+\doxysubsubsection{token}
+{\footnotesize\ttfamily \label{struct_protocol_frame_afb6cdb8d697f6e4b925161d99a2daa3c} 
+uint8\+\_\+t token}
+
+
+
+La documentación de esta estructura está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Gcc\+Application1/types/\textbf{ protocol\+Types.\+h}\end{DoxyCompactItemize}

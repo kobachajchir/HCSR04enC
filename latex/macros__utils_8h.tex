@@ -1,0 +1,113 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/macros\+\_\+utils.h}
+\label{macros__utils_8h}\index{GccApplication1/utils/macros\_utils.h@{GccApplication1/utils/macros\_utils.h}}
+{\ttfamily \#include "{}../types/bitmap\+Type.\+h"{}}\newline
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SET\+\_\+\+FLAG}(flag\+\_\+struct,  BIT\+\_\+\+MASK)
+\item 
+\#define \textbf{ CLEAR\+\_\+\+FLAG}(flag\+\_\+struct,  BIT\+\_\+\+MASK)
+\item 
+\#define \textbf{ TOGGLE\+\_\+\+FLAG}(flag\+\_\+struct,  BIT\+\_\+\+MASK)
+\item 
+\#define \textbf{ IS\+\_\+\+FLAG\+\_\+\+SET}(flag\+\_\+struct,  BIT\+\_\+\+MASK)
+\item 
+\#define \textbf{ NIBBLEL\+\_\+\+SET\+\_\+\+STATE}(object,  state)
+\item 
+\#define \textbf{ NIBBLEH\+\_\+\+SET\+\_\+\+STATE}(object,  state)
+\item 
+\#define \textbf{ NIBBLEH\+\_\+\+GET\+\_\+\+STATE}(flag\+\_\+struct)
+\item 
+\#define \textbf{ NIBBLEL\+\_\+\+GET\+\_\+\+STATE}(flag\+\_\+struct)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de «define»}
+\index{macros\_utils.h@{macros\_utils.h}!CLEAR\_FLAG@{CLEAR\_FLAG}}
+\index{CLEAR\_FLAG@{CLEAR\_FLAG}!macros\_utils.h@{macros\_utils.h}}
+\doxysubsubsection{CLEAR\_FLAG}
+{\footnotesize\ttfamily \label{macros__utils_8h_a8e534de2a564fbb13b7b4a5ce0dce791} 
+\#define CLEAR\+\_\+\+FLAG(\begin{DoxyParamCaption}\item[{}]{flag\+\_\+struct}{, }\item[{}]{BIT\+\_\+\+MASK}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((flag\_struct).byte\ \&=\ \string~(BIT\_MASK))}
+
+\end{DoxyCode}
+\index{macros\_utils.h@{macros\_utils.h}!IS\_FLAG\_SET@{IS\_FLAG\_SET}}
+\index{IS\_FLAG\_SET@{IS\_FLAG\_SET}!macros\_utils.h@{macros\_utils.h}}
+\doxysubsubsection{IS\_FLAG\_SET}
+{\footnotesize\ttfamily \label{macros__utils_8h_a57b5841fd74ed2d32bc5f2759004c24a} 
+\#define IS\+\_\+\+FLAG\+\_\+\+SET(\begin{DoxyParamCaption}\item[{}]{flag\+\_\+struct}{, }\item[{}]{BIT\+\_\+\+MASK}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(((flag\_struct).byte\ \&\ (BIT\_MASK))\ !=\ 0)}
+
+\end{DoxyCode}
+\index{macros\_utils.h@{macros\_utils.h}!NIBBLEH\_GET\_STATE@{NIBBLEH\_GET\_STATE}}
+\index{NIBBLEH\_GET\_STATE@{NIBBLEH\_GET\_STATE}!macros\_utils.h@{macros\_utils.h}}
+\doxysubsubsection{NIBBLEH\_GET\_STATE}
+{\footnotesize\ttfamily \label{macros__utils_8h_af29004d93dadd4d8a25f3ea4182925b2} 
+\#define NIBBLEH\+\_\+\+GET\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{flag\+\_\+struct}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(((flag\_struct).byte\ \&\ NIBBLE\_H\_MASK)\ >>\ 4)}
+
+\end{DoxyCode}
+\index{macros\_utils.h@{macros\_utils.h}!NIBBLEH\_SET\_STATE@{NIBBLEH\_SET\_STATE}}
+\index{NIBBLEH\_SET\_STATE@{NIBBLEH\_SET\_STATE}!macros\_utils.h@{macros\_utils.h}}
+\doxysubsubsection{NIBBLEH\_SET\_STATE}
+{\footnotesize\ttfamily \label{macros__utils_8h_a453422f13143d1b8d373b79d028b2d7c} 
+\#define NIBBLEH\+\_\+\+SET\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{object}{, }\item[{}]{state}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ ((object).byte\ =\ ((object).byte\ \&\ NIBBLE\_L\_MASK)\ |\ (((state)\ \&\ NIBBLE\_L\_MASK)\ <<\ 4))}
+
+\end{DoxyCode}
+\index{macros\_utils.h@{macros\_utils.h}!NIBBLEL\_GET\_STATE@{NIBBLEL\_GET\_STATE}}
+\index{NIBBLEL\_GET\_STATE@{NIBBLEL\_GET\_STATE}!macros\_utils.h@{macros\_utils.h}}
+\doxysubsubsection{NIBBLEL\_GET\_STATE}
+{\footnotesize\ttfamily \label{macros__utils_8h_aae6b0d938fc7bbc886181f07d3fafd5d} 
+\#define NIBBLEL\+\_\+\+GET\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{flag\+\_\+struct}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((flag\_struct).byte\ \&\ NIBBLE\_L\_MASK)}
+
+\end{DoxyCode}
+\index{macros\_utils.h@{macros\_utils.h}!NIBBLEL\_SET\_STATE@{NIBBLEL\_SET\_STATE}}
+\index{NIBBLEL\_SET\_STATE@{NIBBLEL\_SET\_STATE}!macros\_utils.h@{macros\_utils.h}}
+\doxysubsubsection{NIBBLEL\_SET\_STATE}
+{\footnotesize\ttfamily \label{macros__utils_8h_a7f6e200779faeb889013351c95d71c19} 
+\#define NIBBLEL\+\_\+\+SET\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{object}{, }\item[{}]{state}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ ((object).byte\ =\ ((object).byte\ \&\ NIBBLE\_H\_MASK)\ |\ ((state)\ \&\ NIBBLE\_L\_MASK))}
+
+\end{DoxyCode}
+\index{macros\_utils.h@{macros\_utils.h}!SET\_FLAG@{SET\_FLAG}}
+\index{SET\_FLAG@{SET\_FLAG}!macros\_utils.h@{macros\_utils.h}}
+\doxysubsubsection{SET\_FLAG}
+{\footnotesize\ttfamily \label{macros__utils_8h_a3cfb61e8a8cb57efceef1c686bf49b3d} 
+\#define SET\+\_\+\+FLAG(\begin{DoxyParamCaption}\item[{}]{flag\+\_\+struct}{, }\item[{}]{BIT\+\_\+\+MASK}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((flag\_struct).byte\ |=\ \ (BIT\_MASK))}
+
+\end{DoxyCode}
+\index{macros\_utils.h@{macros\_utils.h}!TOGGLE\_FLAG@{TOGGLE\_FLAG}}
+\index{TOGGLE\_FLAG@{TOGGLE\_FLAG}!macros\_utils.h@{macros\_utils.h}}
+\doxysubsubsection{TOGGLE\_FLAG}
+{\footnotesize\ttfamily \label{macros__utils_8h_ad0767759019e5d4c731661efc801859c} 
+\#define TOGGLE\+\_\+\+FLAG(\begin{DoxyParamCaption}\item[{}]{flag\+\_\+struct}{, }\item[{}]{BIT\+\_\+\+MASK}{}\end{DoxyParamCaption})}
+
+{\bfseries Valor\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((flag\_struct).byte\ \string^=\ \ (BIT\_MASK))}
+
+\end{DoxyCode}

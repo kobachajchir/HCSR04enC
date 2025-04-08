@@ -1,0 +1,118 @@
+\doxysection{protocol\+Types.\+h}
+\label{protocol_types_8h_source}\index{GccApplication1/types/protocolTypes.h@{GccApplication1/types/protocolTypes.h}}
+\textbf{ Ir a la documentación de este archivo.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00015\ \textcolor{comment}{CMD\_ALIVE:\ 55\ 4E\ 45\ 52\ 00\ 3A\ A0\ 96}}
+\DoxyCodeLine{00016\ \textcolor{comment}{CMD\_START:\ 55\ 4E\ 45\ 52\ 01\ 3A\ B1\ 01\ 87}}
+\DoxyCodeLine{00017\ \textcolor{comment}{CMD\_STOP:\ 55\ 4E\ 45\ 52\ 01\ 3A\ B2\ 00\ 85}}
+\DoxyCodeLine{00018\ \textcolor{comment}{CMD\_SET\_CONFIG:\ 55\ 4E\ 45\ 52\ 0B\ 3A\ C0\ 30\ 3A\ 43\ 2D\ 31\ 3A\ 42\ 2D\ 32\ 3A\ 41\ B4\ //PAYLOAD:\ 30\ 3A\ 43\ 2D\ 31\ 3A\ 42\ 2D\ 32\ 3A\ 41\ ?\ equivale\ a\ la\ cadena\ "{}0:C-\/1:B-\/2:A"{}}}
+\DoxyCodeLine{00019\ \textcolor{comment}{CMD\_GET\_CONFIG:\ 55\ 4E\ 45\ 52\ 00\ 3A\ C1\ F7}}
+\DoxyCodeLine{00020\ \textcolor{comment}{CMD\_GET\_FIRMWARE:\ 55\ 4E\ 45\ 52\ 00\ 3A\ F0\ C6}}
+\DoxyCodeLine{00021\ \textcolor{comment}{CMD\_GET\_STATS:\ 55\ 4E\ 45\ 52\ 00\ 3A\ F1\ C7}}
+\DoxyCodeLine{00022\ \textcolor{comment}{CMD\_CLEAR\_STATS:\ 55\ 4E\ 45\ 52\ 00\ 3A\ F2\ C4}}
+\DoxyCodeLine{00023\ \textcolor{comment}{CMD\_GET\_REPOSITORY:\ 55\ 4E\ 45\ 52\ 00\ 3A\ F3\ C5}}
+\DoxyCodeLine{00024\ \textcolor{comment}{CMD\_CONFIG\_RESET:\ 55\ 4E\ 45\ 52\ 00\ 3A\ F4\ C2}}
+\DoxyCodeLine{00025\ \textcolor{comment}{CMD\_INVALID:\ 55\ 4E\ 45\ 52\ 00\ 3A\ E0\ D6}}
+\DoxyCodeLine{00026\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#ifndef\ PROTOCOLTYPE\_H\_}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ PROTOCOLTYPE\_H\_}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}bitmapType.h"{}}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ PROTOCOL\_BUFFER\_SIZE\ 64\ \ }\textcolor{comment}{//\ Buffer\ circular\ de\ 64\ bytes}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ PROTOCOL\_TOKEN\ ':'}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ PROTOCOL\_PACING\_TOKEN\ '-\/'}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ EXPECTED\_HEADER\_SUM\ 0x1A}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ PROTOSERV\_IDLE\ 0}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ PROTOSERV\_READING\_HEADER\ 1}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ PROTOSERV\_READING\_LEN\ 2\ }\textcolor{comment}{//encuentra\ :\ y\ pasa\ a\ reading\ cmd}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ PROTOSERV\_READING\_TOKEN\ 3}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ PROTOSERV\_READING\_CMD\ 4}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ PROTOSERV\_READING\_PAYLOAD\ 5}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ PROTOSERV\_READING\_CHK\ 6}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ PROTOSERV\_CALCULATING\_CHK\ 7}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ PROTOSERV\_PROCESSING\_PAYLOAD\ 8}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ PROTOSERV\_VALIDATED\ 9}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ PROTOSERV\_SEND\ 10}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ PROTOSERV\_SEND\_DONE\ 11}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ PROTOSERV\_PROCESSING\ BIT0\_MASK}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ PROTOSERV\_CHECKDATA\ BIT1\_MASK}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ PROTOSERV\_RESET\ BIT2\_MASK}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ PROTOSERV\_CREATE\_PCK\ BIT3\_MASK}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00065\ \ \ \ \ uint8\_t\ header[4];\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ HEADER\ (4\ bytes)}}
+\DoxyCodeLine{00066\ \ \ \ \ uint8\_t\ length;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ LENGTH\ (1\ byte)}}
+\DoxyCodeLine{00067\ \ \ \ \ uint8\_t\ token;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TOKEN\ (1\ byte)}}
+\DoxyCodeLine{00068\ \ \ \ \ uint8\_t\ cmd;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ CMD\ (1\ byte)}}
+\DoxyCodeLine{00069\ \ \ \ \ uint8\_t*\ payload;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ PAYLOAD\ (N\ bytes)\ //Marca\ la\ posicion\ en\ el\ buffer\ de\ protoService}}
+\DoxyCodeLine{00070\ \ \ \ \ uint8\_t\ checksum;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ CHECKSUM\ (1\ byte)}}
+\DoxyCodeLine{00071\ \}\ ProtocolFrame;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//\ Responses}}
+\DoxyCodeLine{00079\ \ \ \ \ CMD\_RESPONSE\_ALIVE\ \ \ \ \ \ \ \ \ \ \ =\ 0x00,\ \textcolor{comment}{//\ Response:\ Alive\ confirmation}}
+\DoxyCodeLine{00080\ \ \ \ \ CMD\_RESPONSE\_START\ \ \ \ \ \ \ \ \ \ \ =\ 0x01,\ \textcolor{comment}{//\ Response\ for\ start\ command}}
+\DoxyCodeLine{00081\ \ \ \ \ CMD\_RESPONSE\_STOP\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x02,\ \textcolor{comment}{//\ Response\ for\ stop\ command}}
+\DoxyCodeLine{00082\ \ \ \ \ CMD\_RESPONSE\_SET\_CONFIG\ \ \ \ \ \ =\ 0x03,\ \textcolor{comment}{//\ Response\ for\ set\ configuration\ command}}
+\DoxyCodeLine{00083\ \ \ \ \ CMD\_RESPONSE\_GET\_CONFIG\ \ \ \ \ \ =\ 0x04,\ \textcolor{comment}{//\ Response\ for\ get\ configuration\ command}}
+\DoxyCodeLine{00084\ \ \ \ \ CMD\_RESPONSE\_CLEAR\_STATS\ \ \ \ \ =\ 0x05,\ \textcolor{comment}{//\ Response\ for\ clear\ statistics\ command}}
+\DoxyCodeLine{00085\ \ \ \ \ CMD\_RESPONSE\_GET\_STATS\ \ \ \ \ \ \ =\ 0x06,\ \textcolor{comment}{//\ Response\ for\ get\ statistics\ command}}
+\DoxyCodeLine{00086\ \ \ \ \ CMD\_RESPONSE\_GET\_FIRMWARE\ \ \ \ =\ 0x07,\ \textcolor{comment}{//\ Response\ for\ get\ firmware\ command}}
+\DoxyCodeLine{00087\ \ \ \ \ CMD\_RESPONSE\_GET\_REPOSITORY\ \ =\ 0x08,\ \textcolor{comment}{//\ Response\ for\ get\ repository\ command}}
+\DoxyCodeLine{00088\ \ \ \ \ CMD\_RESPONSE\_CONFIG\_RESET\ \ \ \ =\ 0x09,\ \textcolor{comment}{//\ Response\ for\ reset\ configuration\ command}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//\ Main\ commands}}
+\DoxyCodeLine{00091\ \ \ \ \ CMD\_ALIVE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xA0,\ \textcolor{comment}{//\ Command\ indicating\ device\ is\ alive}}
+\DoxyCodeLine{00092\ \ \ \ \ }
+\DoxyCodeLine{00093\ \ \ \ \ CMD\_START\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xB1,\ \textcolor{comment}{//\ Start\ command}}
+\DoxyCodeLine{00094\ \ \ \ \ CMD\_STOP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xB2,\ \textcolor{comment}{//\ Stop\ command}}
+\DoxyCodeLine{00095\ \ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ CMD\_SET\_CONFIG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xC0,\ \textcolor{comment}{//\ Command\ to\ set\ configuration}}
+\DoxyCodeLine{00097\ \ \ \ \ CMD\_GET\_CONFIG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xC1,\ \textcolor{comment}{//\ Command\ to\ get\ configuration}}
+\DoxyCodeLine{00098\ \ \ \ \ }
+\DoxyCodeLine{00099\ \ \ \ \ CMD\_GET\_FIRMWARE\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xF0,\ \textcolor{comment}{//\ Command\ to\ get\ firmware}}
+\DoxyCodeLine{00100\ \ \ \ \ CMD\_GET\_STATS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xF1,\ \textcolor{comment}{//\ Command\ to\ get\ statistics}}
+\DoxyCodeLine{00101\ \ \ \ \ CMD\_CLEAR\_STATS\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xF2,\ \textcolor{comment}{//\ Command\ to\ clear\ statistics}}
+\DoxyCodeLine{00102\ \ \ \ \ CMD\_GET\_REPOSITORY\ \ \ \ \ \ \ \ \ \ \ =\ 0xF3,\ \textcolor{comment}{//\ Command\ to\ get\ repository}}
+\DoxyCodeLine{00103\ \ \ \ \ CMD\_CONFIG\_RESET\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xF4,\ \textcolor{comment}{//\ Command\ to\ reset\ config}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{//\ Debug\ commands\ (zona\ 0xE...)}}
+\DoxyCodeLine{00106\ \ \ \ \ CMD\_DEBUG\_ULTRA\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xE1,\ \textcolor{comment}{//\ Enable/disable\ ultrasonic\ debug}}
+\DoxyCodeLine{00107\ \ \ \ \ CMD\_DEBUG\_SERVOS\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xE2,\ \textcolor{comment}{//\ Enable/disable\ servos\ debug}}
+\DoxyCodeLine{00108\ \ \ \ \ CMD\_DEBUG\_SORTER\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xE3,\ \textcolor{comment}{//\ Enable/disable\ sorter\ debug}}
+\DoxyCodeLine{00109\ \ \ \ \ CMD\_DEBUG\_EEPROM\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xE4,\ \textcolor{comment}{//\ Enable/disable\ EEPROM\ debug}}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ Debug\ responses\ (zona\ 0x0X)}}
+\DoxyCodeLine{00111\ \ \ \ \ CMD\_RESPONSE\_DEBUG\_ULTRA\ \ \ \ \ =\ 0x0A,\ \textcolor{comment}{//\ Response\ for\ ultrasonic\ debug\ toggle}}
+\DoxyCodeLine{00112\ \ \ \ \ CMD\_RESPONSE\_DEBUG\_SERVOS\ \ \ \ =\ 0x0B,\ \textcolor{comment}{//\ Response\ for\ servos\ debug\ toggle}}
+\DoxyCodeLine{00113\ \ \ \ \ CMD\_RESPONSE\_DEBUG\_SORTER\ \ \ \ =\ 0x0C,\ \textcolor{comment}{//\ Response\ for\ sorter\ debug\ toggle}}
+\DoxyCodeLine{00114\ \ \ \ \ CMD\_RESPONSE\_DEBUG\_EEPROM\ \ \ \ =\ 0x0D,\ \textcolor{comment}{//\ Response\ for\ EEPROM\ debug\ toggle}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{comment}{//\ Fallback}}
+\DoxyCodeLine{00117\ \ \ \ \ CMD\_INVALID\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xE0\ \ \textcolor{comment}{//\ Invalid\ command\ (default\ error)}}
+\DoxyCodeLine{00118\ \}\ Command;}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00124\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00125\ \ \ \ \ Command\ request;}
+\DoxyCodeLine{00126\ \ \ \ \ Command\ response;}
+\DoxyCodeLine{00127\ \}\ CommandMap;}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00135\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ indexW;}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ indexR;}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keyword}{volatile}\ uint8\_t\ buffer[PROTOCOL\_BUFFER\_SIZE];}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{volatile}\ Byte\_Flag\_Struct\ flags;}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{volatile}\ ProtocolFrame\ receivePck;}
+\DoxyCodeLine{00141\ \}\ ProtocolService;}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PROTOCOLTYPE\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

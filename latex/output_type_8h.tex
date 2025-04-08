@@ -1,0 +1,109 @@
+\doxysection{Referencia del archivo Gcc\+Application1/types/output\+Type.h}
+\label{output_type_8h}\index{GccApplication1/types/outputType.h@{GccApplication1/types/outputType.h}}
+
+
+Define el tipo de dato para representar una salida del sistema de clasificación.  
+
+
+{\ttfamily \#include "{}box\+Types.\+h"{}}\newline
+{\ttfamily \#include "{}bitmap\+Type.\+h"{}}\newline
+\doxysubsubsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ output\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Estructura que representa una salida del sistema de clasificación. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ OUTPUT\+\_\+\+BUSY}~\textbf{ BIT0\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag que indica que la salida está ocupada procesando una caja. \end{DoxyCompactList}\item 
+\#define \textbf{ OUTPUT\+\_\+\+PUSH}~\textbf{ BIT1\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag que indica que el actuador debe empujar una caja. \end{DoxyCompactList}\item 
+\#define \textbf{ OUTPUT\+\_\+\+RESET}~\textbf{ BIT2\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag que indica que el actuador debe volver a su posición de reposo. \end{DoxyCompactList}\item 
+\#define \textbf{ OUTPUT\+\_\+\+READY}~\textbf{ BIT3\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag que indica que la salida está lista para recibir una nueva caja. \end{DoxyCompactList}\item 
+\#define \textbf{ OUTPUT\+\_\+\+A\+\_\+\+DEFAULT\+\_\+\+BOX\+\_\+\+TYPE}~\textbf{ BOX\+\_\+\+SIZE\+\_\+A}
+\begin{DoxyCompactList}\small\item\em Definiciones por defecto del tipo de caja por salida. \end{DoxyCompactList}\item 
+\#define \textbf{ OUTPUT\+\_\+\+B\+\_\+\+DEFAULT\+\_\+\+BOX\+\_\+\+TYPE}~\textbf{ BOX\+\_\+\+SIZE\+\_\+B}
+\item 
+\#define \textbf{ OUTPUT\+\_\+\+C\+\_\+\+DEFAULT\+\_\+\+BOX\+\_\+\+TYPE}~\textbf{ BOX\+\_\+\+SIZE\+\_\+C}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Define el tipo de dato para representar una salida del sistema de clasificación. 
+
+Incluye pines asociados al sensor y actuador, flags de estado y tipo de caja asignado.
+
+\begin{DoxyAuthor}{Autor}
+kobac 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+26-\/Mar-\/25 
+\end{DoxyDate}
+
+
+\doxysubsection{DocumentaciÃ³n de Â«defineÂ»}
+\index{outputType.h@{outputType.h}!OUTPUT\_A\_DEFAULT\_BOX\_TYPE@{OUTPUT\_A\_DEFAULT\_BOX\_TYPE}}
+\index{OUTPUT\_A\_DEFAULT\_BOX\_TYPE@{OUTPUT\_A\_DEFAULT\_BOX\_TYPE}!outputType.h@{outputType.h}}
+\doxysubsubsection{OUTPUT\_A\_DEFAULT\_BOX\_TYPE}
+{\footnotesize\ttfamily \label{output_type_8h_a8b094dfbd3e03017259e50878d54c2b7} 
+\#define OUTPUT\+\_\+\+A\+\_\+\+DEFAULT\+\_\+\+BOX\+\_\+\+TYPE~\textbf{ BOX\+\_\+\+SIZE\+\_\+A}}
+
+
+
+Definiciones por defecto del tipo de caja por salida. 
+
+\index{outputType.h@{outputType.h}!OUTPUT\_B\_DEFAULT\_BOX\_TYPE@{OUTPUT\_B\_DEFAULT\_BOX\_TYPE}}
+\index{OUTPUT\_B\_DEFAULT\_BOX\_TYPE@{OUTPUT\_B\_DEFAULT\_BOX\_TYPE}!outputType.h@{outputType.h}}
+\doxysubsubsection{OUTPUT\_B\_DEFAULT\_BOX\_TYPE}
+{\footnotesize\ttfamily \label{output_type_8h_a209c0940777c6199d8830143d5f07aba} 
+\#define OUTPUT\+\_\+\+B\+\_\+\+DEFAULT\+\_\+\+BOX\+\_\+\+TYPE~\textbf{ BOX\+\_\+\+SIZE\+\_\+B}}
+
+\index{outputType.h@{outputType.h}!OUTPUT\_BUSY@{OUTPUT\_BUSY}}
+\index{OUTPUT\_BUSY@{OUTPUT\_BUSY}!outputType.h@{outputType.h}}
+\doxysubsubsection{OUTPUT\_BUSY}
+{\footnotesize\ttfamily \label{output_type_8h_a19d97fef80cbec5a745931efd659b26f} 
+\#define OUTPUT\+\_\+\+BUSY~\textbf{ BIT0\+\_\+\+MASK}}
+
+
+
+Flag que indica que la salida está ocupada procesando una caja. 
+
+\index{outputType.h@{outputType.h}!OUTPUT\_C\_DEFAULT\_BOX\_TYPE@{OUTPUT\_C\_DEFAULT\_BOX\_TYPE}}
+\index{OUTPUT\_C\_DEFAULT\_BOX\_TYPE@{OUTPUT\_C\_DEFAULT\_BOX\_TYPE}!outputType.h@{outputType.h}}
+\doxysubsubsection{OUTPUT\_C\_DEFAULT\_BOX\_TYPE}
+{\footnotesize\ttfamily \label{output_type_8h_a2d54a539fd59b6a0e06a01dd24ff904c} 
+\#define OUTPUT\+\_\+\+C\+\_\+\+DEFAULT\+\_\+\+BOX\+\_\+\+TYPE~\textbf{ BOX\+\_\+\+SIZE\+\_\+C}}
+
+\index{outputType.h@{outputType.h}!OUTPUT\_PUSH@{OUTPUT\_PUSH}}
+\index{OUTPUT\_PUSH@{OUTPUT\_PUSH}!outputType.h@{outputType.h}}
+\doxysubsubsection{OUTPUT\_PUSH}
+{\footnotesize\ttfamily \label{output_type_8h_abc5bb63ded62e1c17867c203e58e2108} 
+\#define OUTPUT\+\_\+\+PUSH~\textbf{ BIT1\+\_\+\+MASK}}
+
+
+
+Flag que indica que el actuador debe empujar una caja. 
+
+\index{outputType.h@{outputType.h}!OUTPUT\_READY@{OUTPUT\_READY}}
+\index{OUTPUT\_READY@{OUTPUT\_READY}!outputType.h@{outputType.h}}
+\doxysubsubsection{OUTPUT\_READY}
+{\footnotesize\ttfamily \label{output_type_8h_ad4eb8ab3d6d0033d6c6d9b3888383355} 
+\#define OUTPUT\+\_\+\+READY~\textbf{ BIT3\+\_\+\+MASK}}
+
+
+
+Flag que indica que la salida está lista para recibir una nueva caja. 
+
+\index{outputType.h@{outputType.h}!OUTPUT\_RESET@{OUTPUT\_RESET}}
+\index{OUTPUT\_RESET@{OUTPUT\_RESET}!outputType.h@{outputType.h}}
+\doxysubsubsection{OUTPUT\_RESET}
+{\footnotesize\ttfamily \label{output_type_8h_a5bc5d76354b9da12a5c157488eb26999} 
+\#define OUTPUT\+\_\+\+RESET~\textbf{ BIT2\+\_\+\+MASK}}
+
+
+
+Flag que indica que el actuador debe volver a su posición de reposo. 
+

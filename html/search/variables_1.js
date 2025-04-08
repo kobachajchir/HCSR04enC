@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['bandera_0',['bandera',['../main_8c.html#abaf9d105ac1cfa3d1cb984806de4e93d',1,'bandera:&#160;main.c'],['../main_8h.html#abaf9d105ac1cfa3d1cb984806de4e93d',1,'bandera:&#160;main.c']]],
+  ['bandera2_1',['bandera2',['../main_8c.html#aa05f09fd171c189b5b1e24e414dabcdc',1,'bandera2:&#160;main.c'],['../main_8h.html#aa05f09fd171c189b5b1e24e414dabcdc',1,'bandera2:&#160;main.c']]],
+  ['bandera3_2',['bandera3',['../main_8c.html#a2a8d961a96d1c17573e37bf8f18fac90',1,'bandera3:&#160;main.c'],['../main_8h.html#a2a8d961a96d1c17573e37bf8f18fac90',1,'bandera3:&#160;main.c']]],
+  ['bit0_3',['bit0',['../union_byte___flag___struct.html#a39dd617b3cde2eb25327b6c0213a7f36',1,'Byte_Flag_Struct']]],
+  ['bit1_4',['bit1',['../union_byte___flag___struct.html#a0b98e79f49804aab184fe554e2d10483',1,'Byte_Flag_Struct']]],
+  ['bit2_5',['bit2',['../union_byte___flag___struct.html#aa2484bf47c7c38a7eb8f2b22f09f6710',1,'Byte_Flag_Struct']]],
+  ['bit3_6',['bit3',['../union_byte___flag___struct.html#ae1457b2475c549e53d084a2daa6475f5',1,'Byte_Flag_Struct']]],
+  ['bit4_7',['bit4',['../union_byte___flag___struct.html#aec79d033d0709e9c4caf5b21f85848bc',1,'Byte_Flag_Struct']]],
+  ['bit5_8',['bit5',['../union_byte___flag___struct.html#a56012f9e5f78d285eb450866b270b86d',1,'Byte_Flag_Struct']]],
+  ['bit6_9',['bit6',['../union_byte___flag___struct.html#a39af6ce9105754718e17a87fb173b0fb',1,'Byte_Flag_Struct']]],
+  ['bit7_10',['bit7',['../union_byte___flag___struct.html#a23364783b1302b0aab8b38fc7853cad3',1,'Byte_Flag_Struct']]],
+  ['bith_11',['bitH',['../union_byte___flag___struct.html#ae5851ba5f287daacc69518296d113d21',1,'Byte_Flag_Struct']]],
+  ['bitl_12',['bitL',['../union_byte___flag___struct.html#a79e5f4624dbc1f2bee5f6e7c2db7e0d1',1,'Byte_Flag_Struct']]],
+  ['bitmap_13',['bitmap',['../union_byte___flag___struct.html#a9103feb57a989a3f13c3d3bc0bc3696f',1,'Byte_Flag_Struct']]],
+  ['box_5franges_14',['box_ranges',['../structsorter__system__t.html#a051b9d68aa47285e96e213f1cb14e0f2',1,'sorter_system_t']]],
+  ['box_5fsize_5fa_15',['box_size_a',['../structbox__height__range__matrix__t.html#a15c563c9575b367859bd862fed2b4270',1,'box_height_range_matrix_t']]],
+  ['box_5fsize_5fb_16',['box_size_b',['../structbox__height__range__matrix__t.html#ad9d7e69159ff7a44fae622d0fc691495',1,'box_height_range_matrix_t']]],
+  ['box_5fsize_5fc_17',['box_size_c',['../structbox__height__range__matrix__t.html#a830898c9e95f5c1eb3e3853fbe9c67e1',1,'box_height_range_matrix_t']]],
+  ['boxtype_18',['boxType',['../structoutput__t.html#a76b13e8cb37786b397fc332784fc0aa9',1,'output_t']]],
+  ['btn_5fpressed_5ftime_19',['btn_pressed_time',['../main_8c.html#a39d0eb7a23365e89195c7cd01c4d5adc',1,'btn_pressed_time:&#160;main.c'],['../main_8h.html#a39d0eb7a23365e89195c7cd01c4d5adc',1,'btn_pressed_time:&#160;main.c']]],
+  ['buffer_20',['buffer',['../struct_protocol_service.html#afad48263134e75e99e225c0db20e311a',1,'ProtocolService']]],
+  ['byte_21',['byte',['../union_byte___flag___struct.html#a96f44d20f1dbf1c8785a7bc99a46164c',1,'Byte_Flag_Struct']]]
+];
