@@ -9,6 +9,12 @@
 #include <avr/io.h>
 #include "../../main.h"
 
+/**
+ * @brief Inicializa los sensores TCRT conectados a los pines analógicos.
+ *
+ * Configura los pines PC0–PC3 como entradas, desactiva pull-ups,
+ * y configura el ADC para su uso.
+ */
 void tcrt_init(void)
 {
 	// 1. Configuramos los pines PC0-PC3 como entrada
@@ -23,6 +29,12 @@ void tcrt_init(void)
 	(1 << ADPS2) | (1 << ADPS1); // Prescaler 64 (para 16 MHz ? 250 kHz ADC clk)
 }
 
+/**
+ * @brief Realiza una lectura del canal ADC correspondiente al sensor TCRT.
+ *
+ * @param [in] channel Canal ADC (0 a 3) del sensor.
+ * @retval Valor de 10 bits de la conversión ADC (0–1023).
+ */
 uint16_t tcrt_read_channel(uint8_t channel)
 {
 	// Asegurar que channel esté entre 0 y 3
@@ -36,6 +48,11 @@ uint16_t tcrt_read_channel(uint8_t channel)
 	return ADC;                         // Retorna valor de 10 bits (0–1023)
 }
 
+/**
+ * @brief Inicializa las estructuras y flags de los sensores TCRT.
+ *
+ * Asigna canales, pines, valores por defecto y activa los sensores según configuración.
+ */
 void TCRT_init_Handlers(){
 	IR_A.flags.byte = 0;
 	IR_A.channel = TCRT_A_CHANNEL;
@@ -56,7 +73,7 @@ void TCRT_init_Handlers(){
 	IR_B.hysteresis_percent = 20;
 	
 	NIBBLEH_SET_STATE(IR_B.flags, TCRT_STATUS_IDLE);
-	//SET_FLAG(IR_B.flags, TCRT_ENABLED);
+	//SET_FLAG(IR_B.flags, TCRT_ENABLED); //DEGUB: DESCOMENTAR CUANDO CONECTEMOS LOS SENSORES
 	if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED)){
 		printf("TCRT B ENABLED\n");
 	}
@@ -67,7 +84,7 @@ void TCRT_init_Handlers(){
 	IR_C.lastReading = 0;
 	IR_C.hysteresis_percent = 20;
 	NIBBLEH_SET_STATE(IR_C.flags, TCRT_STATUS_IDLE);
-	//SET_FLAG(IR_C.flags, TCRT_ENABLED);
+	//SET_FLAG(IR_C.flags, TCRT_ENABLED); //DEGUB: DESCOMENTAR CUANDO CONECTEMOS LOS SENSORES
 	if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED)){
 		printf("TCRT C ENABLED\n");
 	}
@@ -84,6 +101,16 @@ void TCRT_init_Handlers(){
 	}
 }
 
+/**
+ * @brief Detecta un flanco de subida en la lectura del sensor.
+ *
+ * Compara el estado anterior con el actual para determinar si hubo flanco ascendente.
+ *
+ * @param [in,out] sensor Puntero a la estructura del sensor TCRT.
+ * @param [in] current_state Estado actual (1 o 0) del sensor.
+ *
+ * @retval true Si hubo flanco de subida.
+ */
 bool detect_rising_edge(TCRT_t* sensor, uint8_t current_state)
 {
 	bool rising = (sensor->lastReading == 0 && current_state == 1);
@@ -91,6 +118,13 @@ bool detect_rising_edge(TCRT_t* sensor, uint8_t current_state)
 	return rising;
 }
 
+/**
+ * @brief Calibra el sensor IR promediando un número de muestras.
+ *
+ * Utiliza el canal ADC asociado al sensor para obtener un umbral inicial.
+ *
+ * @param [in,out] sensor Puntero al sensor a calibrar.
+ */
 void calibrateIRSensor(TCRT_t* sensor)
 {
 	if (IS_FLAG_SET(sensor->flags, TCRT_NEW_VALUE)) {
@@ -115,6 +149,13 @@ void calibrateIRSensor(TCRT_t* sensor)
 	}
 }
 
+/**
+ * @brief Realiza una lectura filtrada del sensor TCRT.
+ *
+ * Acumula múltiples lecturas para aplicar un filtro promedio.
+ *
+ * @param [in,out] sensor Puntero al sensor a leer.
+ */
 void tcrt_read(TCRT_t* sensor)
 {
 	uint16_t lectura = tcrt_read_channel(sensor->channel);
@@ -132,6 +173,16 @@ void tcrt_read(TCRT_t* sensor)
 	}
 }
 
+/**
+ * @brief Determina si hay una caja presente frente al sensor.
+ *
+ * Utiliza el valor de umbral ajustado con histéresis para detectar presencia de objetos.
+ * También detecta flancos de subida/bajada y actualiza el estado del sensor.
+ *
+ * @param [in,out] sensor Puntero al sensor.
+ *
+ * @retval true Si se detecta una caja.
+ */
 bool tcrt_is_box_detected(TCRT_t* sensor)
 {
 	// Calcular el umbral ajustado con margen de histéresis

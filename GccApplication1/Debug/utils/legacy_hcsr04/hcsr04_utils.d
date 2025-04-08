@@ -16,7 +16,7 @@ utils/legacy_hcsr04/hcsr04_utils.d utils/legacy_hcsr04/hcsr04_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../utils/legacy_hcsr04/./../../main.h \
  ../utils/legacy_hcsr04/./../../utils/macros_utils.h \
- ../utils/legacy_hcsr04/./../../utils/../main.h \
+ ../utils/legacy_hcsr04/./../../utils/../types/bitmapType.h \
  ../utils/legacy_hcsr04/./../../types/bitmapType.h \
  ../utils/legacy_hcsr04/./../../types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
@@ -68,7 +68,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../utils/legacy_hcsr04/./../../utils/macros_utils.h:
 
-../utils/legacy_hcsr04/./../../utils/../main.h:
+../utils/legacy_hcsr04/./../../utils/../types/bitmapType.h:
 
 ../utils/legacy_hcsr04/./../../types/bitmapType.h:
 

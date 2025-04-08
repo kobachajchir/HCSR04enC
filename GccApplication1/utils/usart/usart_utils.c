@@ -11,7 +11,15 @@
 #include "./../../types/protocolTypes.h"
 
 /* USART Functions -----------------------------------------------------------*/
-// Función para inicializar el puerto serial (USART)
+/**
+ * @brief Inicializa el periférico USART con el baud rate especificado.
+ *
+ * Configura los registros UBRR0H y UBRR0L para establecer la velocidad.
+ * Habilita el transmisor, receptor y la interrupción de recepción.
+ * Establece el formato: 8 bits de datos, sin paridad, 1 bit de stop.
+ *
+ * @param [in] ubrr Valor UBRR calculado para el baud rate deseado.
+ */
 void USART_Init(uint16_t ubrr)
 {
 	// Configurar el baud rate
@@ -26,6 +34,16 @@ void USART_Init(uint16_t ubrr)
 }
 
 // Función para enviar un byte: Encola el byte y activa la interrupción de transmisión
+/*
+ * Función comentada: USART_putchar
+ *
+ * En caso de ser utilizada, esta función permitiría enviar un byte a través
+ * del buffer circular, activando la interrupción para transmitir.
+ *
+ * @param [in] c Byte a enviar.
+ * @param [in] stream Stream usado por la librería stdio.
+ * @retval 0 Si el byte fue encolado correctamente.
+ */
 // int USART_putchar(char c, FILE *stream) {
 // 	uint8_t next_indexW = (protocolService.indexW + 1) % PROTOCOL_BUFFER_SIZE;
 // 
@@ -44,6 +62,16 @@ void USART_Init(uint16_t ubrr)
 // }
 
 // Función bloqueante para enviar un byte por USART
+/**
+ * @brief Envía un carácter por USART de forma bloqueante.
+ *
+ * Espera a que el buffer de transmisión esté disponible antes de escribir el byte.
+ *
+ * @param [in] c Carácter a enviar.
+ * @param [in] stream Stream de salida usado por printf.
+ *
+ * @retval 0 Éxito al enviar.
+ */
 int USART_putchar_blocking(char c, FILE *stream) {
 	// Espera a que el registro de datos esté vacío (bit UDRE0 activo)
 	while (!(UCSR0A & (1 << UDRE0))) {
@@ -53,6 +81,16 @@ int USART_putchar_blocking(char c, FILE *stream) {
 	return 0;
 }
 
+/**
+ * @brief Lee un byte desde el buffer de recepción circular.
+ *
+ * Verifica si hay datos disponibles en el buffer y los retorna. En caso contrario,
+ * devuelve -1.
+ *
+ * @param [in] stream Stream de entrada (no se usa internamente).
+ *
+ * @retval Byte leído, o -1 si no hay datos disponibles.
+ */
 int USART_getchar(FILE *stream) {
 	// Verifica si hay datos disponibles
 	if (protocolService.indexR == protocolService.indexW) {

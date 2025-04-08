@@ -11,7 +11,14 @@
 #include <string.h>
 #include <avr/pgmspace.h>
 
-
+/**
+ * @brief Inicializa la estructura del servicio de protocolo.
+ *
+ * Esta función reinicia los índices del buffer circular de recepción,
+ * borra las banderas internas y limpia el paquete recibido.
+ *
+ * @param [in,out] service Puntero a la estructura del servicio de protocolo a inicializar.
+ */
 void initProtocolService(ProtocolService* service){
 	service->buffer[0] = NULL;
 	service->indexR = 0;
@@ -20,6 +27,15 @@ void initProtocolService(ProtocolService* service){
 	clear_receive_pck();
 }
 
+/**
+ * @brief Verifica la validez del encabezado del paquete.
+ *
+ * Calcula una suma ponderada de los primeros 4 bytes del buffer
+ * para determinar si el encabezado "UNER" es válido.
+ *
+ * @retval true Si el encabezado es válido.
+ * @retval false Si el encabezado no coincide con el esperado.
+ */
 bool verify_header() {
 	// Verificar si hay al menos 4 bytes disponibles
 	uint8_t available;
@@ -60,6 +76,15 @@ bool verify_header() {
 	}
 }
 
+/**
+ * @brief Procesa el buffer de protocolo buscando un encabezado válido.
+ *
+ * Si hay suficientes bytes disponibles y se detecta un encabezado válido,
+ * la función devuelve true para continuar con el procesamiento.
+ *
+ * @retval true Si se detectó un encabezado válido.
+ * @retval false Si no hay suficientes datos o el encabezado es inválido.
+ */
 bool process_protocol_buffer() {
 	uint8_t available;
 	if (protocolService.indexW >= protocolService.indexR) {
@@ -80,6 +105,12 @@ bool process_protocol_buffer() {
 	}
 }
 
+/**
+ * @brief Devuelve el comando de respuesta correspondiente a un comando recibido.
+ *
+ * @param [in] req Comando recibido.
+ * @retval Command Comando de respuesta correspondiente.
+ */
 Command getResponseCommand(Command req) {
 	uint8_t reqValue = (uint8_t)req;
 	uint8_t responseValue;
@@ -130,9 +161,23 @@ Command getResponseCommand(Command req) {
 	return (Command)responseValue;
 }
 
+/**
+ * @brief Limpia el contenido del paquete recibido.
+ *
+ * Borra todos los campos del `receivePck` para permitir recibir un nuevo paquete.
+ */
 void clear_receive_pck(){
 	memset(&protocolService.receivePck, 0, sizeof(protocolService.receivePck));
 }
+
+/**
+ * @brief Calcula el checksum del payload recibido.
+ *
+ * Realiza una operación XOR sobre el encabezado, longitud, token, comando
+ * y todos los bytes del payload para verificar la integridad de los datos.
+ *
+ * @retval uint8_t Checksum calculado.
+ */
 
 uint8_t calculatePayload() {
 	uint8_t checksum = 0;  // Inicializa el checksum en 0
@@ -155,13 +200,22 @@ uint8_t calculatePayload() {
 	// XOR con cada byte del PAYLOAD (cantidad EXACTA: LENGTH bytes)
 	for (int i = 0; i < protocolService.receivePck.length; i++) { //HACK: Aca puse un =, tendria que checkear el cks, pero como lo adelanta 1, es valido
 		uint8_t payload_byte = *(protocolService.receivePck.payload + i);
-		printf("Byte %d: 0x%02X (Decimal: %d)\n", i, payload_byte, payload_byte);
+		printf_P(PSTR("Byte %d: 0x%02X (Decimal: %d)\n"), i, payload_byte, payload_byte);
 		checksum ^= payload_byte;
 	}
 	protocolService.receivePck.checksum = *(protocolService.receivePck.payload + protocolService.receivePck.length);
 	return checksum;
 }
 
+/**
+ * @brief Crea un paquete en la estructura receivePck del servicio de protocolo.
+ *
+ * Asigna encabezado, longitud, token, comando, payload y checksum.
+ *
+ * @param [in] cmd Comando del paquete.
+ * @param [in] payload Puntero al buffer con los datos del payload.
+ * @param [in] payloadLength Longitud del payload en bytes.
+ */
 void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength) {
 	// Fill the header with 'UNER'
 	protocolService.receivePck.header[0] = 'U';
@@ -209,6 +263,15 @@ void createPck(uint8_t cmd, uint8_t* payload, uint8_t payloadLength) {
 	protocolService.receivePck.checksum = checksum;
 }
 
+/**
+ * @brief Valida el contenido del paquete recibido.
+ *
+ * Extrae cada campo del buffer circular (longitud, token, comando, payload, checksum)
+ * y verifica la validez del paquete.
+ *
+ * @retval true Si el paquete es válido.
+ * @retval false Si el paquete es inválido.
+ */
 bool validatePck(){
 	// Se asume que el HEADER ("UNER") ya fue procesado o se encuentra en las primeras 4 posiciones
 	// y que protocolService.indexR apunta a la última posición del HEADER (índice 3).
@@ -260,6 +323,14 @@ bool validatePck(){
 	}
 }
 
+/**
+ * @brief Ejecuta la acción correspondiente al comando recibido.
+ *
+ * Interpreta el comando y actualiza el estado del sistema o las configuraciones,
+ * además de preparar una respuesta si corresponde.
+ *
+ * @param [in] cmd Comando a ejecutar.
+ */
 void doAction(uint8_t cmd){
 	switch(cmd){
 		case CMD_ALIVE:
@@ -389,6 +460,14 @@ void doAction(uint8_t cmd){
 	}
 }
 
+/**
+ * @brief Ejecuta la tarea principal del protocolo.
+ *
+ * Procesa el estado del protocolo, verifica si hay datos nuevos,
+ * valida paquetes, dispara acciones y maneja las respuestas.
+ *
+ * @retval uint8_t Reservado (sin uso actual).
+ */
 uint8_t protocolTask(){
 	if (NIBBLEH_GET_STATE(protocolService.flags) == PROTOSERV_IDLE && IS_FLAG_SET(protocolService.flags, PROTOSERV_CHECKDATA) && !IS_FLAG_SET(protocolService.flags, PROTOSERV_PROCESSING)) {
 		if (process_protocol_buffer()) {
@@ -453,6 +532,15 @@ uint8_t protocolTask(){
 	}
 }
 
+/**
+ * @brief Crea el payload de respuesta según el comando dado.
+ *
+ * Llena el buffer de transmisión con el contenido adecuado según
+ * el comando de respuesta solicitado.
+ *
+ * @param [in] cmd Comando de respuesta.
+ * @retval uint8_t Longitud del payload generado.
+ */
 uint8_t create_payload(Command cmd) {
 	uint8_t payload_length = 0;
 	// Posición de inicio en el buffer (donde se escribirá el payload)
@@ -620,6 +708,13 @@ uint8_t create_payload(Command cmd) {
 	return payload_length;
 }
 
+/**
+ * @brief Imprime un mensaje por consola según el comando recibido.
+ *
+ * Solo con fines de depuración, informa qué comando se está procesando.
+ *
+ * @param [in] cmd Comando recibido.
+ */
 void printCommandMessage(Command cmd) {
 	switch(cmd) {
 		case CMD_ALIVE:

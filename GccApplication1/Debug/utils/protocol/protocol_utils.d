@@ -1,10 +1,10 @@
 utils/protocol/protocol_utils.d utils/protocol/protocol_utils.o: \
  ../utils/protocol/protocol_utils.c ../utils/protocol/../../main.h \
  ../utils/protocol/../../utils/macros_utils.h \
- ../utils/protocol/../../utils/../main.h \
- ../utils/protocol/../../types/bitmapType.h \
+ ../utils/protocol/../../utils/../types/bitmapType.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
+ ../utils/protocol/../../types/bitmapType.h \
  ../utils/protocol/../../types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
@@ -43,13 +43,13 @@ utils/protocol/protocol_utils.d utils/protocol/protocol_utils.o: \
 
 ../utils/protocol/../../utils/macros_utils.h:
 
-../utils/protocol/../../utils/../main.h:
-
-../utils/protocol/../../types/bitmapType.h:
+../utils/protocol/../../utils/../types/bitmapType.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
+
+../utils/protocol/../../types/bitmapType.h:
 
 ../utils/protocol/../../types/ultrasonicDetectorType.h:
 

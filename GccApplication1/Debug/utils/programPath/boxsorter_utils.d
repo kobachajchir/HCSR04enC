@@ -1,10 +1,10 @@
 utils/programPath/boxsorter_utils.d utils/programPath/boxsorter_utils.o: \
  ../utils/programPath/boxsorter_utils.c ../utils/programPath/../../main.h \
  ../utils/programPath/../../utils/macros_utils.h \
- ../utils/programPath/../../utils/../main.h \
- ../utils/programPath/../../types/bitmapType.h \
+ ../utils/programPath/../../utils/../types/bitmapType.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
+ ../utils/programPath/../../types/bitmapType.h \
  ../utils/programPath/../../types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
@@ -43,13 +43,13 @@ utils/programPath/boxsorter_utils.d utils/programPath/boxsorter_utils.o: \
 
 ../utils/programPath/../../utils/macros_utils.h:
 
-../utils/programPath/../../utils/../main.h:
-
-../utils/programPath/../../types/bitmapType.h:
+../utils/programPath/../../utils/../types/bitmapType.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
+
+../utils/programPath/../../types/bitmapType.h:
 
 ../utils/programPath/../../types/ultrasonicDetectorType.h:
 

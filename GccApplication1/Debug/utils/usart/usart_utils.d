@@ -16,7 +16,7 @@ utils/usart/usart_utils.d utils/usart/usart_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../utils/usart/./../../main.h \
  ../utils/usart/./../../utils/macros_utils.h \
- ../utils/usart/./../../utils/../main.h \
+ ../utils/usart/./../../utils/../types/bitmapType.h \
  ../utils/usart/./../../types/bitmapType.h \
  ../utils/usart/./../../types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
@@ -68,7 +68,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../utils/usart/./../../utils/macros_utils.h:
 
-../utils/usart/./../../utils/../main.h:
+../utils/usart/./../../utils/../types/bitmapType.h:
 
 ../utils/usart/./../../types/bitmapType.h:
 

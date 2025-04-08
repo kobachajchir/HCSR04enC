@@ -7,7 +7,7 @@ utils/eeprom/eeprom_utils.d utils/eeprom/eeprom_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  ../utils/eeprom/../../main.h ../utils/eeprom/../../utils/macros_utils.h \
- ../utils/eeprom/../../utils/../main.h \
+ ../utils/eeprom/../../utils/../types/bitmapType.h \
  ../utils/eeprom/../../types/bitmapType.h \
  ../utils/eeprom/../../types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
@@ -51,7 +51,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../utils/eeprom/../../utils/macros_utils.h:
 
-../utils/eeprom/../../utils/../main.h:
+../utils/eeprom/../../utils/../types/bitmapType.h:
 
 ../utils/eeprom/../../types/bitmapType.h:
 

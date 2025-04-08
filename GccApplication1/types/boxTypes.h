@@ -55,7 +55,6 @@ typedef struct {
 typedef struct {
 	uint8_t height_mm;     // Altura medida
 	Byte_Flag_Struct flags; //Nibble H tiene el tipo, Nibble L tiene las banderas
-	box_state_t state;
 } box_t;
 
 

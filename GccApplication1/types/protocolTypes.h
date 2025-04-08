@@ -1,15 +1,28 @@
-/*
- * protocolType.h
+/**
+ * @file protocolType.h
+ * @brief Define los tipos de datos relacionados al protocolo de comunicación serial.
+ * 
+ * Este protocolo utiliza una estructura de tramas con cabecera 'UNER', longitud,
+ * token separador, comando, payload y checksum para verificación.
+ * 
+ * Define la máquina de estados del protocolo, los comandos disponibles y la estructura de servicio.
  *
- * Created: 30-Mar-25 7:47:19 PM
- *  Author: kobac
- */ 
+ * @author kobac
+ * @date 30-Mar-25
+ */
 
 /*
-CMD_GET_CONFIG 55 4E 45 52 00 3A C1 F7
-CMD_SET_CONFIG 55 4E 45 52 0B 3A C0 30 3A 43 2D 31 3A 42 2D 32 3A 41 B4 //0:C-1:B-2:A
-CMD_GET_REPOSITORY 55 4E 45 52 00 3A F3 C5
-CMD_GET_FIRMWARE 55 4E 45 52 00 3A F0 C6
+CMD_ALIVE: 55 4E 45 52 00 3A A0 96
+CMD_START: 55 4E 45 52 01 3A B1 01 87
+CMD_STOP: 55 4E 45 52 01 3A B2 00 85
+CMD_SET_CONFIG: 55 4E 45 52 0B 3A C0 30 3A 43 2D 31 3A 42 2D 32 3A 41 B4 //PAYLOAD: 30 3A 43 2D 31 3A 42 2D 32 3A 41 ? equivale a la cadena "0:C-1:B-2:A"
+CMD_GET_CONFIG: 55 4E 45 52 00 3A C1 F7
+CMD_GET_FIRMWARE: 55 4E 45 52 00 3A F0 C6
+CMD_GET_STATS: 55 4E 45 52 00 3A F1 C7
+CMD_CLEAR_STATS: 55 4E 45 52 00 3A F2 C4
+CMD_GET_REPOSITORY: 55 4E 45 52 00 3A F3 C5
+CMD_CONFIG_RESET: 55 4E 45 52 00 3A F4 C2
+CMD_INVALID: 55 4E 45 52 00 3A E0 D6
 */
 
 
@@ -42,6 +55,12 @@ CMD_GET_FIRMWARE 55 4E 45 52 00 3A F0 C6
 #define PROTOSERV_RESET BIT2_MASK
 #define PROTOSERV_CREATE_PCK BIT3_MASK
 
+/**
+ * @struct ProtocolFrame
+ * @brief Representa una trama de comunicación del protocolo.
+ *
+ * Contiene la cabecera, longitud del payload, token, comando, puntero al payload y checksum.
+ */
 typedef struct {
 	uint8_t header[4];           // HEADER (4 bytes)
 	uint8_t length;              // LENGTH (1 byte)
@@ -51,6 +70,10 @@ typedef struct {
 	uint8_t checksum;            // CHECKSUM (1 byte)
 } ProtocolFrame;
 
+/**
+ * @enum Command
+ * @brief Enum que contiene todos los comandos del protocolo, incluyendo comandos y sus respuestas.
+ */
 typedef enum {
 	CMD_RESPONSE_ALIVE           = 0x00, // Response: Alive confirmation
 	CMD_RESPONSE_START           = 0x01, // Response for start command
@@ -76,12 +99,21 @@ typedef enum {
 	// Add other commands as needed
 } Command;
 
-
+/**
+ * @struct CommandMap
+ * @brief Estructura para mapear comandos con sus respuestas correspondientes.
+ */
 typedef struct {
 	Command request;
 	Command response;
 } CommandMap;
 
+/**
+ * @struct ProtocolService
+ * @brief Estructura que maneja el estado del servicio de protocolo serial.
+ *
+ * Incluye buffer circular, índices de lectura/escritura, flags de control y la trama recibida.
+ */
 typedef struct {
 	volatile uint8_t indexW;
 	volatile uint8_t indexR;

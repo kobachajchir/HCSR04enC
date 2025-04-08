@@ -67,11 +67,11 @@ EEMEM Config_t eepromConfig;
 
 /* Function prototypes -------------------------------------------------------*/
 void printfWrapper(const char* message);
-void timer1_init();
-void timer2_init();
-void gpio_pins_init();
+void timer1_init(void);
+void timer2_init(void);
+static inline void gpio_pins_init(void);
 static inline void buttonTask(void);
-static inline bool calibrateAllIRSensors();
+static inline bool calibrateAllIRSensors(void);
 
 /* END Function prototypes ---------------------------------------------------*/
 
@@ -186,7 +186,7 @@ ISR(TIMER1_COMPA_vect) {
 ISR(TIMER1_COMPB_vect) {
 	PORTB &= ~(1 << servosArray[current_servo]->pin);
 	if (IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_PUSH) &&
-	IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_RESET)) {s
+	IS_FLAG_SET(servosArray[current_servo]->flags, SERVO_RESET)) {
 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_RESET);
 		CLEAR_FLAG(servosArray[current_servo]->flags, SERVO_PUSH);
 		servosArray[current_servo]->angle = SERVO_IDLE_ANGLE;
@@ -195,19 +195,19 @@ ISR(TIMER1_COMPB_vect) {
 			SET_FLAG(salidaA.flags, OUTPUT_READY);
 			CLEAR_FLAG(salidaA.flags, OUTPUT_BUSY);
 			if(DEBUG_FLAGS_SERVOS){
-				printf_P(PSTR("Volvio a posicion IDLE A\n"), servosArray[i]->pin);
+				printf_P(PSTR("Volvio a posicion IDLE A\n"));
 			}
 		}else if(current_servo == 1){
 			SET_FLAG(salidaB.flags, OUTPUT_READY);
 			CLEAR_FLAG(salidaB.flags, OUTPUT_BUSY);
 			if(DEBUG_FLAGS_SERVOS){
-				printf_P(PSTR("Volvio a posicion IDLE B\n"), servosArray[i]->pin);
+				printf_P(PSTR("Volvio a posicion IDLE B\n"));
 			}
 		}else if(current_servo == 2){
 			SET_FLAG(salidaC.flags, OUTPUT_READY);
 			CLEAR_FLAG(salidaC.flags, OUTPUT_BUSY);
 			if(DEBUG_FLAGS_SERVOS){
-				printf_P(PSTR("Volvio a posicion IDLE C\n"), servosArray[i]->pin);
+				printf_P(PSTR("Volvio a posicion IDLE C\n"));
 			}
 		}
 	}

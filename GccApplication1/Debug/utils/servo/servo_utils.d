@@ -16,7 +16,7 @@ utils/servo/servo_utils.d utils/servo/servo_utils.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../utils/servo/./../../main.h \
  ../utils/servo/./../../utils/macros_utils.h \
- ../utils/servo/./../../utils/../main.h \
+ ../utils/servo/./../../utils/../types/bitmapType.h \
  ../utils/servo/./../../types/bitmapType.h \
  ../utils/servo/./../../types/ultrasonicDetectorType.h \
  D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
@@ -68,7 +68,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../utils/servo/./../../utils/macros_utils.h:
 
-../utils/servo/./../../utils/../main.h:
+../utils/servo/./../../utils/../types/bitmapType.h:
 
 ../utils/servo/./../../types/bitmapType.h:
 
