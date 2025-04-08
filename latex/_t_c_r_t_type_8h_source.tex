@@ -1,0 +1,37 @@
+\doxysection{TCRTType.\+h}
+\label{_t_c_r_t_type_8h_source}\index{GccApplication1/types/TCRTType.h@{GccApplication1/types/TCRTType.h}}
+\textbf{ Ir a la documentación de este archivo.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ TCRTTYPE\_H\_}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ TCRTTYPE\_H\_}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}bitmapType.h"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00027\ \ \ \ \ Byte\_Flag\_Struct\ flags;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ uint16\_t\ ADCConvertedValue;\ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ uint16\_t\ threshold;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ uint16\_t\ lastReading;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ uint8\_t\ channel;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ uint8\_t\ pin;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ uint8\_t\ calibrationCounter;\ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ uint32\_t\ filterAccumulator;\ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ uint8\_t\ hysteresis\_percent;\ \ \ \ }
+\DoxyCodeLine{00036\ \}\ TCRT\_t;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ TCRT\_ENABLED\ BIT0\_MASK}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ TCRT\_EDGE\_RISING\ BIT1\_MASK}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ TCRT\_CALIBRATING\ BIT2\_MASK}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ TCRT\_NEW\_VALUE\ BIT3\_MASK}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ TCRT\_STATUS\_IDLE\ 0}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ TCRT\_READ\ 1}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ TCRT\_COUNTED\ 2}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ TCRT\_DEACTIVATED\ 3}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ TCRTTYPE\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,93 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/eeprom/eeprom\+\_\+utils.h}
+\label{eeprom__utils_8h}\index{GccApplication1/utils/eeprom/eeprom\_utils.h@{GccApplication1/utils/eeprom/eeprom\_utils.h}}
+{\ttfamily \#include "{}../../types/config\+Type.\+h"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ save\+Configuration\+RAM} (const \textbf{ Config\+\_\+t} $\ast$config)
+\begin{DoxyCompactList}\small\item\em Guarda la configuración en EEPROM desde una copia en RAM. \end{DoxyCompactList}\item 
+bool \textbf{ exist\+Config} (void)
+\begin{DoxyCompactList}\small\item\em Verifica si existe una configuración válida en la EEPROM. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ calculate\+\_\+config\+\_\+checksum} (\textbf{ Config\+\_\+t} $\ast$config)
+\begin{DoxyCompactList}\small\item\em Calcula el checksum de una estructura de configuración. \end{DoxyCompactList}\item 
+void \textbf{ load\+Configuration\+RAM} (\textbf{ Config\+\_\+t} $\ast$config)
+\begin{DoxyCompactList}\small\item\em Carga la configuración desde EEPROM a una estructura en RAM. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DocumentaciÃ³n de funciones}
+\index{eeprom\_utils.h@{eeprom\_utils.h}!calculate\_config\_checksum@{calculate\_config\_checksum}}
+\index{calculate\_config\_checksum@{calculate\_config\_checksum}!eeprom\_utils.h@{eeprom\_utils.h}}
+\doxysubsubsection{calculate\_config\_checksum()}
+{\footnotesize\ttfamily \label{eeprom__utils_8h_ad8c2bce82470c5fcbdc89d8b0562f5c5} 
+uint8\+\_\+t calculate\+\_\+config\+\_\+checksum (\begin{DoxyParamCaption}\item[{\textbf{ Config\+\_\+t} $\ast$}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Calcula el checksum de una estructura de configuración. 
+
+Realiza una operación XOR entre los valores de salidaA, salidaB y salidaC.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em config} & Puntero a la configuración a verificar. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em Checksum} & calculado como XOR de los campos de salida. \\
+\hline
+\end{DoxyRetVals}
+\index{eeprom\_utils.h@{eeprom\_utils.h}!existConfig@{existConfig}}
+\index{existConfig@{existConfig}!eeprom\_utils.h@{eeprom\_utils.h}}
+\doxysubsubsection{existConfig()}
+{\footnotesize\ttfamily \label{eeprom__utils_8h_aec28892d3def34f6907982f144240001} 
+bool exist\+Config (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Verifica si existe una configuración válida en la EEPROM. 
+
+Comprueba si los campos son distintos de 0x\+FF y si el checksum es correcto.
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em true} & Si la configuración es válida. \\
+\hline
+{\em false} & Si la configuración no está presente o el checksum no coincide. \\
+\hline
+\end{DoxyRetVals}
+\index{eeprom\_utils.h@{eeprom\_utils.h}!loadConfigurationRAM@{loadConfigurationRAM}}
+\index{loadConfigurationRAM@{loadConfigurationRAM}!eeprom\_utils.h@{eeprom\_utils.h}}
+\doxysubsubsection{loadConfigurationRAM()}
+{\footnotesize\ttfamily \label{eeprom__utils_8h_a2e5a84e7e2ff1029f1cba0ae11ffb9b5} 
+void load\+Configuration\+RAM (\begin{DoxyParamCaption}\item[{\textbf{ Config\+\_\+t} $\ast$}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Carga la configuración desde EEPROM a una estructura en RAM. 
+
+Si el puntero es válido, lee el bloque completo desde EEPROM.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ out}}  & {\em config} & Puntero a la estructura donde se cargará la configuración. \\
+\hline
+\end{DoxyParams}
+\index{eeprom\_utils.h@{eeprom\_utils.h}!saveConfigurationRAM@{saveConfigurationRAM}}
+\index{saveConfigurationRAM@{saveConfigurationRAM}!eeprom\_utils.h@{eeprom\_utils.h}}
+\doxysubsubsection{saveConfigurationRAM()}
+{\footnotesize\ttfamily \label{eeprom__utils_8h_a6812f46ec5406eced3bc14d47b7bef5f} 
+void save\+Configuration\+RAM (\begin{DoxyParamCaption}\item[{const \textbf{ Config\+\_\+t} $\ast$}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Guarda la configuración en EEPROM desde una copia en RAM. 
+
+Copia la estructura recibida, calcula su checksum y la guarda usando {\ttfamily eeprom\+\_\+update\+\_\+block}.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em config} & Puntero a la configuración en RAM que se desea guardar. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,653 @@
+\doxysection{Referencia del archivo Gcc\+Application1/main.c}
+\label{main_8c}\index{GccApplication1/main.c@{GccApplication1/main.c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$avr/pgmspace.\+h$>$}\newline
+{\ttfamily \#include $<$avr/eeprom.\+h$>$}\newline
+{\ttfamily \#include "{}main.\+h"{}}\newline
+{\ttfamily \#include "{}utils/macros\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}types/bitmap\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}types/sorter\+System\+Types.\+h"{}}\newline
+{\ttfamily \#include "{}utils/usart/usart\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}utils/servo/servo\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}types/ultrasonic\+Detector\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}types/\+TCRTType.\+h"{}}\newline
+{\ttfamily \#include "{}types/config\+Type.\+h"{}}\newline
+{\ttfamily \#include "{}utils/program\+Path/boxsorter\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}utils/protocol/protocol\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}ultrasonic.\+h"{}}\newline
+{\ttfamily \#include "{}ultrasonic\+\_\+hal.\+h"{}}\newline
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ printf\+Wrapper} (const char $\ast$message)
+\begin{DoxyCompactList}\small\item\em Wrapper para imprimir mensajes por consola. \end{DoxyCompactList}\item 
+void \textbf{ timer1\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Inicializa el Timer 1 (timer1\+\_\+init) \end{DoxyCompactList}\item 
+void \textbf{ timer2\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Inicializa los pines GPIO del sistema (gpio\+\_\+pins\+\_\+init) \end{DoxyCompactList}\item 
+static void \textbf{ gpio\+\_\+pins\+\_\+init} ()
+\begin{DoxyCompactList}\small\item\em Inicializa los pines GPIO del sistema. \end{DoxyCompactList}\item 
+static void \textbf{ button\+Task} (void)
+\begin{DoxyCompactList}\small\item\em Tarea asociada al botón de entrada. \end{DoxyCompactList}\item 
+static bool \textbf{ calibrate\+All\+IRSensors} ()
+\begin{DoxyCompactList}\small\item\em Calibra todos los sensores IR habilitados. \end{DoxyCompactList}\item 
+\textbf{ ISR} (TIMER1\+\_\+\+CAPT\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em ISR del evento de captura del Timer1 para el sensor ultrasónico. \end{DoxyCompactList}\item 
+\textbf{ ISR} (TIMER1\+\_\+\+OVF\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em ISR de desbordamiento del Timer1. \end{DoxyCompactList}\item 
+\textbf{ ISR} (TIMER1\+\_\+\+COMPA\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em ISR del Timer1 Compare Match A. \end{DoxyCompactList}\item 
+\textbf{ ISR} (TIMER1\+\_\+\+COMPB\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em ISR del Timer1 Compare Match B. \end{DoxyCompactList}\item 
+\textbf{ ISR} (USART\+\_\+\+RX\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em ISR de recepción por USART. \end{DoxyCompactList}\item 
+\textbf{ ISR} (USART\+\_\+\+UDRE\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em ISR de transmisión por USART (UDRE). \end{DoxyCompactList}\item 
+\textbf{ ISR} (TIMER2\+\_\+\+COMPA\+\_\+vect)
+\begin{DoxyCompactList}\small\item\em ISR de comparación A del Timer 2 (TIMER2\+\_\+\+COMPA\+\_\+vect) \end{DoxyCompactList}\item 
+int \textbf{ main} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ bandera}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ bandera2}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ bandera3}
+\item 
+volatile uint16\+\_\+t \textbf{ echo\+\_\+init\+\_\+time} = 0
+\item 
+volatile uint16\+\_\+t \textbf{ echo\+\_\+finish\+\_\+time} = 0
+\item 
+volatile uint16\+\_\+t \textbf{ distance\+\_\+mm} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ servo\+\_\+counter} = 0
+\item 
+volatile uint32\+\_\+t \textbf{ pulse\+\_\+width\+\_\+A} = 3000\+UL
+\item 
+volatile uint16\+\_\+t \textbf{ target\+\_\+tick\+\_\+A} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ ovf\+\_\+count} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ wait\+\_\+time} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ btn\+\_\+pressed\+\_\+time} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ echo\+\_\+state} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ diez\+Ms\+Counter} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ veintems\+\_\+counter} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ trigger\+\_\+timeout\+\_\+counter} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ servo\+\_\+active\+\_\+counter} = 0
+\item 
+volatile uint8\+\_\+t \textbf{ transmit\+\_\+counter}
+\item 
+uint8\+\_\+t \textbf{ do\+Action\+Cmd}
+\item 
+uint8\+\_\+t \textbf{ servo\+AVal} = 0
+\item 
+ultrasonic\+\_\+t \textbf{ ultra\+Sensor}
+\item 
+\textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t} \textbf{ hcsr04\+Detector}
+\item 
+\textbf{ TCRT\+\_\+t} \textbf{ IR\+\_\+A}
+\item 
+\textbf{ TCRT\+\_\+t} \textbf{ IR\+\_\+B}
+\item 
+\textbf{ TCRT\+\_\+t} \textbf{ IR\+\_\+C}
+\item 
+\textbf{ TCRT\+\_\+t} \textbf{ IR\+\_\+U}
+\item 
+\textbf{ servo\+\_\+t} \textbf{ servoA}
+\item 
+\textbf{ servo\+\_\+t} \textbf{ servoB}
+\item 
+\textbf{ servo\+\_\+t} \textbf{ servoC}
+\item 
+volatile \textbf{ servo\+\_\+t} $\ast$ \textbf{ servos\+Array} [3]
+\item 
+volatile uint8\+\_\+t \textbf{ current\+\_\+servo} = 0
+\item 
+\textbf{ output\+\_\+t} \textbf{ salidaA}
+\item 
+\textbf{ output\+\_\+t} \textbf{ salidaB}
+\item 
+\textbf{ output\+\_\+t} \textbf{ salidaC}
+\item 
+\textbf{ sorter\+\_\+system\+\_\+t} \textbf{ Sorter\+System}
+\item 
+\textbf{ Protocol\+Service} \textbf{ protocol\+Service}
+\item 
+\textbf{ Config\+\_\+t} \textbf{ current\+Config}
+\item 
+EEMEM \textbf{ Config\+\_\+t} \textbf{ eeprom\+Config}
+\item 
+FILE \textbf{ mystdout} = FDEV\+\_\+\+SETUP\+\_\+\+STREAM(\textbf{ USART\+\_\+putchar\+\_\+blocking}, NULL, \+\_\+\+FDEV\+\_\+\+SETUP\+\_\+\+WRITE)
+\item 
+FILE \textbf{ mystdin} = FDEV\+\_\+\+SETUP\+\_\+\+STREAM(NULL, \textbf{ USART\+\_\+getchar}, \+\_\+\+FDEV\+\_\+\+SETUP\+\_\+\+READ)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{DocumentaciÃ³n de funciones}
+\index{main.c@{main.c}!buttonTask@{buttonTask}}
+\index{buttonTask@{buttonTask}!main.c@{main.c}}
+\doxysubsubsection{buttonTask()}
+{\footnotesize\ttfamily \label{main_8c_a0cb509803ce847466e3c3604a4af1a29} 
+static void button\+Task (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Tarea asociada al botón de entrada. 
+
+Verifica si el botón ha sido presionado y soltado, y determina si la duración fue suficiente. Si se detecta una presión larga (con overflow del contador) también es aceptada como válida.
+
+\begin{DoxyNote}{Nota}
+Modifica las banderas {\ttfamily BTN\+\_\+\+PRESSED}, {\ttfamily BTN\+\_\+\+RELEASED} y {\ttfamily BTN\+\_\+\+OVF}.
+
+Esta función está declarada como {\ttfamily inline} para optimizar el manejo rápido de eventos relacionados al botón, que puede ser llamado con alta frecuencia dentro de un ciclo de tareas. 
+\end{DoxyNote}
+\index{main.c@{main.c}!calibrateAllIRSensors@{calibrateAllIRSensors}}
+\index{calibrateAllIRSensors@{calibrateAllIRSensors}!main.c@{main.c}}
+\doxysubsubsection{calibrateAllIRSensors()}
+{\footnotesize\ttfamily \label{main_8c_a9113131aefbfe0c08577bde786c89596} 
+static bool calibrate\+All\+IRSensors (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calibra todos los sensores IR habilitados. 
+
+Esta función inicia la calibración de los sensores IR (A, B, C, U) que estén marcados como habilitados. La calibración se realiza una sola vez gracias a un flag interno {\ttfamily init\+\_\+done}. La función debe ser llamada periódicamente hasta que retorne {\ttfamily true}.
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em true} & Si todos los sensores han terminado su calibración. \\
+\hline
+{\em false} & Si alguno aún está en proceso de calibración.\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Nota}
+Esta función está declarada como {\ttfamily inline} para permitir su expansión directa en el lugar donde se use, lo cual mejora el rendimiento en este tipo de funciónes que son solo para estructurar el codigo. 
+\end{DoxyNote}
+\index{main.c@{main.c}!gpio\_pins\_init@{gpio\_pins\_init}}
+\index{gpio\_pins\_init@{gpio\_pins\_init}!main.c@{main.c}}
+\doxysubsubsection{gpio\_pins\_init()}
+{\footnotesize\ttfamily \label{main_8c_a7e1b187dc53f7dc2a9137c3fb5ba41e8} 
+static void gpio\+\_\+pins\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Inicializa los pines GPIO del sistema. 
+
+Configura los pines de entrada/salida para los periféricos como LED, botón, trigger ultrasónico, pines de servo y sensores TCRT. También se asegura de poner ciertos pines en bajo por seguridad.
+
+\begin{DoxyNote}{Nota}
+Esta función está declarada como {\ttfamily inline} porque se espera que se llame una única vez al inicio del programa, y no tiene sentido agregarle sobrecarga de llamada. 
+\end{DoxyNote}
+\index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{ISR()\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily \label{main_8c_a5da59e05fa5ade4be7c7656aee78291a} 
+ISR (\begin{DoxyParamCaption}\item[{TIMER1\+\_\+\+CAPT\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+
+
+ISR del evento de captura del Timer1 para el sensor ultrasónico. 
+
+Esta rutina de servicio de interrupción se invoca cuando se produce un evento de captura (TIMER1\+\_\+\+CAPT\+\_\+vect). ~\newline
+ Según el estado del sensor ultrasónico (almacenado en la variable global {\ttfamily ultra\+Sensor}), la ISR realiza\+:
+\begin{DoxyItemize}
+\item {\bfseries{ULTRA\+\_\+\+WAIT\+\_\+\+RISING\+:}} ~\newline
+ Si la bandera {\ttfamily ECHO\+\_\+\+RISING} está activa, se guarda el tiempo inicial de eco en {\ttfamily echo\+\_\+init\+\_\+time} usando el valor de ICR1 sumado al número de desbordamientos ({\ttfamily ovf\+\_\+count $\ast$ 65536UL}), y se limpia la bandera.
+\item {\bfseries{ULTRA\+\_\+\+WAIT\+\_\+\+FALLING\+:}} ~\newline
+ Se guarda el tiempo final de eco en {\ttfamily echo\+\_\+finish\+\_\+time} (calculado de forma similar) y se activa la bandera {\ttfamily ECHO\+\_\+\+RECEIVED} para indicar que se recibió la señal completa.
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Nota}
+Se utilizan variables globales como {\ttfamily ultra\+Sensor} y {\ttfamily ovf\+\_\+count}.
+\end{DoxyNote}
+@ret\+Val No aplica (ISR). \index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{ISR()\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily \label{main_8c_ad39420cdd896dd12c68e36313139d0a5} 
+ISR (\begin{DoxyParamCaption}\item[{TIMER1\+\_\+\+COMPA\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+
+
+ISR del Timer1 Compare Match A. 
+
+Programa la siguiente interrupción cada 20 ms para manejar el ciclo completo de actualización de servos. Recorre todos los servos y ajusta el pulso de control según su estado. Si el servo está en modo "{}push"{}, se le asigna un pulso máximo. Si no, se calcula el pulso a partir del ángulo.
+
+\begin{DoxyNote}{Nota}
+Marca {\ttfamily IR\+\_\+\+READ\+\_\+\+INTERRUPT = 1} para indicar que debe procesarse lectura IR. Solo activa el pin del primer servo en la lista, programando su apagado mediante OCR1B.
+\end{DoxyNote}
+@ret\+Val No aplica (ISR).
+
+\begin{DoxySeeAlso}{Ver tambiÃ©n}
+\doxyref{calculate\+\_\+angle\+\_\+pulse\+Us}{pÃ¡g.}{servo__utils_8c_a9be00cc746a4b23036719dce077dd2f4} 
+\end{DoxySeeAlso}
+\index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{ISR()\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily \label{main_8c_a317c504c8745a1256efed69e0dbf6e66} 
+ISR (\begin{DoxyParamCaption}\item[{TIMER1\+\_\+\+COMPB\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+
+
+ISR del Timer1 Compare Match B. 
+
+Se encarga de apagar el pin del servo actualmente activo y actualizar su estado si estaba en modo de "{}push"{} con "{}reset"{}. Luego avanza al siguiente servo activo y configura su señal PWM correspondiente en el mismo frame de 20 ms.
+
+\begin{DoxyNote}{Nota}
+Al volver de un push, se limpia el estado y se posiciona el servo en el ángulo idle. También se liberan las flags OUTPUT\+\_\+\+BUSY y se activa OUTPUT\+\_\+\+READY en la salida correspondiente.
+\end{DoxyNote}
+@ret\+Val No aplica (ISR).
+
+\begin{DoxySeeAlso}{Ver tambiÃ©n}
+\doxyref{calculate\+\_\+angle\+\_\+pulse\+Us}{pÃ¡g.}{servo__utils_8c_a9be00cc746a4b23036719dce077dd2f4} 
+\end{DoxySeeAlso}
+\index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{ISR()\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily \label{main_8c_ab16889ae984b9b798989a0d239283cac} 
+ISR (\begin{DoxyParamCaption}\item[{TIMER1\+\_\+\+OVF\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+
+
+ISR de desbordamiento del Timer1. 
+
+Esta rutina de interrupción se ejecuta cada vez que el Timer1 se desborda (TIMER1\+\_\+\+OVF\+\_\+vect). ~\newline
+ Incrementa el contador global {\ttfamily ovf\+\_\+count}, que se utiliza junto con {\ttfamily ICR1} para calcular el tiempo total de captura en aplicaciones como medición con sensor ultrasónico.
+
+\begin{DoxyNote}{Nota}
+No recibe parámetros. Utiliza la variable global {\ttfamily ovf\+\_\+count}.
+\end{DoxyNote}
+@ret\+Val No aplica (ISR). \index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{ISR()\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily \label{main_8c_a5686c229bdef50123688ab6cb1404230} 
+ISR (\begin{DoxyParamCaption}\item[{TIMER2\+\_\+\+COMPA\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+
+
+ISR de comparación A del Timer 2 (TIMER2\+\_\+\+COMPA\+\_\+vect) 
+
+Rutina de interrupción que se ejecuta cada 10 ms. Controla el proceso completo del sensor ultrasónico\+: el pulso de trigger, el tiempo de espera por el echo, el restablecimiento del trigger, y maneja el tiempo de activación de los servos, así como la gestión de flags de los sensores TCRT.
+
+
+\begin{DoxyItemize}
+\item Activa/desactiva el pulso de trigger del sensor ultrasónico.
+\item Maneja los timeout de echo y tiempo de espera entre triggers de 60ms.
+\item Actualiza flags para la lectura de sensores IR (TCRT).
+\item Gestiona el tiempo de activación (pulsos) de los servos y sus flags.
+\item Maneja la lectura del botón y sus estados de desbordamiento.
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Nota}
+Esta rutina se ejecuta solo si {\ttfamily TIMER2\+\_\+\+ACTIVE} está activado.
+\end{DoxyNote}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em No} & aplica (ISR) \\
+\hline
+\end{DoxyRetVals}
+\index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{ISR()\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily \label{main_8c_a09ce999e15ad60b8a3f07d08af1946f9} 
+ISR (\begin{DoxyParamCaption}\item[{USART\+\_\+\+RX\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+
+
+ISR de recepción por USART. 
+
+Interrupción que se activa al recibir un byte por USART. Guarda el byte en un buffer circular. Si el buffer está lleno, sobrescribe el dato más antiguo. Además, verifica si hay suficiente información para iniciar el procesamiento de un paquete.
+
+\begin{DoxyNote}{Nota}
+Esta rutina actualiza {\ttfamily indexW}, y avanza {\ttfamily indexR} si el buffer está lleno para evitar bloqueo.
+\end{DoxyNote}
+@ret\+Val No aplica (ISR). \index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{ISR()\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily \label{main_8c_ad878deb12efde50ce23b8afa0cd310d1} 
+ISR (\begin{DoxyParamCaption}\item[{USART\+\_\+\+UDRE\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+
+
+ISR de transmisión por USART (UDRE). 
+
+Envia secuencialmente los bytes del paquete almacenado en el buffer circular. Cuando se transmiten todos los bytes del paquete (payload + (header + length + token + cmd + checksum)), desactiva la interrupción de transmisión y reactiva la de recepción.
+
+\begin{DoxyNote}{Nota}
+Se utiliza un contador ({\ttfamily transmit\+\_\+counter}) para saber cuántos bytes se han enviado.
+\end{DoxyNote}
+@ret\+Val No aplica (ISR). \index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{main()}
+{\footnotesize\ttfamily \label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\index{main.c@{main.c}!printfWrapper@{printfWrapper}}
+\index{printfWrapper@{printfWrapper}!main.c@{main.c}}
+\doxysubsubsection{printfWrapper()}
+{\footnotesize\ttfamily \label{main_8c_a79d21f91f71c72b5a90d52532da94e54} 
+void printf\+Wrapper (\begin{DoxyParamCaption}\item[{const char $\ast$}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Wrapper para imprimir mensajes por consola. 
+
+Imprime el mensaje recibido utilizando {\ttfamily printf}. Está pensado para ser usado como función de callback en bibliotecas externas que requieren una función con este formato para redirigir la salida.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em message} & Cadena de texto terminada en NULL a imprimir. \\
+\hline
+\end{DoxyParams}
+\index{main.c@{main.c}!timer1\_init@{timer1\_init}}
+\index{timer1\_init@{timer1\_init}!main.c@{main.c}}
+\doxysubsubsection{timer1\_init()}
+{\footnotesize\ttfamily \label{main_8c_abb302081b7dbd40d0fea4bbe53fd9b7b} 
+void timer1\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa el Timer 1 (timer1\+\_\+init) 
+
+Configura el Timer 1 para manejar\+:
+\begin{DoxyItemize}
+\item Captura de entrada (Input Capture) para medición del sensor ultrasónico.
+\item Interrupción por desbordamiento (Overflow) para ampliar la resolución del temporizador.
+\item Interrupciones de comparación A y B para el control de servos.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item Se configura el Timer en modo normal.
+\item Se activa la captura en flanco ascendente inicialmente.
+\item Se establece un prescaler de 8 para una buena resolución temporal.
+\item Se carga {\ttfamily OCR1A} para la primera interrupción de servo en 20ms.
+\end{DoxyItemize}
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em No} & aplica (void) \\
+\hline
+\end{DoxyRetVals}
+\index{main.c@{main.c}!timer2\_init@{timer2\_init}}
+\index{timer2\_init@{timer2\_init}!main.c@{main.c}}
+\doxysubsubsection{timer2\_init()}
+{\footnotesize\ttfamily \label{main_8c_a2cd8cee0c5bd8d8b2f528216f7dd487d} 
+void timer2\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa los pines GPIO del sistema (gpio\+\_\+pins\+\_\+init) 
+
+Configura la dirección y el estado inicial de los pines de entrada/salida utilizados por el sistema\+: LED, TRIGGER, ECHO, botón, y pines de servos.
+
+
+\begin{DoxyItemize}
+\item LED configurado como salida y encendido.
+\item TRIGGER como salida, ECHO como entrada.
+\item Botón como entrada.
+\item Pines de servo (A, B, C) como salidas.
+\item Se inicializa el sensor TCRT con {\ttfamily \doxyref{tcrt\+\_\+init()}{pÃ¡g.}{tcrt__utils_8c_a640932133dbc070f018c88daa1988cde}}.
+\item Se garantiza que TRIGGER y BUTTON estén en bajo inicialmente.
+\end{DoxyItemize}
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em No} & aplica (void) \\
+\hline
+\end{DoxyRetVals}
+
+
+\doxysubsection{DocumentaciÃ³n de variables}
+\index{main.c@{main.c}!bandera@{bandera}}
+\index{bandera@{bandera}!main.c@{main.c}}
+\doxysubsubsection{bandera}
+{\footnotesize\ttfamily \label{main_8c_abaf9d105ac1cfa3d1cb984806de4e93d} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} bandera}
+
+\index{main.c@{main.c}!bandera2@{bandera2}}
+\index{bandera2@{bandera2}!main.c@{main.c}}
+\doxysubsubsection{bandera2}
+{\footnotesize\ttfamily \label{main_8c_aa05f09fd171c189b5b1e24e414dabcdc} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} bandera2}
+
+\index{main.c@{main.c}!bandera3@{bandera3}}
+\index{bandera3@{bandera3}!main.c@{main.c}}
+\doxysubsubsection{bandera3}
+{\footnotesize\ttfamily \label{main_8c_a2a8d961a96d1c17573e37bf8f18fac90} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} bandera3}
+
+\index{main.c@{main.c}!btn\_pressed\_time@{btn\_pressed\_time}}
+\index{btn\_pressed\_time@{btn\_pressed\_time}!main.c@{main.c}}
+\doxysubsubsection{btn\_pressed\_time}
+{\footnotesize\ttfamily \label{main_8c_a39d0eb7a23365e89195c7cd01c4d5adc} 
+volatile uint8\+\_\+t btn\+\_\+pressed\+\_\+time = 0}
+
+\index{main.c@{main.c}!current\_servo@{current\_servo}}
+\index{current\_servo@{current\_servo}!main.c@{main.c}}
+\doxysubsubsection{current\_servo}
+{\footnotesize\ttfamily \label{main_8c_ad1e4fa10601db976f3be9392f5203dfb} 
+volatile uint8\+\_\+t current\+\_\+servo = 0}
+
+\index{main.c@{main.c}!currentConfig@{currentConfig}}
+\index{currentConfig@{currentConfig}!main.c@{main.c}}
+\doxysubsubsection{currentConfig}
+{\footnotesize\ttfamily \label{main_8c_a8e0bde3c252441976d34b2e0542266fd} 
+\textbf{ Config\+\_\+t} current\+Config}
+
+\index{main.c@{main.c}!diezMsCounter@{diezMsCounter}}
+\index{diezMsCounter@{diezMsCounter}!main.c@{main.c}}
+\doxysubsubsection{diezMsCounter}
+{\footnotesize\ttfamily \label{main_8c_a99c929b87d5b3753dec215ab140204e3} 
+volatile uint8\+\_\+t diez\+Ms\+Counter = 0}
+
+\index{main.c@{main.c}!distance\_mm@{distance\_mm}}
+\index{distance\_mm@{distance\_mm}!main.c@{main.c}}
+\doxysubsubsection{distance\_mm}
+{\footnotesize\ttfamily \label{main_8c_ab1d02bbc368f5045da7543804a031fca} 
+volatile uint16\+\_\+t distance\+\_\+mm = 0}
+
+\index{main.c@{main.c}!doActionCmd@{doActionCmd}}
+\index{doActionCmd@{doActionCmd}!main.c@{main.c}}
+\doxysubsubsection{doActionCmd}
+{\footnotesize\ttfamily \label{main_8c_a3f8282cb87eff12a48807d2e1c11d078} 
+uint8\+\_\+t do\+Action\+Cmd}
+
+\index{main.c@{main.c}!echo\_finish\_time@{echo\_finish\_time}}
+\index{echo\_finish\_time@{echo\_finish\_time}!main.c@{main.c}}
+\doxysubsubsection{echo\_finish\_time}
+{\footnotesize\ttfamily \label{main_8c_a6cb8d4c8c7542dbf595586d7c0b4c5a5} 
+volatile uint16\+\_\+t echo\+\_\+finish\+\_\+time = 0}
+
+\index{main.c@{main.c}!echo\_init\_time@{echo\_init\_time}}
+\index{echo\_init\_time@{echo\_init\_time}!main.c@{main.c}}
+\doxysubsubsection{echo\_init\_time}
+{\footnotesize\ttfamily \label{main_8c_ad30d5942b66b232f3156405c78f551d5} 
+volatile uint16\+\_\+t echo\+\_\+init\+\_\+time = 0}
+
+\index{main.c@{main.c}!echo\_state@{echo\_state}}
+\index{echo\_state@{echo\_state}!main.c@{main.c}}
+\doxysubsubsection{echo\_state}
+{\footnotesize\ttfamily \label{main_8c_a8a6e8c4d6645f2f82f0551bb3dd5da78} 
+volatile uint8\+\_\+t echo\+\_\+state = 0}
+
+\index{main.c@{main.c}!eepromConfig@{eepromConfig}}
+\index{eepromConfig@{eepromConfig}!main.c@{main.c}}
+\doxysubsubsection{eepromConfig}
+{\footnotesize\ttfamily \label{main_8c_ac8dc19927a84b4761e18f650b084f1e6} 
+EEMEM \textbf{ Config\+\_\+t} eeprom\+Config}
+
+\index{main.c@{main.c}!hcsr04Detector@{hcsr04Detector}}
+\index{hcsr04Detector@{hcsr04Detector}!main.c@{main.c}}
+\doxysubsubsection{hcsr04Detector}
+{\footnotesize\ttfamily \label{main_8c_a64cf5b1735bc17f8bea57cd8516216f1} 
+\textbf{ Ultrasonic\+\_\+\+Detector\+\_\+t} hcsr04\+Detector}
+
+\index{main.c@{main.c}!IR\_A@{IR\_A}}
+\index{IR\_A@{IR\_A}!main.c@{main.c}}
+\doxysubsubsection{IR\_A}
+{\footnotesize\ttfamily \label{main_8c_a2a60131ca1e382dfb2c6273d236c4e2c} 
+\textbf{ TCRT\+\_\+t} IR\+\_\+A}
+
+\index{main.c@{main.c}!IR\_B@{IR\_B}}
+\index{IR\_B@{IR\_B}!main.c@{main.c}}
+\doxysubsubsection{IR\_B}
+{\footnotesize\ttfamily \label{main_8c_ab38d51300ec0ce64dec3bc391e0a51e9} 
+\textbf{ TCRT\+\_\+t} IR\+\_\+B}
+
+\index{main.c@{main.c}!IR\_C@{IR\_C}}
+\index{IR\_C@{IR\_C}!main.c@{main.c}}
+\doxysubsubsection{IR\_C}
+{\footnotesize\ttfamily \label{main_8c_a4dd21f397d78c9096f97df93bc5845a7} 
+\textbf{ TCRT\+\_\+t} IR\+\_\+C}
+
+\index{main.c@{main.c}!IR\_U@{IR\_U}}
+\index{IR\_U@{IR\_U}!main.c@{main.c}}
+\doxysubsubsection{IR\_U}
+{\footnotesize\ttfamily \label{main_8c_aa5c2257eac0fba0588336c2cf375acd5} 
+\textbf{ TCRT\+\_\+t} IR\+\_\+U}
+
+\index{main.c@{main.c}!mystdin@{mystdin}}
+\index{mystdin@{mystdin}!main.c@{main.c}}
+\doxysubsubsection{mystdin}
+{\footnotesize\ttfamily \label{main_8c_a3d3822358b228d94f0927a1cc7af7433} 
+FILE mystdin = FDEV\+\_\+\+SETUP\+\_\+\+STREAM(NULL, \textbf{ USART\+\_\+getchar}, \+\_\+\+FDEV\+\_\+\+SETUP\+\_\+\+READ)}
+
+\index{main.c@{main.c}!mystdout@{mystdout}}
+\index{mystdout@{mystdout}!main.c@{main.c}}
+\doxysubsubsection{mystdout}
+{\footnotesize\ttfamily \label{main_8c_aaa1fc0ff1aeb77f1feff261fa5ea792b} 
+FILE mystdout = FDEV\+\_\+\+SETUP\+\_\+\+STREAM(\textbf{ USART\+\_\+putchar\+\_\+blocking}, NULL, \+\_\+\+FDEV\+\_\+\+SETUP\+\_\+\+WRITE)}
+
+\index{main.c@{main.c}!ovf\_count@{ovf\_count}}
+\index{ovf\_count@{ovf\_count}!main.c@{main.c}}
+\doxysubsubsection{ovf\_count}
+{\footnotesize\ttfamily \label{main_8c_abbd387e7138a4c76bc186cd5ed969ede} 
+volatile uint8\+\_\+t ovf\+\_\+count = 0}
+
+\index{main.c@{main.c}!protocolService@{protocolService}}
+\index{protocolService@{protocolService}!main.c@{main.c}}
+\doxysubsubsection{protocolService}
+{\footnotesize\ttfamily \label{main_8c_a2483443e25b1561e49f23d3c48e97db3} 
+\textbf{ Protocol\+Service} protocol\+Service}
+
+\index{main.c@{main.c}!pulse\_width\_A@{pulse\_width\_A}}
+\index{pulse\_width\_A@{pulse\_width\_A}!main.c@{main.c}}
+\doxysubsubsection{pulse\_width\_A}
+{\footnotesize\ttfamily \label{main_8c_ac0d0e51d9e4c426d6bba6ece0e8e7858} 
+volatile uint32\+\_\+t pulse\+\_\+width\+\_\+A = 3000\+UL}
+
+\index{main.c@{main.c}!salidaA@{salidaA}}
+\index{salidaA@{salidaA}!main.c@{main.c}}
+\doxysubsubsection{salidaA}
+{\footnotesize\ttfamily \label{main_8c_a3e724f77222b7d549e8d575af36aaecc} 
+\textbf{ output\+\_\+t} salidaA}
+
+\index{main.c@{main.c}!salidaB@{salidaB}}
+\index{salidaB@{salidaB}!main.c@{main.c}}
+\doxysubsubsection{salidaB}
+{\footnotesize\ttfamily \label{main_8c_a16b14a740bcd865c4ffe58f857b764f5} 
+\textbf{ output\+\_\+t} salidaB}
+
+\index{main.c@{main.c}!salidaC@{salidaC}}
+\index{salidaC@{salidaC}!main.c@{main.c}}
+\doxysubsubsection{salidaC}
+{\footnotesize\ttfamily \label{main_8c_aecbd75740710683f7c084eb6da2b1fcf} 
+\textbf{ output\+\_\+t} salidaC}
+
+\index{main.c@{main.c}!servo\_active\_counter@{servo\_active\_counter}}
+\index{servo\_active\_counter@{servo\_active\_counter}!main.c@{main.c}}
+\doxysubsubsection{servo\_active\_counter}
+{\footnotesize\ttfamily \label{main_8c_a0f7a4cc47f065d0b6d195cfef1f1c1e6} 
+volatile uint8\+\_\+t servo\+\_\+active\+\_\+counter = 0}
+
+\index{main.c@{main.c}!servo\_counter@{servo\_counter}}
+\index{servo\_counter@{servo\_counter}!main.c@{main.c}}
+\doxysubsubsection{servo\_counter}
+{\footnotesize\ttfamily \label{main_8c_a25f564e62121593a86e26ebe723fcde7} 
+volatile uint8\+\_\+t servo\+\_\+counter = 0}
+
+\index{main.c@{main.c}!servoA@{servoA}}
+\index{servoA@{servoA}!main.c@{main.c}}
+\doxysubsubsection{servoA}
+{\footnotesize\ttfamily \label{main_8c_a5e019a3047bf049271f3329c862eed61} 
+\textbf{ servo\+\_\+t} servoA}
+
+\index{main.c@{main.c}!servoAVal@{servoAVal}}
+\index{servoAVal@{servoAVal}!main.c@{main.c}}
+\doxysubsubsection{servoAVal}
+{\footnotesize\ttfamily \label{main_8c_a5b3279e00a3846bf80b037cf2c6c6be6} 
+uint8\+\_\+t servo\+AVal = 0}
+
+\index{main.c@{main.c}!servoB@{servoB}}
+\index{servoB@{servoB}!main.c@{main.c}}
+\doxysubsubsection{servoB}
+{\footnotesize\ttfamily \label{main_8c_a834a14206b5c59a2f4d0bb1aa391587e} 
+\textbf{ servo\+\_\+t} servoB}
+
+\index{main.c@{main.c}!servoC@{servoC}}
+\index{servoC@{servoC}!main.c@{main.c}}
+\doxysubsubsection{servoC}
+{\footnotesize\ttfamily \label{main_8c_a4a829f2e7a8bcff5033cf7a95c4f9af6} 
+\textbf{ servo\+\_\+t} servoC}
+
+\index{main.c@{main.c}!servosArray@{servosArray}}
+\index{servosArray@{servosArray}!main.c@{main.c}}
+\doxysubsubsection{servosArray}
+{\footnotesize\ttfamily \label{main_8c_a874d63f2df613859c3225f2a9f66893c} 
+volatile \textbf{ servo\+\_\+t}$\ast$ servos\+Array[3]}
+
+\index{main.c@{main.c}!SorterSystem@{SorterSystem}}
+\index{SorterSystem@{SorterSystem}!main.c@{main.c}}
+\doxysubsubsection{SorterSystem}
+{\footnotesize\ttfamily \label{main_8c_a7099de9259fc88558d53f64564c0af9a} 
+\textbf{ sorter\+\_\+system\+\_\+t} Sorter\+System}
+
+\index{main.c@{main.c}!target\_tick\_A@{target\_tick\_A}}
+\index{target\_tick\_A@{target\_tick\_A}!main.c@{main.c}}
+\doxysubsubsection{target\_tick\_A}
+{\footnotesize\ttfamily \label{main_8c_a399762ad1749155357375979f81386dc} 
+volatile uint16\+\_\+t target\+\_\+tick\+\_\+A = 0}
+
+\index{main.c@{main.c}!transmit\_counter@{transmit\_counter}}
+\index{transmit\_counter@{transmit\_counter}!main.c@{main.c}}
+\doxysubsubsection{transmit\_counter}
+{\footnotesize\ttfamily \label{main_8c_a9f784b799146813512b3e9453c5d6826} 
+volatile uint8\+\_\+t transmit\+\_\+counter}
+
+\index{main.c@{main.c}!trigger\_timeout\_counter@{trigger\_timeout\_counter}}
+\index{trigger\_timeout\_counter@{trigger\_timeout\_counter}!main.c@{main.c}}
+\doxysubsubsection{trigger\_timeout\_counter}
+{\footnotesize\ttfamily \label{main_8c_ac6ba5dc15d6295e02e79aa0b703fd856} 
+volatile uint8\+\_\+t trigger\+\_\+timeout\+\_\+counter = 0}
+
+\index{main.c@{main.c}!ultraSensor@{ultraSensor}}
+\index{ultraSensor@{ultraSensor}!main.c@{main.c}}
+\doxysubsubsection{ultraSensor}
+{\footnotesize\ttfamily \label{main_8c_a7620d2a7632969ee3cfd057511b0a200} 
+ultrasonic\+\_\+t ultra\+Sensor}
+
+\index{main.c@{main.c}!veintems\_counter@{veintems\_counter}}
+\index{veintems\_counter@{veintems\_counter}!main.c@{main.c}}
+\doxysubsubsection{veintems\_counter}
+{\footnotesize\ttfamily \label{main_8c_ab71a97a20c4240cdd01bee2b1907082e} 
+volatile uint8\+\_\+t veintems\+\_\+counter = 0}
+
+\index{main.c@{main.c}!wait\_time@{wait\_time}}
+\index{wait\_time@{wait\_time}!main.c@{main.c}}
+\doxysubsubsection{wait\_time}
+{\footnotesize\ttfamily \label{main_8c_a95f29f6ffe2da2da6684e9299ec289f7} 
+volatile uint8\+\_\+t wait\+\_\+time = 0}
+

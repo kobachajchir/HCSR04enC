@@ -1,0 +1,75 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/ultrasonic\+\_\+hal.c}
+\label{ultrasonic__hal_8c}\index{GccApplication1/utils/ultrasonic\_hal.c@{GccApplication1/utils/ultrasonic\_hal.c}}
+{\ttfamily \#include "{}ultrasonic.\+h"{}}\newline
+{\ttfamily \#include "{}ultrasonic\+\_\+hal.\+h"{}}\newline
+{\ttfamily \#include "{}../main.\+h"{}}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ ultrasonic\+\_\+hal\+\_\+trigger\+\_\+set\+High} (ultrasonic\+\_\+t $\ast$us)
+\item 
+void \textbf{ ultrasonic\+\_\+hal\+\_\+trigger\+\_\+set\+Low} (ultrasonic\+\_\+t $\ast$us)
+\item 
+void \textbf{ ultrasonic\+\_\+hal\+\_\+set\+Trigger\+\_\+timeout} (ultrasonic\+\_\+t $\ast$us, uint32\+\_\+t microseconds)
+\item 
+void \textbf{ ultrasonic\+\_\+hal\+\_\+echo\+\_\+timeout} (ultrasonic\+\_\+t $\ast$us)
+\item 
+void \textbf{ ultrasonic\+\_\+hal\+\_\+echo\+\_\+set\+Rising\+Edge} (ultrasonic\+\_\+t $\ast$us)
+\item 
+void \textbf{ ultrasonic\+\_\+hal\+\_\+echo\+\_\+set\+Falling\+Edge} (ultrasonic\+\_\+t $\ast$us)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static volatile uint32\+\_\+t \textbf{ g\+\_\+timeout\+Target\+\_\+us} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones}
+\index{ultrasonic\_hal.c@{ultrasonic\_hal.c}!ultrasonic\_hal\_echo\_setFallingEdge@{ultrasonic\_hal\_echo\_setFallingEdge}}
+\index{ultrasonic\_hal\_echo\_setFallingEdge@{ultrasonic\_hal\_echo\_setFallingEdge}!ultrasonic\_hal.c@{ultrasonic\_hal.c}}
+\doxysubsubsection{ultrasonic\_hal\_echo\_setFallingEdge()}
+{\footnotesize\ttfamily \label{ultrasonic__hal_8c_af1d68fa7b5bdcf904f352c0295659858} 
+void ultrasonic\+\_\+hal\+\_\+echo\+\_\+set\+Falling\+Edge (\begin{DoxyParamCaption}\item[{ultrasonic\+\_\+t $\ast$}]{us}{}\end{DoxyParamCaption})}
+
+\index{ultrasonic\_hal.c@{ultrasonic\_hal.c}!ultrasonic\_hal\_echo\_setRisingEdge@{ultrasonic\_hal\_echo\_setRisingEdge}}
+\index{ultrasonic\_hal\_echo\_setRisingEdge@{ultrasonic\_hal\_echo\_setRisingEdge}!ultrasonic\_hal.c@{ultrasonic\_hal.c}}
+\doxysubsubsection{ultrasonic\_hal\_echo\_setRisingEdge()}
+{\footnotesize\ttfamily \label{ultrasonic__hal_8c_a0045b3ab516845881a4354ac3fb3ff9a} 
+void ultrasonic\+\_\+hal\+\_\+echo\+\_\+set\+Rising\+Edge (\begin{DoxyParamCaption}\item[{ultrasonic\+\_\+t $\ast$}]{us}{}\end{DoxyParamCaption})}
+
+\index{ultrasonic\_hal.c@{ultrasonic\_hal.c}!ultrasonic\_hal\_echo\_timeout@{ultrasonic\_hal\_echo\_timeout}}
+\index{ultrasonic\_hal\_echo\_timeout@{ultrasonic\_hal\_echo\_timeout}!ultrasonic\_hal.c@{ultrasonic\_hal.c}}
+\doxysubsubsection{ultrasonic\_hal\_echo\_timeout()}
+{\footnotesize\ttfamily \label{ultrasonic__hal_8c_adc0c62eebe09fb29b2b367833b573e0c} 
+void ultrasonic\+\_\+hal\+\_\+echo\+\_\+timeout (\begin{DoxyParamCaption}\item[{ultrasonic\+\_\+t $\ast$}]{us}{}\end{DoxyParamCaption})}
+
+\index{ultrasonic\_hal.c@{ultrasonic\_hal.c}!ultrasonic\_hal\_setTrigger\_timeout@{ultrasonic\_hal\_setTrigger\_timeout}}
+\index{ultrasonic\_hal\_setTrigger\_timeout@{ultrasonic\_hal\_setTrigger\_timeout}!ultrasonic\_hal.c@{ultrasonic\_hal.c}}
+\doxysubsubsection{ultrasonic\_hal\_setTrigger\_timeout()}
+{\footnotesize\ttfamily \label{ultrasonic__hal_8c_abb9366fb7e408c1389c5c2ac74ef83ac} 
+void ultrasonic\+\_\+hal\+\_\+set\+Trigger\+\_\+timeout (\begin{DoxyParamCaption}\item[{ultrasonic\+\_\+t $\ast$}]{us}{, }\item[{uint32\+\_\+t}]{microseconds}{}\end{DoxyParamCaption})}
+
+\index{ultrasonic\_hal.c@{ultrasonic\_hal.c}!ultrasonic\_hal\_trigger\_setHigh@{ultrasonic\_hal\_trigger\_setHigh}}
+\index{ultrasonic\_hal\_trigger\_setHigh@{ultrasonic\_hal\_trigger\_setHigh}!ultrasonic\_hal.c@{ultrasonic\_hal.c}}
+\doxysubsubsection{ultrasonic\_hal\_trigger\_setHigh()}
+{\footnotesize\ttfamily \label{ultrasonic__hal_8c_afea34132ca0e3d831bd0497871795348} 
+void ultrasonic\+\_\+hal\+\_\+trigger\+\_\+set\+High (\begin{DoxyParamCaption}\item[{ultrasonic\+\_\+t $\ast$}]{us}{}\end{DoxyParamCaption})}
+
+\index{ultrasonic\_hal.c@{ultrasonic\_hal.c}!ultrasonic\_hal\_trigger\_setLow@{ultrasonic\_hal\_trigger\_setLow}}
+\index{ultrasonic\_hal\_trigger\_setLow@{ultrasonic\_hal\_trigger\_setLow}!ultrasonic\_hal.c@{ultrasonic\_hal.c}}
+\doxysubsubsection{ultrasonic\_hal\_trigger\_setLow()}
+{\footnotesize\ttfamily \label{ultrasonic__hal_8c_ab1d7896b19d114b8674f9018697cb0e1} 
+void ultrasonic\+\_\+hal\+\_\+trigger\+\_\+set\+Low (\begin{DoxyParamCaption}\item[{ultrasonic\+\_\+t $\ast$}]{us}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Documentación de variables}
+\index{ultrasonic\_hal.c@{ultrasonic\_hal.c}!g\_timeoutTarget\_us@{g\_timeoutTarget\_us}}
+\index{g\_timeoutTarget\_us@{g\_timeoutTarget\_us}!ultrasonic\_hal.c@{ultrasonic\_hal.c}}
+\doxysubsubsection{g\_timeoutTarget\_us}
+{\footnotesize\ttfamily \label{ultrasonic__hal_8c_a8f675a45be1fdd6591858da47c005e32} 
+volatile uint32\+\_\+t g\+\_\+timeout\+Target\+\_\+us = 0\hspace{0.3cm}{\ttfamily [static]}}
+

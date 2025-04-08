@@ -1,0 +1,83 @@
+\doxysection{Referencia del archivo Gcc\+Application1/types/sorter\+System\+Types.h}
+\label{sorter_system_types_8h}\index{GccApplication1/types/sorterSystemTypes.h@{GccApplication1/types/sorterSystemTypes.h}}
+
+
+Tipos de datos relacionados con el sistema de clasificación de cajas.  
+
+
+{\ttfamily \#include "{}box\+Types.\+h"{}}\newline
+{\ttfamily \#include "{}output\+Type.\+h"{}}\newline
+\doxysubsubsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ production\+\_\+stats\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Contiene estadísticas de producción del sistema clasificador. \end{DoxyCompactList}\item 
+struct \textbf{ sorter\+\_\+system\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Representa el sistema de clasificación completo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ NUM\+\_\+\+OUTPUTS}~3
+\begin{DoxyCompactList}\small\item\em Número total de salidas del sistema. \end{DoxyCompactList}\item 
+\#define \textbf{ DETECTION\+\_\+\+THRESHOLD\+\_\+\+MAX\+\_\+\+MM}~105
+\begin{DoxyCompactList}\small\item\em Altura máxima permitida para la detección (en mm). \end{DoxyCompactList}\item 
+\#define \textbf{ DETECTION\+\_\+\+THRESHOLD\+\_\+\+MIN\+\_\+\+MM}~55
+\begin{DoxyCompactList}\small\item\em Altura mínima permitida para considerar una caja (en mm). \end{DoxyCompactList}\item 
+\#define \textbf{ DETECTION\+\_\+\+IDLE\+\_\+\+DISTANCE\+\_\+\+MM}~190
+\begin{DoxyCompactList}\small\item\em Distancia de referencia cuando no hay caja (en mm). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Tipos de datos relacionados con el sistema de clasificación de cajas. 
+
+Define estructuras y constantes necesarias para gestionar la lógica del sistema de clasificación, incluyendo estadísticas de producción y salidas disponibles.
+
+\begin{DoxyAuthor}{Autor}
+kobac 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+26-\/Mar-\/25 
+\end{DoxyDate}
+
+
+\doxysubsection{DocumentaciÃ³n de Â«defineÂ»}
+\index{sorterSystemTypes.h@{sorterSystemTypes.h}!DETECTION\_IDLE\_DISTANCE\_MM@{DETECTION\_IDLE\_DISTANCE\_MM}}
+\index{DETECTION\_IDLE\_DISTANCE\_MM@{DETECTION\_IDLE\_DISTANCE\_MM}!sorterSystemTypes.h@{sorterSystemTypes.h}}
+\doxysubsubsection{DETECTION\_IDLE\_DISTANCE\_MM}
+{\footnotesize\ttfamily \label{sorter_system_types_8h_a090b37397045001f38d5d54bbb04f595} 
+\#define DETECTION\+\_\+\+IDLE\+\_\+\+DISTANCE\+\_\+\+MM~190}
+
+
+
+Distancia de referencia cuando no hay caja (en mm). 
+
+\index{sorterSystemTypes.h@{sorterSystemTypes.h}!DETECTION\_THRESHOLD\_MAX\_MM@{DETECTION\_THRESHOLD\_MAX\_MM}}
+\index{DETECTION\_THRESHOLD\_MAX\_MM@{DETECTION\_THRESHOLD\_MAX\_MM}!sorterSystemTypes.h@{sorterSystemTypes.h}}
+\doxysubsubsection{DETECTION\_THRESHOLD\_MAX\_MM}
+{\footnotesize\ttfamily \label{sorter_system_types_8h_a2da7dd4265bf5f589a82b0a153ef3456} 
+\#define DETECTION\+\_\+\+THRESHOLD\+\_\+\+MAX\+\_\+\+MM~105}
+
+
+
+Altura máxima permitida para la detección (en mm). 
+
+\index{sorterSystemTypes.h@{sorterSystemTypes.h}!DETECTION\_THRESHOLD\_MIN\_MM@{DETECTION\_THRESHOLD\_MIN\_MM}}
+\index{DETECTION\_THRESHOLD\_MIN\_MM@{DETECTION\_THRESHOLD\_MIN\_MM}!sorterSystemTypes.h@{sorterSystemTypes.h}}
+\doxysubsubsection{DETECTION\_THRESHOLD\_MIN\_MM}
+{\footnotesize\ttfamily \label{sorter_system_types_8h_a9d429ebaf9234bfc89a7b19fbb9ae934} 
+\#define DETECTION\+\_\+\+THRESHOLD\+\_\+\+MIN\+\_\+\+MM~55}
+
+
+
+Altura mínima permitida para considerar una caja (en mm). 
+
+\index{sorterSystemTypes.h@{sorterSystemTypes.h}!NUM\_OUTPUTS@{NUM\_OUTPUTS}}
+\index{NUM\_OUTPUTS@{NUM\_OUTPUTS}!sorterSystemTypes.h@{sorterSystemTypes.h}}
+\doxysubsubsection{NUM\_OUTPUTS}
+{\footnotesize\ttfamily \label{sorter_system_types_8h_a2b952de4620c16ca060fe9e2d3aad454} 
+\#define NUM\+\_\+\+OUTPUTS~3}
+
+
+
+Número total de salidas del sistema. 
+

@@ -1,0 +1,352 @@
+\doxysection{Referencia del archivo Gcc\+Application1/types/protocol\+Types.h}
+\label{protocol_types_8h}\index{GccApplication1/types/protocolTypes.h@{GccApplication1/types/protocolTypes.h}}
+{\ttfamily \#include "{}bitmap\+Type.\+h"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Protocol\+Frame}
+\begin{DoxyCompactList}\small\item\em Representa una trama de comunicaci�n del protocolo. \end{DoxyCompactList}\item 
+struct \textbf{ Command\+Map}
+\begin{DoxyCompactList}\small\item\em Estructura para mapear comandos con sus respuestas correspondientes. \end{DoxyCompactList}\item 
+struct \textbf{ Protocol\+Service}
+\begin{DoxyCompactList}\small\item\em Estructura que maneja el estado del servicio de protocolo serial. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ PROTOCOL\+\_\+\+BUFFER\+\_\+\+SIZE}~64
+\item 
+\#define \textbf{ PROTOCOL\+\_\+\+TOKEN}~\textquotesingle{}\+:\textquotesingle{}
+\item 
+\#define \textbf{ PROTOCOL\+\_\+\+PACING\+\_\+\+TOKEN}~\textquotesingle{}-\/\textquotesingle{}
+\item 
+\#define \textbf{ EXPECTED\+\_\+\+HEADER\+\_\+\+SUM}~0x1A
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+IDLE}~0
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+READING\+\_\+\+HEADER}~1
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+READING\+\_\+\+LEN}~2
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+READING\+\_\+\+TOKEN}~3
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+READING\+\_\+\+CMD}~4
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+READING\+\_\+\+PAYLOAD}~5
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+READING\+\_\+\+CHK}~6
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+CALCULATING\+\_\+\+CHK}~7
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+PROCESSING\+\_\+\+PAYLOAD}~8
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+VALIDATED}~9
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+SEND}~10
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+SEND\+\_\+\+DONE}~11
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+PROCESSING}~\textbf{ BIT0\+\_\+\+MASK}
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+CHECKDATA}~\textbf{ BIT1\+\_\+\+MASK}
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+RESET}~\textbf{ BIT2\+\_\+\+MASK}
+\item 
+\#define \textbf{ PROTOSERV\+\_\+\+CREATE\+\_\+\+PCK}~\textbf{ BIT3\+\_\+\+MASK}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumeraciones}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ Command} \{ \newline
+\textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+ALIVE} = 0x00
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+START} = 0x01
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+STOP} = 0x02
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+SET\+\_\+\+CONFIG} = 0x03
+, \newline
+\textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+GET\+\_\+\+CONFIG} = 0x04
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+CLEAR\+\_\+\+STATS} = 0x05
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+GET\+\_\+\+STATS} = 0x06
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+GET\+\_\+\+FIRMWARE} = 0x07
+, \newline
+\textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+GET\+\_\+\+REPOSITORY} = 0x08
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+CONFIG\+\_\+\+RESET} = 0x09
+, \textbf{ CMD\+\_\+\+ALIVE} = 0x\+A0
+, \textbf{ CMD\+\_\+\+START} = 0x\+B1
+, \newline
+\textbf{ CMD\+\_\+\+STOP} = 0x\+B2
+, \textbf{ CMD\+\_\+\+SET\+\_\+\+CONFIG} = 0x\+C0
+, \textbf{ CMD\+\_\+\+GET\+\_\+\+CONFIG} = 0x\+C1
+, \textbf{ CMD\+\_\+\+GET\+\_\+\+FIRMWARE} = 0x\+F0
+, \newline
+\textbf{ CMD\+\_\+\+GET\+\_\+\+STATS} = 0x\+F1
+, \textbf{ CMD\+\_\+\+CLEAR\+\_\+\+STATS} = 0x\+F2
+, \textbf{ CMD\+\_\+\+GET\+\_\+\+REPOSITORY} = 0x\+F3
+, \textbf{ CMD\+\_\+\+CONFIG\+\_\+\+RESET} = 0x\+F4
+, \newline
+\textbf{ CMD\+\_\+\+DEBUG\+\_\+\+ULTRA} = 0x\+E1
+, \textbf{ CMD\+\_\+\+DEBUG\+\_\+\+SERVOS} = 0x\+E2
+, \textbf{ CMD\+\_\+\+DEBUG\+\_\+\+SORTER} = 0x\+E3
+, \textbf{ CMD\+\_\+\+DEBUG\+\_\+\+EEPROM} = 0x\+E4
+, \newline
+\textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+DEBUG\+\_\+\+ULTRA} = 0x0A
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+DEBUG\+\_\+\+SERVOS} = 0x0B
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+DEBUG\+\_\+\+SORTER} = 0x0C
+, \textbf{ CMD\+\_\+\+RESPONSE\+\_\+\+DEBUG\+\_\+\+EEPROM} = 0x0D
+, \newline
+\textbf{ CMD\+\_\+\+INVALID} = 0x\+E0
+ \}
+\begin{DoxyCompactList}\small\item\em Enum que contiene todos los comandos del protocolo, incluyendo comandos y sus respuestas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de «define»}
+\index{protocolTypes.h@{protocolTypes.h}!EXPECTED\_HEADER\_SUM@{EXPECTED\_HEADER\_SUM}}
+\index{EXPECTED\_HEADER\_SUM@{EXPECTED\_HEADER\_SUM}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{EXPECTED\_HEADER\_SUM}
+{\footnotesize\ttfamily \label{protocol_types_8h_afec2f77f903d62337db067cc091a3b6f} 
+\#define EXPECTED\+\_\+\+HEADER\+\_\+\+SUM~0x1A}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOCOL\_BUFFER\_SIZE@{PROTOCOL\_BUFFER\_SIZE}}
+\index{PROTOCOL\_BUFFER\_SIZE@{PROTOCOL\_BUFFER\_SIZE}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOCOL\_BUFFER\_SIZE}
+{\footnotesize\ttfamily \label{protocol_types_8h_a97dca2d0b0106e4ec570f56e57a19828} 
+\#define PROTOCOL\+\_\+\+BUFFER\+\_\+\+SIZE~64}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOCOL\_PACING\_TOKEN@{PROTOCOL\_PACING\_TOKEN}}
+\index{PROTOCOL\_PACING\_TOKEN@{PROTOCOL\_PACING\_TOKEN}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOCOL\_PACING\_TOKEN}
+{\footnotesize\ttfamily \label{protocol_types_8h_a67f231e93356740a14cef227c561e23a} 
+\#define PROTOCOL\+\_\+\+PACING\+\_\+\+TOKEN~\textquotesingle{}-\/\textquotesingle{}}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOCOL\_TOKEN@{PROTOCOL\_TOKEN}}
+\index{PROTOCOL\_TOKEN@{PROTOCOL\_TOKEN}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOCOL\_TOKEN}
+{\footnotesize\ttfamily \label{protocol_types_8h_afce7b983af6e0a7030312f191f7436c3} 
+\#define PROTOCOL\+\_\+\+TOKEN~\textquotesingle{}\+:\textquotesingle{}}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_CALCULATING\_CHK@{PROTOSERV\_CALCULATING\_CHK}}
+\index{PROTOSERV\_CALCULATING\_CHK@{PROTOSERV\_CALCULATING\_CHK}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_CALCULATING\_CHK}
+{\footnotesize\ttfamily \label{protocol_types_8h_a05bce06dc6718985cdf92e7a2b8855eb} 
+\#define PROTOSERV\+\_\+\+CALCULATING\+\_\+\+CHK~7}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_CHECKDATA@{PROTOSERV\_CHECKDATA}}
+\index{PROTOSERV\_CHECKDATA@{PROTOSERV\_CHECKDATA}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_CHECKDATA}
+{\footnotesize\ttfamily \label{protocol_types_8h_a72147e705b550a1d8dd7302a59c3c2d4} 
+\#define PROTOSERV\+\_\+\+CHECKDATA~\textbf{ BIT1\+\_\+\+MASK}}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_CREATE\_PCK@{PROTOSERV\_CREATE\_PCK}}
+\index{PROTOSERV\_CREATE\_PCK@{PROTOSERV\_CREATE\_PCK}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_CREATE\_PCK}
+{\footnotesize\ttfamily \label{protocol_types_8h_a9c6674f5c02cbb5157b8b8990fd38bef} 
+\#define PROTOSERV\+\_\+\+CREATE\+\_\+\+PCK~\textbf{ BIT3\+\_\+\+MASK}}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_IDLE@{PROTOSERV\_IDLE}}
+\index{PROTOSERV\_IDLE@{PROTOSERV\_IDLE}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_IDLE}
+{\footnotesize\ttfamily \label{protocol_types_8h_a83b2ba59b5d89fe8d0bffef1706c0074} 
+\#define PROTOSERV\+\_\+\+IDLE~0}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_PROCESSING@{PROTOSERV\_PROCESSING}}
+\index{PROTOSERV\_PROCESSING@{PROTOSERV\_PROCESSING}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_PROCESSING}
+{\footnotesize\ttfamily \label{protocol_types_8h_ae9e6ba86d6b493519b630c6825f46a2a} 
+\#define PROTOSERV\+\_\+\+PROCESSING~\textbf{ BIT0\+\_\+\+MASK}}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_PROCESSING\_PAYLOAD@{PROTOSERV\_PROCESSING\_PAYLOAD}}
+\index{PROTOSERV\_PROCESSING\_PAYLOAD@{PROTOSERV\_PROCESSING\_PAYLOAD}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_PROCESSING\_PAYLOAD}
+{\footnotesize\ttfamily \label{protocol_types_8h_a107bb2716f3e0d52d1f644620517af79} 
+\#define PROTOSERV\+\_\+\+PROCESSING\+\_\+\+PAYLOAD~8}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_READING\_CHK@{PROTOSERV\_READING\_CHK}}
+\index{PROTOSERV\_READING\_CHK@{PROTOSERV\_READING\_CHK}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_READING\_CHK}
+{\footnotesize\ttfamily \label{protocol_types_8h_a9784f0833be32605c6eed1cbc1949a0e} 
+\#define PROTOSERV\+\_\+\+READING\+\_\+\+CHK~6}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_READING\_CMD@{PROTOSERV\_READING\_CMD}}
+\index{PROTOSERV\_READING\_CMD@{PROTOSERV\_READING\_CMD}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_READING\_CMD}
+{\footnotesize\ttfamily \label{protocol_types_8h_a127ef9515f27712ebcdaabca5d5d31ba} 
+\#define PROTOSERV\+\_\+\+READING\+\_\+\+CMD~4}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_READING\_HEADER@{PROTOSERV\_READING\_HEADER}}
+\index{PROTOSERV\_READING\_HEADER@{PROTOSERV\_READING\_HEADER}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_READING\_HEADER}
+{\footnotesize\ttfamily \label{protocol_types_8h_a29ce89b81ff9dc83ba6fb3efef25cdaa} 
+\#define PROTOSERV\+\_\+\+READING\+\_\+\+HEADER~1}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_READING\_LEN@{PROTOSERV\_READING\_LEN}}
+\index{PROTOSERV\_READING\_LEN@{PROTOSERV\_READING\_LEN}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_READING\_LEN}
+{\footnotesize\ttfamily \label{protocol_types_8h_afae02f42e89ab2ec4a00fb3a6f8506d5} 
+\#define PROTOSERV\+\_\+\+READING\+\_\+\+LEN~2}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_READING\_PAYLOAD@{PROTOSERV\_READING\_PAYLOAD}}
+\index{PROTOSERV\_READING\_PAYLOAD@{PROTOSERV\_READING\_PAYLOAD}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_READING\_PAYLOAD}
+{\footnotesize\ttfamily \label{protocol_types_8h_a642bf4dd0d7cd473f675c25ef8b11680} 
+\#define PROTOSERV\+\_\+\+READING\+\_\+\+PAYLOAD~5}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_READING\_TOKEN@{PROTOSERV\_READING\_TOKEN}}
+\index{PROTOSERV\_READING\_TOKEN@{PROTOSERV\_READING\_TOKEN}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_READING\_TOKEN}
+{\footnotesize\ttfamily \label{protocol_types_8h_a018d8f99dc97a5755671fa127bcf3cdf} 
+\#define PROTOSERV\+\_\+\+READING\+\_\+\+TOKEN~3}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_RESET@{PROTOSERV\_RESET}}
+\index{PROTOSERV\_RESET@{PROTOSERV\_RESET}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_RESET}
+{\footnotesize\ttfamily \label{protocol_types_8h_a00243a90ba8adda8e3a5511ea5e34a64} 
+\#define PROTOSERV\+\_\+\+RESET~\textbf{ BIT2\+\_\+\+MASK}}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_SEND@{PROTOSERV\_SEND}}
+\index{PROTOSERV\_SEND@{PROTOSERV\_SEND}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_SEND}
+{\footnotesize\ttfamily \label{protocol_types_8h_acdf73bd77064a890f4dc7efa001c8c14} 
+\#define PROTOSERV\+\_\+\+SEND~10}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_SEND\_DONE@{PROTOSERV\_SEND\_DONE}}
+\index{PROTOSERV\_SEND\_DONE@{PROTOSERV\_SEND\_DONE}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_SEND\_DONE}
+{\footnotesize\ttfamily \label{protocol_types_8h_af3c1967f3d19eb7aa640878b20b94437} 
+\#define PROTOSERV\+\_\+\+SEND\+\_\+\+DONE~11}
+
+\index{protocolTypes.h@{protocolTypes.h}!PROTOSERV\_VALIDATED@{PROTOSERV\_VALIDATED}}
+\index{PROTOSERV\_VALIDATED@{PROTOSERV\_VALIDATED}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{PROTOSERV\_VALIDATED}
+{\footnotesize\ttfamily \label{protocol_types_8h_a3fea8937093eb1182d665cfa3adba072} 
+\#define PROTOSERV\+\_\+\+VALIDATED~9}
+
+
+
+\doxysubsection{Documentación de enumeraciones}
+\index{protocolTypes.h@{protocolTypes.h}!Command@{Command}}
+\index{Command@{Command}!protocolTypes.h@{protocolTypes.h}}
+\doxysubsubsection{Command}
+{\footnotesize\ttfamily \label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153} 
+enum \textbf{ Command}}
+
+
+
+Enum que contiene todos los comandos del protocolo, incluyendo comandos y sus respuestas. 
+
+\begin{DoxyEnumFields}[2]{Valores de enumeraciones}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_ALIVE@{CMD\_RESPONSE\_ALIVE}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_ALIVE@{CMD\_RESPONSE\_ALIVE}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153ae71d8347b3a378275d25c0fa2390a656} 
+CMD\+\_\+\+RESPONSE\+\_\+\+ALIVE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_START@{CMD\_RESPONSE\_START}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_START@{CMD\_RESPONSE\_START}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a6217a381c5786a155085bfaba7ec13e7} 
+CMD\+\_\+\+RESPONSE\+\_\+\+START&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_STOP@{CMD\_RESPONSE\_STOP}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_STOP@{CMD\_RESPONSE\_STOP}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153aadcc6e5ea864b7a393caa60a6b2c21cc} 
+CMD\+\_\+\+RESPONSE\+\_\+\+STOP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_SET\_CONFIG@{CMD\_RESPONSE\_SET\_CONFIG}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_SET\_CONFIG@{CMD\_RESPONSE\_SET\_CONFIG}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153acaff8db12249596e200bfa164b1635ce} 
+CMD\+\_\+\+RESPONSE\+\_\+\+SET\+\_\+\+CONFIG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_GET\_CONFIG@{CMD\_RESPONSE\_GET\_CONFIG}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_GET\_CONFIG@{CMD\_RESPONSE\_GET\_CONFIG}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153ac7bb9d98ad702fa7111b56d0e6cb0566} 
+CMD\+\_\+\+RESPONSE\+\_\+\+GET\+\_\+\+CONFIG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_CLEAR\_STATS@{CMD\_RESPONSE\_CLEAR\_STATS}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_CLEAR\_STATS@{CMD\_RESPONSE\_CLEAR\_STATS}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a090163e2fae1e30931cd9ac2375d18e1} 
+CMD\+\_\+\+RESPONSE\+\_\+\+CLEAR\+\_\+\+STATS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_GET\_STATS@{CMD\_RESPONSE\_GET\_STATS}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_GET\_STATS@{CMD\_RESPONSE\_GET\_STATS}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153aa056e9e94661dc04354c66720f1fa3ca} 
+CMD\+\_\+\+RESPONSE\+\_\+\+GET\+\_\+\+STATS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_GET\_FIRMWARE@{CMD\_RESPONSE\_GET\_FIRMWARE}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_GET\_FIRMWARE@{CMD\_RESPONSE\_GET\_FIRMWARE}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153afe4ad3aedccf8e8724bd15419b8386a5} 
+CMD\+\_\+\+RESPONSE\+\_\+\+GET\+\_\+\+FIRMWARE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_GET\_REPOSITORY@{CMD\_RESPONSE\_GET\_REPOSITORY}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_GET\_REPOSITORY@{CMD\_RESPONSE\_GET\_REPOSITORY}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153ada903e8272ed337ff9b9eb3a43e466e1} 
+CMD\+\_\+\+RESPONSE\+\_\+\+GET\+\_\+\+REPOSITORY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_CONFIG\_RESET@{CMD\_RESPONSE\_CONFIG\_RESET}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_CONFIG\_RESET@{CMD\_RESPONSE\_CONFIG\_RESET}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a299d7c38ee6f60295ecfba88ac21203d} 
+CMD\+\_\+\+RESPONSE\+\_\+\+CONFIG\+\_\+\+RESET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_ALIVE@{CMD\_ALIVE}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_ALIVE@{CMD\_ALIVE}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a9d0d1fded8cfc6c0ea499069e47b9a6d} 
+CMD\+\_\+\+ALIVE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_START@{CMD\_START}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_START@{CMD\_START}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153af2e188a52388c10d5e2f48ca37b28287} 
+CMD\+\_\+\+START&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_STOP@{CMD\_STOP}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_STOP@{CMD\_STOP}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a1e0ceff2d6f13742786f42dac58149bc} 
+CMD\+\_\+\+STOP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_SET\_CONFIG@{CMD\_SET\_CONFIG}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_SET\_CONFIG@{CMD\_SET\_CONFIG}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a77553c4f9197b5892c5827a04c25a968} 
+CMD\+\_\+\+SET\+\_\+\+CONFIG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_GET\_CONFIG@{CMD\_GET\_CONFIG}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_GET\_CONFIG@{CMD\_GET\_CONFIG}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a72722dc0846a5fc226f850301b703609} 
+CMD\+\_\+\+GET\+\_\+\+CONFIG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_GET\_FIRMWARE@{CMD\_GET\_FIRMWARE}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_GET\_FIRMWARE@{CMD\_GET\_FIRMWARE}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a741e61299ea78bb03b9626d8f08cb560} 
+CMD\+\_\+\+GET\+\_\+\+FIRMWARE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_GET\_STATS@{CMD\_GET\_STATS}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_GET\_STATS@{CMD\_GET\_STATS}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a193c61fec5859d400a7be6c5004d53e1} 
+CMD\+\_\+\+GET\+\_\+\+STATS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_CLEAR\_STATS@{CMD\_CLEAR\_STATS}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_CLEAR\_STATS@{CMD\_CLEAR\_STATS}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153ad9e5adb03d3a730515fa242ada2dbf07} 
+CMD\+\_\+\+CLEAR\+\_\+\+STATS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_GET\_REPOSITORY@{CMD\_GET\_REPOSITORY}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_GET\_REPOSITORY@{CMD\_GET\_REPOSITORY}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a69bbf851a56abbc6aa8071b0c65de361} 
+CMD\+\_\+\+GET\+\_\+\+REPOSITORY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_CONFIG\_RESET@{CMD\_CONFIG\_RESET}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_CONFIG\_RESET@{CMD\_CONFIG\_RESET}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a2614ba7375b53f5c79e26a4336d141e4} 
+CMD\+\_\+\+CONFIG\+\_\+\+RESET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_DEBUG\_ULTRA@{CMD\_DEBUG\_ULTRA}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_DEBUG\_ULTRA@{CMD\_DEBUG\_ULTRA}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153acc6119a105ceede6b8e6504ecc4e6aa2} 
+CMD\+\_\+\+DEBUG\+\_\+\+ULTRA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_DEBUG\_SERVOS@{CMD\_DEBUG\_SERVOS}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_DEBUG\_SERVOS@{CMD\_DEBUG\_SERVOS}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a9369af5b4a3ee3506d8c843afae5283d} 
+CMD\+\_\+\+DEBUG\+\_\+\+SERVOS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_DEBUG\_SORTER@{CMD\_DEBUG\_SORTER}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_DEBUG\_SORTER@{CMD\_DEBUG\_SORTER}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153aea7d37b475d634f7a56b2cd6003c43a4} 
+CMD\+\_\+\+DEBUG\+\_\+\+SORTER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_DEBUG\_EEPROM@{CMD\_DEBUG\_EEPROM}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_DEBUG\_EEPROM@{CMD\_DEBUG\_EEPROM}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153ae54ab9a4321541e41e3550f87b56cb65} 
+CMD\+\_\+\+DEBUG\+\_\+\+EEPROM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_DEBUG\_ULTRA@{CMD\_RESPONSE\_DEBUG\_ULTRA}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_DEBUG\_ULTRA@{CMD\_RESPONSE\_DEBUG\_ULTRA}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a7211269bed65fac5327f695eff84b029} 
+CMD\+\_\+\+RESPONSE\+\_\+\+DEBUG\+\_\+\+ULTRA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_DEBUG\_SERVOS@{CMD\_RESPONSE\_DEBUG\_SERVOS}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_DEBUG\_SERVOS@{CMD\_RESPONSE\_DEBUG\_SERVOS}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a2b0c16a57a97aa8ae4a9ece588c6fc59} 
+CMD\+\_\+\+RESPONSE\+\_\+\+DEBUG\+\_\+\+SERVOS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_DEBUG\_SORTER@{CMD\_RESPONSE\_DEBUG\_SORTER}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_DEBUG\_SORTER@{CMD\_RESPONSE\_DEBUG\_SORTER}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a2f95b197115257659189e9c7902fc8a6} 
+CMD\+\_\+\+RESPONSE\+\_\+\+DEBUG\+\_\+\+SORTER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_RESPONSE\_DEBUG\_EEPROM@{CMD\_RESPONSE\_DEBUG\_EEPROM}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_RESPONSE\_DEBUG\_EEPROM@{CMD\_RESPONSE\_DEBUG\_EEPROM}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153aff76a8635a0d75ee0eb5440a940df8f3} 
+CMD\+\_\+\+RESPONSE\+\_\+\+DEBUG\+\_\+\+EEPROM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_INVALID@{CMD\_INVALID}!protocolTypes.h@{protocolTypes.h}}\index{protocolTypes.h@{protocolTypes.h}!CMD\_INVALID@{CMD\_INVALID}}}\label{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153a506aa3525e0378ccdbc9e0a14a86aec5} 
+CMD\+\_\+\+INVALID&\\
+\hline
+
+\end{DoxyEnumFields}

@@ -1,0 +1,80 @@
+\doxysection{Referencia del archivo Gcc\+Application1/types/servo\+Type.h}
+\label{servo_type_8h}\index{GccApplication1/types/servoType.h@{GccApplication1/types/servoType.h}}
+
+
+Definición del tipo de dato para el control de servomotores.  
+
+
+{\ttfamily \#include "{}bitmap\+Type.\+h"{}}\newline
+\doxysubsubsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ servo\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Representa un servomotor con su configuración y estado. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SERVO\+\_\+\+ENABLE}~\textbf{ BIT0\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag para habilitar el servomotor. \end{DoxyCompactList}\item 
+\#define \textbf{ SERVO\+\_\+\+PUSH}~\textbf{ BIT1\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag para activar el empuje del servo (modo PUSH). \end{DoxyCompactList}\item 
+\#define \textbf{ SERVO\+\_\+\+RESET}~\textbf{ BIT2\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag para solicitar el reinicio del servo a su ángulo de reposo. \end{DoxyCompactList}\item 
+\#define \textbf{ SERVO\+\_\+\+MOVE}~\textbf{ BIT3\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Flag que indica si el servo debe moverse. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Definición del tipo de dato para el control de servomotores. 
+
+Contiene la estructura que representa un servomotor y los flags asociados a su control. Incluye ángulo, duración del pulso, tiempo de estado y control por pines.
+
+\begin{DoxyAuthor}{Autor}
+kobac 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+28-\/Mar-\/25 
+\end{DoxyDate}
+
+
+\doxysubsection{DocumentaciÃ³n de Â«defineÂ»}
+\index{servoType.h@{servoType.h}!SERVO\_ENABLE@{SERVO\_ENABLE}}
+\index{SERVO\_ENABLE@{SERVO\_ENABLE}!servoType.h@{servoType.h}}
+\doxysubsubsection{SERVO\_ENABLE}
+{\footnotesize\ttfamily \label{servo_type_8h_a405e43e4785abb1ba49e3feb11f2b730} 
+\#define SERVO\+\_\+\+ENABLE~\textbf{ BIT0\+\_\+\+MASK}}
+
+
+
+Flag para habilitar el servomotor. 
+
+\index{servoType.h@{servoType.h}!SERVO\_MOVE@{SERVO\_MOVE}}
+\index{SERVO\_MOVE@{SERVO\_MOVE}!servoType.h@{servoType.h}}
+\doxysubsubsection{SERVO\_MOVE}
+{\footnotesize\ttfamily \label{servo_type_8h_ab9ae59e453f423c1727d67a7647ccca5} 
+\#define SERVO\+\_\+\+MOVE~\textbf{ BIT3\+\_\+\+MASK}}
+
+
+
+Flag que indica si el servo debe moverse. 
+
+\index{servoType.h@{servoType.h}!SERVO\_PUSH@{SERVO\_PUSH}}
+\index{SERVO\_PUSH@{SERVO\_PUSH}!servoType.h@{servoType.h}}
+\doxysubsubsection{SERVO\_PUSH}
+{\footnotesize\ttfamily \label{servo_type_8h_a3ed0a73515ce68533f36212daac28edb} 
+\#define SERVO\+\_\+\+PUSH~\textbf{ BIT1\+\_\+\+MASK}}
+
+
+
+Flag para activar el empuje del servo (modo PUSH). 
+
+\index{servoType.h@{servoType.h}!SERVO\_RESET@{SERVO\_RESET}}
+\index{SERVO\_RESET@{SERVO\_RESET}!servoType.h@{servoType.h}}
+\doxysubsubsection{SERVO\_RESET}
+{\footnotesize\ttfamily \label{servo_type_8h_a556a63fc2edc3a0817eb492c30b3a49d} 
+\#define SERVO\+\_\+\+RESET~\textbf{ BIT2\+\_\+\+MASK}}
+
+
+
+Flag para solicitar el reinicio del servo a su ángulo de reposo. 
+

@@ -1,0 +1,95 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/usart/usart\+\_\+utils.h}
+\label{usart__utils_8h}\index{GccApplication1/utils/usart/usart\_utils.h@{GccApplication1/utils/usart/usart\_utils.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ USART\+\_\+\+Init} (uint16\+\_\+t ubrr)
+\begin{DoxyCompactList}\small\item\em Inicializa el periférico USART con el baud rate especificado. \end{DoxyCompactList}\item 
+void \textbf{ USART\+\_\+\+Transmit} (unsigned char data)
+\item 
+int \textbf{ USART\+\_\+putchar} (char c, FILE $\ast$stream)
+\item 
+int \textbf{ USART\+\_\+putchar\+\_\+blocking} (char c, FILE $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Envía un carácter por USART de forma bloqueante. \end{DoxyCompactList}\item 
+int \textbf{ USART\+\_\+getchar} (FILE $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Lee un byte desde el buffer de recepción circular. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DocumentaciÃ³n de funciones}
+\index{usart\_utils.h@{usart\_utils.h}!USART\_getchar@{USART\_getchar}}
+\index{USART\_getchar@{USART\_getchar}!usart\_utils.h@{usart\_utils.h}}
+\doxysubsubsection{USART\_getchar()}
+{\footnotesize\ttfamily \label{usart__utils_8h_a5c3788b11dde5e3933b29e1b6e48fc13} 
+int USART\+\_\+getchar (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{stream}{}\end{DoxyParamCaption})}
+
+
+
+Lee un byte desde el buffer de recepción circular. 
+
+Verifica si hay datos disponibles en el buffer y los retorna. En caso contrario, devuelve -\/1.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em stream} & Stream de entrada (no se usa internamente).\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em Byte} & leído, o -\/1 si no hay datos disponibles. \\
+\hline
+\end{DoxyRetVals}
+\index{usart\_utils.h@{usart\_utils.h}!USART\_Init@{USART\_Init}}
+\index{USART\_Init@{USART\_Init}!usart\_utils.h@{usart\_utils.h}}
+\doxysubsubsection{USART\_Init()}
+{\footnotesize\ttfamily \label{usart__utils_8h_a8c71eca12fe1ae725b6e4afddf5f9332} 
+void USART\+\_\+\+Init (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{ubrr}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa el periférico USART con el baud rate especificado. 
+
+Configura los registros UBRR0H y UBRR0L para establecer la velocidad. Habilita el transmisor, receptor y la interrupción de recepción. Establece el formato\+: 8 bits de datos, sin paridad, 1 bit de stop.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em ubrr} & Valor UBRR calculado para el baud rate deseado. \\
+\hline
+\end{DoxyParams}
+\index{usart\_utils.h@{usart\_utils.h}!USART\_putchar@{USART\_putchar}}
+\index{USART\_putchar@{USART\_putchar}!usart\_utils.h@{usart\_utils.h}}
+\doxysubsubsection{USART\_putchar()}
+{\footnotesize\ttfamily \label{usart__utils_8h_a50ede045ab8657fe97082fd7ec09d018} 
+int USART\+\_\+putchar (\begin{DoxyParamCaption}\item[{char}]{c}{, }\item[{FILE $\ast$}]{stream}{}\end{DoxyParamCaption})}
+
+\index{usart\_utils.h@{usart\_utils.h}!USART\_putchar\_blocking@{USART\_putchar\_blocking}}
+\index{USART\_putchar\_blocking@{USART\_putchar\_blocking}!usart\_utils.h@{usart\_utils.h}}
+\doxysubsubsection{USART\_putchar\_blocking()}
+{\footnotesize\ttfamily \label{usart__utils_8h_a3615a6a73667c24518d953c3d4d05de5} 
+int USART\+\_\+putchar\+\_\+blocking (\begin{DoxyParamCaption}\item[{char}]{c}{, }\item[{FILE $\ast$}]{stream}{}\end{DoxyParamCaption})}
+
+
+
+Envía un carácter por USART de forma bloqueante. 
+
+Espera a que el buffer de transmisión esté disponible antes de escribir el byte.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em c} & Carácter a enviar. \\
+\hline
+\mbox{\texttt{ in}}  & {\em stream} & Stream de salida usado por printf.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em 0} & Éxito al enviar. \\
+\hline
+\end{DoxyRetVals}
+\index{usart\_utils.h@{usart\_utils.h}!USART\_Transmit@{USART\_Transmit}}
+\index{USART\_Transmit@{USART\_Transmit}!usart\_utils.h@{usart\_utils.h}}
+\doxysubsubsection{USART\_Transmit()}
+{\footnotesize\ttfamily \label{usart__utils_8h_ab8c416106cf1aff4ccdb3da4860fc179} 
+void USART\+\_\+\+Transmit (\begin{DoxyParamCaption}\item[{unsigned char}]{data}{}\end{DoxyParamCaption})}
+

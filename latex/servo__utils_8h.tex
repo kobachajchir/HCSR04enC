@@ -1,0 +1,78 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/servo/servo\+\_\+utils.h}
+\label{servo__utils_8h}\index{GccApplication1/utils/servo/servo\_utils.h@{GccApplication1/utils/servo/servo\_utils.h}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ init\+Servo} (volatile \textbf{ servo\+\_\+t} $\ast$servo, uint8\+\_\+t index, uint8\+\_\+t pin, uint8\+\_\+t start\+Angle)
+\begin{DoxyCompactList}\small\item\em Inicializa un servo específico. \end{DoxyCompactList}\item 
+uint16\+\_\+t \textbf{ calculate\+\_\+angle\+\_\+pulse\+Us} (uint8\+\_\+t angle)
+\begin{DoxyCompactList}\small\item\em Convierte un ángulo en microsegundos de pulso. \end{DoxyCompactList}\item 
+void \textbf{ servo\+\_\+set\+\_\+angle} (uint8\+\_\+t index, uint8\+\_\+t angle)
+\begin{DoxyCompactList}\small\item\em Establece el ángulo de un servo del arreglo global {\ttfamily servos\+Array}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DocumentaciÃ³n de funciones}
+\index{servo\_utils.h@{servo\_utils.h}!calculate\_angle\_pulseUs@{calculate\_angle\_pulseUs}}
+\index{calculate\_angle\_pulseUs@{calculate\_angle\_pulseUs}!servo\_utils.h@{servo\_utils.h}}
+\doxysubsubsection{calculate\_angle\_pulseUs()}
+{\footnotesize\ttfamily \label{servo__utils_8h_a9be00cc746a4b23036719dce077dd2f4} 
+uint16\+\_\+t calculate\+\_\+angle\+\_\+pulse\+Us (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{angle}{}\end{DoxyParamCaption})}
+
+
+
+Convierte un ángulo en microsegundos de pulso. 
+
+Realiza un escalado lineal entre {\ttfamily SERVO\+\_\+\+MIN\+\_\+\+PULSE} y {\ttfamily SERVO\+\_\+\+MAX\+\_\+\+PULSE}.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em angle} & Ángulo deseado (0–180 grados).\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em Duración} & del pulso en microsegundos correspondiente al ángulo. \\
+\hline
+\end{DoxyRetVals}
+\index{servo\_utils.h@{servo\_utils.h}!initServo@{initServo}}
+\index{initServo@{initServo}!servo\_utils.h@{servo\_utils.h}}
+\doxysubsubsection{initServo()}
+{\footnotesize\ttfamily \label{servo__utils_8h_adc1344022d38e9142b1658b3289cca1b} 
+void init\+Servo (\begin{DoxyParamCaption}\item[{volatile \textbf{ servo\+\_\+t} $\ast$}]{servo}{, }\item[{uint8\+\_\+t}]{index}{, }\item[{uint8\+\_\+t}]{pin}{, }\item[{uint8\+\_\+t}]{start\+Angle}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa un servo específico. 
+
+Asigna valores iniciales de ángulo, pin, y estado. Habilita el servo.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in,out}}  & {\em servo} & Puntero a la estructura del servo a inicializar. \\
+\hline
+\mbox{\texttt{ in}}  & {\em index} & Índice del servo en el arreglo global. \\
+\hline
+\mbox{\texttt{ in}}  & {\em pin} & Pin de salida asociado al servo. \\
+\hline
+\mbox{\texttt{ in}}  & {\em start\+Angle} & Ángulo inicial en grados (0 a 180). \\
+\hline
+\end{DoxyParams}
+\index{servo\_utils.h@{servo\_utils.h}!servo\_set\_angle@{servo\_set\_angle}}
+\index{servo\_set\_angle@{servo\_set\_angle}!servo\_utils.h@{servo\_utils.h}}
+\doxysubsubsection{servo\_set\_angle()}
+{\footnotesize\ttfamily \label{servo__utils_8h_ac2ad8679ed8b43924844721718002969} 
+void servo\+\_\+set\+\_\+angle (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{index}{, }\item[{uint8\+\_\+t}]{angle}{}\end{DoxyParamCaption})}
+
+
+
+Establece el ángulo de un servo del arreglo global {\ttfamily servos\+Array}. 
+
+Calcula y asigna la duración del pulso correspondiente al ángulo deseado.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em index} & Índice del servo (0 a NUM\+\_\+\+OUTPUTS-\/1). \\
+\hline
+\mbox{\texttt{ in}}  & {\em angle} & Ángulo deseado (0–180 grados). \\
+\hline
+\end{DoxyParams}

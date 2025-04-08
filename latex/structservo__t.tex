@@ -1,0 +1,67 @@
+\doxysection{Referencia de la estructura servo\+\_\+t}
+\label{structservo__t}\index{servo\_t@{servo\_t}}
+
+
+Representa un servomotor con su configuración y estado.  
+
+
+
+
+{\ttfamily \#include $<$servo\+Type.\+h$>$}
+
+\doxysubsubsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \textbf{ pin}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ flags}
+\item 
+uint16\+\_\+t \textbf{ pulse\+\_\+us}
+\item 
+uint8\+\_\+t \textbf{ angle}
+\item 
+uint8\+\_\+t \textbf{ state\+\_\+time}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Representa un servomotor con su configuración y estado. 
+
+Contiene información sobre el pin asignado, los flags de control, la duración del pulso (en microsegundos), el ángulo actual y el tiempo de estado. 
+
+\doxysubsection{DocumentaciÃ³n de campos}
+\index{servo\_t@{servo\_t}!angle@{angle}}
+\index{angle@{angle}!servo\_t@{servo\_t}}
+\doxysubsubsection{angle}
+{\footnotesize\ttfamily \label{structservo__t_a76f155f57a7d8504459c4438bdcfdceb} 
+uint8\+\_\+t angle}
+
+Ángulo actual del servo (0–180 grados) \index{servo\_t@{servo\_t}!flags@{flags}}
+\index{flags@{flags}!servo\_t@{servo\_t}}
+\doxysubsubsection{flags}
+{\footnotesize\ttfamily \label{structservo__t_a3678d26acc883f3c39c9970857aaf88f} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} flags}
+
+Flags de control del servo (habilitado, push, reset, etc.) \index{servo\_t@{servo\_t}!pin@{pin}}
+\index{pin@{pin}!servo\_t@{servo\_t}}
+\doxysubsubsection{pin}
+{\footnotesize\ttfamily \label{structservo__t_ab40a673fb19c1e650e1f79de91788aa5} 
+uint8\+\_\+t pin}
+
+Pin asignado al servo \index{servo\_t@{servo\_t}!pulse\_us@{pulse\_us}}
+\index{pulse\_us@{pulse\_us}!servo\_t@{servo\_t}}
+\doxysubsubsection{pulse\_us}
+{\footnotesize\ttfamily \label{structservo__t_a804213fb058ff3d13f6d4ce0b32f26ef} 
+uint16\+\_\+t pulse\+\_\+us}
+
+Duración del pulso actual en microsegundos \index{servo\_t@{servo\_t}!state\_time@{state\_time}}
+\index{state\_time@{state\_time}!servo\_t@{servo\_t}}
+\doxysubsubsection{state\_time}
+{\footnotesize\ttfamily \label{structservo__t_a931fbe34d89b7d9201027b2570e56325} 
+uint8\+\_\+t state\+\_\+time}
+
+Tiempo en que se mantiene en un estado activo (ej. en modo push) 
+
+La documentaciÃ³n de esta estructura estÃ¡ generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Gcc\+Application1/types/\textbf{ servo\+Type.\+h}\end{DoxyCompactItemize}

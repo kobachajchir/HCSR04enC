@@ -1,0 +1,208 @@
+\doxysection{Referencia del archivo Gcc\+Application1/types/box\+Types.h}
+\label{box_types_8h}\index{GccApplication1/types/boxTypes.h@{GccApplication1/types/boxTypes.h}}
+{\ttfamily \#include "{}bitmap\+Type.\+h"{}}\newline
+\doxysubsubsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ box\+\_\+height\+\_\+range\+\_\+t}
+\item 
+struct \textbf{ box\+\_\+height\+\_\+range\+\_\+matrix\+\_\+t}
+\item 
+struct \textbf{ box\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ ZONE\+\_\+\+ULTRA\+\_\+\+CLEAR}~flags.\+bitmap.\+bit0;
+\item 
+\#define \textbf{ SELECTED}~flags.\+bitmap.\+bit1;
+\item 
+\#define \textbf{ DISCARDED}~flags.\+bitmap.\+bit2;
+\item 
+\#define \textbf{ BOX\+\_\+\+A\+\_\+\+MIN\+\_\+\+MM}~55
+\item 
+\#define \textbf{ BOX\+\_\+\+A\+\_\+\+MAX\+\_\+\+MM}~65
+\item 
+\#define \textbf{ BOX\+\_\+\+B\+\_\+\+MIN\+\_\+\+MM}~75
+\item 
+\#define \textbf{ BOX\+\_\+\+B\+\_\+\+MAX\+\_\+\+MM}~85
+\item 
+\#define \textbf{ BOX\+\_\+\+C\+\_\+\+MIN\+\_\+\+MM}~95
+\item 
+\#define \textbf{ BOX\+\_\+\+C\+\_\+\+MAX\+\_\+\+MM}~105
+\item 
+\#define \textbf{ BOX\+\_\+\+LENGTH\+\_\+\+MM}~80
+\item 
+\#define \textbf{ BOX\+\_\+\+DISCARDED}~0
+\item 
+\#define \textbf{ BOX\+\_\+\+SIZE\+\_\+A}~1
+\item 
+\#define \textbf{ BOX\+\_\+\+SIZE\+\_\+B}~2
+\item 
+\#define \textbf{ BOX\+\_\+\+SIZE\+\_\+C}~3
+\item 
+\#define \textbf{ NO\+\_\+\+BOX}~4
+\item 
+\#define \textbf{ BOX\+\_\+\+WAITING\+\_\+\+MEASURE}~0
+\item 
+\#define \textbf{ BOX\+\_\+\+MEASURED}~1
+\item 
+\#define \textbf{ BOX\+\_\+\+MOVING}~2
+\item 
+\#define \textbf{ BOX\+\_\+\+AT\+\_\+\+OUTPUT}~3
+\item 
+\#define \textbf{ BOX\+\_\+\+PUSHED}~4
+\item 
+\#define \textbf{ BOX\+\_\+\+COMPLETED}~5
+\end{DoxyCompactItemize}
+\doxysubsubsection*{typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint8\+\_\+t \textbf{ box\+\_\+type\+\_\+t}
+\item 
+typedef uint8\+\_\+t \textbf{ box\+\_\+state\+\_\+t}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de «define»}
+\index{boxTypes.h@{boxTypes.h}!BOX\_A\_MAX\_MM@{BOX\_A\_MAX\_MM}}
+\index{BOX\_A\_MAX\_MM@{BOX\_A\_MAX\_MM}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_A\_MAX\_MM}
+{\footnotesize\ttfamily \label{box_types_8h_ac4c4b329c327a55956a45a64283754c0} 
+\#define BOX\+\_\+\+A\+\_\+\+MAX\+\_\+\+MM~65}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_A\_MIN\_MM@{BOX\_A\_MIN\_MM}}
+\index{BOX\_A\_MIN\_MM@{BOX\_A\_MIN\_MM}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_A\_MIN\_MM}
+{\footnotesize\ttfamily \label{box_types_8h_ab0e1bcde089ccb70ff4d38fbbc7ec616} 
+\#define BOX\+\_\+\+A\+\_\+\+MIN\+\_\+\+MM~55}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_AT\_OUTPUT@{BOX\_AT\_OUTPUT}}
+\index{BOX\_AT\_OUTPUT@{BOX\_AT\_OUTPUT}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_AT\_OUTPUT}
+{\footnotesize\ttfamily \label{box_types_8h_a966597359fc00dca9155b9a22e9dfbc0} 
+\#define BOX\+\_\+\+AT\+\_\+\+OUTPUT~3}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_B\_MAX\_MM@{BOX\_B\_MAX\_MM}}
+\index{BOX\_B\_MAX\_MM@{BOX\_B\_MAX\_MM}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_B\_MAX\_MM}
+{\footnotesize\ttfamily \label{box_types_8h_a1e51a2fa103b46a2472b90ff20628c1b} 
+\#define BOX\+\_\+\+B\+\_\+\+MAX\+\_\+\+MM~85}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_B\_MIN\_MM@{BOX\_B\_MIN\_MM}}
+\index{BOX\_B\_MIN\_MM@{BOX\_B\_MIN\_MM}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_B\_MIN\_MM}
+{\footnotesize\ttfamily \label{box_types_8h_a46578f8d5ff6156dca1613e39bbb4ed2} 
+\#define BOX\+\_\+\+B\+\_\+\+MIN\+\_\+\+MM~75}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_C\_MAX\_MM@{BOX\_C\_MAX\_MM}}
+\index{BOX\_C\_MAX\_MM@{BOX\_C\_MAX\_MM}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_C\_MAX\_MM}
+{\footnotesize\ttfamily \label{box_types_8h_a643be9a4e55ddbdb893cbb072b7b95b4} 
+\#define BOX\+\_\+\+C\+\_\+\+MAX\+\_\+\+MM~105}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_C\_MIN\_MM@{BOX\_C\_MIN\_MM}}
+\index{BOX\_C\_MIN\_MM@{BOX\_C\_MIN\_MM}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_C\_MIN\_MM}
+{\footnotesize\ttfamily \label{box_types_8h_a5a9badd47db0d2a6a610f656033ee6c3} 
+\#define BOX\+\_\+\+C\+\_\+\+MIN\+\_\+\+MM~95}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_COMPLETED@{BOX\_COMPLETED}}
+\index{BOX\_COMPLETED@{BOX\_COMPLETED}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_COMPLETED}
+{\footnotesize\ttfamily \label{box_types_8h_a2c62bdf6bd457732d5e9976a5846a1cb} 
+\#define BOX\+\_\+\+COMPLETED~5}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_DISCARDED@{BOX\_DISCARDED}}
+\index{BOX\_DISCARDED@{BOX\_DISCARDED}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_DISCARDED}
+{\footnotesize\ttfamily \label{box_types_8h_a1c0354de379fba701b183d2bfe67d91c} 
+\#define BOX\+\_\+\+DISCARDED~0}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_LENGTH\_MM@{BOX\_LENGTH\_MM}}
+\index{BOX\_LENGTH\_MM@{BOX\_LENGTH\_MM}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_LENGTH\_MM}
+{\footnotesize\ttfamily \label{box_types_8h_a59b61f65914bd203c4d554a5859423b6} 
+\#define BOX\+\_\+\+LENGTH\+\_\+\+MM~80}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_MEASURED@{BOX\_MEASURED}}
+\index{BOX\_MEASURED@{BOX\_MEASURED}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_MEASURED}
+{\footnotesize\ttfamily \label{box_types_8h_a659cbeb1a06f792d4b11a294a1db3d9f} 
+\#define BOX\+\_\+\+MEASURED~1}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_MOVING@{BOX\_MOVING}}
+\index{BOX\_MOVING@{BOX\_MOVING}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_MOVING}
+{\footnotesize\ttfamily \label{box_types_8h_ae6948b3317b2755533c800a6bd146743} 
+\#define BOX\+\_\+\+MOVING~2}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_PUSHED@{BOX\_PUSHED}}
+\index{BOX\_PUSHED@{BOX\_PUSHED}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_PUSHED}
+{\footnotesize\ttfamily \label{box_types_8h_a8d405262d462bbe9682781ebb0bef828} 
+\#define BOX\+\_\+\+PUSHED~4}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_SIZE\_A@{BOX\_SIZE\_A}}
+\index{BOX\_SIZE\_A@{BOX\_SIZE\_A}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_SIZE\_A}
+{\footnotesize\ttfamily \label{box_types_8h_af23e34a7fdc2a92e18d37d59ed385aec} 
+\#define BOX\+\_\+\+SIZE\+\_\+A~1}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_SIZE\_B@{BOX\_SIZE\_B}}
+\index{BOX\_SIZE\_B@{BOX\_SIZE\_B}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_SIZE\_B}
+{\footnotesize\ttfamily \label{box_types_8h_a8065329f43396d9c8c0db2c6985b396d} 
+\#define BOX\+\_\+\+SIZE\+\_\+B~2}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_SIZE\_C@{BOX\_SIZE\_C}}
+\index{BOX\_SIZE\_C@{BOX\_SIZE\_C}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_SIZE\_C}
+{\footnotesize\ttfamily \label{box_types_8h_a7ac7d0a459354c284f3d95cf8e8a72b3} 
+\#define BOX\+\_\+\+SIZE\+\_\+C~3}
+
+\index{boxTypes.h@{boxTypes.h}!BOX\_WAITING\_MEASURE@{BOX\_WAITING\_MEASURE}}
+\index{BOX\_WAITING\_MEASURE@{BOX\_WAITING\_MEASURE}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{BOX\_WAITING\_MEASURE}
+{\footnotesize\ttfamily \label{box_types_8h_af47b65d4d4fff940b391c9126e6316ea} 
+\#define BOX\+\_\+\+WAITING\+\_\+\+MEASURE~0}
+
+\index{boxTypes.h@{boxTypes.h}!DISCARDED@{DISCARDED}}
+\index{DISCARDED@{DISCARDED}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{DISCARDED}
+{\footnotesize\ttfamily \label{box_types_8h_a5f93d9770df9717c26bc883797bdc07e} 
+\#define DISCARDED~flags.\+bitmap.\+bit2;}
+
+\index{boxTypes.h@{boxTypes.h}!NO\_BOX@{NO\_BOX}}
+\index{NO\_BOX@{NO\_BOX}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{NO\_BOX}
+{\footnotesize\ttfamily \label{box_types_8h_a1811a5d9673c900c9ecdd0b8155b2212} 
+\#define NO\+\_\+\+BOX~4}
+
+\index{boxTypes.h@{boxTypes.h}!SELECTED@{SELECTED}}
+\index{SELECTED@{SELECTED}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{SELECTED}
+{\footnotesize\ttfamily \label{box_types_8h_a4274041a72a0c212e4b8851b35fcf8fb} 
+\#define SELECTED~flags.\+bitmap.\+bit1;}
+
+\index{boxTypes.h@{boxTypes.h}!ZONE\_ULTRA\_CLEAR@{ZONE\_ULTRA\_CLEAR}}
+\index{ZONE\_ULTRA\_CLEAR@{ZONE\_ULTRA\_CLEAR}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{ZONE\_ULTRA\_CLEAR}
+{\footnotesize\ttfamily \label{box_types_8h_a245998ef59214aa91c4e8415c07306da} 
+\#define ZONE\+\_\+\+ULTRA\+\_\+\+CLEAR~flags.\+bitmap.\+bit0;}
+
+
+
+\doxysubsection{Documentación de «typedef»}
+\index{boxTypes.h@{boxTypes.h}!box\_state\_t@{box\_state\_t}}
+\index{box\_state\_t@{box\_state\_t}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{box\_state\_t}
+{\footnotesize\ttfamily \label{box_types_8h_afe80a3c400f8edea47b165e60aa864f0} 
+typedef uint8\+\_\+t \textbf{ box\+\_\+state\+\_\+t}}
+
+\index{boxTypes.h@{boxTypes.h}!box\_type\_t@{box\_type\_t}}
+\index{box\_type\_t@{box\_type\_t}!boxTypes.h@{boxTypes.h}}
+\doxysubsubsection{box\_type\_t}
+{\footnotesize\ttfamily \label{box_types_8h_acbdca706d57c8a5517434a35679203d1} 
+typedef uint8\+\_\+t \textbf{ box\+\_\+type\+\_\+t}}
+

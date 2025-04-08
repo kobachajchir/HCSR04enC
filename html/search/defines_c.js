@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['tcrt_5fa_0',['TCRT_A',['../main_8h.html#a2a046c1cf46c5ef97cba3fdc2717ab17',1,'main.h']]],
+  ['tcrt_5fa_5fchannel_1',['TCRT_A_CHANNEL',['../main_8h.html#ab41282b9efa703a8200a45f84e2eb0e9',1,'main.h']]],
+  ['tcrt_5fb_2',['TCRT_B',['../main_8h.html#a2985a5f35e6658f1127305a92ad444db',1,'main.h']]],
+  ['tcrt_5fb_5fchannel_3',['TCRT_B_CHANNEL',['../main_8h.html#aff4afef09637970155d3d198c4198387',1,'main.h']]],
+  ['tcrt_5fc_4',['TCRT_C',['../main_8h.html#ad5365904c85925e7b0ef4197aeda38da',1,'main.h']]],
+  ['tcrt_5fc_5fchannel_5',['TCRT_C_CHANNEL',['../main_8h.html#a86168a540ce4753f221dd4150716f3b8',1,'main.h']]],
+  ['tcrt_5fcalibrating_6',['TCRT_CALIBRATING',['../_t_c_r_t_type_8h.html#a125ab0e26f2bb1ac412f71a47977120b',1,'TCRTType.h']]],
+  ['tcrt_5fcalibration_5fsamples_7',['TCRT_CALIBRATION_SAMPLES',['../main_8h.html#a742540e08531ab429d04c662f38f445a',1,'main.h']]],
+  ['tcrt_5fcounted_8',['TCRT_COUNTED',['../_t_c_r_t_type_8h.html#ab1ca04b8aa54fa8e2f192f8674ea9ded',1,'TCRTType.h']]],
+  ['tcrt_5fdeactivated_9',['TCRT_DEACTIVATED',['../_t_c_r_t_type_8h.html#ad65614e7c0ec52e98ed49b8e43deb492',1,'TCRTType.h']]],
+  ['tcrt_5fedge_5frising_10',['TCRT_EDGE_RISING',['../_t_c_r_t_type_8h.html#a809706879c7ecc1d3d4506cca71f669c',1,'TCRTType.h']]],
+  ['tcrt_5fenabled_11',['TCRT_ENABLED',['../_t_c_r_t_type_8h.html#a213152a3579eff0f23a823b6dd55a4ae',1,'TCRTType.h']]],
+  ['tcrt_5ffilter_5fsamples_12',['TCRT_FILTER_SAMPLES',['../main_8h.html#a149ac50281c50614a19428fe2a194959',1,'main.h']]],
+  ['tcrt_5fnew_5fvalue_13',['TCRT_NEW_VALUE',['../_t_c_r_t_type_8h.html#a241afe5ca810a88721ecddf5579c3f14',1,'TCRTType.h']]],
+  ['tcrt_5fread_14',['TCRT_READ',['../_t_c_r_t_type_8h.html#a055dfb36469a50f80e5ec47af2367942',1,'TCRTType.h']]],
+  ['tcrt_5fstatus_5fidle_15',['TCRT_STATUS_IDLE',['../_t_c_r_t_type_8h.html#abff45daede267bc1f3dfef1e8f930bae',1,'TCRTType.h']]],
+  ['tcrt_5fu_16',['TCRT_U',['../main_8h.html#a875d52ca1a6faa4f6aadb2ec1fa3e405',1,'main.h']]],
+  ['tcrt_5fu_5fchannel_17',['TCRT_U_CHANNEL',['../main_8h.html#a3f77fc16a2c007cb1b92a092d9f0c599',1,'main.h']]],
+  ['timer2_5factive_18',['TIMER2_ACTIVE',['../main_8h.html#ae9fc4786d4b93cac5165ce136cb5c7fa',1,'main.h']]],
+  ['toggle_5fflag_19',['TOGGLE_FLAG',['../macros__utils_8h.html#ad0767759019e5d4c731661efc801859c',1,'macros_utils.h']]],
+  ['trigger_5factive_20',['TRIGGER_ACTIVE',['../main_8h.html#aacb43fb59e5976f8c4c6a2143386f4b0',1,'main.h']]],
+  ['trigger_5fddr_21',['TRIGGER_DDR',['../main_8h.html#aa37795c1a663743dfa7910f6cd4de805',1,'main.h']]],
+  ['trigger_5fpin_22',['TRIGGER_PIN',['../main_8h.html#adacee581176b7076b7baf0f72d81460f',1,'main.h']]],
+  ['trigger_5fport_23',['TRIGGER_PORT',['../main_8h.html#a4b6e515e6bd9995d85a203b8326fc49f',1,'main.h']]],
+  ['trigger_5fwait_5ftime_5ftenms_24',['TRIGGER_WAIT_TIME_TENMS',['../main_8h.html#a0d890da839b2db6347eb322c96be0b43',1,'main.h']]]
+];

@@ -1,0 +1,201 @@
+\doxysection{main.\+h}
+\label{main_8h_source}\index{GccApplication1/main.h@{GccApplication1/main.h}}
+\textbf{ Ir a la documentaciÃ³n de este archivo.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ main.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Created:\ 22-\/Mar-\/25\ 5:47:24\ PM}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Author:\ kobac}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ MAIN\_H\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MAIN\_H\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ ======================\ INCLUDES\ =========================\ //}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}utils/macros\_utils.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}types/bitmapType.h"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}types/ultrasonicDetectorType.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}types/sorterSystemTypes.h"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}types/TCRTType.h"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}types/outputType.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}types/servoType.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}types/protocolTypes.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}types/configType.h"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}ultrasonic.h"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}ultrasonic\_hal.h"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <avr/io.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <avr/eeprom.h>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <avr/pgmspace.h>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ ======================\ DEFINES\ =========================\ //}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ -\/-\/-\/\ Frecuencia\ de\ reloj\ -\/-\/-\/}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ F\_CPU\ 16000000UL\ \ }\textcolor{comment}{//\ 16\ MHz}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ -\/-\/-\/\ Pines\ del\ sistema\ -\/-\/-\/}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ TRIGGER\_PIN\ \ \ \ \ \ PD3}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ TRIGGER\_DDR\ \ \ \ \ \ DDRD}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ TRIGGER\_PORT\ \ \ \ \ PORTD}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ ECHO\_PIN\ \ \ \ \ \ \ \ \ PB0}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ BUTTON\_PIN\ \ \ \ \ \ \ PD4}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ LED\_BUILTIN\_PIN\ \ PB5}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ SERVOA\_PIN\ \ \ \ \ \ \ PB1}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ SERVOB\_PIN\ \ \ \ \ \ \ PB2}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ SERVOC\_PIN\ \ \ \ \ \ \ PB3}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ -\/-\/-\/\ Pines\ TCRT\ -\/-\/-\/}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ TCRT\_A\ PC0}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ TCRT\_B\ PC1}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ TCRT\_C\ PC2}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ TCRT\_U\ PC3}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ TCRT\_A\_CHANNEL\ 0}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ TCRT\_B\_CHANNEL\ 1}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ TCRT\_C\_CHANNEL\ 2}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ TCRT\_U\_CHANNEL\ 3}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ -\/-\/-\/\ Parámetros\ TCRT\ -\/-\/-\/}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ TCRT\_CALIBRATION\_SAMPLES\ 10}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ TCRT\_FILTER\_SAMPLES\ 10}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ -\/-\/-\/\ Parámetros\ de\ distancia\ ultrasónica\ -\/-\/-\/}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ DISTANCE\_MIN\_MM\ 30}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ DISTANCE\_MAX\_MM\ 2000}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ ECHO\_INTERVAL\_TENMS\ 10}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ TRIGGER\_WAIT\_TIME\_TENMS\ 6}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ -\/-\/-\/\ Parámetros\ Servo\ -\/-\/-\/}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ SERVO\_MIN\_PULSE\ \ \ \ \ 2000UL}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ SERVO\_START\_PULSE\ \ \ 3000UL}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ SERVO\_MAX\_PULSE\ \ \ \ \ 4000UL}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ SERVO\_FRAME\_PERIOD\ \ 40000}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ SERVO\_RESET\_TIME\ \ \ \ 30}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ SERVO\_ACTIVE\_TIME\ \ \ 10}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ SERVO\_PUSH\_ANGLE\ \ \ \ 0}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ SERVO\_IDLE\_ANGLE\ \ \ \ 90}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ -\/-\/-\/\ Tipos\ de\ caja\ (para\ mapeo\ lógico)\ -\/-\/-\/}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ CAJA\_GRANDE\ 3}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ CAJA\_MEDIA\ \ 2}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ CAJA\_CHICA\ \ 1}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ DESCARTE\ \ \ \ 0}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{comment}{//\ -\/-\/-\/\ Parámetros\ de\ botón -\/-\/-\/}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ BTN\_PRESS\_TIME\ 10}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ -\/-\/-\/\ Parámetros\ de\ protocolo\ -\/-\/-\/}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ PROTOCOL\_MIN\_BYTE\_COUNT\ 6}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ PROTOCOL\_MAX\_BYTE\_COUNT\ 24}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ PROTOCOL\_FIXED\_SIZE\ \ \ \ \ 8}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{comment}{//\ -\/-\/-\/\ Información del\ dispositivo\ -\/-\/-\/}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ DEV\_REPOSITORY\ \ \ \ \ \ \ \ "{}github.com/kobachajchir/HCSR04enC"{}}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ DEV\_FIRMWARE\_VERSION\ "{}1.0.0"{}}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ ======================\ FLAGS\ =========================\ //}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ -\/-\/-\/\ Byte\ de\ flags\ generales\ -\/-\/-\/}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ ALL\_FLAGS\ flags.byte}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ -\/-\/-\/\ Byte\ 1\ -\/-\/-\/}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ BTN\_RELEASED\ \ \ \ \ \ \ \ \ \ \ \ bandera.bitmap.bit0}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ TIMER2\_ACTIVE\ \ \ \ \ \ \ \ \ \ \ bandera.bitmap.bit1}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ BTN\_OVF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bandera.bitmap.bit2}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ ECHO\_INTERVAL\_FLAG\ \ \ \ \ bandera.bitmap.bit3}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ IR\_READ\_INTERRUPT\ \ \ \ \ \ bandera.bitmap.bit4}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ IR\_CALIBRATED\ \ \ \ \ \ \ \ \ \ bandera.bitmap.bit5}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ BTN\_PRESSED\ \ \ \ \ \ \ \ \ \ \ \ bandera.bitmap.bit6}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ ULTRASONIC\_ENABLE\ \ \ \ \ \ bandera.bitmap.bit7}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{comment}{//\ -\/-\/-\/\ Byte\ 2\ -\/-\/-\/}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ VEINTEMS\_PASSED\ \ \ \ \ \ \ \ \ \ \ \ bandera2.bitmap.bit0}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ EMIT\_TRIGGER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bandera2.bitmap.bit1}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ EMIT\_FAILED\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bandera2.bitmap.bit2}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ WAITING\_ECHO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bandera2.bitmap.bit3}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ WAIT\_TIME\_TRIGGER\_PASSED\ \ bandera2.bitmap.bit4}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ TRIGGER\_ACTIVE\ \ \ \ \ \ \ \ \ \ \ \ \ bandera2.bitmap.bit5}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ DEBUG\_FLAGS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bandera2.bitmap.bit6}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ DEBUG\_FLAGS\_SORTER\ \ \ \ \ \ \ \ \ bandera2.bitmap.bit7}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{comment}{//\ -\/-\/-\/\ Byte\ 3\ -\/-\/-\/}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ DEBUG\_FLAGS\_SERVOS\ \ \ \ \ \ \ bandera3.bitmap.bit0}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ DEBUG\_FLAGS\_EEPROM\ \ \ \ \ \ \ bandera3.bitmap.bit1}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#define\ IS\_TRANSMITTING\ \ \ \ \ \ \ \ \ \ bandera3.bitmap.bit3}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ CREATE\_RESPONSE\_PCK\ \ \ \ \ \ bandera3.bitmap.bit4}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ DO\_ACTION\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bandera3.bitmap.bit5}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ NEW\_CONFIG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bandera3.bitmap.bit6}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \textcolor{comment}{//\ ======================\ Máscaras\ =========================\ //}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \textcolor{comment}{//\ -\/-\/-\/\ Bits\ individuales\ -\/-\/-\/}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ BIT0\_MASK\ 0x01}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#define\ BIT1\_MASK\ 0x02}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#define\ BIT2\_MASK\ 0x04}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#define\ BIT3\_MASK\ 0x08}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#define\ BIT4\_MASK\ 0x10}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#define\ BIT5\_MASK\ 0x20}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#define\ BIT6\_MASK\ 0x40}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ BIT7\_MASK\ 0x80}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{comment}{//\ -\/-\/-\/\ Pares\ de\ bits\ -\/-\/-\/}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ BITS01\_MASK\ 0x03}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#define\ BITS23\_MASK\ 0x0C}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ BITS45\_MASK\ 0x30}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#define\ BITS67\_MASK\ 0xC0}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{comment}{//\ -\/-\/-\/\ Nibbles\ -\/-\/-\/}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#define\ NIBBLE\_L\_MASK\ 0x0F}}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#define\ NIBBLE\_H\_MASK\ 0xF0}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{comment}{//\ ======================\ VARIABLES\ EXTERNAS\ =========================\ //}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \textcolor{keyword}{extern}\ Byte\_Flag\_Struct\ bandera;}
+\DoxyCodeLine{00150\ \textcolor{keyword}{extern}\ Byte\_Flag\_Struct\ bandera2;}
+\DoxyCodeLine{00151\ \textcolor{keyword}{extern}\ Byte\_Flag\_Struct\ bandera3;}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint16\_t\ echo\_init\_time;}
+\DoxyCodeLine{00154\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint16\_t\ echo\_finish\_time;}
+\DoxyCodeLine{00155\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint16\_t\ distance\_mm;}
+\DoxyCodeLine{00156\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint32\_t\ pulse\_width\_A;}
+\DoxyCodeLine{00157\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint8\_t\ ovf\_count;}
+\DoxyCodeLine{00158\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint8\_t\ wait\_time;}
+\DoxyCodeLine{00159\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint8\_t\ btn\_pressed\_time;}
+\DoxyCodeLine{00160\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint8\_t\ echo\_state;}
+\DoxyCodeLine{00161\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint8\_t\ servo\_counter;}
+\DoxyCodeLine{00162\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint8\_t\ transmit\_counter;}
+\DoxyCodeLine{00163\ \textcolor{keyword}{extern}\ uint8\_t\ doActionCmd;}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{comment}{//\ -\/-\/-\/\ Objetos\ del\ sistema\ -\/-\/-\/}}
+\DoxyCodeLine{00166\ \textcolor{keyword}{extern}\ ultrasonic\_t\ ultraSensor;}
+\DoxyCodeLine{00167\ \textcolor{keyword}{extern}\ Ultrasonic\_Detector\_t\ hcsr04Detector;}
+\DoxyCodeLine{00168\ \textcolor{keyword}{extern}\ sorter\_system\_t\ SorterSystem;}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \textcolor{comment}{//\ -\/-\/-\/\ Sensores\ TCRT\ -\/-\/-\/}}
+\DoxyCodeLine{00171\ \textcolor{keyword}{extern}\ TCRT\_t\ IR\_A;}
+\DoxyCodeLine{00172\ \textcolor{keyword}{extern}\ TCRT\_t\ IR\_B;}
+\DoxyCodeLine{00173\ \textcolor{keyword}{extern}\ TCRT\_t\ IR\_C;}
+\DoxyCodeLine{00174\ \textcolor{keyword}{extern}\ TCRT\_t\ IR\_U;}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{comment}{//\ -\/-\/-\/\ Servos\ -\/-\/-\/}}
+\DoxyCodeLine{00177\ \textcolor{keyword}{extern}\ servo\_t\ servoA;}
+\DoxyCodeLine{00178\ \textcolor{keyword}{extern}\ servo\_t\ servoB;}
+\DoxyCodeLine{00179\ \textcolor{keyword}{extern}\ servo\_t\ servoC;}
+\DoxyCodeLine{00180\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ servo\_t*\ servosArray[NUM\_OUTPUTS];}
+\DoxyCodeLine{00181\ \textcolor{keyword}{extern}\ \textcolor{keyword}{volatile}\ uint8\_t\ current\_servo;}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{comment}{//\ -\/-\/-\/\ Salidas\ -\/-\/-\/}}
+\DoxyCodeLine{00184\ \textcolor{keyword}{extern}\ output\_t\ salidaA;}
+\DoxyCodeLine{00185\ \textcolor{keyword}{extern}\ output\_t\ salidaB;}
+\DoxyCodeLine{00186\ \textcolor{keyword}{extern}\ output\_t\ salidaC;}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \textcolor{comment}{//\ -\/-\/-\/\ Protocolo\ de\ comunicación -\/-\/-\/}}
+\DoxyCodeLine{00189\ \textcolor{keyword}{extern}\ ProtocolService\ protocolService;}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \textcolor{comment}{//\ -\/-\/-\/\ Configuración EEPROM\ -\/-\/-\/}}
+\DoxyCodeLine{00192\ \textcolor{keyword}{extern}\ Config\_t\ currentConfig;}
+\DoxyCodeLine{00193\ \textcolor{keyword}{extern}\ EEMEM\ Config\_t\ eepromConfig;}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MAIN\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

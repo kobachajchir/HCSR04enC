@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clasificadora_Microcontroladores_CHAJCHIR_ARRUA: Referencia del archivo GccApplication1/utils/protocol/protocol_utils.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Clasificadora_Microcontroladores_CHAJCHIR_ARRUA<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">El proyecto desarrolla un sistema de clasificacion de cajas a traves de medicion de altura, con configuracion mediante un protocolo de comunicaciÃ³n serial no bloqueante - AVR C- ATMEGA328p</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('protocol__utils_8h.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo protocol_utils.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="main_8h_source.html">../../main.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="protocol_types_8h_source.html">../../types/protocolTypes.h</a>&quot;</code><br />
+</div>
+<p><a href="protocol__utils_8h_source.html">Ir al cÃ³digo fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a580f5b54cedd59bd94e8ec5816c2a2e9" id="r_a580f5b54cedd59bd94e8ec5816c2a2e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a580f5b54cedd59bd94e8ec5816c2a2e9">initProtocolService</a> (<a class="el" href="struct_protocol_service.html">ProtocolService</a> *service)</td></tr>
+<tr class="memdesc:a580f5b54cedd59bd94e8ec5816c2a2e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa la estructura del servicio de protocolo.  <br /></td></tr>
+<tr class="separator:a580f5b54cedd59bd94e8ec5816c2a2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf84a8818e3bab8f36f25a19bae27f0b" id="r_adf84a8818e3bab8f36f25a19bae27f0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf84a8818e3bab8f36f25a19bae27f0b">verify_header</a> ()</td></tr>
+<tr class="memdesc:adf84a8818e3bab8f36f25a19bae27f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica la validez del encabezado del paquete.  <br /></td></tr>
+<tr class="separator:adf84a8818e3bab8f36f25a19bae27f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08b2dcbb3c316e5decef49a29c637e8b" id="r_a08b2dcbb3c316e5decef49a29c637e8b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08b2dcbb3c316e5decef49a29c637e8b">process_protocol_buffer</a> ()</td></tr>
+<tr class="memdesc:a08b2dcbb3c316e5decef49a29c637e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Procesa el buffer de protocolo buscando un encabezado válido.  <br /></td></tr>
+<tr class="separator:a08b2dcbb3c316e5decef49a29c637e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15ec5468109225537cfc49bea1eab6e7" id="r_a15ec5468109225537cfc49bea1eab6e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15ec5468109225537cfc49bea1eab6e7">clear_receive_pck</a> ()</td></tr>
+<tr class="memdesc:a15ec5468109225537cfc49bea1eab6e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limpia el contenido del paquete recibido.  <br /></td></tr>
+<tr class="separator:a15ec5468109225537cfc49bea1eab6e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cf1f9c367026cf7e40fc83ee85195a1" id="r_a1cf1f9c367026cf7e40fc83ee85195a1"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1cf1f9c367026cf7e40fc83ee85195a1">calculatePayload</a> ()</td></tr>
+<tr class="memdesc:a1cf1f9c367026cf7e40fc83ee85195a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcula el checksum del payload recibido.  <br /></td></tr>
+<tr class="separator:a1cf1f9c367026cf7e40fc83ee85195a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0f3c5d4d9ab3ca4db5904779ea566b" id="r_a1d0f3c5d4d9ab3ca4db5904779ea566b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d0f3c5d4d9ab3ca4db5904779ea566b">createPck</a> (uint8_t cmd, uint8_t *payload, uint8_t payloadLength)</td></tr>
+<tr class="memdesc:a1d0f3c5d4d9ab3ca4db5904779ea566b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea un paquete en la estructura receivePck del servicio de protocolo.  <br /></td></tr>
+<tr class="separator:a1d0f3c5d4d9ab3ca4db5904779ea566b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ddb01731316a71cad2d59f90a60a3c" id="r_a90ddb01731316a71cad2d59f90a60a3c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90ddb01731316a71cad2d59f90a60a3c">validatePck</a> ()</td></tr>
+<tr class="memdesc:a90ddb01731316a71cad2d59f90a60a3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Valida el contenido del paquete recibido.  <br /></td></tr>
+<tr class="separator:a90ddb01731316a71cad2d59f90a60a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c9f245a970a7477ef15163c8fbad2ad" id="r_a8c9f245a970a7477ef15163c8fbad2ad"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c9f245a970a7477ef15163c8fbad2ad">create_payload</a> (<a class="el" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">Command</a> cmd)</td></tr>
+<tr class="memdesc:a8c9f245a970a7477ef15163c8fbad2ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea el payload de respuesta según el comando dado.  <br /></td></tr>
+<tr class="separator:a8c9f245a970a7477ef15163c8fbad2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a144316f6181d2cf60af7e79adce806fb" id="r_a144316f6181d2cf60af7e79adce806fb"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a144316f6181d2cf60af7e79adce806fb">protocolTask</a> ()</td></tr>
+<tr class="memdesc:a144316f6181d2cf60af7e79adce806fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ejecuta la tarea principal del protocolo.  <br /></td></tr>
+<tr class="separator:a144316f6181d2cf60af7e79adce806fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37df37e33f461231b6060fd8743162d3" id="r_a37df37e33f461231b6060fd8743162d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37df37e33f461231b6060fd8743162d3">doAction</a> (uint8_t cmd)</td></tr>
+<tr class="memdesc:a37df37e33f461231b6060fd8743162d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ejecuta la acción correspondiente al comando recibido.  <br /></td></tr>
+<tr class="separator:a37df37e33f461231b6060fd8743162d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79c698dc24844438de1432e7ffdbe884" id="r_a79c698dc24844438de1432e7ffdbe884"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79c698dc24844438de1432e7ffdbe884">printCommandMessage</a> (<a class="el" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">Command</a> cmd)</td></tr>
+<tr class="memdesc:a79c698dc24844438de1432e7ffdbe884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imprime un mensaje por consola según el comando recibido.  <br /></td></tr>
+<tr class="separator:a79c698dc24844438de1432e7ffdbe884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">DocumentaciÃ³n de funciones</h2>
+<a id="a1cf1f9c367026cf7e40fc83ee85195a1" name="a1cf1f9c367026cf7e40fc83ee85195a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cf1f9c367026cf7e40fc83ee85195a1">&#9670;&#160;</a></span>calculatePayload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t calculatePayload </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calcula el checksum del payload recibido. </p>
+<p>Realiza una operación XOR sobre el encabezado, longitud, token, comando y todos los bytes del payload para verificar la integridad de los datos.</p>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">uint8_t</td><td>Checksum calculado. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a15ec5468109225537cfc49bea1eab6e7" name="a15ec5468109225537cfc49bea1eab6e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15ec5468109225537cfc49bea1eab6e7">&#9670;&#160;</a></span>clear_receive_pck()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clear_receive_pck </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Limpia el contenido del paquete recibido. </p>
+<p>Borra todos los campos del <code>receivePck</code> para permitir recibir un nuevo paquete. </p>
+
+</div>
+</div>
+<a id="a8c9f245a970a7477ef15163c8fbad2ad" name="a8c9f245a970a7477ef15163c8fbad2ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c9f245a970a7477ef15163c8fbad2ad">&#9670;&#160;</a></span>create_payload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t create_payload </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">Command</a></td>          <td class="paramname"><span class="paramname"><em>cmd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crea el payload de respuesta según el comando dado. </p>
+<p>Llena el buffer de transmisión con el contenido adecuado según el comando de respuesta solicitado.</p>
+<dl class="params"><dt>ParÃ¡metros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>Comando de respuesta. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">uint8_t</td><td>Longitud del payload generado. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1d0f3c5d4d9ab3ca4db5904779ea566b" name="a1d0f3c5d4d9ab3ca4db5904779ea566b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d0f3c5d4d9ab3ca4db5904779ea566b">&#9670;&#160;</a></span>createPck()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void createPck </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>cmd</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>payload</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>payloadLength</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crea un paquete en la estructura receivePck del servicio de protocolo. </p>
+<p>Asigna encabezado, longitud, token, comando, payload y checksum.</p>
+<dl class="params"><dt>ParÃ¡metros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>Comando del paquete. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">payload</td><td>Puntero al buffer con los datos del payload. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">payloadLength</td><td>Longitud del payload en bytes. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a37df37e33f461231b6060fd8743162d3" name="a37df37e33f461231b6060fd8743162d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37df37e33f461231b6060fd8743162d3">&#9670;&#160;</a></span>doAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void doAction </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>cmd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ejecuta la acción correspondiente al comando recibido. </p>
+<p>Interpreta el comando y actualiza el estado del sistema o las configuraciones, además de preparar una respuesta si corresponde.</p>
+<dl class="params"><dt>ParÃ¡metros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>Comando a ejecutar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a580f5b54cedd59bd94e8ec5816c2a2e9" name="a580f5b54cedd59bd94e8ec5816c2a2e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a580f5b54cedd59bd94e8ec5816c2a2e9">&#9670;&#160;</a></span>initProtocolService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initProtocolService </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_protocol_service.html">ProtocolService</a> *</td>          <td class="paramname"><span class="paramname"><em>service</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicializa la estructura del servicio de protocolo. </p>
+<p>Esta función reinicia los índices del buffer circular de recepción, borra las banderas internas y limpia el paquete recibido.</p>
+<dl class="params"><dt>ParÃ¡metros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">service</td><td>Puntero a la estructura del servicio de protocolo a inicializar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a79c698dc24844438de1432e7ffdbe884" name="a79c698dc24844438de1432e7ffdbe884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c698dc24844438de1432e7ffdbe884">&#9670;&#160;</a></span>printCommandMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printCommandMessage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">Command</a></td>          <td class="paramname"><span class="paramname"><em>cmd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Imprime un mensaje por consola según el comando recibido. </p>
+<p>Solo con fines de depuración, informa qué comando se está procesando.</p>
+<dl class="params"><dt>ParÃ¡metros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">cmd</td><td>Comando recibido. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a08b2dcbb3c316e5decef49a29c637e8b" name="a08b2dcbb3c316e5decef49a29c637e8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08b2dcbb3c316e5decef49a29c637e8b">&#9670;&#160;</a></span>process_protocol_buffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool process_protocol_buffer </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Procesa el buffer de protocolo buscando un encabezado válido. </p>
+<p>Si hay suficientes bytes disponibles y se detecta un encabezado válido, la función devuelve true para continuar con el procesamiento.</p>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>Si se detectó un encabezado válido. </td></tr>
+    <tr><td class="paramname">false</td><td>Si no hay suficientes datos o el encabezado es inválido. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a144316f6181d2cf60af7e79adce806fb" name="a144316f6181d2cf60af7e79adce806fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a144316f6181d2cf60af7e79adce806fb">&#9670;&#160;</a></span>protocolTask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t protocolTask </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ejecuta la tarea principal del protocolo. </p>
+<p>Procesa el estado del protocolo, verifica si hay datos nuevos, valida paquetes, dispara acciones y maneja las respuestas.</p>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">uint8_t</td><td>Reservado (sin uso actual). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a90ddb01731316a71cad2d59f90a60a3c" name="a90ddb01731316a71cad2d59f90a60a3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90ddb01731316a71cad2d59f90a60a3c">&#9670;&#160;</a></span>validatePck()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool validatePck </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Valida el contenido del paquete recibido. </p>
+<p>Extrae cada campo del buffer circular (longitud, token, comando, payload, checksum) y verifica la validez del paquete.</p>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>Si el paquete es válido. </td></tr>
+    <tr><td class="paramname">false</td><td>Si el paquete es inválido. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adf84a8818e3bab8f36f25a19bae27f0b" name="adf84a8818e3bab8f36f25a19bae27f0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf84a8818e3bab8f36f25a19bae27f0b">&#9670;&#160;</a></span>verify_header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool verify_header </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifica la validez del encabezado del paquete. </p>
+<p>Calcula una suma ponderada de los primeros 4 bytes del buffer para determinar si el encabezado "UNER" es válido.</p>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>Si el encabezado es válido. </td></tr>
+    <tr><td class="paramname">false</td><td>Si el encabezado no coincide con el esperado. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_027ef9e0f692986d43197b4d06e3469a.html">GccApplication1</a></li><li class="navelem"><a class="el" href="dir_c5b957d7e6a230f62d155e8b047a756c.html">utils</a></li><li class="navelem"><a class="el" href="dir_7aaff39f7484687f63d32d00e6b624eb.html">protocol</a></li><li class="navelem"><a class="el" href="protocol__utils_8h.html">protocol_utils.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clasificadora_Microcontroladores_CHAJCHIR_ARRUA: Archivo de código fuente GccApplication1/types/protocolTypes.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Clasificadora_Microcontroladores_CHAJCHIR_ARRUA<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">El proyecto desarrolla un sistema de clasificacion de cajas a traves de medicion de altura, con configuracion mediante un protocolo de comunicación serial no bloqueante - AVR C- ATMEGA328p</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('protocol_types_8h_source.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">protocolTypes.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="protocol_types_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">CMD_ALIVE: 55 4E 45 52 00 3A A0 96</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">CMD_START: 55 4E 45 52 01 3A B1 01 87</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">CMD_STOP: 55 4E 45 52 01 3A B2 00 85</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">CMD_SET_CONFIG: 55 4E 45 52 0B 3A C0 30 3A 43 2D 31 3A 42 2D 32 3A 41 B4 //PAYLOAD: 30 3A 43 2D 31 3A 42 2D 32 3A 41 ? equivale a la cadena &quot;0:C-1:B-2:A&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">CMD_GET_CONFIG: 55 4E 45 52 00 3A C1 F7</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">CMD_GET_FIRMWARE: 55 4E 45 52 00 3A F0 C6</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">CMD_GET_STATS: 55 4E 45 52 00 3A F1 C7</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">CMD_CLEAR_STATS: 55 4E 45 52 00 3A F2 C4</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">CMD_GET_REPOSITORY: 55 4E 45 52 00 3A F3 C5</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">CMD_CONFIG_RESET: 55 4E 45 52 00 3A F4 C2</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">CMD_INVALID: 55 4E 45 52 00 3A E0 D6</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#ifndef PROTOCOLTYPE_H_</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define PROTOCOLTYPE_H_</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="bitmap_type_8h.html">bitmapType.h</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a97dca2d0b0106e4ec570f56e57a19828">   35</a></span><span class="preprocessor">#define PROTOCOL_BUFFER_SIZE 64  </span><span class="comment">// Buffer circular de 64 bytes</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#afce7b983af6e0a7030312f191f7436c3">   36</a></span><span class="preprocessor">#define PROTOCOL_TOKEN &#39;:&#39;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a67f231e93356740a14cef227c561e23a">   37</a></span><span class="preprocessor">#define PROTOCOL_PACING_TOKEN &#39;-&#39;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#afec2f77f903d62337db067cc091a3b6f">   38</a></span><span class="preprocessor">#define EXPECTED_HEADER_SUM 0x1A</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a83b2ba59b5d89fe8d0bffef1706c0074">   40</a></span><span class="preprocessor">#define PROTOSERV_IDLE 0</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a29ce89b81ff9dc83ba6fb3efef25cdaa">   41</a></span><span class="preprocessor">#define PROTOSERV_READING_HEADER 1</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#afae02f42e89ab2ec4a00fb3a6f8506d5">   42</a></span><span class="preprocessor">#define PROTOSERV_READING_LEN 2 </span><span class="comment">//encuentra : y pasa a reading cmd</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a018d8f99dc97a5755671fa127bcf3cdf">   43</a></span><span class="preprocessor">#define PROTOSERV_READING_TOKEN 3</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a127ef9515f27712ebcdaabca5d5d31ba">   44</a></span><span class="preprocessor">#define PROTOSERV_READING_CMD 4</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a642bf4dd0d7cd473f675c25ef8b11680">   45</a></span><span class="preprocessor">#define PROTOSERV_READING_PAYLOAD 5</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a9784f0833be32605c6eed1cbc1949a0e">   46</a></span><span class="preprocessor">#define PROTOSERV_READING_CHK 6</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a05bce06dc6718985cdf92e7a2b8855eb">   47</a></span><span class="preprocessor">#define PROTOSERV_CALCULATING_CHK 7</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a107bb2716f3e0d52d1f644620517af79">   48</a></span><span class="preprocessor">#define PROTOSERV_PROCESSING_PAYLOAD 8</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a3fea8937093eb1182d665cfa3adba072">   49</a></span><span class="preprocessor">#define PROTOSERV_VALIDATED 9</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#acdf73bd77064a890f4dc7efa001c8c14">   50</a></span><span class="preprocessor">#define PROTOSERV_SEND 10</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#af3c1967f3d19eb7aa640878b20b94437">   51</a></span><span class="preprocessor">#define PROTOSERV_SEND_DONE 11</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#ae9e6ba86d6b493519b630c6825f46a2a">   53</a></span><span class="preprocessor">#define PROTOSERV_PROCESSING BIT0_MASK</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a72147e705b550a1d8dd7302a59c3c2d4">   54</a></span><span class="preprocessor">#define PROTOSERV_CHECKDATA BIT1_MASK</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a00243a90ba8adda8e3a5511ea5e34a64">   55</a></span><span class="preprocessor">#define PROTOSERV_RESET BIT2_MASK</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a9c6674f5c02cbb5157b8b8990fd38bef">   56</a></span><span class="preprocessor">#define PROTOSERV_CREATE_PCK BIT3_MASK</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="};">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="struct_protocol_frame.html">   64</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="struct_protocol_frame.html#a2c189e50aec5ffd2583d1e6ca0ac818d">   65</a></span>    uint8_t <a class="code hl_variable" href="struct_protocol_frame.html#a2c189e50aec5ffd2583d1e6ca0ac818d">header</a>[4];           <span class="comment">// HEADER (4 bytes)</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="struct_protocol_frame.html#ab2b3adeb2a67e656ff030b56727fd0ac">   66</a></span>    uint8_t <a class="code hl_variable" href="struct_protocol_frame.html#ab2b3adeb2a67e656ff030b56727fd0ac">length</a>;              <span class="comment">// LENGTH (1 byte)</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="struct_protocol_frame.html#afb6cdb8d697f6e4b925161d99a2daa3c">   67</a></span>    uint8_t <a class="code hl_variable" href="struct_protocol_frame.html#afb6cdb8d697f6e4b925161d99a2daa3c">token</a>;               <span class="comment">// TOKEN (1 byte)</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="struct_protocol_frame.html#a4d43e8212bdc9dbee866506f04effcea">   68</a></span>    uint8_t <a class="code hl_variable" href="struct_protocol_frame.html#a4d43e8212bdc9dbee866506f04effcea">cmd</a>;                 <span class="comment">// CMD (1 byte)</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="struct_protocol_frame.html#aa5cbdad2c57e9b3f949e1a4d96382b66">   69</a></span>    uint8_t* <a class="code hl_variable" href="struct_protocol_frame.html#aa5cbdad2c57e9b3f949e1a4d96382b66">payload</a>;            <span class="comment">// PAYLOAD (N bytes) //Marca la posicion en el buffer de protoService</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="struct_protocol_frame.html#a59eac9627282a484fbaf0aa7aa3b8a9a">   70</a></span>    uint8_t <a class="code hl_variable" href="struct_protocol_frame.html#a59eac9627282a484fbaf0aa7aa3b8a9a">checksum</a>;            <span class="comment">// CHECKSUM (1 byte)</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>} <a class="code hl_struct" href="struct_protocol_frame.html">ProtocolFrame</a>;</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="};">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">   77</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="comment">// Responses</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ae71d8347b3a378275d25c0fa2390a656">   79</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ae71d8347b3a378275d25c0fa2390a656">CMD_RESPONSE_ALIVE</a>           = 0x00, <span class="comment">// Response: Alive confirmation</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a6217a381c5786a155085bfaba7ec13e7">   80</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a6217a381c5786a155085bfaba7ec13e7">CMD_RESPONSE_START</a>           = 0x01, <span class="comment">// Response for start command</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aadcc6e5ea864b7a393caa60a6b2c21cc">   81</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aadcc6e5ea864b7a393caa60a6b2c21cc">CMD_RESPONSE_STOP</a>            = 0x02, <span class="comment">// Response for stop command</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153acaff8db12249596e200bfa164b1635ce">   82</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153acaff8db12249596e200bfa164b1635ce">CMD_RESPONSE_SET_CONFIG</a>      = 0x03, <span class="comment">// Response for set configuration command</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ac7bb9d98ad702fa7111b56d0e6cb0566">   83</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ac7bb9d98ad702fa7111b56d0e6cb0566">CMD_RESPONSE_GET_CONFIG</a>      = 0x04, <span class="comment">// Response for get configuration command</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a090163e2fae1e30931cd9ac2375d18e1">   84</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a090163e2fae1e30931cd9ac2375d18e1">CMD_RESPONSE_CLEAR_STATS</a>     = 0x05, <span class="comment">// Response for clear statistics command</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aa056e9e94661dc04354c66720f1fa3ca">   85</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aa056e9e94661dc04354c66720f1fa3ca">CMD_RESPONSE_GET_STATS</a>       = 0x06, <span class="comment">// Response for get statistics command</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153afe4ad3aedccf8e8724bd15419b8386a5">   86</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153afe4ad3aedccf8e8724bd15419b8386a5">CMD_RESPONSE_GET_FIRMWARE</a>    = 0x07, <span class="comment">// Response for get firmware command</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ada903e8272ed337ff9b9eb3a43e466e1">   87</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ada903e8272ed337ff9b9eb3a43e466e1">CMD_RESPONSE_GET_REPOSITORY</a>  = 0x08, <span class="comment">// Response for get repository command</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a299d7c38ee6f60295ecfba88ac21203d">   88</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a299d7c38ee6f60295ecfba88ac21203d">CMD_RESPONSE_CONFIG_RESET</a>    = 0x09, <span class="comment">// Response for reset configuration command</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="comment">// Main commands</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a9d0d1fded8cfc6c0ea499069e47b9a6d">   91</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a9d0d1fded8cfc6c0ea499069e47b9a6d">CMD_ALIVE</a>                    = 0xA0, <span class="comment">// Command indicating device is alive</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153af2e188a52388c10d5e2f48ca37b28287">   93</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153af2e188a52388c10d5e2f48ca37b28287">CMD_START</a>                    = 0xB1, <span class="comment">// Start command</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a1e0ceff2d6f13742786f42dac58149bc">   94</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a1e0ceff2d6f13742786f42dac58149bc">CMD_STOP</a>                     = 0xB2, <span class="comment">// Stop command</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a77553c4f9197b5892c5827a04c25a968">   96</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a77553c4f9197b5892c5827a04c25a968">CMD_SET_CONFIG</a>               = 0xC0, <span class="comment">// Command to set configuration</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a72722dc0846a5fc226f850301b703609">   97</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a72722dc0846a5fc226f850301b703609">CMD_GET_CONFIG</a>               = 0xC1, <span class="comment">// Command to get configuration</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a741e61299ea78bb03b9626d8f08cb560">   99</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a741e61299ea78bb03b9626d8f08cb560">CMD_GET_FIRMWARE</a>             = 0xF0, <span class="comment">// Command to get firmware</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a193c61fec5859d400a7be6c5004d53e1">  100</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a193c61fec5859d400a7be6c5004d53e1">CMD_GET_STATS</a>                = 0xF1, <span class="comment">// Command to get statistics</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ad9e5adb03d3a730515fa242ada2dbf07">  101</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ad9e5adb03d3a730515fa242ada2dbf07">CMD_CLEAR_STATS</a>              = 0xF2, <span class="comment">// Command to clear statistics</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a69bbf851a56abbc6aa8071b0c65de361">  102</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a69bbf851a56abbc6aa8071b0c65de361">CMD_GET_REPOSITORY</a>           = 0xF3, <span class="comment">// Command to get repository</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2614ba7375b53f5c79e26a4336d141e4">  103</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2614ba7375b53f5c79e26a4336d141e4">CMD_CONFIG_RESET</a>             = 0xF4, <span class="comment">// Command to reset config</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="comment">// Debug commands (zona 0xE...)</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153acc6119a105ceede6b8e6504ecc4e6aa2">  106</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153acc6119a105ceede6b8e6504ecc4e6aa2">CMD_DEBUG_ULTRA</a>              = 0xE1, <span class="comment">// Enable/disable ultrasonic debug</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a9369af5b4a3ee3506d8c843afae5283d">  107</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a9369af5b4a3ee3506d8c843afae5283d">CMD_DEBUG_SERVOS</a>             = 0xE2, <span class="comment">// Enable/disable servos debug</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aea7d37b475d634f7a56b2cd6003c43a4">  108</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aea7d37b475d634f7a56b2cd6003c43a4">CMD_DEBUG_SORTER</a>             = 0xE3, <span class="comment">// Enable/disable sorter debug</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ae54ab9a4321541e41e3550f87b56cb65">  109</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ae54ab9a4321541e41e3550f87b56cb65">CMD_DEBUG_EEPROM</a>             = 0xE4, <span class="comment">// Enable/disable EEPROM debug</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="comment">// Debug responses (zona 0x0X)</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a7211269bed65fac5327f695eff84b029">  111</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a7211269bed65fac5327f695eff84b029">CMD_RESPONSE_DEBUG_ULTRA</a>     = 0x0A, <span class="comment">// Response for ultrasonic debug toggle</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2b0c16a57a97aa8ae4a9ece588c6fc59">  112</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2b0c16a57a97aa8ae4a9ece588c6fc59">CMD_RESPONSE_DEBUG_SERVOS</a>    = 0x0B, <span class="comment">// Response for servos debug toggle</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2f95b197115257659189e9c7902fc8a6">  113</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2f95b197115257659189e9c7902fc8a6">CMD_RESPONSE_DEBUG_SORTER</a>    = 0x0C, <span class="comment">// Response for sorter debug toggle</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aff76a8635a0d75ee0eb5440a940df8f3">  114</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aff76a8635a0d75ee0eb5440a940df8f3">CMD_RESPONSE_DEBUG_EEPROM</a>    = 0x0D, <span class="comment">// Response for EEPROM debug toggle</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">// Fallback</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a506aa3525e0378ccdbc9e0a14a86aec5">  117</a></span>    <a class="code hl_enumvalue" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a506aa3525e0378ccdbc9e0a14a86aec5">CMD_INVALID</a>                  = 0xE0  <span class="comment">// Invalid command (default error)</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>} <a class="code hl_enumeration" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">Command</a>;</div>
+</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="foldopen" id="foldopen00124" data-start="{" data-end="};">
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="struct_command_map.html">  124</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="struct_command_map.html#aff2bedb37c635130e2697de3ddeb73be">  125</a></span>    <a class="code hl_enumeration" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">Command</a> <a class="code hl_variable" href="struct_command_map.html#aff2bedb37c635130e2697de3ddeb73be">request</a>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="struct_command_map.html#a99e1ffe215904530334a3e74d4427bf0">  126</a></span>    <a class="code hl_enumeration" href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">Command</a> <a class="code hl_variable" href="struct_command_map.html#a99e1ffe215904530334a3e74d4427bf0">response</a>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>} <a class="code hl_struct" href="struct_command_map.html">CommandMap</a>;</div>
+</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span></div>
+<div class="foldopen" id="foldopen00135" data-start="{" data-end="};">
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="struct_protocol_service.html">  135</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="struct_protocol_service.html#a2efd0de528d9d0a706f3522369ba2458">  136</a></span>    <span class="keyword">volatile</span> uint8_t <a class="code hl_variable" href="struct_protocol_service.html#a2efd0de528d9d0a706f3522369ba2458">indexW</a>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="struct_protocol_service.html#ab63a2d89518970416bce2019716d3197">  137</a></span>    <span class="keyword">volatile</span> uint8_t <a class="code hl_variable" href="struct_protocol_service.html#ab63a2d89518970416bce2019716d3197">indexR</a>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="struct_protocol_service.html#afad48263134e75e99e225c0db20e311a">  138</a></span>    <span class="keyword">volatile</span> uint8_t <a class="code hl_variable" href="struct_protocol_service.html#afad48263134e75e99e225c0db20e311a">buffer</a>[<a class="code hl_define" href="protocol_types_8h.html#a97dca2d0b0106e4ec570f56e57a19828">PROTOCOL_BUFFER_SIZE</a>];</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="struct_protocol_service.html#a7e88c7649029c71f11b99fa916d0650b">  139</a></span>    <span class="keyword">volatile</span> <a class="code hl_union" href="union_byte___flag___struct.html">Byte_Flag_Struct</a> <a class="code hl_variable" href="struct_protocol_service.html#a7e88c7649029c71f11b99fa916d0650b">flags</a>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="struct_protocol_service.html#ad185e2bcfa4bca6ed417935304d28f05">  140</a></span>    <span class="keyword">volatile</span> <a class="code hl_struct" href="struct_protocol_frame.html">ProtocolFrame</a> <a class="code hl_variable" href="struct_protocol_service.html#ad185e2bcfa4bca6ed417935304d28f05">receivePck</a>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>} <a class="code hl_struct" href="struct_protocol_service.html">ProtocolService</a>;</div>
+</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">#endif </span><span class="comment">/* PROTOCOLTYPE_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="abitmap_type_8h_html"><div class="ttname"><a href="bitmap_type_8h.html">bitmapType.h</a></div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153">Command</a></div><div class="ttdeci">Command</div><div class="ttdoc">Enum que contiene todos los comandos del protocolo, incluyendo comandos y sus respuestas.</div><div class="ttdef"><b>Definition</b> protocolTypes.h:77</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a090163e2fae1e30931cd9ac2375d18e1"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a090163e2fae1e30931cd9ac2375d18e1">CMD_RESPONSE_CLEAR_STATS</a></div><div class="ttdeci">@ CMD_RESPONSE_CLEAR_STATS</div><div class="ttdef"><b>Definition</b> protocolTypes.h:84</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a193c61fec5859d400a7be6c5004d53e1"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a193c61fec5859d400a7be6c5004d53e1">CMD_GET_STATS</a></div><div class="ttdeci">@ CMD_GET_STATS</div><div class="ttdef"><b>Definition</b> protocolTypes.h:100</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a1e0ceff2d6f13742786f42dac58149bc"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a1e0ceff2d6f13742786f42dac58149bc">CMD_STOP</a></div><div class="ttdeci">@ CMD_STOP</div><div class="ttdef"><b>Definition</b> protocolTypes.h:94</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a2614ba7375b53f5c79e26a4336d141e4"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2614ba7375b53f5c79e26a4336d141e4">CMD_CONFIG_RESET</a></div><div class="ttdeci">@ CMD_CONFIG_RESET</div><div class="ttdef"><b>Definition</b> protocolTypes.h:103</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a299d7c38ee6f60295ecfba88ac21203d"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a299d7c38ee6f60295ecfba88ac21203d">CMD_RESPONSE_CONFIG_RESET</a></div><div class="ttdeci">@ CMD_RESPONSE_CONFIG_RESET</div><div class="ttdef"><b>Definition</b> protocolTypes.h:88</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a2b0c16a57a97aa8ae4a9ece588c6fc59"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2b0c16a57a97aa8ae4a9ece588c6fc59">CMD_RESPONSE_DEBUG_SERVOS</a></div><div class="ttdeci">@ CMD_RESPONSE_DEBUG_SERVOS</div><div class="ttdef"><b>Definition</b> protocolTypes.h:112</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a2f95b197115257659189e9c7902fc8a6"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a2f95b197115257659189e9c7902fc8a6">CMD_RESPONSE_DEBUG_SORTER</a></div><div class="ttdeci">@ CMD_RESPONSE_DEBUG_SORTER</div><div class="ttdef"><b>Definition</b> protocolTypes.h:113</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a506aa3525e0378ccdbc9e0a14a86aec5"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a506aa3525e0378ccdbc9e0a14a86aec5">CMD_INVALID</a></div><div class="ttdeci">@ CMD_INVALID</div><div class="ttdef"><b>Definition</b> protocolTypes.h:117</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a6217a381c5786a155085bfaba7ec13e7"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a6217a381c5786a155085bfaba7ec13e7">CMD_RESPONSE_START</a></div><div class="ttdeci">@ CMD_RESPONSE_START</div><div class="ttdef"><b>Definition</b> protocolTypes.h:80</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a69bbf851a56abbc6aa8071b0c65de361"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a69bbf851a56abbc6aa8071b0c65de361">CMD_GET_REPOSITORY</a></div><div class="ttdeci">@ CMD_GET_REPOSITORY</div><div class="ttdef"><b>Definition</b> protocolTypes.h:102</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a7211269bed65fac5327f695eff84b029"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a7211269bed65fac5327f695eff84b029">CMD_RESPONSE_DEBUG_ULTRA</a></div><div class="ttdeci">@ CMD_RESPONSE_DEBUG_ULTRA</div><div class="ttdef"><b>Definition</b> protocolTypes.h:111</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a72722dc0846a5fc226f850301b703609"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a72722dc0846a5fc226f850301b703609">CMD_GET_CONFIG</a></div><div class="ttdeci">@ CMD_GET_CONFIG</div><div class="ttdef"><b>Definition</b> protocolTypes.h:97</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a741e61299ea78bb03b9626d8f08cb560"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a741e61299ea78bb03b9626d8f08cb560">CMD_GET_FIRMWARE</a></div><div class="ttdeci">@ CMD_GET_FIRMWARE</div><div class="ttdef"><b>Definition</b> protocolTypes.h:99</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a77553c4f9197b5892c5827a04c25a968"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a77553c4f9197b5892c5827a04c25a968">CMD_SET_CONFIG</a></div><div class="ttdeci">@ CMD_SET_CONFIG</div><div class="ttdef"><b>Definition</b> protocolTypes.h:96</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a9369af5b4a3ee3506d8c843afae5283d"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a9369af5b4a3ee3506d8c843afae5283d">CMD_DEBUG_SERVOS</a></div><div class="ttdeci">@ CMD_DEBUG_SERVOS</div><div class="ttdef"><b>Definition</b> protocolTypes.h:107</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153a9d0d1fded8cfc6c0ea499069e47b9a6d"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153a9d0d1fded8cfc6c0ea499069e47b9a6d">CMD_ALIVE</a></div><div class="ttdeci">@ CMD_ALIVE</div><div class="ttdef"><b>Definition</b> protocolTypes.h:91</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153aa056e9e94661dc04354c66720f1fa3ca"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aa056e9e94661dc04354c66720f1fa3ca">CMD_RESPONSE_GET_STATS</a></div><div class="ttdeci">@ CMD_RESPONSE_GET_STATS</div><div class="ttdef"><b>Definition</b> protocolTypes.h:85</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153aadcc6e5ea864b7a393caa60a6b2c21cc"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aadcc6e5ea864b7a393caa60a6b2c21cc">CMD_RESPONSE_STOP</a></div><div class="ttdeci">@ CMD_RESPONSE_STOP</div><div class="ttdef"><b>Definition</b> protocolTypes.h:81</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153ac7bb9d98ad702fa7111b56d0e6cb0566"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ac7bb9d98ad702fa7111b56d0e6cb0566">CMD_RESPONSE_GET_CONFIG</a></div><div class="ttdeci">@ CMD_RESPONSE_GET_CONFIG</div><div class="ttdef"><b>Definition</b> protocolTypes.h:83</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153acaff8db12249596e200bfa164b1635ce"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153acaff8db12249596e200bfa164b1635ce">CMD_RESPONSE_SET_CONFIG</a></div><div class="ttdeci">@ CMD_RESPONSE_SET_CONFIG</div><div class="ttdef"><b>Definition</b> protocolTypes.h:82</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153acc6119a105ceede6b8e6504ecc4e6aa2"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153acc6119a105ceede6b8e6504ecc4e6aa2">CMD_DEBUG_ULTRA</a></div><div class="ttdeci">@ CMD_DEBUG_ULTRA</div><div class="ttdef"><b>Definition</b> protocolTypes.h:106</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153ad9e5adb03d3a730515fa242ada2dbf07"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ad9e5adb03d3a730515fa242ada2dbf07">CMD_CLEAR_STATS</a></div><div class="ttdeci">@ CMD_CLEAR_STATS</div><div class="ttdef"><b>Definition</b> protocolTypes.h:101</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153ada903e8272ed337ff9b9eb3a43e466e1"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ada903e8272ed337ff9b9eb3a43e466e1">CMD_RESPONSE_GET_REPOSITORY</a></div><div class="ttdeci">@ CMD_RESPONSE_GET_REPOSITORY</div><div class="ttdef"><b>Definition</b> protocolTypes.h:87</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153ae54ab9a4321541e41e3550f87b56cb65"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ae54ab9a4321541e41e3550f87b56cb65">CMD_DEBUG_EEPROM</a></div><div class="ttdeci">@ CMD_DEBUG_EEPROM</div><div class="ttdef"><b>Definition</b> protocolTypes.h:109</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153ae71d8347b3a378275d25c0fa2390a656"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153ae71d8347b3a378275d25c0fa2390a656">CMD_RESPONSE_ALIVE</a></div><div class="ttdeci">@ CMD_RESPONSE_ALIVE</div><div class="ttdef"><b>Definition</b> protocolTypes.h:79</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153aea7d37b475d634f7a56b2cd6003c43a4"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aea7d37b475d634f7a56b2cd6003c43a4">CMD_DEBUG_SORTER</a></div><div class="ttdeci">@ CMD_DEBUG_SORTER</div><div class="ttdef"><b>Definition</b> protocolTypes.h:108</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153af2e188a52388c10d5e2f48ca37b28287"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153af2e188a52388c10d5e2f48ca37b28287">CMD_START</a></div><div class="ttdeci">@ CMD_START</div><div class="ttdef"><b>Definition</b> protocolTypes.h:93</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153afe4ad3aedccf8e8724bd15419b8386a5"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153afe4ad3aedccf8e8724bd15419b8386a5">CMD_RESPONSE_GET_FIRMWARE</a></div><div class="ttdeci">@ CMD_RESPONSE_GET_FIRMWARE</div><div class="ttdef"><b>Definition</b> protocolTypes.h:86</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a2afce0a47a93eee73a314d53e4890153aff76a8635a0d75ee0eb5440a940df8f3"><div class="ttname"><a href="protocol_types_8h.html#a2afce0a47a93eee73a314d53e4890153aff76a8635a0d75ee0eb5440a940df8f3">CMD_RESPONSE_DEBUG_EEPROM</a></div><div class="ttdeci">@ CMD_RESPONSE_DEBUG_EEPROM</div><div class="ttdef"><b>Definition</b> protocolTypes.h:114</div></div>
+<div class="ttc" id="aprotocol_types_8h_html_a97dca2d0b0106e4ec570f56e57a19828"><div class="ttname"><a href="protocol_types_8h.html#a97dca2d0b0106e4ec570f56e57a19828">PROTOCOL_BUFFER_SIZE</a></div><div class="ttdeci">#define PROTOCOL_BUFFER_SIZE</div><div class="ttdef"><b>Definition</b> protocolTypes.h:35</div></div>
+<div class="ttc" id="astruct_command_map_html"><div class="ttname"><a href="struct_command_map.html">CommandMap</a></div><div class="ttdoc">Estructura para mapear comandos con sus respuestas correspondientes.</div><div class="ttdef"><b>Definition</b> protocolTypes.h:124</div></div>
+<div class="ttc" id="astruct_command_map_html_a99e1ffe215904530334a3e74d4427bf0"><div class="ttname"><a href="struct_command_map.html#a99e1ffe215904530334a3e74d4427bf0">CommandMap::response</a></div><div class="ttdeci">Command response</div><div class="ttdef"><b>Definition</b> protocolTypes.h:126</div></div>
+<div class="ttc" id="astruct_command_map_html_aff2bedb37c635130e2697de3ddeb73be"><div class="ttname"><a href="struct_command_map.html#aff2bedb37c635130e2697de3ddeb73be">CommandMap::request</a></div><div class="ttdeci">Command request</div><div class="ttdef"><b>Definition</b> protocolTypes.h:125</div></div>
+<div class="ttc" id="astruct_protocol_frame_html"><div class="ttname"><a href="struct_protocol_frame.html">ProtocolFrame</a></div><div class="ttdoc">Representa una trama de comunicaci�n del protocolo.</div><div class="ttdef"><b>Definition</b> protocolTypes.h:64</div></div>
+<div class="ttc" id="astruct_protocol_frame_html_a2c189e50aec5ffd2583d1e6ca0ac818d"><div class="ttname"><a href="struct_protocol_frame.html#a2c189e50aec5ffd2583d1e6ca0ac818d">ProtocolFrame::header</a></div><div class="ttdeci">uint8_t header[4]</div><div class="ttdef"><b>Definition</b> protocolTypes.h:65</div></div>
+<div class="ttc" id="astruct_protocol_frame_html_a4d43e8212bdc9dbee866506f04effcea"><div class="ttname"><a href="struct_protocol_frame.html#a4d43e8212bdc9dbee866506f04effcea">ProtocolFrame::cmd</a></div><div class="ttdeci">uint8_t cmd</div><div class="ttdef"><b>Definition</b> protocolTypes.h:68</div></div>
+<div class="ttc" id="astruct_protocol_frame_html_a59eac9627282a484fbaf0aa7aa3b8a9a"><div class="ttname"><a href="struct_protocol_frame.html#a59eac9627282a484fbaf0aa7aa3b8a9a">ProtocolFrame::checksum</a></div><div class="ttdeci">uint8_t checksum</div><div class="ttdef"><b>Definition</b> protocolTypes.h:70</div></div>
+<div class="ttc" id="astruct_protocol_frame_html_aa5cbdad2c57e9b3f949e1a4d96382b66"><div class="ttname"><a href="struct_protocol_frame.html#aa5cbdad2c57e9b3f949e1a4d96382b66">ProtocolFrame::payload</a></div><div class="ttdeci">uint8_t * payload</div><div class="ttdef"><b>Definition</b> protocolTypes.h:69</div></div>
+<div class="ttc" id="astruct_protocol_frame_html_ab2b3adeb2a67e656ff030b56727fd0ac"><div class="ttname"><a href="struct_protocol_frame.html#ab2b3adeb2a67e656ff030b56727fd0ac">ProtocolFrame::length</a></div><div class="ttdeci">uint8_t length</div><div class="ttdef"><b>Definition</b> protocolTypes.h:66</div></div>
+<div class="ttc" id="astruct_protocol_frame_html_afb6cdb8d697f6e4b925161d99a2daa3c"><div class="ttname"><a href="struct_protocol_frame.html#afb6cdb8d697f6e4b925161d99a2daa3c">ProtocolFrame::token</a></div><div class="ttdeci">uint8_t token</div><div class="ttdef"><b>Definition</b> protocolTypes.h:67</div></div>
+<div class="ttc" id="astruct_protocol_service_html"><div class="ttname"><a href="struct_protocol_service.html">ProtocolService</a></div><div class="ttdoc">Estructura que maneja el estado del servicio de protocolo serial.</div><div class="ttdef"><b>Definition</b> protocolTypes.h:135</div></div>
+<div class="ttc" id="astruct_protocol_service_html_a2efd0de528d9d0a706f3522369ba2458"><div class="ttname"><a href="struct_protocol_service.html#a2efd0de528d9d0a706f3522369ba2458">ProtocolService::indexW</a></div><div class="ttdeci">volatile uint8_t indexW</div><div class="ttdef"><b>Definition</b> protocolTypes.h:136</div></div>
+<div class="ttc" id="astruct_protocol_service_html_a7e88c7649029c71f11b99fa916d0650b"><div class="ttname"><a href="struct_protocol_service.html#a7e88c7649029c71f11b99fa916d0650b">ProtocolService::flags</a></div><div class="ttdeci">volatile Byte_Flag_Struct flags</div><div class="ttdef"><b>Definition</b> protocolTypes.h:139</div></div>
+<div class="ttc" id="astruct_protocol_service_html_ab63a2d89518970416bce2019716d3197"><div class="ttname"><a href="struct_protocol_service.html#ab63a2d89518970416bce2019716d3197">ProtocolService::indexR</a></div><div class="ttdeci">volatile uint8_t indexR</div><div class="ttdef"><b>Definition</b> protocolTypes.h:137</div></div>
+<div class="ttc" id="astruct_protocol_service_html_ad185e2bcfa4bca6ed417935304d28f05"><div class="ttname"><a href="struct_protocol_service.html#ad185e2bcfa4bca6ed417935304d28f05">ProtocolService::receivePck</a></div><div class="ttdeci">volatile ProtocolFrame receivePck</div><div class="ttdef"><b>Definition</b> protocolTypes.h:140</div></div>
+<div class="ttc" id="astruct_protocol_service_html_afad48263134e75e99e225c0db20e311a"><div class="ttname"><a href="struct_protocol_service.html#afad48263134e75e99e225c0db20e311a">ProtocolService::buffer</a></div><div class="ttdeci">volatile uint8_t buffer[64]</div><div class="ttdef"><b>Definition</b> protocolTypes.h:138</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html"><div class="ttname"><a href="union_byte___flag___struct.html">Byte_Flag_Struct</a></div><div class="ttdef"><b>Definition</b> bitmapType.h:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_027ef9e0f692986d43197b4d06e3469a.html">GccApplication1</a></li><li class="navelem"><a class="el" href="dir_ea5c804158e414c9d7b86e6bc12c96fa.html">types</a></li><li class="navelem"><a class="el" href="protocol_types_8h.html">protocolTypes.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

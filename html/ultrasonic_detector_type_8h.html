@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clasificadora_Microcontroladores_CHAJCHIR_ARRUA: Referencia del archivo GccApplication1/types/ultrasonicDetectorType.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Clasificadora_Microcontroladores_CHAJCHIR_ARRUA<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">El proyecto desarrolla un sistema de clasificacion de cajas a traves de medicion de altura, con configuracion mediante un protocolo de comunicaciÃ³n serial no bloqueante - AVR C- ATMEGA328p</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('ultrasonic_detector_type_8h.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estructuras de datos</a> &#124;
+<a href="#define-members">defines</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo ultrasonicDetectorType.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Definición de la estructura y macros para el detector ultrasónico compuesto.  
+<a href="#details">MÃ¡s...</a></p>
+<div class="textblock"><code>#include &quot;ultrasonic.h&quot;</code><br />
+<code>#include &quot;ultrasonic_hal.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="bitmap_type_8h_source.html">bitmapType.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_t_c_r_t_type_8h_source.html">TCRTType.h</a>&quot;</code><br />
+</div>
+<p><a href="ultrasonic_detector_type_8h_source.html">Ir al cÃ³digo fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Estructuras de datos</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_ultrasonic___detector__t.html">Ultrasonic_Detector_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura que representa un sistema de detección basado en sensor ultrasónico e IR.  <a href="struct_ultrasonic___detector__t.html#details">MÃ¡s...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a53bf4eeed7e0f3724dd6c1ff17056ce0" id="r_a53bf4eeed7e0f3724dd6c1ff17056ce0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53bf4eeed7e0f3724dd6c1ff17056ce0">ULTRADET_ZONE_ULTRA_CLEAR</a>&#160;&#160;&#160;<a class="el" href="main_8h.html#add50893ff5f5bc55497a9f6d7e265ef9">BIT0_MASK</a></td></tr>
+<tr class="memdesc:a53bf4eeed7e0f3724dd6c1ff17056ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag que indica que la zona del sensor ultrasónico está despejada.  <br /></td></tr>
+<tr class="separator:a53bf4eeed7e0f3724dd6c1ff17056ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef75c2c112e690f2ff5969bfec3e3815" id="r_aef75c2c112e690f2ff5969bfec3e3815"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef75c2c112e690f2ff5969bfec3e3815">ULTRADET_ZONE_TRCT_U_DETECTING</a>&#160;&#160;&#160;<a class="el" href="main_8h.html#a4d6a0d98f52a25f6ff6ff1b519ef663c">BIT1_MASK</a></td></tr>
+<tr class="memdesc:aef75c2c112e690f2ff5969bfec3e3815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag que indica que el sensor IR U está detectando una caja.  <br /></td></tr>
+<tr class="separator:aef75c2c112e690f2ff5969bfec3e3815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fa3cbe4cb61c685b82f6a6d3f14e9d0" id="r_a3fa3cbe4cb61c685b82f6a6d3f14e9d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fa3cbe4cb61c685b82f6a6d3f14e9d0">ULTRADET_SENSOR_IDLE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:a3fa3cbe4cb61c685b82f6a6d3f14e9d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estado del sensor: en reposo (esperando una detección).  <br /></td></tr>
+<tr class="separator:a3fa3cbe4cb61c685b82f6a6d3f14e9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf668f9657cfbd0241a9c71b507e9a0a" id="r_abf668f9657cfbd0241a9c71b507e9a0a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf668f9657cfbd0241a9c71b507e9a0a">ULTRADET_SENSOR_DETECTING</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:abf668f9657cfbd0241a9c71b507e9a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estado del sensor: detectando una caja.  <br /></td></tr>
+<tr class="separator:abf668f9657cfbd0241a9c71b507e9a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70719b5f6a028c6ed27495cdde3dfca0" id="r_a70719b5f6a028c6ed27495cdde3dfca0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70719b5f6a028c6ed27495cdde3dfca0">ULTRADET_SENSOR_WAITING_CLEAR</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:a70719b5f6a028c6ed27495cdde3dfca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estado del sensor: esperando que se libere la zona (la caja se retire).  <br /></td></tr>
+<tr class="separator:a70719b5f6a028c6ed27495cdde3dfca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">DescripciÃ³n detallada</h2>
+<div class="textblock"><p>Definición de la estructura y macros para el detector ultrasónico compuesto. </p>
+<p>Este archivo define la estructura <code><a class="el" href="struct_ultrasonic___detector__t.html" title="Estructura que representa un sistema de detección basado en sensor ultrasónico e IR.">Ultrasonic_Detector_t</a></code>, que combina un sensor ultrasónico con un sensor infrarrojo (TCRT), así como los flags y estados utilizados para el control del proceso de detección de cajas mediante ultrasonido.</p>
+<dl class="section author"><dt>Autor</dt><dd>kobac </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>26-Mar-25 </dd></dl>
+</div><h2 class="groupheader">DocumentaciÃ³n de Â«defineÂ»</h2>
+<a id="abf668f9657cfbd0241a9c71b507e9a0a" name="abf668f9657cfbd0241a9c71b507e9a0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf668f9657cfbd0241a9c71b507e9a0a">&#9670;&#160;</a></span>ULTRADET_SENSOR_DETECTING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ULTRADET_SENSOR_DETECTING&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Estado del sensor: detectando una caja. </p>
+
+</div>
+</div>
+<a id="a3fa3cbe4cb61c685b82f6a6d3f14e9d0" name="a3fa3cbe4cb61c685b82f6a6d3f14e9d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fa3cbe4cb61c685b82f6a6d3f14e9d0">&#9670;&#160;</a></span>ULTRADET_SENSOR_IDLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ULTRADET_SENSOR_IDLE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Estado del sensor: en reposo (esperando una detección). </p>
+
+</div>
+</div>
+<a id="a70719b5f6a028c6ed27495cdde3dfca0" name="a70719b5f6a028c6ed27495cdde3dfca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70719b5f6a028c6ed27495cdde3dfca0">&#9670;&#160;</a></span>ULTRADET_SENSOR_WAITING_CLEAR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ULTRADET_SENSOR_WAITING_CLEAR&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Estado del sensor: esperando que se libere la zona (la caja se retire). </p>
+
+</div>
+</div>
+<a id="aef75c2c112e690f2ff5969bfec3e3815" name="aef75c2c112e690f2ff5969bfec3e3815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef75c2c112e690f2ff5969bfec3e3815">&#9670;&#160;</a></span>ULTRADET_ZONE_TRCT_U_DETECTING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ULTRADET_ZONE_TRCT_U_DETECTING&#160;&#160;&#160;<a class="el" href="main_8h.html#a4d6a0d98f52a25f6ff6ff1b519ef663c">BIT1_MASK</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag que indica que el sensor IR U está detectando una caja. </p>
+
+</div>
+</div>
+<a id="a53bf4eeed7e0f3724dd6c1ff17056ce0" name="a53bf4eeed7e0f3724dd6c1ff17056ce0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53bf4eeed7e0f3724dd6c1ff17056ce0">&#9670;&#160;</a></span>ULTRADET_ZONE_ULTRA_CLEAR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ULTRADET_ZONE_ULTRA_CLEAR&#160;&#160;&#160;<a class="el" href="main_8h.html#add50893ff5f5bc55497a9f6d7e265ef9">BIT0_MASK</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag que indica que la zona del sensor ultrasónico está despejada. </p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_027ef9e0f692986d43197b4d06e3469a.html">GccApplication1</a></li><li class="navelem"><a class="el" href="dir_ea5c804158e414c9d7b86e6bc12c96fa.html">types</a></li><li class="navelem"><a class="el" href="ultrasonic_detector_type_8h.html">ultrasonicDetectorType.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

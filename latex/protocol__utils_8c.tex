@@ -1,0 +1,253 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/protocol/protocol\+\_\+utils.c}
+\label{protocol__utils_8c}\index{GccApplication1/utils/protocol/protocol\_utils.c@{GccApplication1/utils/protocol/protocol\_utils.c}}
+{\ttfamily \#include "{}../../main.\+h"{}}\newline
+{\ttfamily \#include "{}protocol\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}../usart/usart\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}../../types/box\+Types.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$avr/pgmspace.\+h$>$}\newline
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ init\+Protocol\+Service} (\textbf{ Protocol\+Service} $\ast$service)
+\begin{DoxyCompactList}\small\item\em Inicializa la estructura del servicio de protocolo. \end{DoxyCompactList}\item 
+bool \textbf{ verify\+\_\+header} ()
+\begin{DoxyCompactList}\small\item\em Verifica la validez del encabezado del paquete. \end{DoxyCompactList}\item 
+bool \textbf{ process\+\_\+protocol\+\_\+buffer} ()
+\begin{DoxyCompactList}\small\item\em Procesa el buffer de protocolo buscando un encabezado válido. \end{DoxyCompactList}\item 
+\textbf{ Command} \textbf{ get\+Response\+Command} (\textbf{ Command} req)
+\begin{DoxyCompactList}\small\item\em Devuelve el comando de respuesta correspondiente a un comando recibido. \end{DoxyCompactList}\item 
+void \textbf{ clear\+\_\+receive\+\_\+pck} ()
+\begin{DoxyCompactList}\small\item\em Limpia el contenido del paquete recibido. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ calculate\+Payload} ()
+\begin{DoxyCompactList}\small\item\em Calcula el checksum del payload recibido. \end{DoxyCompactList}\item 
+void \textbf{ create\+Pck} (uint8\+\_\+t cmd, uint8\+\_\+t $\ast$payload, uint8\+\_\+t payload\+Length)
+\begin{DoxyCompactList}\small\item\em Crea un paquete en la estructura receive\+Pck del servicio de protocolo. \end{DoxyCompactList}\item 
+bool \textbf{ validate\+Pck} ()
+\begin{DoxyCompactList}\small\item\em Valida el contenido del paquete recibido. \end{DoxyCompactList}\item 
+void \textbf{ do\+Action} (uint8\+\_\+t cmd)
+\begin{DoxyCompactList}\small\item\em Ejecuta la acción correspondiente al comando recibido. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ protocol\+Task} ()
+\begin{DoxyCompactList}\small\item\em Ejecuta la tarea principal del protocolo. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ create\+\_\+payload} (\textbf{ Command} cmd)
+\begin{DoxyCompactList}\small\item\em Crea el payload de respuesta según el comando dado. \end{DoxyCompactList}\item 
+void \textbf{ print\+Command\+Message} (\textbf{ Command} cmd)
+\begin{DoxyCompactList}\small\item\em Imprime un mensaje por consola según el comando recibido. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DocumentaciÃ³n de funciones}
+\index{protocol\_utils.c@{protocol\_utils.c}!calculatePayload@{calculatePayload}}
+\index{calculatePayload@{calculatePayload}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{calculatePayload()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a1cf1f9c367026cf7e40fc83ee85195a1} 
+uint8\+\_\+t calculate\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Calcula el checksum del payload recibido. 
+
+Realiza una operación XOR sobre el encabezado, longitud, token, comando y todos los bytes del payload para verificar la integridad de los datos.
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em uint8\+\_\+t} & Checksum calculado. \\
+\hline
+\end{DoxyRetVals}
+\index{protocol\_utils.c@{protocol\_utils.c}!clear\_receive\_pck@{clear\_receive\_pck}}
+\index{clear\_receive\_pck@{clear\_receive\_pck}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{clear\_receive\_pck()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a15ec5468109225537cfc49bea1eab6e7} 
+void clear\+\_\+receive\+\_\+pck (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Limpia el contenido del paquete recibido. 
+
+Borra todos los campos del {\ttfamily receive\+Pck} para permitir recibir un nuevo paquete. \index{protocol\_utils.c@{protocol\_utils.c}!create\_payload@{create\_payload}}
+\index{create\_payload@{create\_payload}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{create\_payload()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a8c9f245a970a7477ef15163c8fbad2ad} 
+uint8\+\_\+t create\+\_\+payload (\begin{DoxyParamCaption}\item[{\textbf{ Command}}]{cmd}{}\end{DoxyParamCaption})}
+
+
+
+Crea el payload de respuesta según el comando dado. 
+
+Llena el buffer de transmisión con el contenido adecuado según el comando de respuesta solicitado.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em cmd} & Comando de respuesta. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em uint8\+\_\+t} & Longitud del payload generado. \\
+\hline
+\end{DoxyRetVals}
+\index{protocol\_utils.c@{protocol\_utils.c}!createPck@{createPck}}
+\index{createPck@{createPck}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{createPck()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a1d0f3c5d4d9ab3ca4db5904779ea566b} 
+void create\+Pck (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd}{, }\item[{uint8\+\_\+t $\ast$}]{payload}{, }\item[{uint8\+\_\+t}]{payload\+Length}{}\end{DoxyParamCaption})}
+
+
+
+Crea un paquete en la estructura receive\+Pck del servicio de protocolo. 
+
+Asigna encabezado, longitud, token, comando, payload y checksum.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em cmd} & Comando del paquete. \\
+\hline
+\mbox{\texttt{ in}}  & {\em payload} & Puntero al buffer con los datos del payload. \\
+\hline
+\mbox{\texttt{ in}}  & {\em payload\+Length} & Longitud del payload en bytes. \\
+\hline
+\end{DoxyParams}
+\index{protocol\_utils.c@{protocol\_utils.c}!doAction@{doAction}}
+\index{doAction@{doAction}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{doAction()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a37df37e33f461231b6060fd8743162d3} 
+void do\+Action (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cmd}{}\end{DoxyParamCaption})}
+
+
+
+Ejecuta la acción correspondiente al comando recibido. 
+
+Interpreta el comando y actualiza el estado del sistema o las configuraciones, además de preparar una respuesta si corresponde.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em cmd} & Comando a ejecutar. \\
+\hline
+\end{DoxyParams}
+\index{protocol\_utils.c@{protocol\_utils.c}!getResponseCommand@{getResponseCommand}}
+\index{getResponseCommand@{getResponseCommand}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{getResponseCommand()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_ad71d29a190ce7e76fc943898e4959da0} 
+\textbf{ Command} get\+Response\+Command (\begin{DoxyParamCaption}\item[{\textbf{ Command}}]{req}{}\end{DoxyParamCaption})}
+
+
+
+Devuelve el comando de respuesta correspondiente a un comando recibido. 
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em req} & Comando recibido. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em \doxyref{Command}{pÃ¡g.}{protocol_types_8h_a2afce0a47a93eee73a314d53e4890153}} & Comando de respuesta correspondiente. \\
+\hline
+\end{DoxyRetVals}
+\index{protocol\_utils.c@{protocol\_utils.c}!initProtocolService@{initProtocolService}}
+\index{initProtocolService@{initProtocolService}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{initProtocolService()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a580f5b54cedd59bd94e8ec5816c2a2e9} 
+void init\+Protocol\+Service (\begin{DoxyParamCaption}\item[{\textbf{ Protocol\+Service} $\ast$}]{service}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa la estructura del servicio de protocolo. 
+
+Esta función reinicia los índices del buffer circular de recepción, borra las banderas internas y limpia el paquete recibido.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in,out}}  & {\em service} & Puntero a la estructura del servicio de protocolo a inicializar. \\
+\hline
+\end{DoxyParams}
+\index{protocol\_utils.c@{protocol\_utils.c}!printCommandMessage@{printCommandMessage}}
+\index{printCommandMessage@{printCommandMessage}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{printCommandMessage()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a79c698dc24844438de1432e7ffdbe884} 
+void print\+Command\+Message (\begin{DoxyParamCaption}\item[{\textbf{ Command}}]{cmd}{}\end{DoxyParamCaption})}
+
+
+
+Imprime un mensaje por consola según el comando recibido. 
+
+Solo con fines de depuración, informa qué comando se está procesando.
+
+
+\begin{DoxyParams}[1]{ParÃ¡metros}
+\mbox{\texttt{ in}}  & {\em cmd} & Comando recibido. \\
+\hline
+\end{DoxyParams}
+\index{protocol\_utils.c@{protocol\_utils.c}!process\_protocol\_buffer@{process\_protocol\_buffer}}
+\index{process\_protocol\_buffer@{process\_protocol\_buffer}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{process\_protocol\_buffer()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a08b2dcbb3c316e5decef49a29c637e8b} 
+bool process\+\_\+protocol\+\_\+buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Procesa el buffer de protocolo buscando un encabezado válido. 
+
+Si hay suficientes bytes disponibles y se detecta un encabezado válido, la función devuelve true para continuar con el procesamiento.
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em true} & Si se detectó un encabezado válido. \\
+\hline
+{\em false} & Si no hay suficientes datos o el encabezado es inválido. \\
+\hline
+\end{DoxyRetVals}
+\index{protocol\_utils.c@{protocol\_utils.c}!protocolTask@{protocolTask}}
+\index{protocolTask@{protocolTask}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{protocolTask()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a144316f6181d2cf60af7e79adce806fb} 
+uint8\+\_\+t protocol\+Task (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Ejecuta la tarea principal del protocolo. 
+
+Procesa el estado del protocolo, verifica si hay datos nuevos, valida paquetes, dispara acciones y maneja las respuestas.
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em uint8\+\_\+t} & Reservado (sin uso actual). \\
+\hline
+\end{DoxyRetVals}
+\index{protocol\_utils.c@{protocol\_utils.c}!validatePck@{validatePck}}
+\index{validatePck@{validatePck}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{validatePck()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_a90ddb01731316a71cad2d59f90a60a3c} 
+bool validate\+Pck (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Valida el contenido del paquete recibido. 
+
+Extrae cada campo del buffer circular (longitud, token, comando, payload, checksum) y verifica la validez del paquete.
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em true} & Si el paquete es válido. \\
+\hline
+{\em false} & Si el paquete es inválido. \\
+\hline
+\end{DoxyRetVals}
+\index{protocol\_utils.c@{protocol\_utils.c}!verify\_header@{verify\_header}}
+\index{verify\_header@{verify\_header}!protocol\_utils.c@{protocol\_utils.c}}
+\doxysubsubsection{verify\_header()}
+{\footnotesize\ttfamily \label{protocol__utils_8c_adf84a8818e3bab8f36f25a19bae27f0b} 
+bool verify\+\_\+header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Verifica la validez del encabezado del paquete. 
+
+Calcula una suma ponderada de los primeros 4 bytes del buffer para determinar si el encabezado "{}\+UNER"{} es válido.
+
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em true} & Si el encabezado es válido. \\
+\hline
+{\em false} & Si el encabezado no coincide con el esperado. \\
+\hline
+\end{DoxyRetVals}

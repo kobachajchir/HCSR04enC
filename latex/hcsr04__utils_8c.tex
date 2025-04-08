@@ -1,0 +1,34 @@
+\doxysection{Referencia del archivo Gcc\+Application1/utils/legacy\+\_\+hcsr04/hcsr04\+\_\+utils.c}
+\label{hcsr04__utils_8c}\index{GccApplication1/utils/legacy\_hcsr04/hcsr04\_utils.c@{GccApplication1/utils/legacy\_hcsr04/hcsr04\_utils.c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}./../../main.\+h"{}}\newline
+{\ttfamily \#include "{}hcsr04\+\_\+utils.\+h"{}}\newline
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ calculate\+\_\+distance} ()
+\begin{DoxyCompactList}\small\item\em Calcula la distancia basada en el tiempo de eco medido por el sensor ultrasónico. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DocumentaciÃ³n de funciones}
+\index{hcsr04\_utils.c@{hcsr04\_utils.c}!calculate\_distance@{calculate\_distance}}
+\index{calculate\_distance@{calculate\_distance}!hcsr04\_utils.c@{hcsr04\_utils.c}}
+\doxysubsubsection{calculate\_distance()}
+{\footnotesize\ttfamily \label{hcsr04__utils_8c_a40eb1b5e9a7f2e3bce9ac07f8f5b357f} 
+void calculate\+\_\+distance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Calcula la distancia basada en el tiempo de eco medido por el sensor ultrasónico. 
+
+Esta función calcula la duración del pulso de eco en función de los tiempos de inicio y fin, luego estima la distancia en milímetros usando una constante de conversión adaptada a la resolución del temporizador (0.\+5 µs por tick). Si la distancia está dentro de los límites válidos, se imprime por consola.
+
+\begin{DoxyNote}{Nota}
+La fórmula usada es\+: distancia = (tiempo $\ast$ 34) / 400, ajustada a evitar divisiones flotantes.
+\end{DoxyNote}
+
+\begin{DoxyRetVals}{Valores devueltos}
+{\em void} & \\
+\hline
+\end{DoxyRetVals}

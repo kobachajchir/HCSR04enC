@@ -1,0 +1,59 @@
+\doxysection{Referencia de la estructura Config\+\_\+t}
+\label{struct_config__t}\index{Config\_t@{Config\_t}}
+
+
+Estructura que representa la configuración del sistema de clasificación.  
+
+
+
+
+{\ttfamily \#include $<$config\+Type.\+h$>$}
+
+\doxysubsubsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ box\+\_\+type\+\_\+t} \textbf{ salidaA}
+\item 
+\textbf{ box\+\_\+type\+\_\+t} \textbf{ salidaB}
+\item 
+\textbf{ box\+\_\+type\+\_\+t} \textbf{ salidaC}
+\item 
+uint8\+\_\+t \textbf{ checksum}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Estructura que representa la configuración del sistema de clasificación. 
+
+Contiene la configuración de tipos de caja asignados a las salidas del sistema y un checksum simple para validar la integridad de los datos cuando se leen desde EEPROM. 
+
+\doxysubsection{DocumentaciÃ³n de campos}
+\index{Config\_t@{Config\_t}!checksum@{checksum}}
+\index{checksum@{checksum}!Config\_t@{Config\_t}}
+\doxysubsubsection{checksum}
+{\footnotesize\ttfamily \label{struct_config__t_a59eac9627282a484fbaf0aa7aa3b8a9a} 
+uint8\+\_\+t checksum}
+
+Checksum de verificación de la configuración. \index{Config\_t@{Config\_t}!salidaA@{salidaA}}
+\index{salidaA@{salidaA}!Config\_t@{Config\_t}}
+\doxysubsubsection{salidaA}
+{\footnotesize\ttfamily \label{struct_config__t_a82e3d41e98fa3b59e526ceb5bc4b962c} 
+\textbf{ box\+\_\+type\+\_\+t} salidaA}
+
+Tipo de caja asignado a la salida A. \index{Config\_t@{Config\_t}!salidaB@{salidaB}}
+\index{salidaB@{salidaB}!Config\_t@{Config\_t}}
+\doxysubsubsection{salidaB}
+{\footnotesize\ttfamily \label{struct_config__t_a1453ab7eeff7a126471c8b1c74fe05d0} 
+\textbf{ box\+\_\+type\+\_\+t} salidaB}
+
+Tipo de caja asignado a la salida B. \index{Config\_t@{Config\_t}!salidaC@{salidaC}}
+\index{salidaC@{salidaC}!Config\_t@{Config\_t}}
+\doxysubsubsection{salidaC}
+{\footnotesize\ttfamily \label{struct_config__t_afe59b79ecf63b4413e14ad0dc444eccb} 
+\textbf{ box\+\_\+type\+\_\+t} salidaC}
+
+Tipo de caja asignado a la salida C. 
+
+La documentaciÃ³n de esta estructura estÃ¡ generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Gcc\+Application1/types/\textbf{ config\+Type.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,128 @@
+\doxysection{Referencia del archivo Gcc\+Application1/types/\+TCRTType.h}
+\label{_t_c_r_t_type_8h}\index{GccApplication1/types/TCRTType.h@{GccApplication1/types/TCRTType.h}}
+
+
+Definición del tipo de dato \doxyref{TCRT\+\_\+t}{pÃ¡g.}{struct_t_c_r_t__t} para sensores infrarrojos reflectivos.  
+
+
+{\ttfamily \#include "{}bitmap\+Type.\+h"{}}\newline
+\doxysubsubsection*{Estructuras de datos}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ TCRT\+\_\+t}
+\begin{DoxyCompactList}\small\item\em Representa un sensor TCRT (IR reflectivo) con filtrado y calibración. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ TCRT\+\_\+\+ENABLED}~\textbf{ BIT0\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Bandera que indica que el sensor está habilitado. \end{DoxyCompactList}\item 
+\#define \textbf{ TCRT\+\_\+\+EDGE\+\_\+\+RISING}~\textbf{ BIT1\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Bandera que indica que se detectó flanco de subida (detección activa). \end{DoxyCompactList}\item 
+\#define \textbf{ TCRT\+\_\+\+CALIBRATING}~\textbf{ BIT2\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Bandera que indica que el sensor está en proceso de calibración. \end{DoxyCompactList}\item 
+\#define \textbf{ TCRT\+\_\+\+NEW\+\_\+\+VALUE}~\textbf{ BIT3\+\_\+\+MASK}
+\begin{DoxyCompactList}\small\item\em Bandera que indica que hay una nueva lectura disponible. \end{DoxyCompactList}\item 
+\#define \textbf{ TCRT\+\_\+\+STATUS\+\_\+\+IDLE}~0
+\begin{DoxyCompactList}\small\item\em Estado\+: el sensor está inactivo. \end{DoxyCompactList}\item 
+\#define \textbf{ TCRT\+\_\+\+READ}~1
+\begin{DoxyCompactList}\small\item\em Estado\+: objeto detectado (lectura activa). \end{DoxyCompactList}\item 
+\#define \textbf{ TCRT\+\_\+\+COUNTED}~2
+\begin{DoxyCompactList}\small\item\em Estado\+: objeto detectado y contado. \end{DoxyCompactList}\item 
+\#define \textbf{ TCRT\+\_\+\+DEACTIVATED}~3
+\begin{DoxyCompactList}\small\item\em Estado\+: sensor desactivado. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Definición del tipo de dato \doxyref{TCRT\+\_\+t}{pÃ¡g.}{struct_t_c_r_t__t} para sensores infrarrojos reflectivos. 
+
+Este archivo define la estructura de un sensor TCRT (infrarrojo reflectivo), incluyendo sus estados, flags, y variables utilizadas para la calibración, lectura y detección de objetos mediante el ADC.
+
+\begin{DoxyAuthor}{Autor}
+kobac 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+27-\/Mar-\/25 
+\end{DoxyDate}
+
+
+\doxysubsection{DocumentaciÃ³n de Â«defineÂ»}
+\index{TCRTType.h@{TCRTType.h}!TCRT\_CALIBRATING@{TCRT\_CALIBRATING}}
+\index{TCRT\_CALIBRATING@{TCRT\_CALIBRATING}!TCRTType.h@{TCRTType.h}}
+\doxysubsubsection{TCRT\_CALIBRATING}
+{\footnotesize\ttfamily \label{_t_c_r_t_type_8h_a125ab0e26f2bb1ac412f71a47977120b} 
+\#define TCRT\+\_\+\+CALIBRATING~\textbf{ BIT2\+\_\+\+MASK}}
+
+
+
+Bandera que indica que el sensor está en proceso de calibración. 
+
+\index{TCRTType.h@{TCRTType.h}!TCRT\_COUNTED@{TCRT\_COUNTED}}
+\index{TCRT\_COUNTED@{TCRT\_COUNTED}!TCRTType.h@{TCRTType.h}}
+\doxysubsubsection{TCRT\_COUNTED}
+{\footnotesize\ttfamily \label{_t_c_r_t_type_8h_ab1ca04b8aa54fa8e2f192f8674ea9ded} 
+\#define TCRT\+\_\+\+COUNTED~2}
+
+
+
+Estado\+: objeto detectado y contado. 
+
+\index{TCRTType.h@{TCRTType.h}!TCRT\_DEACTIVATED@{TCRT\_DEACTIVATED}}
+\index{TCRT\_DEACTIVATED@{TCRT\_DEACTIVATED}!TCRTType.h@{TCRTType.h}}
+\doxysubsubsection{TCRT\_DEACTIVATED}
+{\footnotesize\ttfamily \label{_t_c_r_t_type_8h_ad65614e7c0ec52e98ed49b8e43deb492} 
+\#define TCRT\+\_\+\+DEACTIVATED~3}
+
+
+
+Estado\+: sensor desactivado. 
+
+\index{TCRTType.h@{TCRTType.h}!TCRT\_EDGE\_RISING@{TCRT\_EDGE\_RISING}}
+\index{TCRT\_EDGE\_RISING@{TCRT\_EDGE\_RISING}!TCRTType.h@{TCRTType.h}}
+\doxysubsubsection{TCRT\_EDGE\_RISING}
+{\footnotesize\ttfamily \label{_t_c_r_t_type_8h_a809706879c7ecc1d3d4506cca71f669c} 
+\#define TCRT\+\_\+\+EDGE\+\_\+\+RISING~\textbf{ BIT1\+\_\+\+MASK}}
+
+
+
+Bandera que indica que se detectó flanco de subida (detección activa). 
+
+\index{TCRTType.h@{TCRTType.h}!TCRT\_ENABLED@{TCRT\_ENABLED}}
+\index{TCRT\_ENABLED@{TCRT\_ENABLED}!TCRTType.h@{TCRTType.h}}
+\doxysubsubsection{TCRT\_ENABLED}
+{\footnotesize\ttfamily \label{_t_c_r_t_type_8h_a213152a3579eff0f23a823b6dd55a4ae} 
+\#define TCRT\+\_\+\+ENABLED~\textbf{ BIT0\+\_\+\+MASK}}
+
+
+
+Bandera que indica que el sensor está habilitado. 
+
+\index{TCRTType.h@{TCRTType.h}!TCRT\_NEW\_VALUE@{TCRT\_NEW\_VALUE}}
+\index{TCRT\_NEW\_VALUE@{TCRT\_NEW\_VALUE}!TCRTType.h@{TCRTType.h}}
+\doxysubsubsection{TCRT\_NEW\_VALUE}
+{\footnotesize\ttfamily \label{_t_c_r_t_type_8h_a241afe5ca810a88721ecddf5579c3f14} 
+\#define TCRT\+\_\+\+NEW\+\_\+\+VALUE~\textbf{ BIT3\+\_\+\+MASK}}
+
+
+
+Bandera que indica que hay una nueva lectura disponible. 
+
+\index{TCRTType.h@{TCRTType.h}!TCRT\_READ@{TCRT\_READ}}
+\index{TCRT\_READ@{TCRT\_READ}!TCRTType.h@{TCRTType.h}}
+\doxysubsubsection{TCRT\_READ}
+{\footnotesize\ttfamily \label{_t_c_r_t_type_8h_a055dfb36469a50f80e5ec47af2367942} 
+\#define TCRT\+\_\+\+READ~1}
+
+
+
+Estado\+: objeto detectado (lectura activa). 
+
+\index{TCRTType.h@{TCRTType.h}!TCRT\_STATUS\_IDLE@{TCRT\_STATUS\_IDLE}}
+\index{TCRT\_STATUS\_IDLE@{TCRT\_STATUS\_IDLE}!TCRTType.h@{TCRTType.h}}
+\doxysubsubsection{TCRT\_STATUS\_IDLE}
+{\footnotesize\ttfamily \label{_t_c_r_t_type_8h_abff45daede267bc1f3dfef1e8f930bae} 
+\#define TCRT\+\_\+\+STATUS\+\_\+\+IDLE~0}
+
+
+
+Estado\+: el sensor está inactivo. 
+

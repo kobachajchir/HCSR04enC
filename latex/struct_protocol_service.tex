@@ -1,0 +1,67 @@
+\doxysection{Referencia de la estructura Protocol\+Service}
+\label{struct_protocol_service}\index{ProtocolService@{ProtocolService}}
+
+
+Estructura que maneja el estado del servicio de protocolo serial.  
+
+
+
+
+{\ttfamily \#include $<$protocol\+Types.\+h$>$}
+
+\doxysubsubsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+volatile uint8\+\_\+t \textbf{ indexW}
+\item 
+volatile uint8\+\_\+t \textbf{ indexR}
+\item 
+volatile uint8\+\_\+t \textbf{ buffer} [64]
+\item 
+volatile \textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ flags}
+\item 
+volatile \textbf{ Protocol\+Frame} \textbf{ receive\+Pck}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Estructura que maneja el estado del servicio de protocolo serial. 
+
+Incluye buffer circular, �ndices de lectura/escritura, flags de control y la trama recibida. 
+
+\doxysubsection{Documentación de campos}
+\index{ProtocolService@{ProtocolService}!buffer@{buffer}}
+\index{buffer@{buffer}!ProtocolService@{ProtocolService}}
+\doxysubsubsection{buffer}
+{\footnotesize\ttfamily \label{struct_protocol_service_afad48263134e75e99e225c0db20e311a} 
+volatile uint8\+\_\+t buffer[64]}
+
+\index{ProtocolService@{ProtocolService}!flags@{flags}}
+\index{flags@{flags}!ProtocolService@{ProtocolService}}
+\doxysubsubsection{flags}
+{\footnotesize\ttfamily \label{struct_protocol_service_a7e88c7649029c71f11b99fa916d0650b} 
+volatile \textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} flags}
+
+\index{ProtocolService@{ProtocolService}!indexR@{indexR}}
+\index{indexR@{indexR}!ProtocolService@{ProtocolService}}
+\doxysubsubsection{indexR}
+{\footnotesize\ttfamily \label{struct_protocol_service_ab63a2d89518970416bce2019716d3197} 
+volatile uint8\+\_\+t indexR}
+
+\index{ProtocolService@{ProtocolService}!indexW@{indexW}}
+\index{indexW@{indexW}!ProtocolService@{ProtocolService}}
+\doxysubsubsection{indexW}
+{\footnotesize\ttfamily \label{struct_protocol_service_a2efd0de528d9d0a706f3522369ba2458} 
+volatile uint8\+\_\+t indexW}
+
+\index{ProtocolService@{ProtocolService}!receivePck@{receivePck}}
+\index{receivePck@{receivePck}!ProtocolService@{ProtocolService}}
+\doxysubsubsection{receivePck}
+{\footnotesize\ttfamily \label{struct_protocol_service_ad185e2bcfa4bca6ed417935304d28f05} 
+volatile \textbf{ Protocol\+Frame} receive\+Pck}
+
+
+
+La documentación de esta estructura está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Gcc\+Application1/types/\textbf{ protocol\+Types.\+h}\end{DoxyCompactItemize}

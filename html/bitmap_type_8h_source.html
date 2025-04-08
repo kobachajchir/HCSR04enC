@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.13.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Clasificadora_Microcontroladores_CHAJCHIR_ARRUA: Archivo de código fuente GccApplication1/types/bitmapType.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Clasificadora_Microcontroladores_CHAJCHIR_ARRUA<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">El proyecto desarrolla un sistema de clasificacion de cajas a traves de medicion de altura, con configuracion mediante un protocolo de comunicación serial no bloqueante - AVR C- ATMEGA328p</div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.13.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('bitmap_type_8h_source.html',''); initResizable(true); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">bitmapType.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bitmap_type_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * BITMAPTYPE.h</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Created: 22-Mar-25 5:31:54 PM</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *  Author: kobac</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> */</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef BITMAPTYPE_H_</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define BITMAPTYPE_H_</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;stdint.h&gt;</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html">   14</a></span><span class="keyword">typedef</span> <span class="keyword">union </span>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a39dd617b3cde2eb25327b6c0213a7f36">   16</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#a39dd617b3cde2eb25327b6c0213a7f36">bit0</a>: 1;  <span class="comment">// Bit 0 - Parte del nibble bajo (bitL)</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a0b98e79f49804aab184fe554e2d10483">   17</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#a0b98e79f49804aab184fe554e2d10483">bit1</a>: 1;  <span class="comment">// Bit 1 - Parte del nibble bajo (bitL)</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#aa2484bf47c7c38a7eb8f2b22f09f6710">   18</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#aa2484bf47c7c38a7eb8f2b22f09f6710">bit2</a>: 1;  <span class="comment">// Bit 2 - Parte del nibble bajo (bitL)</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#ae1457b2475c549e53d084a2daa6475f5">   19</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#ae1457b2475c549e53d084a2daa6475f5">bit3</a>: 1;  <span class="comment">// Bit 3 - Parte del nibble bajo (bitL)</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#aec79d033d0709e9c4caf5b21f85848bc">   20</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#aec79d033d0709e9c4caf5b21f85848bc">bit4</a>: 1;  <span class="comment">// Bit 4 - Parte del nibble alto (bitH)</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a56012f9e5f78d285eb450866b270b86d">   21</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#a56012f9e5f78d285eb450866b270b86d">bit5</a>: 1;  <span class="comment">// Bit 5 - Parte del nibble alto (bitH)</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a39af6ce9105754718e17a87fb173b0fb">   22</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#a39af6ce9105754718e17a87fb173b0fb">bit6</a>: 1;  <span class="comment">// Bit 6 - Parte del nibble alto (bitH)</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a23364783b1302b0aab8b38fc7853cad3">   23</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#a23364783b1302b0aab8b38fc7853cad3">bit7</a>: 1;  <span class="comment">// Bit 7 - Parte del nibble alto (bitH)</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a9103feb57a989a3f13c3d3bc0bc3696f">   24</a></span>    } bitmap;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a79e5f4624dbc1f2bee5f6e7c2db7e0d1">   26</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#a79e5f4624dbc1f2bee5f6e7c2db7e0d1">bitL</a>: 4;  <span class="comment">// Nibble bajo (bits 0-3)</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#ae5851ba5f287daacc69518296d113d21">   27</a></span>        uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#ae5851ba5f287daacc69518296d113d21">bitH</a>: 4;  <span class="comment">// Nibble alto (bits 4-7)</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a29405520b4587dbbc419ecc9ebf81180">   28</a></span>    } nibbles;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="union_byte___flag___struct.html#a96f44d20f1dbf1c8785a7bc99a46164c">   29</a></span>    uint8_t <a class="code hl_variable" href="union_byte___flag___struct.html#a96f44d20f1dbf1c8785a7bc99a46164c">byte</a>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>} <a class="code hl_union" href="union_byte___flag___struct.html">Byte_Flag_Struct</a>;</div>
+</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif </span><span class="comment">/* BITMAPTYPE_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aunion_byte___flag___struct_html"><div class="ttname"><a href="union_byte___flag___struct.html">Byte_Flag_Struct</a></div><div class="ttdef"><b>Definition</b> bitmapType.h:14</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_a0b98e79f49804aab184fe554e2d10483"><div class="ttname"><a href="union_byte___flag___struct.html#a0b98e79f49804aab184fe554e2d10483">Byte_Flag_Struct::bit1</a></div><div class="ttdeci">uint8_t bit1</div><div class="ttdef"><b>Definition</b> bitmapType.h:17</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_a23364783b1302b0aab8b38fc7853cad3"><div class="ttname"><a href="union_byte___flag___struct.html#a23364783b1302b0aab8b38fc7853cad3">Byte_Flag_Struct::bit7</a></div><div class="ttdeci">uint8_t bit7</div><div class="ttdef"><b>Definition</b> bitmapType.h:23</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_a39af6ce9105754718e17a87fb173b0fb"><div class="ttname"><a href="union_byte___flag___struct.html#a39af6ce9105754718e17a87fb173b0fb">Byte_Flag_Struct::bit6</a></div><div class="ttdeci">uint8_t bit6</div><div class="ttdef"><b>Definition</b> bitmapType.h:22</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_a39dd617b3cde2eb25327b6c0213a7f36"><div class="ttname"><a href="union_byte___flag___struct.html#a39dd617b3cde2eb25327b6c0213a7f36">Byte_Flag_Struct::bit0</a></div><div class="ttdeci">uint8_t bit0</div><div class="ttdef"><b>Definition</b> bitmapType.h:16</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_a56012f9e5f78d285eb450866b270b86d"><div class="ttname"><a href="union_byte___flag___struct.html#a56012f9e5f78d285eb450866b270b86d">Byte_Flag_Struct::bit5</a></div><div class="ttdeci">uint8_t bit5</div><div class="ttdef"><b>Definition</b> bitmapType.h:21</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_a79e5f4624dbc1f2bee5f6e7c2db7e0d1"><div class="ttname"><a href="union_byte___flag___struct.html#a79e5f4624dbc1f2bee5f6e7c2db7e0d1">Byte_Flag_Struct::bitL</a></div><div class="ttdeci">uint8_t bitL</div><div class="ttdef"><b>Definition</b> bitmapType.h:26</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_a96f44d20f1dbf1c8785a7bc99a46164c"><div class="ttname"><a href="union_byte___flag___struct.html#a96f44d20f1dbf1c8785a7bc99a46164c">Byte_Flag_Struct::byte</a></div><div class="ttdeci">uint8_t byte</div><div class="ttdef"><b>Definition</b> bitmapType.h:29</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_aa2484bf47c7c38a7eb8f2b22f09f6710"><div class="ttname"><a href="union_byte___flag___struct.html#aa2484bf47c7c38a7eb8f2b22f09f6710">Byte_Flag_Struct::bit2</a></div><div class="ttdeci">uint8_t bit2</div><div class="ttdef"><b>Definition</b> bitmapType.h:18</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_ae1457b2475c549e53d084a2daa6475f5"><div class="ttname"><a href="union_byte___flag___struct.html#ae1457b2475c549e53d084a2daa6475f5">Byte_Flag_Struct::bit3</a></div><div class="ttdeci">uint8_t bit3</div><div class="ttdef"><b>Definition</b> bitmapType.h:19</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_ae5851ba5f287daacc69518296d113d21"><div class="ttname"><a href="union_byte___flag___struct.html#ae5851ba5f287daacc69518296d113d21">Byte_Flag_Struct::bitH</a></div><div class="ttdeci">uint8_t bitH</div><div class="ttdef"><b>Definition</b> bitmapType.h:27</div></div>
+<div class="ttc" id="aunion_byte___flag___struct_html_aec79d033d0709e9c4caf5b21f85848bc"><div class="ttname"><a href="union_byte___flag___struct.html#aec79d033d0709e9c4caf5b21f85848bc">Byte_Flag_Struct::bit4</a></div><div class="ttdeci">uint8_t bit4</div><div class="ttdef"><b>Definition</b> bitmapType.h:20</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_027ef9e0f692986d43197b4d06e3469a.html">GccApplication1</a></li><li class="navelem"><a class="el" href="dir_ea5c804158e414c9d7b86e6bc12c96fa.html">types</a></li><li class="navelem"><a class="el" href="bitmap_type_8h.html">bitmapType.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+\doxysection{Referencia de la estructura Ultrasonic\+\_\+\+Detector\+\_\+t}
+\label{struct_ultrasonic___detector__t}\index{Ultrasonic\_Detector\_t@{Ultrasonic\_Detector\_t}}
+
+
+Estructura que representa un sistema de detección basado en sensor ultrasónico e IR.  
+
+
+
+
+{\ttfamily \#include $<$ultrasonic\+Detector\+Type.\+h$>$}
+
+\doxysubsubsection*{Campos de datos}
+\begin{DoxyCompactItemize}
+\item 
+ultrasonic\+\_\+t $\ast$ \textbf{ sensor}
+\item 
+\textbf{ TCRT\+\_\+t} $\ast$ \textbf{ sensor\+\_\+\+IR}
+\item 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} \textbf{ flags}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{DescripciÃ³n detallada}
+Estructura que representa un sistema de detección basado en sensor ultrasónico e IR. 
+
+Contiene punteros a los sensores usados para la detección de presencia y clasificación de cajas, así como un conjunto de banderas de estado y control. 
+
+\doxysubsection{DocumentaciÃ³n de campos}
+\index{Ultrasonic\_Detector\_t@{Ultrasonic\_Detector\_t}!flags@{flags}}
+\index{flags@{flags}!Ultrasonic\_Detector\_t@{Ultrasonic\_Detector\_t}}
+\doxysubsubsection{flags}
+{\footnotesize\ttfamily \label{struct_ultrasonic___detector__t_a3678d26acc883f3c39c9970857aaf88f} 
+\textbf{ Byte\+\_\+\+Flag\+\_\+\+Struct} flags}
+
+Flags\+: nibble H para estado, nibble L para flags de zona \index{Ultrasonic\_Detector\_t@{Ultrasonic\_Detector\_t}!sensor@{sensor}}
+\index{sensor@{sensor}!Ultrasonic\_Detector\_t@{Ultrasonic\_Detector\_t}}
+\doxysubsubsection{sensor}
+{\footnotesize\ttfamily \label{struct_ultrasonic___detector__t_a679e877e50b0ebdf5f8523769decf4cc} 
+ultrasonic\+\_\+t$\ast$ sensor}
+
+Puntero al sensor ultrasónico (HCSR04) \index{Ultrasonic\_Detector\_t@{Ultrasonic\_Detector\_t}!sensor\_IR@{sensor\_IR}}
+\index{sensor\_IR@{sensor\_IR}!Ultrasonic\_Detector\_t@{Ultrasonic\_Detector\_t}}
+\doxysubsubsection{sensor\_IR}
+{\footnotesize\ttfamily \label{struct_ultrasonic___detector__t_a5f7ffa3489e26f757bc1d5a4d713962b} 
+\textbf{ TCRT\+\_\+t}$\ast$ sensor\+\_\+\+IR}
+
+Puntero al sensor infrarrojo (TCRT) 
+
+La documentaciÃ³n de esta estructura estÃ¡ generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+Gcc\+Application1/types/\textbf{ ultrasonic\+Detector\+Type.\+h}\end{DoxyCompactItemize}
