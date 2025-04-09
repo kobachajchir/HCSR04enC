@@ -1,0 +1,14 @@
+<map id="GccApplication1/types/ultrasonicDetectorType.h" name="GccApplication1/types/ultrasonicDetectorType.h">
+<area shape="rect" id="Node000001" title="Definición de la estructura y macros para el detector ultrasónico compuesto." alt="" coords="135,5,305,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,94,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,51,91,91,89,87,175,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="117,96,230,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,50,191,84,186,81,206,47"/>
+<area shape="rect" id="Node000004" href="$bitmap_type_8h.html" title=" " alt="" coords="260,171,359,197"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="234,47,297,156,292,158,230,50"/>
+<area shape="rect" id="Node000006" href="$_t_c_r_t_type_8h.html" title="Definición del tipo de dato TCRT_t para sensores infrarrojos reflectivos." alt="" coords="304,96,400,123"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="256,46,320,85,317,90,253,51"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="277,245,342,272"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="312,198,312,230,307,230,307,198"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="347,125,327,159,322,156,342,122"/>
+</map>

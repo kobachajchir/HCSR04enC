@@ -2,6 +2,14 @@
 \label{tcrt__utils_8h}\index{GccApplication1/utils/tcrt/tcrt\_utils.h@{GccApplication1/utils/tcrt/tcrt\_utils.h}}
 {\ttfamily \#include "{}types/\+TCRTType.\+h"{}}\newline
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Gráfico de dependencias incluidas en tcrt\+\_\+utils.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{tcrt__utils_8h__incl}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Funciones}
 \begin{DoxyCompactItemize}
 \item 
@@ -37,6 +45,22 @@ Utiliza el canal ADC asociado al sensor para obtener un umbral inicial.
 \mbox{\texttt{ in,out}}  & {\em sensor} & Puntero al sensor a calibrar. \\
 \hline
 \end{DoxyParams}
+Gráfico de llamadas de esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{tcrt__utils_8h_ae09ff4102347ab8d40f5b4fc600e67ca_cgraph}
+\end{center}
+\end{figure}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tcrt__utils_8h_ae09ff4102347ab8d40f5b4fc600e67ca_icgraph}
+\end{center}
+\end{figure}
 \index{tcrt\_utils.h@{tcrt\_utils.h}!detect\_rising\_edge@{detect\_rising\_edge}}
 \index{detect\_rising\_edge@{detect\_rising\_edge}!tcrt\_utils.h@{tcrt\_utils.h}}
 \doxysubsubsection{detect\_rising\_edge()}
@@ -71,7 +95,15 @@ void tcrt\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCapt
 
 Inicializa los sensores TCRT conectados a los pines anal�gicos. 
 
-Configura los pines PC0�\+PC3 como entradas, desactiva pull-\/ups, y configura el ADC para su uso. \index{tcrt\_utils.h@{tcrt\_utils.h}!tcrt\_is\_box\_detected@{tcrt\_is\_box\_detected}}
+Configura los pines PC0�\+PC3 como entradas, desactiva pull-\/ups, y configura el ADC para su uso. Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{tcrt__utils_8h_a640932133dbc070f018c88daa1988cde_icgraph}
+\end{center}
+\end{figure}
+\index{tcrt\_utils.h@{tcrt\_utils.h}!tcrt\_is\_box\_detected@{tcrt\_is\_box\_detected}}
 \index{tcrt\_is\_box\_detected@{tcrt\_is\_box\_detected}!tcrt\_utils.h@{tcrt\_utils.h}}
 \doxysubsubsection{tcrt\_is\_box\_detected()}
 {\footnotesize\ttfamily \label{tcrt__utils_8h_ab6c59b4ce307ce1bbe252421d22d06ae} 
@@ -93,6 +125,14 @@ Utiliza el valor de umbral ajustado con hist�resis para detectar presencia de ob
 {\em true} & Si se detecta una caja. \\
 \hline
 \end{DoxyRetVals}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tcrt__utils_8h_ab6c59b4ce307ce1bbe252421d22d06ae_icgraph}
+\end{center}
+\end{figure}
 \index{tcrt\_utils.h@{tcrt\_utils.h}!tcrt\_read@{tcrt\_read}}
 \index{tcrt\_read@{tcrt\_read}!tcrt\_utils.h@{tcrt\_utils.h}}
 \doxysubsubsection{tcrt\_read()}
@@ -110,6 +150,22 @@ Acumula m�ltiples lecturas para aplicar un filtro promedio.
 \mbox{\texttt{ in,out}}  & {\em sensor} & Puntero al sensor a leer. \\
 \hline
 \end{DoxyParams}
+Gráfico de llamadas de esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{tcrt__utils_8h_a088ecc5d18c61778d47fbcfa19746250_cgraph}
+\end{center}
+\end{figure}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{tcrt__utils_8h_a088ecc5d18c61778d47fbcfa19746250_icgraph}
+\end{center}
+\end{figure}
 \index{tcrt\_utils.h@{tcrt\_utils.h}!tcrt\_read\_channel@{tcrt\_read\_channel}}
 \index{tcrt\_read\_channel@{tcrt\_read\_channel}!tcrt\_utils.h@{tcrt\_utils.h}}
 \doxysubsubsection{tcrt\_read\_channel()}
@@ -130,3 +186,11 @@ Realiza una lectura del canal ADC correspondiente al sensor TCRT.
 {\em Valor} & de 10 bits de la conversi�n ADC (0�1023). \\
 \hline
 \end{DoxyRetVals}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tcrt__utils_8h_a6a9f4f05c2e44d7839a90a16a7bf5874_icgraph}
+\end{center}
+\end{figure}

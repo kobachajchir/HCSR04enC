@@ -1,0 +1,8 @@
+<map id="Ultrasonic_Detector_t" name="Ultrasonic_Detector_t">
+<area shape="rect" id="Node000001" title="Estructura que representa un sistema de detección basado en sensor ultrasónico e IR." alt="" coords="5,187,154,213"/>
+<area shape="rect" id="Node000002" href="$struct_t_c_r_t__t.html" title="Representa un sensor TCRT (IR reflectivo) con filtrado y calibración." alt="" coords="102,96,169,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,137,90,188,85,185,117,134"/>
+<area shape="rect" id="Node000003" href="$union_byte___flag___struct.html" title=" " alt="" coords="6,5,129,32"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="64,47,60,83,61,122,68,157,78,186,72,187,63,158,56,123,55,83,59,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,43,128,94,124,97,84,46"/>
+</map>

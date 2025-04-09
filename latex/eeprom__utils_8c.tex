@@ -3,6 +3,14 @@
 {\ttfamily \#include "{}eeprom\+\_\+utils.\+h"{}}\newline
 {\ttfamily \#include "{}../../main.\+h"{}}\newline
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Gr√°fico de dependencias incluidas en eeprom\+\_\+utils.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eeprom__utils_8c__incl}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Funciones}
 \begin{DoxyCompactItemize}
 \item 
@@ -39,6 +47,14 @@ Realiza una operaciÛn XOR entre los valores de salidaA, salidaB y salidaC.
 {\em Checksum} & calculado como XOR de los campos de salida. \\
 \hline
 \end{DoxyRetVals}
+Gr√°fico de llamadas a esta funci√≥n\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eeprom__utils_8c_ad8c2bce82470c5fcbdc89d8b0562f5c5_icgraph}
+\end{center}
+\end{figure}
 \index{eeprom\_utils.c@{eeprom\_utils.c}!existConfig@{existConfig}}
 \index{existConfig@{existConfig}!eeprom\_utils.c@{eeprom\_utils.c}}
 \doxysubsubsection{existConfig()}
@@ -58,6 +74,22 @@ Comprueba si los campos son distintos de 0x\+FF y si el checksum es correcto.
 {\em false} & Si la configuraciÛn no est· presente o el checksum no coincide. \\
 \hline
 \end{DoxyRetVals}
+Gr√°fico de llamadas de esta funci√≥n\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{eeprom__utils_8c_aec28892d3def34f6907982f144240001_cgraph}
+\end{center}
+\end{figure}
+Gr√°fico de llamadas a esta funci√≥n\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{eeprom__utils_8c_aec28892d3def34f6907982f144240001_icgraph}
+\end{center}
+\end{figure}
 \index{eeprom\_utils.c@{eeprom\_utils.c}!loadConfigurationRAM@{loadConfigurationRAM}}
 \index{loadConfigurationRAM@{loadConfigurationRAM}!eeprom\_utils.c@{eeprom\_utils.c}}
 \doxysubsubsection{loadConfigurationRAM()}
@@ -75,6 +107,14 @@ Si el puntero es v·lido, lee el bloque completo desde EEPROM.
 \mbox{\texttt{ out}}  & {\em config} & Puntero a la estructura donde se cargar· la configuraciÛn. \\
 \hline
 \end{DoxyParams}
+Gr√°fico de llamadas a esta funci√≥n\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eeprom__utils_8c_a2e5a84e7e2ff1029f1cba0ae11ffb9b5_icgraph}
+\end{center}
+\end{figure}
 \index{eeprom\_utils.c@{eeprom\_utils.c}!saveConfigurationRAM@{saveConfigurationRAM}}
 \index{saveConfigurationRAM@{saveConfigurationRAM}!eeprom\_utils.c@{eeprom\_utils.c}}
 \doxysubsubsection{saveConfigurationRAM()}
@@ -92,3 +132,19 @@ Copia la estructura recibida, calcula su checksum y la guarda usando {\ttfamily 
 \mbox{\texttt{ in}}  & {\em config} & Puntero a la configuraciÛn en RAM que se desea guardar. \\
 \hline
 \end{DoxyParams}
+Gr√°fico de llamadas de esta funci√≥n\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eeprom__utils_8c_a6812f46ec5406eced3bc14d47b7bef5f_cgraph}
+\end{center}
+\end{figure}
+Gr√°fico de llamadas a esta funci√≥n\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{eeprom__utils_8c_a6812f46ec5406eced3bc14d47b7bef5f_icgraph}
+\end{center}
+\end{figure}

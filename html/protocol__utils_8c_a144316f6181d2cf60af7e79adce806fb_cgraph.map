@@ -1,0 +1,13 @@
+<map id="protocolTask" name="protocolTask">
+<area shape="rect" id="Node000001" title="Ejecuta la tarea principal del protocolo." alt="" coords="5,56,101,83"/>
+<area shape="rect" id="Node000002" href="$protocol__utils_8c.html#a15ec5468109225537cfc49bea1eab6e7" title="Limpia el contenido del paquete recibido." alt="" coords="165,5,292,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,53,165,34,166,39,102,58"/>
+<area shape="rect" id="Node000003" href="$protocol__utils_8c.html#a08b2dcbb3c316e5decef49a29c637e8b" title="Procesa el buffer de protocolo buscando un encabezado válido." alt="" coords="149,56,308,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,67,133,67,133,72,101,72"/>
+<area shape="rect" id="Node000005" href="$protocol__utils_8c.html#a90ddb01731316a71cad2d59f90a60a3c" title="Valida el contenido del paquete recibido." alt="" coords="184,107,273,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="102,80,169,100,168,105,100,86"/>
+<area shape="rect" id="Node000004" href="$protocol__utils_8c.html#adf84a8818e3bab8f36f25a19bae27f0b" title="Verifica la validez del encabezado del paquete." alt="" coords="366,56,466,83"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="308,67,351,67,351,72,308,72"/>
+<area shape="rect" id="Node000006" href="$protocol__utils_8c.html#a1cf1f9c367026cf7e40fc83ee85195a1" title="Calcula el checksum del payload recibido." alt="" coords="356,107,476,133"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="274,117,340,117,340,123,274,123"/>
+</map>

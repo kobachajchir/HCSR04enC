@@ -1,0 +1,17 @@
+<map id="calculate_angle_pulseUs" name="calculate_angle_pulseUs">
+<area shape="rect" id="Node000001" title="Convierte un ángulo en microsegundos de pulso." alt="" coords="527,81,693,108"/>
+<area shape="rect" id="Node000002" href="$servo__utils_8c.html#adc1344022d38e9142b1658b3289cca1b" title="Inicializa un servo específico." alt="" coords="384,5,457,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="559,78,455,35,457,30,561,73"/>
+<area shape="rect" id="Node000006" href="$main_8c.html#ad39420cdd896dd12c68e36313139d0a5" title="ISR del Timer1 Compare Match A." alt="" coords="398,56,443,83"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="511,84,443,75,444,70,511,79"/>
+<area shape="rect" id="Node000007" href="$main_8c.html#a317c504c8745a1256efed69e0dbf6e66" title="ISR del Timer1 Compare Match B." alt="" coords="398,107,443,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="511,111,444,120,443,114,511,105"/>
+<area shape="rect" id="Node000008" href="$servo__utils_8c.html#ac2ad8679ed8b43924844721718002969" title="Establece el ángulo de un servo del arreglo global servosArray." alt="" coords="362,157,479,184"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="561,117,457,159,455,154,559,112"/>
+<area shape="rect" id="Node000003" href="$boxsorter__utils_8c.html#ad978a60fb09963ff64dba6092ee48c2f" title="Inicializa los servos utilizados por el sistema." alt="" coords="235,5,314,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="369,21,314,21,314,16,369,16"/>
+<area shape="rect" id="Node000004" href="$boxsorter__utils_8c.html#ac3988d0a14e12e52073709af9b93fe9d" title="Inicializa las salidas del sistema de clasificación." alt="" coords="103,5,187,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="219,21,187,21,187,16,219,16"/>
+<area shape="rect" id="Node000005" href="$main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>

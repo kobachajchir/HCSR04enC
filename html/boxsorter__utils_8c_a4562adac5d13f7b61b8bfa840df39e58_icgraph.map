@@ -1,0 +1,7 @@
+<map id="classify_box" name="classify_box">
+<area shape="rect" id="Node000001" title="Clasifica una caja en función de su altura medida." alt="" coords="266,5,360,32"/>
+<area shape="rect" id="Node000002" href="$boxsorter__utils_8c.html#af0e381d6f0d88428934b9854cddb037f" title="Tarea que ejecuta el control principal del sensor ultrasónico." alt="" coords="103,5,218,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,21,219,21,219,16,250,16"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>

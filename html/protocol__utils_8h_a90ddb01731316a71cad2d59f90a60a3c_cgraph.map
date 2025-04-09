@@ -1,0 +1,5 @@
+<map id="validatePck" name="validatePck">
+<area shape="rect" id="Node000001" title="Valida el contenido del paquete recibido." alt="" coords="5,5,95,32"/>
+<area shape="rect" id="Node000002" href="$protocol__utils_8c.html#a1cf1f9c367026cf7e40fc83ee85195a1" title="Calcula el checksum del payload recibido." alt="" coords="143,5,263,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,16,127,16,127,21,95,21"/>
+</map>

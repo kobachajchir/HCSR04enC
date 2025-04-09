@@ -1,0 +1,5 @@
+<map id="initServo" name="initServo">
+<area shape="rect" id="Node000001" title="Inicializa un servo específico." alt="" coords="5,5,78,32"/>
+<area shape="rect" id="Node000002" href="$servo__utils_8c.html#a9be00cc746a4b23036719dce077dd2f4" title="Convierte un ángulo en microsegundos de pulso." alt="" coords="126,5,292,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,16,110,16,110,21,78,21"/>
+</map>

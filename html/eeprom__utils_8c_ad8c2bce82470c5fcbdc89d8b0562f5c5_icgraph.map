@@ -1,0 +1,15 @@
+<map id="calculate_config_checksum" name="calculate_config_checksum">
+<area shape="rect" id="Node000001" title="Calcula el checksum de una estructura de configuración." alt="" coords="439,31,622,57"/>
+<area shape="rect" id="Node000002" href="$eeprom__utils_8c.html#aec28892d3def34f6907982f144240001" title="Verifica si existe una configuración válida en la EEPROM." alt="" coords="270,5,357,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="423,34,357,26,358,21,424,29"/>
+<area shape="rect" id="Node000005" href="$eeprom__utils_8c.html#a6812f46ec5406eced3bc14d47b7bef5f" title="Guarda la configuración en EEPROM desde una copia en RAM." alt="" coords="235,56,391,83"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="424,59,392,63,392,58,423,54"/>
+<area shape="rect" id="Node000003" href="$boxsorter__utils_8c.html#ac3988d0a14e12e52073709af9b93fe9d" title="Inicializa las salidas del sistema de clasificación." alt="" coords="103,5,187,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,21,188,21,188,16,254,16"/>
+<area shape="rect" id="Node000004" href="$main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,56,55,83"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="100,41,56,61,54,56,98,36"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="219,72,55,72,55,67,219,67"/>
+<area shape="rect" id="Node000006" href="$protocol__utils_8c.html#a37df37e33f461231b6060fd8743162d3" title="Ejecuta la acción correspondiente al comando recibido." alt="" coords="109,107,181,133"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="252,90,182,112,180,107,251,85"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="98,102,54,83,56,78,100,97"/>
+</map>

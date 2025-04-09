@@ -1,0 +1,5 @@
+<map id="ultraSensorTask" name="ultraSensorTask">
+<area shape="rect" id="Node000001" title="Tarea que ejecuta el control principal del sensor ultrasónico." alt="" coords="5,5,121,32"/>
+<area shape="rect" id="Node000002" href="$boxsorter__utils_8c.html#a4562adac5d13f7b61b8bfa840df39e58" title="Clasifica una caja en función de su altura medida." alt="" coords="169,5,263,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,16,153,16,153,21,121,21"/>
+</map>

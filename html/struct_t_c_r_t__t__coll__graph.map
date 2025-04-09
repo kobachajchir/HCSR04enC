@@ -1,0 +1,5 @@
+<map id="TCRT_t" name="TCRT_t">
+<area shape="rect" id="Node000001" title="Representa un sensor TCRT (IR reflectivo) con filtrado y calibración." alt="" coords="33,96,100,123"/>
+<area shape="rect" id="Node000002" href="$union_byte___flag___struct.html" title=" " alt="" coords="5,5,128,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,48,69,95,64,95,64,48"/>
+</map>
