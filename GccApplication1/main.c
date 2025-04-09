@@ -494,50 +494,50 @@ void timer2_init()
  * @note Esta función está declarada como `inline` para permitir su expansión directa
  * en el lugar donde se use, lo cual mejora el rendimiento en este tipo de funciónes que son solo para estructurar el codigo.
  */
-static inline bool calibrateAllIRSensors()
-{
-	static bool init_done = false;
-
-	if (!init_done) {
-		printf_P(PSTR("Calibrando sensores IR...\n"));
-		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED)){
-			SET_FLAG(IR_A.flags, TCRT_CALIBRATING);
-		}
-		if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED)){
-			SET_FLAG(IR_B.flags, TCRT_CALIBRATING);
-		}
-		if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED)){
-			SET_FLAG(IR_C.flags, TCRT_CALIBRATING);
-		}
-		if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED)){
-			SET_FLAG(IR_U.flags, TCRT_CALIBRATING);
-		}
-		init_done = true;
-	}
-
-	if (IS_FLAG_SET(IR_A.flags, TCRT_CALIBRATING)) {
-		calibrateIRSensor(&IR_A);
-	}
-	if (IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) {
-		calibrateIRSensor(&IR_B);
-	}
-	if (IS_FLAG_SET(IR_C.flags, TCRT_CALIBRATING)) {
-		calibrateIRSensor(&IR_C);
-	}
-	if (IS_FLAG_SET(IR_U.flags, TCRT_CALIBRATING)) {
-		calibrateIRSensor(&IR_U);
-	}
-	// Lo mismo con los demás si están habilitados...
-
-	// Condición de salida
-	if (!IS_FLAG_SET(IR_A.flags, TCRT_CALIBRATING) &&
-	!IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING) &&
-	!IS_FLAG_SET(IR_C.flags, TCRT_CALIBRATING) &&
-	!IS_FLAG_SET(IR_U.flags, TCRT_CALIBRATING)) { //Si hay alguno no ENABLED, entonces no entra en CALIBRATING mode y aca puede salir tranquilo, no bloquea el funcionamiento no tener un sensor
-		return true; // Listo
-	}
-	return false; // Sigue calibrando
-}
+// static inline bool calibrateAllIRSensors()
+// {
+// 	static bool init_done = false;
+// 
+// 	if (!init_done) {
+// 		printf_P(PSTR("Calibrando sensores IR...\n"));
+// 		if(IS_FLAG_SET(IR_A.flags, TCRT_ENABLED)){
+// 			SET_FLAG(IR_A.flags, TCRT_CALIBRATING);
+// 		}
+// 		if(IS_FLAG_SET(IR_B.flags, TCRT_ENABLED)){
+// 			SET_FLAG(IR_B.flags, TCRT_CALIBRATING);
+// 		}
+// 		if(IS_FLAG_SET(IR_C.flags, TCRT_ENABLED)){
+// 			SET_FLAG(IR_C.flags, TCRT_CALIBRATING);
+// 		}
+// 		if(IS_FLAG_SET(IR_U.flags, TCRT_ENABLED)){
+// 			SET_FLAG(IR_U.flags, TCRT_CALIBRATING);
+// 		}
+// 		init_done = true;
+// 	}
+// 
+// 	if (IS_FLAG_SET(IR_A.flags, TCRT_CALIBRATING)) {
+// 		calibrateIRSensor(&IR_A);
+// 	}
+// 	if (IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING)) {
+// 		calibrateIRSensor(&IR_B);
+// 	}
+// 	if (IS_FLAG_SET(IR_C.flags, TCRT_CALIBRATING)) {
+// 		calibrateIRSensor(&IR_C);
+// 	}
+// 	if (IS_FLAG_SET(IR_U.flags, TCRT_CALIBRATING)) {
+// 		calibrateIRSensor(&IR_U);
+// 	}
+// 	// Lo mismo con los demás si están habilitados...
+// 
+// 	// Condición de salida
+// 	if (!IS_FLAG_SET(IR_A.flags, TCRT_CALIBRATING) &&
+// 	!IS_FLAG_SET(IR_B.flags, TCRT_CALIBRATING) &&
+// 	!IS_FLAG_SET(IR_C.flags, TCRT_CALIBRATING) &&
+// 	!IS_FLAG_SET(IR_U.flags, TCRT_CALIBRATING)) { //Si hay alguno no ENABLED, entonces no entra en CALIBRATING mode y aca puede salir tranquilo, no bloquea el funcionamiento no tener un sensor
+// 		return true; // Listo
+// 	}
+// 	return false; // Sigue calibrando
+// }
 
 /**
  * @brief Tarea asociada al botón de entrada.
@@ -647,11 +647,14 @@ int main()
 	ultrasonic_set_debug_mode(&ultraSensor, DEBUG_FLAGS ? true : false); //Establece bandera de debug
 	initDetector(&hcsr04Detector, &ultraSensor, &IR_U); //Inicializar el dectector IR con el ultrasonico
 	initSorter(&SorterSystem); //Iniciar el clasificador
+	initOutputs(); //Recien aca inicializar las salidas, porque recien inicializamos los IR	
 	
 	EMIT_TRIGGER = 1; //Solo si quiero emitir al iniciar, sino sacar
 	
 	//Imprime iniciado
 	printf_P(PSTR("Iniciado\n"));
+	IR_CALIBRATED = 1;
+
 	
 	sei(); //Inicia las interrupciones
 	
@@ -659,17 +662,17 @@ int main()
 	{ 
 		if(IR_CALIBRATED){
 			irSensorsTask(&SorterSystem);
-		}else{
-			if(calibrateAllIRSensors()){ //Etapa de calibracion de los sensores IR
-				printf_P(PSTR("Todos los sensores IR calibrados.\n"));
-				IR_CALIBRATED = 1;
-				IR_A.calibrationCounter = 0;
-				IR_B.calibrationCounter = 0;
-				IR_C.calibrationCounter = 0;
-				IR_U.calibrationCounter = 0;
-				initOutputs(); //Recien aca inicializar las salidas, porque recien inicializamos los IR
-			}
 		}
+// 		}else{
+// 			if(calibrateAllIRSensors()){ //Etapa de calibracion de los sensores IR
+// 				printf_P(PSTR("Todos los sensores IR calibrados.\n"));
+// 				IR_CALIBRATED = 1;
+// 				IR_A.calibrationCounter = 0;
+// 				IR_B.calibrationCounter = 0;
+// 				IR_C.calibrationCounter = 0;
+// 				IR_U.calibrationCounter = 0;
+// 			}
+// 		}
 		ultraSensorTask(&hcsr04Detector, &SorterSystem); //Recordar que la funcion pide un puntero y esto ya es un puntero, por lo que no lo apunto con &
 		servosTask(); //Task de los servos
 		buttonTask(); //Task del boton

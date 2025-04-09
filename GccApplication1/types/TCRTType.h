@@ -33,6 +33,7 @@ typedef struct {
 	uint8_t calibrationCounter;    /**< Contador de muestras para calibración/filtrado */
 	uint32_t filterAccumulator;    /**< Acumulador de muestras para filtrado */
 	uint8_t hysteresis_percent;    /**< Porcentaje de histéresis aplicado sobre el threshold */
+	uint8_t digitalState;
 } TCRT_t;
 
 /// @brief Bandera que indica que el sensor está habilitado.

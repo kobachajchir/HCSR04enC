@@ -30,26 +30,31 @@
 #define F_CPU 16000000UL  // 16 MHz
 
 // --- Pines del sistema ---
-#define TRIGGER_PIN      PD3
+#define TRIGGER_PIN      PD3 //PIN 3
 #define TRIGGER_DDR      DDRD
 #define TRIGGER_PORT     PORTD
-#define ECHO_PIN         PB0
-#define BUTTON_PIN       PD4
-#define LED_BUILTIN_PIN  PB5
-#define SERVOA_PIN       PB1
-#define SERVOB_PIN       PB2
-#define SERVOC_PIN       PB3
+#define ECHO_PIN         PB0 //PIN 8
+#define BUTTON_PIN       PD4 //PIN 4
+#define LED_BUILTIN_PIN  PB5 //PIN 13
+#define SERVOA_PIN       PB1 //PIN 9
+#define SERVOB_PIN       PB2 //PIN 10
+#define SERVOC_PIN       PB3 //PIN 11
 
-// --- Pines TCRT ---
-#define TCRT_A PC0
-#define TCRT_B PC1
-#define TCRT_C PC2
-#define TCRT_U PC3
+// 	// --- Pines TCRT ---
+// 	#define TCRT_A PC0
+// 	#define TCRT_B PC1
+// 	#define TCRT_C PC2
+// 	#define TCRT_U PC3
+// 
+// 	#define TCRT_A_CHANNEL 0
+// 	#define TCRT_B_CHANNEL 1
+// 	#define TCRT_C_CHANNEL 2
+// 	#define TCRT_U_CHANNEL 3
 
-#define TCRT_A_CHANNEL 0
-#define TCRT_B_CHANNEL 1
-#define TCRT_C_CHANNEL 2
-#define TCRT_U_CHANNEL 3
+#define TCRT_A PD5 //PIN 5
+#define TCRT_B PD6 //PIN 6
+#define TCRT_C PD7 //PIN 7
+#define TCRT_U PD2 //PIN 2
 
 // --- Parámetros TCRT ---
 #define TCRT_CALIBRATION_SAMPLES 10

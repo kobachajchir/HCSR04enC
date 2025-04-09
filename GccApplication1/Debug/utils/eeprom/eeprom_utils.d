@@ -10,9 +10,9 @@ utils/eeprom/eeprom_utils.d utils/eeprom/eeprom_utils.o: \
  ../utils/eeprom/../../utils/../types/bitmapType.h \
  ../utils/eeprom/../../types/bitmapType.h \
  ../utils/eeprom/../../types/ultrasonicDetectorType.h \
- D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h \
+ ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h \
+ ../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h \
  ../utils/eeprom/../../types/TCRTType.h \
  ../utils/eeprom/../../types/sorterSystemTypes.h \
  ../utils/eeprom/../../types/outputType.h \
@@ -57,11 +57,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../utils/eeprom/../../types/ultrasonicDetectorType.h:
 
-D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic.h:
+../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
-D:\Microcontroladores\koba_ultrasonic_lib\koba_ultrasonic_lib/ultrasonic_hal.h:
+../../../koba_ultrasonic_lib/koba_ultrasonic_lib/ultrasonic_hal.h:
 
 ../utils/eeprom/../../types/TCRTType.h:
 

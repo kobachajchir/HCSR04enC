@@ -39,12 +39,11 @@ void initDetector(Ultrasonic_Detector_t* hcsr04Detector, ultrasonic_t* sensor_ul
 inline void initServos(void){ //Funcion solo estructural, es inline
 	initServo(&servoA, 0, SERVOA_PIN, SERVO_IDLE_ANGLE);
 	initServo(&servoB, 1, SERVOB_PIN, SERVO_IDLE_ANGLE);
-	//initServo(&servoC, 2, SERVOC_PIN, SERVO_IDLE_ANGLE); //Recordar que tenemos que habilitar este cuando pongamos el servo
+	initServo(&servoC, 2, SERVOC_PIN, SERVO_IDLE_ANGLE); //Recordar que tenemos que habilitar este cuando pongamos el servo
 	servosArray[0] = &servoA;
 	servosArray[1] = &servoB;
 	servosArray[2] = &servoC;
 	current_servo = 0;
-	//printf("Init servos\n");
 }
 
 /**
@@ -84,7 +83,6 @@ void initOutputs(){
 	SET_FLAG(salidaA.flags, OUTPUT_READY);
 	SET_FLAG(salidaB.flags, OUTPUT_READY);
 	SET_FLAG(salidaC.flags, OUTPUT_READY);
-	//printf("Init outputs\n");
 }
 
 /**
@@ -184,7 +182,7 @@ void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t* sort
 	if (ULTRASONIC_ENABLE &&
 		ultraDetector->sensor->TRIGGER_ALLOWED &&
 		EMIT_TRIGGER &&
-		IS_FLAG_SET(ultraDetector->flags, ULTRADET_ZONE_TRCT_U_DETECTING))
+		!IS_FLAG_SET(ultraDetector->flags, ULTRADET_ZONE_TRCT_U_DETECTING))
 	{
 		if (ultrasonic_start(ultraDetector->sensor)) {
 			ULTRASONIC_ENABLE = 0;
@@ -376,9 +374,14 @@ void irSensorsTask(sorter_system_t * sorter){
 		tcrt_read(&IR_U);
 	}
 	tcrt_is_box_detected(&IR_U);
-
+// 	if (NIBBLEH_GET_STATE(IR_C.flags) == TCRT_COUNTED) {
+// 		if (DEBUG_FLAGS_SORTER) {
+// 			printf_P(PSTR("Detecto en IR C\n"));
+// 		}
+// 	}
 	if (NIBBLEH_GET_STATE(IR_U.flags) == TCRT_READ && !IS_FLAG_SET(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING)) {
 		SET_FLAG(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING);
+		printf_P(PSTR("Detecto en IR U\n"));
 	}
 	else if (NIBBLEH_GET_STATE(IR_U.flags) == TCRT_COUNTED && IS_FLAG_SET(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING)) {
 		CLEAR_FLAG(hcsr04Detector.flags, ULTRADET_ZONE_TRCT_U_DETECTING);
