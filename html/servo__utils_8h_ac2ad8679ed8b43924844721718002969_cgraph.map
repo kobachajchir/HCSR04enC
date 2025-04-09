@@ -1,0 +1,5 @@
+<map id="servo_set_angle" name="servo_set_angle">
+<area shape="rect" id="Node000001" title="Establece el ángulo de un servo del arreglo global servosArray." alt="" coords="5,5,122,32"/>
+<area shape="rect" id="Node000002" href="$servo__utils_8c.html#a9be00cc746a4b23036719dce077dd2f4" title="Convierte un ángulo en microsegundos de pulso." alt="" coords="170,5,336,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="122,16,154,16,154,21,122,21"/>
+</map>

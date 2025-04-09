@@ -9,6 +9,14 @@
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
 {\ttfamily \#include $<$avr/pgmspace.\+h$>$}\newline
+Gráfico de dependencias incluidas en boxsorter\+\_\+utils.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boxsorter__utils_8c__incl}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Funciones}
 \begin{DoxyCompactItemize}
 \item 
@@ -55,6 +63,14 @@ Determina si es tipo A, B, C o descartada, comparando contra los rangos predefin
 {\em \doxyref{box\+\_\+type\+\_\+t}{pág.}{box_types_8h_acbdca706d57c8a5517434a35679203d1}} & Tipo de caja detectada. \\
 \hline
 \end{DoxyRetVals}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{boxsorter__utils_8c_a4562adac5d13f7b61b8bfa840df39e58_icgraph}
+\end{center}
+\end{figure}
 \index{boxsorter\_utils.c@{boxsorter\_utils.c}!initDetector@{initDetector}}
 \index{initDetector@{initDetector}!boxsorter\_utils.c@{boxsorter\_utils.c}}
 \doxysubsubsection{initDetector()}
@@ -76,6 +92,14 @@ Configura el puntero al sensor ultras�nico y al sensor IR asociado.
 \mbox{\texttt{ in}}  & {\em sensor\+\_\+\+IR} & Puntero al sensor IR. \\
 \hline
 \end{DoxyParams}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{boxsorter__utils_8c_a17f05d303b2b8f8241647d984b12a97e_icgraph}
+\end{center}
+\end{figure}
 \index{boxsorter\_utils.c@{boxsorter\_utils.c}!initOutputs@{initOutputs}}
 \index{initOutputs@{initOutputs}!boxsorter\_utils.c@{boxsorter\_utils.c}}
 \doxysubsubsection{initOutputs()}
@@ -86,7 +110,23 @@ void init\+Outputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 Inicializa las salidas del sistema de clasificaci�n. 
 
-Carga configuraci�n desde EEPROM si existe, o aplica valores por defecto. Asocia pines y marca todas las salidas como listas (READY). \index{boxsorter\_utils.c@{boxsorter\_utils.c}!initServos@{initServos}}
+Carga configuraci�n desde EEPROM si existe, o aplica valores por defecto. Asocia pines y marca todas las salidas como listas (READY). Gráfico de llamadas de esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boxsorter__utils_8c_ac3988d0a14e12e52073709af9b93fe9d_cgraph}
+\end{center}
+\end{figure}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{boxsorter__utils_8c_ac3988d0a14e12e52073709af9b93fe9d_icgraph}
+\end{center}
+\end{figure}
+\index{boxsorter\_utils.c@{boxsorter\_utils.c}!initServos@{initServos}}
 \index{initServos@{initServos}!boxsorter\_utils.c@{boxsorter\_utils.c}}
 \doxysubsubsection{initServos()}
 {\footnotesize\ttfamily \label{boxsorter__utils_8c_ad978a60fb09963ff64dba6092ee48c2f} 
@@ -96,7 +136,23 @@ void init\+Servos (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaptio
 
 Inicializa los servos utilizados por el sistema. 
 
-Asigna �ngulo inicial y pines de control. Los servos son almacenados en un arreglo global. \index{boxsorter\_utils.c@{boxsorter\_utils.c}!initSorter@{initSorter}}
+Asigna �ngulo inicial y pines de control. Los servos son almacenados en un arreglo global. Gráfico de llamadas de esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boxsorter__utils_8c_ad978a60fb09963ff64dba6092ee48c2f_cgraph}
+\end{center}
+\end{figure}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{boxsorter__utils_8c_ad978a60fb09963ff64dba6092ee48c2f_icgraph}
+\end{center}
+\end{figure}
+\index{boxsorter\_utils.c@{boxsorter\_utils.c}!initSorter@{initSorter}}
 \index{initSorter@{initSorter}!boxsorter\_utils.c@{boxsorter\_utils.c}}
 \doxysubsubsection{initSorter()}
 {\footnotesize\ttfamily \label{boxsorter__utils_8c_aa3c646ee656c4a2b207ebb0779a3693b} 
@@ -113,6 +169,14 @@ Asocia rangos de altura de cajas, salidas y configura estado inicial.
 \mbox{\texttt{ out}}  & {\em System\+Sorter} & Puntero al sistema de clasificaci�n a inicializar. \\
 \hline
 \end{DoxyParams}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{boxsorter__utils_8c_aa3c646ee656c4a2b207ebb0779a3693b_icgraph}
+\end{center}
+\end{figure}
 \index{boxsorter\_utils.c@{boxsorter\_utils.c}!irSensorsTask@{irSensorsTask}}
 \index{irSensorsTask@{irSensorsTask}!boxsorter\_utils.c@{boxsorter\_utils.c}}
 \doxysubsubsection{irSensorsTask()}
@@ -130,6 +194,22 @@ Realiza lectura de cada sensor, detecta cajas, y activa los servos correspondien
 \mbox{\texttt{ in,out}}  & {\em sorter} & Sistema de clasificaci�n. \\
 \hline
 \end{DoxyParams}
+Gráfico de llamadas de esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{boxsorter__utils_8c_a4f7cf5974fc873b6a0036fb285e6189c_cgraph}
+\end{center}
+\end{figure}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{boxsorter__utils_8c_a4f7cf5974fc873b6a0036fb285e6189c_icgraph}
+\end{center}
+\end{figure}
 \index{boxsorter\_utils.c@{boxsorter\_utils.c}!servosTask@{servosTask}}
 \index{servosTask@{servosTask}!boxsorter\_utils.c@{boxsorter\_utils.c}}
 \doxysubsubsection{servosTask()}
@@ -140,7 +220,15 @@ void servos\+Task (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 Funci�n placeholder para futuras tareas relacionadas con los servos. 
 
-Actualmente vac�a. \index{boxsorter\_utils.c@{boxsorter\_utils.c}!ultraSensorTask@{ultraSensorTask}}
+Actualmente vac�a. Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{boxsorter__utils_8c_a8e5960349b41ab72dbc29f06048d8145_icgraph}
+\end{center}
+\end{figure}
+\index{boxsorter\_utils.c@{boxsorter\_utils.c}!ultraSensorTask@{ultraSensorTask}}
 \index{ultraSensorTask@{ultraSensorTask}!boxsorter\_utils.c@{boxsorter\_utils.c}}
 \doxysubsubsection{ultraSensorTask()}
 {\footnotesize\ttfamily \label{boxsorter__utils_8c_af0e381d6f0d88428934b9854cddb037f} 
@@ -159,3 +247,19 @@ Se encarga de disparar el sensor, verificar el eco, clasificar la caja, actualiz
 \mbox{\texttt{ in,out}}  & {\em sorter} & Sistema de clasificaci�n. \\
 \hline
 \end{DoxyParams}
+Gráfico de llamadas de esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{boxsorter__utils_8c_af0e381d6f0d88428934b9854cddb037f_cgraph}
+\end{center}
+\end{figure}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{boxsorter__utils_8c_af0e381d6f0d88428934b9854cddb037f_icgraph}
+\end{center}
+\end{figure}

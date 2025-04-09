@@ -1,0 +1,9 @@
+<map id="irSensorsTask" name="irSensorsTask">
+<area shape="rect" id="Node000001" title="Tarea que procesa los sensores IR." alt="" coords="5,31,110,57"/>
+<area shape="rect" id="Node000002" href="$tcrt__utils_8c.html#ab6c59b4ce307ce1bbe252421d22d06ae" title="Determina si hay una caja presente frente al sensor." alt="" coords="158,5,300,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="110,34,142,29,143,34,110,39"/>
+<area shape="rect" id="Node000003" href="$tcrt__utils_8c.html#a088ecc5d18c61778d47fbcfa19746250" title="Realiza una lectura filtrada del sensor TCRT." alt="" coords="193,56,265,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="110,49,178,59,177,64,110,54"/>
+<area shape="rect" id="Node000004" href="$tcrt__utils_8c.html#a6a9f4f05c2e44d7839a90a16a7bf5874" title="Realiza una lectura del canal ADC correspondiente al sensor TCRT." alt="" coords="348,56,472,83"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="265,67,332,67,332,72,265,72"/>
+</map>

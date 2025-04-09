@@ -1,0 +1,13 @@
+<map id="GccApplication1/types/sorterSystemTypes.h" name="GccApplication1/types/sorterSystemTypes.h">
+<area shape="rect" id="Node000001" title="Tipos de datos relacionados con el sistema de clasificación de cajas." alt="" coords="12,5,164,48"/>
+<area shape="rect" id="Node000002" href="$box_types_8h.html" title=" " alt="" coords="5,171,94,197"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,49,73,97,59,157,53,155,68,95,80,48"/>
+<area shape="rect" id="Node000005" href="$output_type_8h.html" title="Define el tipo de dato para representar una salida del sistema de clasificación." alt="" coords="83,96,179,123"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="102,47,119,81,115,83,97,50"/>
+<area shape="rect" id="Node000003" href="$bitmap_type_8h.html" title=" " alt="" coords="40,245,139,272"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="59,197,78,230,73,233,54,199"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="57,320,122,347"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="92,273,92,304,87,304,87,273"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="118,125,76,162,73,158,115,121"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="130,124,100,231,95,230,125,122"/>
+</map>

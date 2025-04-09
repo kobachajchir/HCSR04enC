@@ -1,0 +1,15 @@
+<map id="initOutputs" name="initOutputs">
+<area shape="rect" id="Node000001" title="Inicializa las salidas del sistema de clasificación." alt="" coords="5,56,90,83"/>
+<area shape="rect" id="Node000002" href="$eeprom__utils_8c.html#aec28892d3def34f6907982f144240001" title="Verifica si existe una configuración válida en la EEPROM." alt="" coords="170,5,258,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,54,155,34,156,39,91,59"/>
+<area shape="rect" id="Node000004" href="$boxsorter__utils_8c.html#ad978a60fb09963ff64dba6092ee48c2f" title="Inicializa los servos utilizados por el sistema." alt="" coords="174,56,254,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="90,67,159,67,159,72,90,72"/>
+<area shape="rect" id="Node000007" href="$eeprom__utils_8c.html#a2e5a84e7e2ff1029f1cba0ae11ffb9b5" title="Carga la configuración desde EEPROM a una estructura en RAM." alt="" coords="138,107,290,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="91,80,154,99,153,104,89,85"/>
+<area shape="rect" id="Node000003" href="$eeprom__utils_8c.html#ad8c2bce82470c5fcbdc89d8b0562f5c5" title="Calcula el checksum de una estructura de configuración." alt="" coords="338,5,520,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="258,16,322,16,322,21,258,21"/>
+<area shape="rect" id="Node000005" href="$servo__utils_8c.html#adc1344022d38e9142b1658b3289cca1b" title="Inicializa un servo específico." alt="" coords="393,56,465,83"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="254,67,377,67,377,72,254,72"/>
+<area shape="rect" id="Node000006" href="$servo__utils_8c.html#a9be00cc746a4b23036719dce077dd2f4" title="Convierte un ángulo en microsegundos de pulso." alt="" coords="568,56,735,83"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="466,67,553,67,553,72,466,72"/>
+</map>

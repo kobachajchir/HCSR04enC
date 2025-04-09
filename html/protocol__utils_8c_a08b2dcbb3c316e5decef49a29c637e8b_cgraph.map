@@ -1,0 +1,5 @@
+<map id="process_protocol_buffer" name="process_protocol_buffer">
+<area shape="rect" id="Node000001" title="Procesa el buffer de protocolo buscando un encabezado válido." alt="" coords="5,5,165,32"/>
+<area shape="rect" id="Node000002" href="$protocol__utils_8c.html#adf84a8818e3bab8f36f25a19bae27f0b" title="Verifica la validez del encabezado del paquete." alt="" coords="213,5,312,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,16,197,16,197,21,165,21"/>
+</map>

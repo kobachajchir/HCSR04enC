@@ -1,0 +1,79 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,461,55,488"/>
+<area shape="rect" id="Node000002" href="$main_8c.html#a0cb509803ce847466e3c3604a4af1a29" title="Tarea asociada al botón de entrada." alt="" coords="140,5,225,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="29,461,33,377,44,252,54,187,66,127,81,77,101,42,123,26,126,31,105,46,86,79,71,128,59,187,50,252,39,377,34,461"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#a9113131aefbfe0c08577bde786c89596" title="Calibra todos los sensores IR habilitados." alt="" coords="109,56,256,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="29,461,35,386,47,276,69,166,83,123,101,93,103,90,107,94,105,96,88,125,74,168,53,276,40,386,35,461"/>
+<area shape="rect" id="Node000006" href="$protocol__utils_8c.html#a37df37e33f461231b6060fd8743162d3" title="Ejecuta la acción correspondiente al comando recibido." alt="" coords="146,208,218,235"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="29,461,32,420,42,362,63,300,80,271,101,245,114,234,130,227,132,232,117,239,105,249,84,274,68,302,47,363,37,420,34,461"/>
+<area shape="rect" id="Node000007" href="$eeprom__utils_8c.html#a6812f46ec5406eced3bc14d47b7bef5f" title="Guarda la configuración en EEPROM desde una copia en RAM." alt="" coords="312,157,468,184"/>
+<area shape="poly" id="edge33_Node000001_Node000007" title=" " alt="" coords="30,460,38,402,52,322,72,244,86,214,101,194,124,178,148,166,202,152,257,149,307,152,307,157,257,154,203,157,150,171,126,183,105,198,90,217,78,246,57,323,43,403,35,461"/>
+<area shape="rect" id="Node000009" href="$main_8c.html#a7e1b187dc53f7dc2a9137c3fb5ba41e8" title="Inicializa los pines GPIO del sistema." alt="" coords="132,309,232,336"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="33,460,56,405,75,373,101,346,116,336,119,341,104,350,80,377,60,408,38,462"/>
+<area shape="rect" id="Node000011" href="$boxsorter__utils_8c.html#a17f05d303b2b8f8241647d984b12a97e" title="Inicializa el detector ultrasónico." alt="" coords="138,360,226,387"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="39,459,65,428,101,396,122,386,125,390,104,401,68,432,43,463"/>
+<area shape="rect" id="Node000012" href="$boxsorter__utils_8c.html#ac3988d0a14e12e52073709af9b93fe9d" title="Inicializa las salidas del sistema de clasificación." alt="" coords="140,259,224,285"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="30,460,36,427,48,383,69,336,84,315,101,295,124,281,127,285,104,299,88,318,74,339,54,385,41,428,36,461"/>
+<area shape="rect" id="Node000018" href="$protocol__utils_8c.html#a580f5b54cedd59bd94e8ec5816c2a2e9" title="Inicializa la estructura del servicio de protocolo." alt="" coords="117,411,248,437"/>
+<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="54,464,102,447,122,440,123,445,104,452,56,469"/>
+<area shape="rect" id="Node000020" href="$boxsorter__utils_8c.html#aa3c646ee656c4a2b207ebb0779a3693b" title="Inicializa el sistema de clasificación (Sorter)." alt="" coords="146,512,219,539"/>
+<area shape="poly" id="edge20_Node000001_Node000020" title=" " alt="" coords="56,481,104,497,132,507,130,512,102,503,54,486"/>
+<area shape="rect" id="Node000021" href="$boxsorter__utils_8c.html#a4f7cf5974fc873b6a0036fb285e6189c" title="Tarea que procesa los sensores IR." alt="" coords="130,107,234,133"/>
+<area shape="poly" id="edge21_Node000001_Node000021" title=" " alt="" coords="30,461,38,396,52,303,73,212,86,176,101,150,115,138,118,142,105,154,91,178,78,214,57,304,43,397,35,461"/>
+<area shape="rect" id="Node000024" href="$protocol__utils_8c.html#a79c698dc24844438de1432e7ffdbe884" title="Imprime un mensaje por consola según el comando recibido." alt="" coords="103,563,262,589"/>
+<area shape="poly" id="edge25_Node000001_Node000024" title=" " alt="" coords="43,487,68,518,104,548,113,554,111,558,101,553,65,522,39,490"/>
+<area shape="rect" id="Node000025" href="$main_8c.html#a79d21f91f71c72b5a90d52532da94e54" title="Wrapper para imprimir mensajes por consola." alt="" coords="133,613,232,640"/>
+<area shape="poly" id="edge26_Node000001_Node000025" title=" " alt="" coords="38,487,60,542,80,573,104,599,120,609,117,614,101,603,75,576,56,544,33,489"/>
+<area shape="rect" id="Node000026" href="$protocol__utils_8c.html#a144316f6181d2cf60af7e79adce806fb" title="Ejecuta la tarea principal del protocolo." alt="" coords="135,461,230,488"/>
+<area shape="poly" id="edge27_Node000001_Node000026" title=" " alt="" coords="55,472,119,472,119,477,55,477"/>
+<area shape="rect" id="Node000031" href="$boxsorter__utils_8c.html#a8e5960349b41ab72dbc29f06048d8145" title="Función placeholder para futuras tareas relacionadas con los servos." alt="" coords="138,664,226,691"/>
+<area shape="poly" id="edge34_Node000001_Node000031" title=" " alt="" coords="36,488,41,521,54,564,74,610,88,632,104,650,125,663,122,668,101,654,84,635,69,613,48,566,36,522,30,489"/>
+<area shape="rect" id="Node000032" href="$tcrt__utils_8c.html#a060e4b913013afe982dce42b96b15e54" title="Inicializa las estructuras y flags de los sensores TCRT." alt="" coords="113,715,252,741"/>
+<area shape="poly" id="edge35_Node000001_Node000032" title=" " alt="" coords="34,488,37,529,47,586,68,647,84,676,105,701,108,704,104,707,101,704,80,679,63,650,42,587,32,530,29,488"/>
+<area shape="rect" id="Node000033" href="$main_8c.html#abb302081b7dbd40d0fea4bbe53fd9b7b" title="Inicializa el Timer 1 (timer1_init)" alt="" coords="142,765,223,792"/>
+<area shape="poly" id="edge36_Node000001_Node000033" title=" " alt="" coords="33,488,33,538,41,608,50,646,63,684,81,720,104,751,128,767,125,771,101,755,76,723,58,686,45,648,36,609,28,538,28,488"/>
+<area shape="rect" id="Node000034" href="$main_8c.html#a2cd8cee0c5bd8d8b2f528216f7dd487d" title="Inicializa los pines GPIO del sistema (gpio_pins_init)" alt="" coords="142,816,223,843"/>
+<area shape="poly" id="edge37_Node000001_Node000034" title=" " alt="" coords="35,488,42,554,56,649,77,742,90,778,105,802,128,818,125,822,101,806,85,780,72,743,51,650,37,555,30,489"/>
+<area shape="rect" id="Node000035" href="$boxsorter__utils_8c.html#af0e381d6f0d88428934b9854cddb037f" title="Tarea que ejecuta el control principal del sensor ultrasónico." alt="" coords="125,867,240,893"/>
+<area shape="poly" id="edge38_Node000001_Node000035" title=" " alt="" coords="35,488,40,563,53,673,74,782,88,824,105,853,113,860,109,864,101,856,83,826,69,783,47,674,35,564,29,489"/>
+<area shape="rect" id="Node000037" href="$usart__utils_8c.html#a8c71eca12fe1ae725b6e4afddf5f9332" title="Inicializa el periférico USART con el baud rate especificado." alt="" coords="137,917,228,944"/>
+<area shape="poly" id="edge40_Node000001_Node000037" title=" " alt="" coords="34,488,39,572,50,697,59,762,71,821,86,870,105,904,124,918,121,922,101,907,81,873,66,823,54,763,44,698,33,572,29,488"/>
+<area shape="rect" id="Node000004" href="$tcrt__utils_8c.html#ae09ff4102347ab8d40f5b4fc600e67ca" title="Calibra el sensor IR promediando un número de muestras." alt="" coords="327,5,452,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="239,53,317,34,318,39,241,58"/>
+<area shape="rect" id="Node000005" href="$tcrt__utils_8c.html#a6a9f4f05c2e44d7839a90a16a7bf5874" title="Realiza una lectura del canal ADC correspondiente al sensor TCRT." alt="" coords="546,31,671,57"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="453,23,531,32,531,38,453,29"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="218,210,317,186,318,191,219,215"/>
+<area shape="rect" id="Node000008" href="$eeprom__utils_8c.html#ad8c2bce82470c5fcbdc89d8b0562f5c5" title="Calcula el checksum de una estructura de configuración." alt="" coords="517,183,700,209"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="469,177,502,181,502,186,468,182"/>
+<area shape="rect" id="Node000010" href="$tcrt__utils_8c.html#a640932133dbc070f018c88daa1988cde" title="Inicializa los sensores TCRT conectados a los pines analógicos." alt="" coords="358,360,422,387"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="233,332,343,359,342,365,232,337"/>
+<area shape="rect" id="Node000013" href="$eeprom__utils_8c.html#aec28892d3def34f6907982f144240001" title="Verifica si existe una configuración válida en la EEPROM." alt="" coords="346,208,433,235"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="224,259,330,233,331,238,226,264"/>
+<area shape="rect" id="Node000014" href="$boxsorter__utils_8c.html#ad978a60fb09963ff64dba6092ee48c2f" title="Inicializa los servos utilizados por el sistema." alt="" coords="350,259,429,285"/>
+<area shape="poly" id="edge14_Node000012_Node000014" title=" " alt="" coords="225,269,334,269,334,275,225,275"/>
+<area shape="rect" id="Node000017" href="$eeprom__utils_8c.html#a2e5a84e7e2ff1029f1cba0ae11ffb9b5" title="Carga la configuración desde EEPROM a una estructura en RAM." alt="" coords="314,309,466,336"/>
+<area shape="poly" id="edge17_Node000012_Node000017" title=" " alt="" coords="226,280,318,302,317,308,224,285"/>
+<area shape="poly" id="edge13_Node000013_Node000008" title=" " alt="" coords="433,214,501,206,502,211,434,219"/>
+<area shape="rect" id="Node000015" href="$servo__utils_8c.html#adc1344022d38e9142b1658b3289cca1b" title="Inicializa un servo específico." alt="" coords="572,259,645,285"/>
+<area shape="poly" id="edge15_Node000014_Node000015" title=" " alt="" coords="430,269,557,269,557,275,430,275"/>
+<area shape="rect" id="Node000016" href="$servo__utils_8c.html#a9be00cc746a4b23036719dce077dd2f4" title="Convierte un ángulo en microsegundos de pulso." alt="" coords="748,259,914,285"/>
+<area shape="poly" id="edge16_Node000015_Node000016" title=" " alt="" coords="645,269,732,269,732,275,645,275"/>
+<area shape="rect" id="Node000019" href="$protocol__utils_8c.html#a15ec5468109225537cfc49bea1eab6e7" title="Limpia el contenido del paquete recibido." alt="" coords="326,411,453,437"/>
+<area shape="poly" id="edge19_Node000018_Node000019" title=" " alt="" coords="248,421,311,421,311,427,248,427"/>
+<area shape="rect" id="Node000022" href="$tcrt__utils_8c.html#ab6c59b4ce307ce1bbe252421d22d06ae" title="Determina si hay una caja presente frente al sensor." alt="" coords="318,107,461,133"/>
+<area shape="poly" id="edge22_Node000021_Node000022" title=" " alt="" coords="235,117,303,117,303,123,235,123"/>
+<area shape="rect" id="Node000023" href="$tcrt__utils_8c.html#a088ecc5d18c61778d47fbcfa19746250" title="Realiza una lectura filtrada del sensor TCRT." alt="" coords="354,56,426,83"/>
+<area shape="poly" id="edge23_Node000021_Node000023" title=" " alt="" coords="234,105,338,79,339,84,235,110"/>
+<area shape="poly" id="edge24_Node000023_Node000005" title=" " alt="" coords="426,63,531,50,531,56,427,68"/>
+<area shape="poly" id="edge28_Node000026_Node000019" title=" " alt="" coords="230,460,317,439,318,444,231,466"/>
+<area shape="rect" id="Node000027" href="$protocol__utils_8c.html#a08b2dcbb3c316e5decef49a29c637e8b" title="Procesa el buffer de protocolo buscando un encabezado válido." alt="" coords="310,461,469,488"/>
+<area shape="poly" id="edge29_Node000026_Node000027" title=" " alt="" coords="231,472,294,472,294,477,231,477"/>
+<area shape="rect" id="Node000029" href="$protocol__utils_8c.html#a90ddb01731316a71cad2d59f90a60a3c" title="Valida el contenido del paquete recibido." alt="" coords="345,512,434,539"/>
+<area shape="poly" id="edge31_Node000026_Node000029" title=" " alt="" coords="231,484,330,508,329,513,230,489"/>
+<area shape="rect" id="Node000028" href="$protocol__utils_8c.html#adf84a8818e3bab8f36f25a19bae27f0b" title="Verifica la validez del encabezado del paquete." alt="" coords="559,461,658,488"/>
+<area shape="poly" id="edge30_Node000027_Node000028" title=" " alt="" coords="470,472,544,472,544,477,470,477"/>
+<area shape="rect" id="Node000030" href="$protocol__utils_8c.html#a1cf1f9c367026cf7e40fc83ee85195a1" title="Calcula el checksum del payload recibido." alt="" coords="548,512,669,539"/>
+<area shape="poly" id="edge32_Node000029_Node000030" title=" " alt="" coords="435,523,533,523,533,528,435,528"/>
+<area shape="rect" id="Node000036" href="$boxsorter__utils_8c.html#a4562adac5d13f7b61b8bfa840df39e58" title="Clasifica una caja en función de su altura medida." alt="" coords="342,867,437,893"/>
+<area shape="poly" id="edge39_Node000035_Node000036" title=" " alt="" coords="240,877,327,877,327,883,240,883"/>
+</map>

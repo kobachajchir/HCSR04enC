@@ -1,0 +1,9 @@
+<map id="GccApplication1/types/configType.h" name="GccApplication1/types/configType.h">
+<area shape="rect" id="Node000001" title="Define la estructura de configuración del sistema." alt="" coords="5,5,158,48"/>
+<area shape="rect" id="Node000002" href="$box_types_8h.html" title=" " alt="" coords="37,96,126,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,49,84,80,79,80,79,49"/>
+<area shape="rect" id="Node000003" href="$bitmap_type_8h.html" title=" " alt="" coords="32,171,131,197"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,123,84,155,79,155,79,123"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="49,245,114,272"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="84,198,84,230,79,230,79,198"/>
+</map>

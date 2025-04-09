@@ -1,0 +1,13 @@
+<map id="sorter_system_t" name="sorter_system_t">
+<area shape="rect" id="Node000001" title="Representa el sistema de clasificación completo." alt="" coords="186,219,301,245"/>
+<area shape="rect" id="Node000002" href="$structbox__height__range__matrix__t.html" title=" " alt="" coords="5,128,183,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,162,168,192,215,216,212,220,166,197,120,166"/>
+<area shape="rect" id="Node000003" href="$structbox__height__range__t.html" title=" " alt="" coords="26,5,160,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,48,97,127,91,128,90,48"/>
+<area shape="rect" id="Node000004" href="$structoutput__t.html" title="Estructura que representa una salida del sistema de clasificación." alt="" coords="209,128,278,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="246,170,246,218,241,218,241,170"/>
+<area shape="rect" id="Node000005" href="$union_byte___flag___struct.html" title=" " alt="" coords="184,5,306,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="247,48,246,128,241,127,242,48"/>
+<area shape="rect" id="Node000006" href="$structproduction__stats__t.html" title="Contiene estadísticas de producción del sistema clasificador." alt="" coords="302,128,430,155"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="339,166,297,197,263,220,260,216,294,192,335,162"/>
+</map>

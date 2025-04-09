@@ -1,0 +1,5 @@
+<map id="initProtocolService" name="initProtocolService">
+<area shape="rect" id="Node000001" title="Inicializa la estructura del servicio de protocolo." alt="" coords="5,5,136,32"/>
+<area shape="rect" id="Node000002" href="$protocol__utils_8c.html#a15ec5468109225537cfc49bea1eab6e7" title="Limpia el contenido del paquete recibido." alt="" coords="184,5,310,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,16,168,16,168,21,136,21"/>
+</map>

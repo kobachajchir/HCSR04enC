@@ -1,0 +1,5 @@
+<map id="tcrt_read" name="tcrt_read">
+<area shape="rect" id="Node000001" title="Realiza una lectura filtrada del sensor TCRT." alt="" coords="5,5,78,32"/>
+<area shape="rect" id="Node000002" href="$tcrt__utils_8c.html#a6a9f4f05c2e44d7839a90a16a7bf5874" title="Realiza una lectura del canal ADC correspondiente al sensor TCRT." alt="" coords="126,5,250,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,16,110,16,110,21,78,21"/>
+</map>

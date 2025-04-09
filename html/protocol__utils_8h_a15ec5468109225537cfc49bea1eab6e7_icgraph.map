@@ -1,0 +1,10 @@
+<map id="clear_receive_pck" name="clear_receive_pck">
+<area shape="rect" id="Node000001" title="Limpia el contenido del paquete recibido." alt="" coords="281,31,407,57"/>
+<area shape="rect" id="Node000002" href="$protocol__utils_8c.html#a580f5b54cedd59bd94e8ec5816c2a2e9" title="Inicializa la estructura del servicio de protocolo." alt="" coords="103,5,233,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="265,35,233,31,234,25,266,30"/>
+<area shape="rect" id="Node000004" href="$protocol__utils_8c.html#a144316f6181d2cf60af7e79adce806fb" title="Ejecuta la tarea principal del protocolo." alt="" coords="120,56,216,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="266,58,216,65,215,60,265,53"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,31,55,57"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,36,55,42,54,37,87,31"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="104,60,55,51,55,46,105,55"/>
+</map>

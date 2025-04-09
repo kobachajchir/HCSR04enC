@@ -1,0 +1,7 @@
+<map id="doAction" name="doAction">
+<area shape="rect" id="Node000001" title="Ejecuta la acción correspondiente al comando recibido." alt="" coords="5,5,78,32"/>
+<area shape="rect" id="Node000002" href="$eeprom__utils_8c.html#a6812f46ec5406eced3bc14d47b7bef5f" title="Guarda la configuración en EEPROM desde una copia en RAM." alt="" coords="126,5,282,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="78,16,110,16,110,21,78,21"/>
+<area shape="rect" id="Node000003" href="$eeprom__utils_8c.html#ad8c2bce82470c5fcbdc89d8b0562f5c5" title="Calcula el checksum de una estructura de configuración." alt="" coords="330,5,512,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="283,16,315,16,315,21,283,21"/>
+</map>

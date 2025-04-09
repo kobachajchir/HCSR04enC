@@ -1,0 +1,7 @@
+<map id="tcrt_read" name="tcrt_read">
+<area shape="rect" id="Node000001" title="Realiza una lectura filtrada del sensor TCRT." alt="" coords="255,5,327,32"/>
+<area shape="rect" id="Node000002" href="$boxsorter__utils_8c.html#a4f7cf5974fc873b6a0036fb285e6189c" title="Tarea que procesa los sensores IR." alt="" coords="103,5,207,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,21,207,21,207,16,239,16"/>
+<area shape="rect" id="Node000003" href="$main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+</map>

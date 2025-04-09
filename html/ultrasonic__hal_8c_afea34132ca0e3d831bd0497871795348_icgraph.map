@@ -1,0 +1,5 @@
+<map id="ultrasonic_hal_trigger_setHigh" name="ultrasonic_hal_trigger_setHigh">
+<area shape="rect" id="Node000001" title=" " alt="" coords="98,5,242,48"/>
+<area shape="rect" id="Node000002" href="$main_8c.html#a5686c229bdef50123688ab6cb1404230" title="ISR de comparación A del Timer 2 (TIMER2_COMPA_vect)" alt="" coords="5,13,50,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,29,50,29,50,24,82,24"/>
+</map>
