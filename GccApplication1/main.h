@@ -30,26 +30,32 @@
 #define F_CPU 16000000UL  // 16 MHz
 
 // --- Pines del sistema ---
-#define TRIGGER_PIN      PD3
+#define TRIGGER_PIN      PD3  //PIN 3
 #define TRIGGER_DDR      DDRD
 #define TRIGGER_PORT     PORTD
-#define ECHO_PIN         PB0
-#define BUTTON_PIN       PD4
-#define LED_BUILTIN_PIN  PB5
-#define SERVOA_PIN       PB1
-#define SERVOB_PIN       PB2
-#define SERVOC_PIN       PB3
+#define ECHO_PIN         PB0 //PIN 8
+#define BUTTON_PIN       PD4 //PIN 4
+#define LED_BUILTIN_PIN  PB5 //PIN 13
+#define SERVOA_PIN       PB1 //PIN 9 
+#define SERVOB_PIN       PB2 //PIN 10
+#define SERVOC_PIN       PB3 //PIN 11
 
-// --- Pines TCRT ---
-#define TCRT_A PC0
-#define TCRT_B PC1
-#define TCRT_C PC2
-#define TCRT_U PC3
+// --- Pines TCRT Analogicos ---
+#define TCRT_A PC0 //A0
+#define TCRT_B PC1 //A1
+#define TCRT_C PC2 //A2
+#define TCRT_U PC3 //A3
 
 #define TCRT_A_CHANNEL 0
 #define TCRT_B_CHANNEL 1
 #define TCRT_C_CHANNEL 2
 #define TCRT_U_CHANNEL 3
+
+// --- Pines TCRT Digitales---
+#define TCRT_A_DIG PD5 //Pin 5
+#define TCRT_B_DIG PD6 //Pin 6
+#define TCRT_C_DIG PD7 //Pin 7
+#define TCRT_U_DIG PD2 //Pin 2
 
 // --- Parámetros TCRT ---
 #define TCRT_CALIBRATION_SAMPLES 10
@@ -165,6 +171,7 @@ extern uint8_t doActionCmd;
 // --- Objetos del sistema ---
 extern ultrasonic_t ultraSensor;
 extern Ultrasonic_Detector_t hcsr04Detector;
+extern box_t* currentBox;
 extern sorter_system_t SorterSystem;
 
 // --- Sensores TCRT ---

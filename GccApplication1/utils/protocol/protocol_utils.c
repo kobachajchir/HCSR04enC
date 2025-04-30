@@ -607,6 +607,26 @@ uint8_t create_payload(Command cmd) {
 			protocolService.buffer[start_index] = 0x01;
 			payload_length = 1;
 			break;
+		}
+		case CMD_RESPONSE_GET_IR_CONFIG: {
+			uint8_t pos = protocolService.indexW;
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'U';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = currentConfig.ir_U_analog + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = '-';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'A';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = currentConfig.ir_A_analog + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = '-';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'B';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = currentConfig.ir_B_analog + '0';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = '-';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = 'C';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = ':';
+			protocolService.buffer[(pos++) % PROTOCOL_BUFFER_SIZE] = currentConfig.ir_C_analog + '0';
+
+			return pos - protocolService.indexW;
 		}		
 		case CMD_RESPONSE_GET_CONFIG: {
 			uint8_t pos = start_index;
@@ -799,6 +819,26 @@ void printCommandMessage(Command cmd) {
 		printf_P(PSTR("Salida 0: Tipo = %c\n"), 'A' + (salidaA.boxType - 1));
 		printf_P(PSTR("Salida 1: Tipo = %c\n"), 'A' + (salidaB.boxType - 1));
 		printf_P(PSTR("Salida 2: Tipo = %c\n"), 'A' + (salidaC.boxType - 1));
+		break;
+		case CMD_SET_IR_CONFIG:
+		printf_P(PSTR("Setear configuración de sensores IR (modo digital/analógico)\n"));
+		break;
+		case CMD_GET_IR_CONFIG:
+		printf_P(PSTR("Obtener configuración actual de sensores IR\n"));
+		printf_P(PSTR("Salida 0: Tipo = %c - IR = %s\n"),
+		'A' + (salidaA.boxType - 1),
+		currentConfig.ir_A_analog ? PSTR("Analógico") : PSTR("Digital"));
+
+		printf_P(PSTR("Salida 1: Tipo = %c - IR = %s\n"),
+		'A' + (salidaB.boxType - 1),
+		currentConfig.ir_B_analog ? PSTR("Analógico") : PSTR("Digital"));
+
+		printf_P(PSTR("Salida 2: Tipo = %c - IR = %s\n"),
+		'A' + (salidaC.boxType - 1),
+		currentConfig.ir_C_analog ? PSTR("Analógico") : PSTR("Digital"));
+
+		printf_P(PSTR("Sensor U (ultrasonido): IR = %s\n"),
+		currentConfig.ir_U_analog ? PSTR("Analógico") : PSTR("Digital"));
 		break;
 		case CMD_GET_FIRMWARE:
 		printf_P(PSTR("Obtener firmware: %S\n"), PSTR(DEV_FIRMWARE_VERSION));

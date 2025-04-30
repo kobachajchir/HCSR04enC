@@ -76,45 +76,46 @@ typedef struct {
  */
 typedef enum {
 	// Responses
-	CMD_RESPONSE_ALIVE           = 0x00, // Response: Alive confirmation
-	CMD_RESPONSE_START           = 0x01, // Response for start command
-	CMD_RESPONSE_STOP            = 0x02, // Response for stop command
-	CMD_RESPONSE_SET_CONFIG      = 0x03, // Response for set configuration command
-	CMD_RESPONSE_GET_CONFIG      = 0x04, // Response for get configuration command
-	CMD_RESPONSE_CLEAR_STATS     = 0x05, // Response for clear statistics command
-	CMD_RESPONSE_GET_STATS       = 0x06, // Response for get statistics command
-	CMD_RESPONSE_GET_FIRMWARE    = 0x07, // Response for get firmware command
-	CMD_RESPONSE_GET_REPOSITORY  = 0x08, // Response for get repository command
-	CMD_RESPONSE_CONFIG_RESET    = 0x09, // Response for reset configuration command
+	CMD_RESPONSE_ALIVE           = 0x00,
+	CMD_RESPONSE_START           = 0x01,
+	CMD_RESPONSE_STOP            = 0x02,
+	CMD_RESPONSE_SET_CONFIG      = 0x03,
+	CMD_RESPONSE_GET_CONFIG      = 0x04,
+	CMD_RESPONSE_CLEAR_STATS     = 0x05,
+	CMD_RESPONSE_GET_STATS       = 0x06,
+	CMD_RESPONSE_GET_FIRMWARE    = 0x07,
+	CMD_RESPONSE_GET_REPOSITORY  = 0x08,
+	CMD_RESPONSE_CONFIG_RESET    = 0x09,
+	CMD_RESPONSE_DEBUG_ULTRA     = 0x0A,
+	CMD_RESPONSE_DEBUG_SERVOS    = 0x0B,
+	CMD_RESPONSE_DEBUG_SORTER    = 0x0C,
+	CMD_RESPONSE_DEBUG_EEPROM    = 0x0D,
+	CMD_RESPONSE_SET_IR_CONFIG   = 0x0E,
+	CMD_RESPONSE_GET_IR_CONFIG	 = 0x0F,
 
 	// Main commands
-	CMD_ALIVE                    = 0xA0, // Command indicating device is alive
-	
-	CMD_START                    = 0xB1, // Start command
-	CMD_STOP                     = 0xB2, // Stop command
-	
-	CMD_SET_CONFIG               = 0xC0, // Command to set configuration
-	CMD_GET_CONFIG               = 0xC1, // Command to get configuration
-	
-	CMD_GET_FIRMWARE             = 0xF0, // Command to get firmware
-	CMD_GET_STATS                = 0xF1, // Command to get statistics
-	CMD_CLEAR_STATS              = 0xF2, // Command to clear statistics
-	CMD_GET_REPOSITORY           = 0xF3, // Command to get repository
-	CMD_CONFIG_RESET             = 0xF4, // Command to reset config
+	CMD_ALIVE                    = 0xA0,
+	CMD_START                    = 0xB1,
+	CMD_STOP                     = 0xB2,
+	CMD_SET_CONFIG               = 0xC0,
+	CMD_GET_CONFIG               = 0xC1,
+	CMD_SET_IR_CONFIG            = 0xC2,  // << NUEVO
+	CMD_GET_IR_CONFIG            = 0xC3,  // << NUEVO
+
+	CMD_GET_FIRMWARE             = 0xF0,
+	CMD_GET_STATS                = 0xF1,
+	CMD_CLEAR_STATS              = 0xF2,
+	CMD_GET_REPOSITORY           = 0xF3,
+	CMD_CONFIG_RESET             = 0xF4,
 
 	// Debug commands (zona 0xE...)
-	CMD_DEBUG_ULTRA              = 0xE1, // Enable/disable ultrasonic debug
-	CMD_DEBUG_SERVOS             = 0xE2, // Enable/disable servos debug
-	CMD_DEBUG_SORTER             = 0xE3, // Enable/disable sorter debug
-	CMD_DEBUG_EEPROM             = 0xE4, // Enable/disable EEPROM debug
-	// Debug responses (zona 0x0X)
-	CMD_RESPONSE_DEBUG_ULTRA     = 0x0A, // Response for ultrasonic debug toggle
-	CMD_RESPONSE_DEBUG_SERVOS    = 0x0B, // Response for servos debug toggle
-	CMD_RESPONSE_DEBUG_SORTER    = 0x0C, // Response for sorter debug toggle
-	CMD_RESPONSE_DEBUG_EEPROM    = 0x0D, // Response for EEPROM debug toggle
+	CMD_DEBUG_ULTRA              = 0xE1,
+	CMD_DEBUG_SERVOS             = 0xE2,
+	CMD_DEBUG_SORTER             = 0xE3,
+	CMD_DEBUG_EEPROM             = 0xE4,
 
 	// Fallback
-	CMD_INVALID                  = 0xE0  // Invalid command (default error)
+	CMD_INVALID                  = 0xE0
 } Command;
 
 /**

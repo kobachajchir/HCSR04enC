@@ -45,6 +45,7 @@ uint8_t doActionCmd;
 uint8_t servoAVal = 0; //Angulo 0 a 180 Servo A
 ultrasonic_t ultraSensor;
 Ultrasonic_Detector_t hcsr04Detector;
+box_t* currentBox = NULL;
 TCRT_t IR_A;
 TCRT_t IR_B;
 TCRT_t IR_C;

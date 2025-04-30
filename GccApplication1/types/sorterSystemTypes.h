@@ -47,6 +47,7 @@ typedef struct {
 	box_height_range_matrix_t* box_ranges;
 	output_t* outputs[NUM_OUTPUTS];
 	production_stats_t stats;
+	box_queue_t boxQueue;   
 } sorter_system_t;
 
 

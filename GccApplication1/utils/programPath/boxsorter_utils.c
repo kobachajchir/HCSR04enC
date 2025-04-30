@@ -16,6 +16,46 @@
 #include <avr/pgmspace.h>
 
 /**
+ * @brief Inserta un nuevo evento (caja) en la cola.
+ *
+ * Copia los datos de la caja apuntada por evt al buffer de la cola.
+ *
+ * @param evt Puntero al evento (caja) a insertar.
+ * @retval true Si se pudo insertar.
+ * @retval false Si la cola está llena.
+ */
+bool enqueue_box(box_t* evt) {
+    uint8_t next_tail = (boxQueue.tail + 1) % BOX_QUEUE_SIZE;
+    if (next_tail == boxQueue.head) {
+        // La cola está llena
+        return false;
+    }
+    // Copia el contenido del evento a insertar en la posición actual de la cola.
+    boxQueue.events[boxQueue.tail] = *evt;
+    boxQueue.tail = next_tail;
+    return true;
+}
+
+/**
+ * @brief Extrae el evento (caja) más antiguo de la cola.
+ *
+ * Copia el evento de la posición de la cabeza al objeto apuntado por evt.
+ *
+ * @param evt Puntero al evento donde se copiará el valor extraído.
+ * @retval true Si se extrajo un evento correctamente.
+ * @retval false Si la cola está vacía.
+ */
+bool dequeue_box(box_t* evt) {
+    if (boxQueue.head == boxQueue.tail) {
+        // La cola está vacía
+        return false;
+    }
+    *evt = boxQueue.events[boxQueue.head];
+    boxQueue.head = (boxQueue.head + 1) % BOX_QUEUE_SIZE;
+    return true;
+}
+
+/**
  * @brief Inicializa el detector ultrasónico.
  *
  * Configura el puntero al sensor ultrasónico y al sensor IR asociado.
@@ -90,211 +130,244 @@ void initOutputs(){
 /**
  * @brief Inicializa el sistema de clasificación (Sorter).
  *
- * Asocia rangos de altura de cajas, salidas y configura estado inicial.
+ * Asocia los rangos de altura de las cajas, configura las salidas y 
+ * reinicia las estadísticas y la cola de cajas.
  *
  * @param [out] SystemSorter Puntero al sistema de clasificación a inicializar.
  */
 void initSorter(sorter_system_t* SystemSorter){
-	static box_height_range_matrix_t local_box_ranges = {
-		.box_size_a = { BOX_A_MIN_MM, BOX_A_MAX_MM },
-		.box_size_b = { BOX_B_MIN_MM, BOX_B_MAX_MM },
-		.box_size_c = { BOX_C_MIN_MM, BOX_C_MAX_MM }
-	};
-	SystemSorter->box_ranges = &local_box_ranges;
-	SystemSorter->outputs[0] = &salidaA;
-	SystemSorter->outputs[1] = &salidaB;
-	SystemSorter->outputs[2] = &salidaC;
-	if(DEBUG_FLAGS_SORTER){
-		printf_P(PSTR("SYS SORTER DEBUG - Matriz de dimensiones inicializada\n"));
-		printf_P(PSTR("SYS SORTER DEBUG - Salidas agregadas\n"));
-	}
+    // Define una matriz local de rangos de altura para los diferentes tipos de cajas.
+    static box_height_range_matrix_t local_box_ranges = {
+        .box_size_a = { BOX_A_MIN_MM, BOX_A_MAX_MM },
+        .box_size_b = { BOX_B_MIN_MM, BOX_B_MAX_MM },
+        .box_size_c = { BOX_C_MIN_MM, BOX_C_MAX_MM }
+    };
+
+    // Asocia la matriz de dimensiones al sistema
+    SystemSorter->box_ranges = &local_box_ranges;
+
+    // Configura las salidas (actuadores) del sistema
+    SystemSorter->outputs[0] = &salidaA;
+    SystemSorter->outputs[1] = &salidaB;
+    SystemSorter->outputs[2] = &salidaC;
+
+    // Reinicia las estadísticas de producción
+    SystemSorter->stats.total_measured = 0;
+    SystemSorter->stats.total_discarded = 0;
+    SystemSorter->stats.total_by_type_array[0] = 0;
+    SystemSorter->stats.total_by_type_array[1] = 0;
+    SystemSorter->stats.total_by_type_array[2] = 0;
+
+    // Inicializa la cola de eventos de cajas (buffer circular)
+    SystemSorter->boxQueue.head = 0;
+    SystemSorter->boxQueue.tail = 0;
+
+    if(DEBUG_FLAGS_SORTER){
+        printf_P(PSTR("SYS SORTER DEBUG - Matriz de dimensiones inicializada\n"));
+        printf_P(PSTR("SYS SORTER DEBUG - Salidas agregadas\n"));
+        printf_P(PSTR("SYS SORTER DEBUG - Cola de cajas inicializada\n"));
+    }
 }
+
+/**
+ * @brief Encuentra la primera caja en la cola que no tenga el estado BOX_MEASURED.
+ *
+ * Recorre la cola circular desde el índice head hasta el tail y devuelve un puntero
+ * a la primera caja cuyo estado (extraído del nibble alto de las flags) es distinto a BOX_MEASURED.
+ *
+ * @param [in] queue Puntero a la estructura de la cola (box_queue_t).
+ * @retval box_t* Puntero a la caja encontrada; NULL si todas las cajas en la cola tienen estado BOX_MEASURED.
+ */
+box_t* find_next_unmeasured_box(box_queue_t* queue) {
+    uint8_t index = queue->head;
+    while (index != queue->tail) {
+        uint8_t state = NIBBLEL_GET_STATE(queue->events[index].flags);
+        if (state == BOX_WAITING_MEASURE) {
+            return &queue->events[index];
+        }
+        index = (index + 1) % BOX_QUEUE_SIZE;
+    }
+    return NULL;
+}
+
 
 /**
  * @brief Clasifica una caja en función de su altura medida.
  *
  * Determina si es tipo A, B, C o descartada, comparando contra los rangos predefinidos.
+ * Además, guarda la altura medida en la caja actual (global current_box) y configura sus flags,
+ * estableciendo el estado como BOX_MEASURED.
  *
- * @param [in] distance_mm Distancia medida por el sensor ultrasónico.
- * @param [in] SystemSorter Sistema de clasificación que contiene los rangos.
+ * @param [in] distance_mm Distancia medida por el sensor ultrasónico (en mm).
+ * @param [in] SystemSorter Sistema de clasificación que contiene los rangos de altura.
  * @retval box_type_t Tipo de caja detectada.
  */
 box_type_t classify_box(uint8_t distance_mm, sorter_system_t* SystemSorter)
 {
-	// Si la distancia es mayor o igual a la distancia de reposo (pared)
-	if (distance_mm >= DETECTION_IDLE_DISTANCE_MM) {
-		if (DEBUG_FLAGS_SORTER) {
-			printf_P(PSTR("No hay caja presente (pared detectada a %u mm)\n"), distance_mm);
+	currentBox = find_next_unmeasured_box(&SystemSorter->boxQueue);
+	if (currentBox != NULL) {
+		// Si la distancia es mayor o igual a la distancia de reposo (pared), no hay caja.
+		if (distance_mm >= DETECTION_IDLE_DISTANCE_MM) {
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("No hay caja presente (pared detectada a %u mm)\n"), distance_mm);
+			}
+			return NO_BOX;
 		}
-		return NO_BOX;
-	}
 
-	// Calculamos la altura de la caja como la diferencia con la pared
-	uint8_t altura_mm = DETECTION_IDLE_DISTANCE_MM - distance_mm;
+		// Calculamos la altura de la caja como la diferencia con la pared.
+		uint8_t altura_mm = DETECTION_IDLE_DISTANCE_MM - distance_mm;
 
-	if (altura_mm < DETECTION_THRESHOLD_MIN_MM) {
-		if (DEBUG_FLAGS_SORTER) {
-			printf_P(PSTR("Caja demasiado baja (%u mm), descartada\n"), altura_mm);
+		// Si la altura es menor que el mínimo permitido, descartamos la caja.
+		if (altura_mm < DETECTION_THRESHOLD_MIN_MM) {
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("Caja demasiado baja (%u mm), descartada\n"), altura_mm);
+			}
+			// Actualizamos la caja actual con la altura y marcamos como descartada y medida.
+			currentBox->height_mm = altura_mm;
+			NIBBLEH_SET_STATE(currentBox->flags, BOX_DISCARDED);
+			NIBBLEL_SET_STATE(currentBox->flags, BOX_MEASURED);
+			return BOX_DISCARDED;
 		}
-		return BOX_DISCARDED;
-	}
 
-	// Comparamos contra los rangos definidos
-	if (altura_mm >= SystemSorter->box_ranges->box_size_a.min_height_mm &&
-	altura_mm <= SystemSorter->box_ranges->box_size_a.max_height_mm) {
-		if (DEBUG_FLAGS_SORTER) {
-			printf_P(PSTR("Caja tipo A (%u mm)\n"), altura_mm);
-		}
-		return BOX_SIZE_A;
-	}
-	else if (altura_mm >= SystemSorter->box_ranges->box_size_b.min_height_mm &&
-	altura_mm <= SystemSorter->box_ranges->box_size_b.max_height_mm) {
-		if (DEBUG_FLAGS_SORTER) {
-			printf_P(PSTR("Caja tipo B (%u mm)\n"), altura_mm);
-		}
-		return BOX_SIZE_B;
-	}
-	else if (altura_mm >= SystemSorter->box_ranges->box_size_c.min_height_mm &&
-	altura_mm <= SystemSorter->box_ranges->box_size_c.max_height_mm) {
-		if (DEBUG_FLAGS_SORTER) {
-			printf_P(PSTR("Caja tipo C (%u mm)\n"), altura_mm);
-		}
-		return BOX_SIZE_C;
-	}
+		// Determinamos el tipo de caja comparando la altura con los rangos predefinidos.
+		box_type_t tipo = BOX_DISCARDED; // Valor por defecto (si no cae en ningún rango).
 
-	// Si no entró en ningún rango, se descarta
-	if (DEBUG_FLAGS_SORTER) {
-		printf_P(PSTR("Caja fuera de rango (%u mm), descartada\n"), altura_mm);
+		if (altura_mm >= SystemSorter->box_ranges->box_size_a.min_height_mm &&
+			altura_mm <= SystemSorter->box_ranges->box_size_a.max_height_mm) {
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("Caja tipo A (%u mm)\n"), altura_mm);
+			}
+			tipo = BOX_SIZE_A;
+		}
+		else if (altura_mm >= SystemSorter->box_ranges->box_size_b.min_height_mm &&
+				 altura_mm <= SystemSorter->box_ranges->box_size_b.max_height_mm) {
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("Caja tipo B (%u mm)\n"), altura_mm);
+			}
+			tipo = BOX_SIZE_B;
+		}
+		else if (altura_mm >= SystemSorter->box_ranges->box_size_c.min_height_mm &&
+				 altura_mm <= SystemSorter->box_ranges->box_size_c.max_height_mm) {
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("Caja tipo C (%u mm)\n"), altura_mm);
+			}
+			tipo = BOX_SIZE_C;
+		}
+		else {
+			if (DEBUG_FLAGS_SORTER) {
+				printf_P(PSTR("Caja fuera de rango (%u mm), descartada\n"), altura_mm);
+			}
+			tipo = BOX_DISCARDED;
+		}
+
+		// Almacenar la altura medida en la caja actual.
+		currentBox->height_mm = altura_mm;
+		// Establecer el tipo de caja (nibble alto) y marcar como medida (nibble bajo = BOX_MEASURED).
+		NIBBLEH_SET_STATE(currentBox->flags, tipo);
+		NIBBLEL_SET_STATE(currentBox->flags, BOX_MEASURED);
+		} else {
+		printf_P(PSTR("Todas las cajas ya clasificadas...\n"));
+		tipo = NO_BOX;
 	}
-	return BOX_DISCARDED;
+    return tipo;
 }
 
 /**
  * @brief Tarea que ejecuta el control principal del sensor ultrasónico.
  *
  * Se encarga de disparar el sensor, verificar el eco, clasificar la caja,
- * actualizar estadísticas y manejar errores por timeout.
+ * actualizar estadísticas y, en caso de detección, encolar el evento con estado BOX_MEASURED.
  *
  * @param [in,out] ultraDetector Estructura de control del sensor ultrasónico.
  * @param [in,out] sorter Sistema de clasificación.
  */
 void ultraSensorTask(Ultrasonic_Detector_t* ultraDetector, sorter_system_t* sorter)
 {
-	// 1. Si está habilitado, el trigger está permitido y hay solicitud de emisión
-	if (ULTRASONIC_ENABLE &&
-		ultraDetector->sensor->TRIGGER_ALLOWED &&
-		EMIT_TRIGGER &&
-		IS_FLAG_SET(ultraDetector->flags, ULTRADET_ZONE_TRCT_U_DETECTING))
-	{
-		if (ultrasonic_start(ultraDetector->sensor)) {
-			ULTRASONIC_ENABLE = 0;
-			EMIT_TRIGGER = 0;
-			ultraDetector->sensor->TRIGGER_ALLOWED = 0;
-		} else {
-			if (DEBUG_FLAGS_SORTER)
-				printf_P(PSTR("ErrorInitHCSR04\n"));
-			EMIT_FAILED = 1;
-			EMIT_TRIGGER = 0;
-		}
-	}
+    // 1. Si está habilitado, el trigger está permitido y hay solicitud de emisión
+    if (ULTRASONIC_ENABLE &&
+        ultraDetector->sensor->TRIGGER_ALLOWED &&
+        EMIT_TRIGGER &&
+        IS_FLAG_SET(ultraDetector->flags, ULTRADET_ZONE_TRCT_U_DETECTING))
+    {
+        if (ultrasonic_start(ultraDetector->sensor)) {
+            ULTRASONIC_ENABLE = 0;
+            EMIT_TRIGGER = 0;
+            ultraDetector->sensor->TRIGGER_ALLOWED = 0;
+        } else {
+            if (DEBUG_FLAGS_SORTER)
+                printf_P(PSTR("ErrorInitHCSR04\n"));
+            EMIT_FAILED = 1;
+            EMIT_TRIGGER = 0;
+        }
+    }
 
-	// 2. Actualiza máquina de estados del sensor
-	ultrasonic_update(ultraDetector->sensor);
+    // 2. Actualizar la máquina de estados del sensor ultrasónico
+    ultrasonic_update(ultraDetector->sensor);
 
-	// 3. Si la medición finalizó exitosamente
-	if (ultraDetector->sensor->state == ULTRA_DONE && ultraDetector->sensor->NEW_RESULT) {
-		ultraDetector->sensor->NEW_RESULT = 0;
+    // 3. Si la medición finalizó exitosamente
+    if (ultraDetector->sensor->state == ULTRA_DONE && ultraDetector->sensor->NEW_RESULT) {
+        ultraDetector->sensor->NEW_RESULT = 0;
 
-		box_type_t tipo;
+        box_type_t tipo;
 
-		if (ultraDetector->sensor->distance_mm > DETECTION_IDLE_DISTANCE_MM) {
-			tipo = NO_BOX;
-			SET_FLAG(ultraDetector->flags, ULTRADET_ZONE_ULTRA_CLEAR);
+        // Si la distancia es mayor o igual a la distancia de reposo, se asume que no hay caja
+        if (ultraDetector->sensor->distance_mm > DETECTION_IDLE_DISTANCE_MM) {
+            tipo = NO_BOX;
+            SET_FLAG(ultraDetector->flags, ULTRADET_ZONE_ULTRA_CLEAR);
 
-			if (NIBBLEH_GET_STATE(ultraDetector->flags) == ULTRADET_SENSOR_WAITING_CLEAR) {
-				NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_IDLE);
-				if (DEBUG_FLAGS_SORTER)
-					printf_P(PSTR("Sensor liberado de nuevo\n"));
-			}
+            if (NIBBLEH_GET_STATE(ultraDetector->flags) == ULTRADET_SENSOR_WAITING_CLEAR) {
+                NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_IDLE);
+                if (DEBUG_FLAGS_SORTER)
+                    printf_P(PSTR("Sensor liberado de nuevo\n"));
+            }
+            NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_IDLE);
+        } else {
+            // Si el sensor está en estado IDLE, se procede a clasificar la caja
+            if (NIBBLEH_GET_STATE(ultraDetector->flags) == ULTRADET_SENSOR_IDLE) {
+                NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_DETECTING);
+                // Clasificación: La función classify_box() actualiza la variable global current_box
+                // (de tipo box_t) y devuelve el tipo de caja.
+                tipo = classify_box(ultraDetector->sensor->distance_mm, sorter);
+    
+                if (tipo != NO_BOX) {
+                    // Encolar la caja clasificada únicamente si se detectó una caja
+                    // y se marca su estado como BOX_MEASURED.
+                    // Se asume que classify_box() actualiza current_box y que esta estructura contiene 
+                    // la altura y los flags correctos.
+                    NIBBLEL_SET_STATE(current_box.flags, BOX_MEASURED);
+                    if (!enqueue_box(current_box)) {
+                        if (DEBUG_FLAGS_SORTER) {
+                            printf_P(PSTR("Error: Cola de cajas llena\n"));
+                        }
+                    }
+                }
+                // Cambiar el estado del sensor ultrasónico a "waiting clear" para esperar 
+                // que el sensor IR U deje de detectar la caja (evento que actualizará la caja a BOX_MOVING)
+                NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_WAITING_CLEAR);
+            }
+        }
+    
+        // Reiniciar flags y estados del sensor ultrasónico
+        ultrasonic_init_flags(ultraDetector->sensor);
+        ultraDetector->sensor->state = ULTRA_IDLE;
+        ULTRASONIC_ENABLE = 1;
+    }
 
-			NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_IDLE);
-		} else {
-			if (NIBBLEH_GET_STATE(ultraDetector->flags) == ULTRADET_SENSOR_IDLE) {
-				NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_DETECTING);
-				tipo = classify_box(ultraDetector->sensor->distance_mm, sorter);
-
-				if (tipo != NO_BOX) {
-					if (DEBUG_FLAGS_SORTER) {
-						printf_P(PSTR("Tipo detectado: %u - Salida 0: %u, 1: %u, 2: %u\n"),
-								tipo, salidaA.boxType, salidaB.boxType, salidaC.boxType);
-					}
-
-					if (tipo != BOX_DISCARDED) {
-						output_t* outputs[] = { &salidaA, &salidaB, &salidaC };
-
-						for (uint8_t i = 0; i < NUM_OUTPUTS; i++) {
-							if (outputs[i]->boxType == tipo) {
-								SET_FLAG(outputs[i]->flags, OUTPUT_BUSY);
-								if (DEBUG_FLAGS_SORTER)
-									printf_P(PSTR("Salida %c busy\n"), 'A' + i);
-								break;
-							}
-						}
-					} else if (DEBUG_FLAGS_SORTER) {
-						printf_P(PSTR("BOX_DISCARDED\n"));
-					}
-
-					// Actualizar estadísticas
-					switch (tipo) {
-						case BOX_SIZE_A:
-						case BOX_SIZE_B:
-						case BOX_SIZE_C:
-							sorter->stats.total_by_type_array[tipo - 1]++;
-							if (DEBUG_FLAGS_SORTER)
-								printf_P(PSTR("BOX_SIZE_%c\n"), 'A' + (tipo - 1));
-							break;
-
-						case BOX_DISCARDED:
-							sorter->stats.total_discarded++;
-							if (DEBUG_FLAGS_SORTER)
-								printf_P(PSTR("BOX_DISCARDED\n"));
-							break;
-
-						default:
-							if (DEBUG_FLAGS_SORTER)
-								printf_P(PSTR("Tipo no reconocido\n"));
-							break;
-					}
-
-					sorter->stats.total_measured++;
-					if (DEBUG_FLAGS_SORTER)
-						printf_P(PSTR("Contadas: %u\n"), sorter->stats.total_measured);
-				}
-
-				NIBBLEH_SET_STATE(ultraDetector->flags, ULTRADET_SENSOR_WAITING_CLEAR);
-			}
-		}
-
-		ultrasonic_init_flags(ultraDetector->sensor);
-		ultraDetector->sensor->state = ULTRA_IDLE;
-		ULTRASONIC_ENABLE = 1;
-	}
-
-	// 4. Timeout por falta de eco
-	if (VEINTEMS_PASSED) {
-		if (DEBUG_FLAGS)
-			printf_P(PSTR("HCSR04 perdio ECHO\n"));
-
-		VEINTEMS_PASSED = 0;
-		WAITING_ECHO = 0;
-		ultraDetector->sensor->TIMEDOUT = 1;
-		ultraDetector->sensor->state = ULTRA_TIMEOUT;
-
-		if (ultrasonic_timeout_clear(ultraDetector->sensor, DEBUG_FLAGS ? true : false) && DEBUG_FLAGS)
-			printf_P(PSTR("LIB DEBUG - HCSR04 TMDOUT Cleared\n"));
-
-		ULTRASONIC_ENABLE = 1;
-	}
+    // 4. Timeout por falta de eco
+    if (VEINTEMS_PASSED) {
+        if (DEBUG_FLAGS)
+            printf_P(PSTR("HCSR04 perdio ECHO\n"));
+    
+        VEINTEMS_PASSED = 0;
+        WAITING_ECHO = 0;
+        ultraDetector->sensor->TIMEDOUT = 1;
+        ultraDetector->sensor->state = ULTRA_TIMEOUT;
+    
+        if (ultrasonic_timeout_clear(ultraDetector->sensor, DEBUG_FLAGS ? true : false) && DEBUG_FLAGS)
+            printf_P(PSTR("LIB DEBUG - HCSR04 TMDOUT Cleared\n"));
+    
+        ULTRASONIC_ENABLE = 1;
+    }
 }
 
 

@@ -9,12 +9,13 @@
 #define BOXTYPES_H_
 
 #include "bitmapType.h"
+#include "../main.h"
 
-#define ZONE_ULTRA_CLEAR flags.bitmap.bit0;
-#define SELECTED flags.bitmap.bit1;
-#define DISCARDED flags.bitmap.bit2;
-//#define DISCARDED flags.bitmap.bit3;
-// NO AGREGAR MAS -> Nibble H lo usamos para el tipo 
+// #define ZONE_ULTRA_CLEAR BIT0_MASK;
+// #define SELECTED BIT1_MASK;
+// #define DISCARDED BIT2_MASK;
+// #define DISCARDED BIT3_MASK;
+//NO AGREGAR MAS -> Nibble H lo usamos para el tipo 
 
 //Definicion de constantes de dimensiones de las cajas
 #define BOX_A_MIN_MM 55
@@ -33,6 +34,7 @@
 #define NO_BOX 4 //No definida
 typedef uint8_t box_type_t; //Tipo de caja
 
+//Nibble L de las flag
 #define BOX_WAITING_MEASURE 0   // Esperando en zona de medición
 #define BOX_MEASURED 1            // Altura ya medida y clasificada
 #define BOX_MOVING 2    // En tránsito hacia una salida
@@ -40,6 +42,21 @@ typedef uint8_t box_type_t; //Tipo de caja
 #define BOX_PUSHED  4    // Ya empujada
 #define BOX_COMPLETED 5 //Listo, guardar en estadisticas
 typedef uint8_t box_state_t; //Estado de la caja
+
+/// @brief Tamaño máximo de la cola (cálculo basado en una línea de producción de 2.1m y cajas de 80mm).
+#define BOX_QUEUE_SIZE 26
+
+/**
+ * @struct box_queue_t
+ * @brief Representa una cola circular para almacenar eventos de cajas.
+ *
+ * Cada evento puede incluir información de la caja (por ejemplo, la altura medida o el tipo).
+ */
+typedef struct {
+	box_t events[BOX_QUEUE_SIZE]; /**< Array de eventos de caja */
+	uint8_t head;                 /**< Índice de extracción (caja más antigua) */
+	uint8_t tail;                 /**< Índice de inserción (posición para una nueva caja) */
+} box_queue_t;
 
 typedef struct {
 	uint8_t min_height_mm;  // Minimum height in millimeters

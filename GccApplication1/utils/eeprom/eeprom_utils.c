@@ -3,7 +3,7 @@
  *
  * Created: 4/4/2025 5:00:54 PM
  *  Author: kobac
- */ 
+ */
 
 #include "eeprom_utils.h"
 #include "../../main.h"
@@ -25,14 +25,21 @@ void saveConfigurationRAM(const Config_t *config) {
 /**
  * @brief Calcula el checksum de una estructura de configuración.
  *
- * Realiza una operación XOR entre los valores de salidaA, salidaB y salidaC.
+ * Realiza una operación XOR entre los valores de salida y los flags analógicos.
  *
  * @param [in] config Puntero a la configuración a verificar.
- * @retval Checksum calculado como XOR de los campos de salida.
+ * @retval Checksum calculado como XOR de los campos de salida y flags analógicos.
  */
 uint8_t calculate_config_checksum(Config_t* config) {
-	// Simple XOR de los campos de salida
-	return config->salidaA ^ config->salidaB ^ config->salidaC;
+	uint8_t checksum = 0;
+	checksum ^= config->salidaA;
+	checksum ^= config->salidaB;
+	checksum ^= config->salidaC;
+	checksum ^= config->ir_A_analog;
+	checksum ^= config->ir_B_analog;
+	checksum ^= config->ir_C_analog;
+	checksum ^= config->ir_U_analog;
+	return checksum;
 }
 
 /**
@@ -58,12 +65,12 @@ void loadConfigurationRAM(Config_t *config) {
 bool existConfig(void) {
 	Config_t temp;
 	eeprom_read_block((void*)&temp, (const void *)&eepromConfig, sizeof(Config_t));
-	
+
 	// Si todas las salidas son 0xFF se asume que no hay configuración seteada.
 	if (temp.salidaA == 0xFF && temp.salidaB == 0xFF && temp.salidaC == 0xFF) {
 		return false;
 	}
-	
+
 	uint8_t expected = calculate_config_checksum(&temp);
 	if (temp.checksum != expected) {
 		if(DEBUG_FLAGS_EEPROM){
@@ -71,7 +78,7 @@ bool existConfig(void) {
 		}
 		return false;
 	}
-	
+
 	if(DEBUG_FLAGS_EEPROM){
 		printf_P(PSTR("Configuración válida en EEPROM\n"));
 	}
